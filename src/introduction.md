@@ -4,6 +4,7 @@ NADI is group of software packages that facilitate network analysis and do data 
 
 
 
+
 # Trivia
 - Nadi means River in Nepali (and probably in many south asian languages).
 - First prototype of NADI was Not Available Data Integration, as it

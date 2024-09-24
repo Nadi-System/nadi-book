@@ -14,6 +14,12 @@
   - [Nadi CLI](system/nadi-cli.md)
   - [Nadi GUI](system/nadi-gui.md)
 
+- [Default Plugins](plugins/intro.md)
+  - [Attributes](plugins/attrs.md)
+  - [Timeseries](plugins/ts.md)
+  - [Render](plugins/render.md)
+  - [Error Calculation](plugins/errors.md)
+
 # Developer Guide
 - [Plugin Development](dev/plugins.md)
   - [Internal Plugins](dev/internal-plugins.md)
