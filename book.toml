@@ -1,0 +1,6 @@
+[book]
+authors = ["Gaurav Atreya"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Network Analysis and Data Integration (NADI)"
