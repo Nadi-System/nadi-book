@@ -7,25 +7,25 @@
 
 ---
 
-- [Nadi System](system/intro.md)
-  - [Nadi Code](system/core.md)
-  - [Nadi Plugin](system/plugin.md)
-  - [Nadi Py](system/nadi-py.md)
-  - [Nadi CLI](system/nadi-cli.md)
-  - [Nadi GUI](system/nadi-gui.md)
+- [Nadi System]()
+  - [Nadi Code]()
+  - [Nadi Plugin]()
+  - [Nadi Py]()
+  - [Nadi CLI]()
+  - [Nadi GUI]()
 
-- [Default Plugins](plugins/intro.md)
+- [Default Plugins]()
   - [Attributes](plugins/attrs.md)
-  - [Timeseries](plugins/ts.md)
-  - [Render](plugins/render.md)
-  - [Error Calculation](plugins/errors.md)
+  - [Timeseries]()
+  - [Render]()
+  - [Error Calculation]()
 
 # Developer Guide
 - [Plugin Development](dev/plugins.md)
-  - [Internal Plugins](dev/internal-plugins.md)
-  - [External Plugins](dev/external-plugins.md)
-  - [Node Functions](dev/node-functions.md)
-  - [Network Functions](dev/network-functions.md)
+  - [Internal Plugins]()
+  - [External Plugins]()
+  - [Node Functions]()
+  - [Network Functions]()
 
 # User Reference
 
