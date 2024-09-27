@@ -15,3 +15,9 @@ enable = true
 [output.html.playground]
 runnable = false
 line-numbers = true
+
+# this is really glitchy for now.
+# [output.tectonic]
+# latex    = false  # default = true
+# pdf      = true  # default = true
+# markdown = false  # default = true

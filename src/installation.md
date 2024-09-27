@@ -7,7 +7,9 @@ Nadi System is a suite of software packages each have different installation met
 ### Through Rust (Any OS)
 Assuming you have `rust` and `cargo` setup in your system.
 
-Use `cargo install nadi-cli`
+```bash
+cargo install nadi-cli
+```
 
 ### Linux
 ### OSX (Mac)
@@ -17,9 +19,9 @@ Use `cargo install nadi-cli`
 ### Through Rust (Any OS)
 Assuming you have `rust` and `cargo` setup in your system.
 
-Use `cargo install nadi-cli`
-
-Use `cargo install nadi-gui`
+```bash
+cargo install nadi-gui
+```
 
 ### Linux
 ### OSX (Mac)
@@ -29,4 +31,6 @@ Use `cargo install nadi-gui`
 ## NADI Python Library
 Assuming you have `python` and `pip` setup in your system.
 
-Use `pip install nadi-py` (TODO)
+```bash
+pip install nadi-py # (TODO) publish to pip
+```
