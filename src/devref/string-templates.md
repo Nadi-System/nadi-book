@@ -34,9 +34,17 @@ Brief explanation on the template system:
   will become `2`);
 
 Besides the above points, specific to nadi system, any node template
-will have all the variables from node attributes will be available as
-strings for template. For string variables, their name can be used to
-access quoted string format, while their name with underscore prefix
-will be unquoted raw string. (e.g. if we have attribute
-`name="smithland"`, then `{name}` will render to `"smithland"`, while
-`{_name}` will render to `smithland`).
+will have all the variables from node attributes available as strings
+for template. For string variables, their name can be used to access
+quoted string format, while their name with underscore prefix will be
+unquoted raw string. (e.g. if we have attribute `name="smithland"`,
+then `{name}` will render to `"smithland"`, while `{_name}` will
+render to `smithland`).
+
+
+The syntax highlight here in this book makes it so that any unknown
+transformers will be marked for easy detection to mistakes.
+
+```stp
+This shows var = {var:unknown()}, {_var:case(title)}
+```

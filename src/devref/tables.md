@@ -7,10 +7,13 @@ system, functions to export different table formats can be written as
 a network function.
 
 A sample Table file showing two columns, left aligned name for station
-in title case, and right aligned 7Q10 column with float value of 2
-digits after decimal:
+in title case, and right aligned columns for latitude and longitude
+with float value of 4 digits after decimal:
 
+```table
+<Name => {_stn:case(title)}
+>Latitude => {Latitude:f(4)?} N
+>Longitude => {Longitude:f(4)?} W
 ```
-<Name: {_stn:case(title)}
->7Q10: {nat_7q10:f(2)}
-```
+
+Here the part before `=>` is the column header and the part after is the template. Presence of `<` or `>` in the beginning of the line makes the column left or right aligned, with center aligned by default.

@@ -29,3 +29,14 @@ it'll be called for each node (in sequential order by default). The
 last line `node.inputsfirst` will call that function in input node
 before the current node. Those functions can only be called for
 network with an output node.
+
+
+<div class="warning">
+
+Please note that although the string in the examples are highlighted
+as if they are string templates for readability. Those are just normal
+strings that functions take as inputs. Whether they are used as
+template or not depends on the individual function, refer to their
+help to see if they take `Template` type or `String` type.
+
+</div>
