@@ -11,7 +11,7 @@ any task can use can be internal functions provided by the library or
 the external functions provided by the plugins.
 
 A sample tasks file is shown below:
-```
+```task
 node print_attrs()
 network save_graphviz("/tmp/test.gv", offset=1.3, url="{_NAME}")
 node savedss(
@@ -21,6 +21,7 @@ node savedss(
 	)
 node check_sf("sf")
 node.inputsfirst route_sf("observed")
+node render("Node {NAME} at index {INDEX}")
 ```
 
 Here each line corresponds to one task. And if it's a node task, then

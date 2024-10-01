@@ -17,7 +17,7 @@
   - [Nadi CLI]()
   - [Nadi GUI]()
 
-- [Default Plugins](plguins/default.md)
+- [Default Plugins](plugins/default.md)
   - [Attributes](plugins/attrs.md)
   - [Timeseries]()
   - [Render]()

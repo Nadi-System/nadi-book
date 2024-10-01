@@ -23,7 +23,7 @@ need to be familiar with the names of the data points and their
 location, or consult a different image/map to understand the
 relationship.
 
-![Table with Connection Information](../images/table-conn.png "The table shows how a simple addition of the connection information can increase the readability of the table")
+![Table with Connection Information](../images/ohio-low.svg "The table shows how a simple addition of the connection information can increase the readability of the table")
 
 The inspiration on making this software package comes from many years
 of struggle with doing the same thing again and again in different

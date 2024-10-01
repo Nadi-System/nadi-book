@@ -22,7 +22,7 @@ supported inside the quotes.
 
 Here is an example network file,
 
-```
+```network
 cannelton -> newburgh
 newburgh -> evansville
 evansville -> "jt-myers"

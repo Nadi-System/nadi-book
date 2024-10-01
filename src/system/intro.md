@@ -43,7 +43,7 @@ have.
 
 Here is an example task file, that has a lot of function calls.
 
-![Image Showing Tasks File](../images/tasks.png)
+![Image Showing Tasks File](../images/tasks.svg)
 
 ## Node Function
 

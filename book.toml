@@ -6,6 +6,7 @@ src = "src"
 title = "Network Analysis and Data Integration (NADI)"
 
 [output.html]
+additional-js = ["theme/syntax-highlight.js"]
 smart-punctuation = true
 mathjax-support = true
 
@@ -18,6 +19,6 @@ line-numbers = true
 
 # this is really glitchy for now.
 # [output.tectonic]
-# latex    = false  # default = true
+# latex    = true  # default = true
 # pdf      = true  # default = true
 # markdown = false  # default = true
