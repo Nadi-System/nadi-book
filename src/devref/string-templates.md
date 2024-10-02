@@ -20,6 +20,10 @@ Documentations on the template system, can be redirected to
 Brief explanation on the template system:
 - Templates have variables, time formats, expressions, and commands
   (disabled by default);
+  ```stp
+  Hi my name is {name}, my address is {address?"N/A"}.
+  Current time is {%H} hour  {%M} minutes.
+  ```
 - Variables can be chained in an optional way, so the first one that's
   found will be used (e.g. `{nickname?name}` will render nickname if
   it's present, else name);
@@ -47,4 +51,30 @@ transformers will be marked for easy detection to mistakes.
 
 ```stp
 This shows var = {var:unknown()}, {_var:case(title)}
+```
+
+Some tests for string templates:
+
+```stp
+hi there this {is?a?"test"} for $(a simple case {that?} {might} be "possible")
+```
+
+```stp
+hi looks {like?a?"test"} for $(this does {work:case(up)} now) (yay)
+```
+
+```stp
+more {formatting?} options on {%F} and
+\\latex\{command\}\{with {variable}\}, should work.
+```
+
+```stp
+let's try {every:f(2)?and?"anything":case(title)}
+for $(a complex case {that?%F?} {might} be "possible")
+```
+
+```stp
+see $(some-command --flag "and the value" {problem})
+=(+ 1 2 (st+num 'hithere) (st+num "otherhi"))
+{otherhi?=(1+ pi):f(4)}
 ```

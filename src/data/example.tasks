@@ -1,0 +1,45 @@
+# sample .tasks file which is like a script with functions
+node print_attrs("uniqueID")
+node show_node()
+network save_graphviz("/tmp/test.gv")
+
+node[WV04113,WV04112,WV04112] print_attr_toml("testattr2")
+node render("{NAME} {uniqueID} {_Dam_Height_(Ft)?}")
+node list_attr("; ")
+# some functions can take variable number of inputs
+network calc_attr_errors(
+    "Dam_Height_(Ft)",
+    "Hydraulic_Height_(Ft)",
+    "rmse", "nse", "abserr"
+)
+node sum_safe("Latitude")
+node.inputsfirst render("Hi {SUM_ATTR}")
+# multiple line for function arguments
+network save_table(
+	"test.table",
+	"/tmp/test.tex",
+	true,
+	radius=0.2,
+	start = 2012-19-20,
+	end = 2012-19-23 12:04
+	)
+node set_attrs(testattr = 2)
+node set_attrs_render(testattr2 = "{testattr:calc(+2)}")
+node[WV04112] render("{testattr} {testattr2}")
+
+# here we use a complicated template that can do basic logic handling
+node set_attrs_render(
+    testattr2 = "=(if (and (st+has 'Latitude) (> (st+num 'Latitude) 39)) 'true 'false)"
+)
+# same thing can be done if you need more flexibility in variable names
+node load_toml_string(
+    "testattr2 = =(if (and (st+has 'Latitude) (> (st+num 'Latitude) 39)) 'true 'false)"
+)
+# selecting a list of nodes to run a function
+node[
+	# comment here?
+    WV04113,
+    WV04112
+] print_attr_toml("testattr2")
+# selecting a path
+node[WV04112 -> WV04113] render("=(> 2 3)")

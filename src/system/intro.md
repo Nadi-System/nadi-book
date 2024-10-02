@@ -1,4 +1,6 @@
 # Core Concepts
+This section contains a brief explanation of core concepts. Refer to
+the Reference section for the full details on each.
 
 ## Node
 A Node is a point in network. A Node can have multiple input nodes and
@@ -41,14 +43,38 @@ Task is a function call that can either be a node function or a
 network function. Functions are unique based on their names, and can
 have.
 
-Here is an example task file, that has a lot of function calls.
+Here is an example contents of a task file:
 
-![Image Showing Tasks File](../images/tasks.svg)
+```task
+{{#include ../data/example.tasks}}
+```
 
 ## Node Function
 
 Node function runs on each node. It takes arguments and keyword arguments.
 
+For example following node function takes multiple attribute names and prints them. The signature of the node function is `print_attrs(*args)`.
+```task
+node print_attrs("NAME", "uniqueID", "streamflow")
+```
+
 ## Network Function
 
 Network function runs on the network as a whole. It takes arguments and keyword arguments.
+
+For example following network function takes file path as input to save the network in graphviz format.
+
+```task
+network save_graphviz("/tmp/test.gv")
+```
+
+The signature of this function is as follows
+```sig
+save_graphviz(
+	outfile [PathBuf],
+	name [String] = "network",
+	global_attrs [String] = "",
+	node_attr [Option < Template >],
+	edge_attr [Option < Template >]
+)
+```

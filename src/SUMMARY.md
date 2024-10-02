@@ -39,6 +39,7 @@
   - [Timeseries](./devref/timeseries.md)
   - [String Templates](./devref/string-templates.md)
   - [Tables](./devref/tables.md)
+  - [File Templates](./devref/file-templates.md)
   - [Tasks](./devref/tasks.md)
   - [Node Functions](./devref/node-functions.md)
   - [Network Functions](./devref/network-functions.md)
