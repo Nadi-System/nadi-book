@@ -22,6 +22,11 @@ nodes.
 A condition a nadi network is that it can only be a directed graph
 with tree structure.
 
+Example Network file:
+```net
+{{#include ../data/mississippi.net}}
+```
+
 ## Attributes
 Attributes are TOML like values. They can be one of the following types:
 
@@ -54,21 +59,30 @@ Here is an example contents of a task file:
 Node function runs on each node. It takes arguments and keyword arguments.
 
 For example following node function takes multiple attribute names and prints them. The signature of the node function is `print_attrs(*args)`.
+
 ```task
+!network load_file("../data/mississippi.net")
 node print_attrs("NAME", "uniqueID", "streamflow")
 ```
+
+The output we get is:
+```
+** Running 1 Script **
+NAME = "lower-mississipi"
+NAME = "upper-mississipi"
+NAME = "missouri"
+NAME = "arkansas"
+NAME = "red"
+NAME = "ohio"
+NAME = "tenessee"
+```
+Only the `NAME` is printed as they do not have any other attributes.
 
 ## Network Function
 
 Network function runs on the network as a whole. It takes arguments and keyword arguments.
 
-For example following network function takes file path as input to save the network in graphviz format.
-
-```task
-network save_graphviz("/tmp/test.gv")
-```
-
-The signature of this function is as follows
+For example following network function takes file path as input to save the network in graphviz format:
 ```sig
 save_graphviz(
 	outfile [PathBuf],
@@ -77,4 +91,16 @@ save_graphviz(
 	node_attr [Option < Template >],
 	edge_attr [Option < Template >]
 )
+```
+
+Note that, if the arguments have default values, or are optional, then you do not need to provide them.
+
+For example, you can simply call the above function like this.
+```task
+network save_graphviz("../data/output/test.gv")
+```
+This will write the file `../data/output/test.gv` with following contents.
+
+```graphviz
+{{#include ../data/output/test.gv}}
 ```
