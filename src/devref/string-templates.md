@@ -27,6 +27,9 @@ Brief explanation on the template system:
 - Variables can be chained in an optional way, so the first one that's
   found will be used (e.g. `{nickname?name}` will render nickname if
   it's present, else name);
+- Variables when replaced with literal strings (quoted strings), they
+  will be used directly `{address?"N/A"}` will render `N/A` is
+  `address` is not present;
 - Variables can have optional transformers which transform the string
   based on their rules, (e.g. float transformer will truncate the
   float, upcase will make the string UPPERCASE, etc.);
@@ -45,36 +48,78 @@ unquoted raw string. (e.g. if we have attribute `name="smithland"`,
 then `{name}` will render to `"smithland"`, while `{_name}` will
 render to `smithland`).
 
+Nadi system uses templates in a variety of place, and plugin functions
+also sometimes take templates for file path, or strings, and such
+things. Look at the help string of the function to see if it takes
+`String` or `Template` type.
 
-The syntax highlight here in this book makes it so that any unknown
-transformers will be marked for easy detection to mistakes.
+For example `render` is a function that takes a template and prints it
+after rendering it for each node.
 
-```stp
-This shows var = {var:unknown()}, {_var:case(title)}
+```task run
+!network load_file("./data/mississippi.net")
+!node[ohio] set_attrs(river="the Ohio River", streamflow=45334.12424343)
+node[ohio,red] render(
+	"(=(+ 1 (st+num 'INDEX))th node) {_NAME:case(title)}
+	River Flow = {streamflow:calc(/1000):f(3)?\"NA\"}"
+)
+```
+As seen in above example, you can render variables, transform them, use basic calculations.
+
+Or you can use `lisp` syntax to do more complex calculations. Refer to
+[Nadi Extension Capabilities](../system/extensions.md) section for more
+info on how to use `lisp` on string template.
+
+```task run
+!network load_file("./data/mississippi.net")
+!node[ohio] set_attrs(river="the Ohio River", streamflow=45334.12424343)
+node[ohio] render(
+	"{_river:case(title)} Streamflow
+	from lisp = {=(/ (st+num 'streamflow) 1000):f(2)} x 10^3 cfs"
+)
 ```
 
-Some tests for string templates:
+## Some Complex Examples
 
+Optional variables and a command; note that commands can have variables inside them:
 ```stp
-hi there this {is?a?"test"} for $(a simple case {that?} {might} be "possible")
+hi there this {is?a?"test"} for $(echo a simple case {that?} {might} be "possible")
 ```
 
+Optional variables with transformers inside command.
 ```stp
 hi looks {like?a?"test"} for $(this does {work:case(up)} now) (yay)
 ```
 
+If you need to use `{` and `}` in a template, you can escape them. Following template shows how LaTeX commands can be generated from templates.
 ```stp
 more {formatting?} options on {%F} and
 \\latex\{command\}\{with {variable}\}, should work.
 ```
 
+This just combined a lot of different things from above:
 ```stp
 let's try {every:f(2)?and?"anything":case(title)}
 for $(a complex case {that?%F?} {might} be "possible")
-```
 
-```stp
 see $(some-command --flag "and the value" {problem})
 =(+ 1 2 (st+num 'hithere) (st+num "otherhi"))
 {otherhi?=(1+ pi):f(4)}
 ```
+
+# Note
+As the template string can get complicated, and the parsing is done
+through `Regex`, it is not perfect. If you come across any parsing
+problems, please raise an issue at [string template
+plus](https://github.com/Atreyagaurav/string-template-plus) github
+repo.
+
+# Commands
+Note that running commands within the templates is disabled for
+now. But if you are writing a command template to run in bash, then
+it'll be executed as the syntax is similar.
+
+```task run
+network command("echo today=$(date +%Y-%m-%d) {%Y-%m-%d}")
+```
+Here although the `$(date +%Y-%m-%d)` portion was not rendered on template rendering process, the command was still valid, and was executed.

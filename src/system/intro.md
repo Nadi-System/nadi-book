@@ -54,31 +54,21 @@ Here is an example contents of a task file:
 {{#include ../data/example.tasks}}
 ```
 
-## Node Function
+### Node Function
 
 Node function runs on each node. It takes arguments and keyword arguments.
 
 For example following node function takes multiple attribute names and prints them. The signature of the node function is `print_attrs(*args)`.
 
-```task
-!network load_file("../data/mississippi.net")
+```task run
+!network load_file("./data/mississippi.net")
 node print_attrs("NAME", "uniqueID", "streamflow")
 ```
 
-The output we get is:
-```
-** Running 1 Script **
-NAME = "lower-mississipi"
-NAME = "upper-mississipi"
-NAME = "missouri"
-NAME = "arkansas"
-NAME = "red"
-NAME = "ohio"
-NAME = "tenessee"
-```
+
 Only the `NAME` is printed as they do not have any other attributes.
 
-## Network Function
+### Network Function
 
 Network function runs on the network as a whole. It takes arguments and keyword arguments.
 
@@ -96,11 +86,19 @@ save_graphviz(
 Note that, if the arguments have default values, or are optional, then you do not need to provide them.
 
 For example, you can simply call the above function like this.
-```task
-network save_graphviz("../data/output/test.gv")
+```task run
+!network load_file("./data/mississippi.net")
+!# need to save in /tmp/ because otherwise it cases
+!# infinite loop of rebuilding this file
+network save_graphviz("/tmp/test.gv")
+!network command("cat /tmp/test.gv", verbose=false)
 ```
-This will write the file `../data/output/test.gv` with following contents.
 
-```graphviz
-{{#include ../data/output/test.gv}}
+## Help
+If you need help on any functions. Use the `help` as a `task`. You can use `help.node` or `help.network` for specific help.
+
+```task run
+help.node render()
 ```
+
+Or you can use `nadi --fnhelp <function>` using the `nadi-cli`.

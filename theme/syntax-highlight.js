@@ -14,7 +14,7 @@ const STRING_TEMPLATE_MODE = hljs.inherit(
 hljs.registerLanguage("task", (hljs) => ({
     name: "Task",
     keywords: {
-	keyword: "node network sequential inverse inputsfirst outputfirst",
+	keyword: "help node network sequential inverse inputsfirst outputfirst",
 	built_in: "command show_ts load_attrs set_attrs_render print_attrs set_attrs render list_ts print_all_attrs dummy_ts render set_attrs parallel set_attrs_render debug",
 	literal: "false true",
     },
@@ -208,7 +208,8 @@ const CMD = {
 	{
 	    begin: '-[a-zA-Z]\\s',
 	    className: 'keyword',
-	}
+	},
+	TEMPLATE,
     ]
 };
 

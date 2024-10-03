@@ -5,6 +5,9 @@ multilingual = false
 src = "src"
 title = "Network Analysis and Data Integration (NADI)"
 
+[preprocessor.nadi]
+after = [ "links" ]
+
 [output.html]
 additional-js = ["theme/syntax-highlight.js"]
 smart-punctuation = true

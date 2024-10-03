@@ -16,7 +16,7 @@
   - [Nadi Py]()
   - [Nadi CLI]()
   - [Nadi GUI]()
-
+- [Nadi Extension Capabilities](./system/extensions.md)
 - [Default Plugins](plugins/default.md)
   - [Attributes](plugins/attrs.md)
   - [Timeseries]()
