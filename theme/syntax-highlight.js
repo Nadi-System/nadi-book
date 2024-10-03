@@ -183,7 +183,7 @@ const TEMPLATE_PART = {
 }
 const TEMPLATE = {
     scope: "meta",
-    begin: '[^\\\\]{',
+    begin: '{',
     end: '}',
     className:"regexp",
     contains: [
@@ -191,7 +191,7 @@ const TEMPLATE = {
 	{
 	    begin: '[?]',
 	    className:"built_in",
-	},
+	}
     ]
 };
 const CMD = {
@@ -222,7 +222,25 @@ hljs.registerLanguage("string-template", (hljs) => ({
 		TEMPLATE,
 		LISP_EXPR,
 		CMD,
-	    ]
+	    ],
+	},
+	// this will make it so that the escaped braces don't get
+	// caught with template
+	{
+	    begin: '\\\\{',
+	    className: "addition",
+	},
+	{
+	    begin: '\\\\}',
+	    className: "addition",
+	},
+	{
+	    begin: '\\\\"',
+	    className: "addition",
+	},
+	{
+	    begin: '\\\\\\\\',
+	    className: "addition",
 	}
     ]
 }));
