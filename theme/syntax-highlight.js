@@ -11,18 +11,7 @@ const STRING_TEMPLATE_MODE = hljs.inherit(
     },
 );
 
-hljs.registerLanguage("task", (hljs) => ({
-    name: "Task",
-    keywords: {
-	keyword: "help node network sequential inverse inputsfirst outputfirst",
-	built_in: "command show_ts load_attrs set_attrs_render print_attrs set_attrs render list_ts print_all_attrs dummy_ts render set_attrs parallel set_attrs_render debug",
-	literal: "false true",
-    },
-    contains: [
-	STRING_TEMPLATE_MODE,
-	hljs.HASH_COMMENT_MODE,
-	hljs.C_NUMBER_MODE,
-	{
+const NODE_LIST_OR_PATH = {
 	    // This is for the nodes list or path for the node functions
 	    scope: "meta",
 	    begin: '\\[',
@@ -44,7 +33,20 @@ hljs.registerLanguage("task", (hljs) => ({
 		    className:"built_in",
 		},
 	    ]
-	},
+};
+
+hljs.registerLanguage("task", (hljs) => ({
+    name: "Task",
+    keywords: {
+	keyword: "help node network sequential inverse inputsfirst outputfirst",
+	built_in: "command show_ts load_attrs set_attrs_render print_attrs set_attrs render list_ts print_all_attrs dummy_ts render set_attrs parallel set_attrs_render debug",
+	literal: "false true",
+    },
+    contains: [
+	STRING_TEMPLATE_MODE,
+	hljs.HASH_COMMENT_MODE,
+	hljs.C_NUMBER_MODE,
+	NODE_LIST_OR_PATH,
     ],
 }));
 
@@ -98,7 +100,7 @@ hljs.registerLanguage("table", (hljs) => ({
 	    className:"title",
 	    contains: [
 		{
-		    begin: '[<>]',
+		    begin: '[<>^]',
 		    className: "built_in",
 		},
 		{
@@ -145,7 +147,14 @@ const TRANSFORMER = {
 }
 const LISP_LIST = {
     begin: '\\(\\s*',
-    end: '\\)'
+    end: '\\)',
+    keywords: {
+	// functions from rust_lisp + stp are keyword
+	keyword: "print is_null is_number is_symbol is_boolean is_procedure is_pair car cdr cons list nth sort reverse map filter length range hash hash_get hash_set st+num st+has st+var",
+	// functions in std lisp/elisp are built_in
+	built_in: "interactive format defun define set defmacro lambda quote list cons loop let message begin cond if and or apply eval not",
+	literal: "t nil",
+    },
 };
 
 LISP_LIST.contains = [
@@ -155,9 +164,20 @@ LISP_LIST.contains = [
     hljs.COMMENT(';', '$'),
     {
 	begin: "'",
-	className: 'built_in',
-    }
+	className: 'regexp',
+	contains: [LISP_LIST],
+    },
 ]
+
+
+// since current hightlight.js used by mdbook doesn't have lisp, and
+// the one in github doesn't look that good anyway
+hljs.registerLanguage("elisp", (hljs) => ({
+    name: "emacs-lisp",
+    contains: [
+	LISP_LIST
+    ],
+}));
 
 const LISP_EXPR = {
     scope: "meta",
@@ -243,6 +263,30 @@ hljs.registerLanguage("string-template", (hljs) => ({
 	    className: "addition",
 	}
     ]
+}));
+
+
+hljs.registerLanguage("string-template-markdown", (hljs) => ({
+    name: "String Template Markdown",
+    aliases: [ 'stp-md' ],
+    contains: [
+	{
+	    begin: '^<!-- .* -->$',
+	    className: 'comment',
+	    contains: [
+		{
+		    begin: '---8<---:[[]',
+		    end: '[]]',
+		    contains: [ NODE_LIST_OR_PATH]
+		}
+	    ]
+	},
+	{
+	    begin: '^',
+	    end: '$',
+	    subLanguage: 'string-template'
+	},
+    ],
 }));
 
 hljs.initHighlightingOnLoad();

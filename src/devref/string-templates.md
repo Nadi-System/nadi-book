@@ -45,7 +45,7 @@ Hi, I am {nickname?name}, my address is {address?"N/A"}.
 Variables can have optional transformers which transform the string
 based on their rules, (e.g. float transformer will truncate the
 float, upcase will make the string UPPERCASE, etc.);
-```stp run name=John
+```stp run name=Joe
 Hi, I am {nickname?name:case(up)}, my address is {address?"N/A"}.
 ```
 
@@ -87,7 +87,7 @@ after rendering it for each node.
 !node[ohio] set_attrs(river="the Ohio River", streamflow=45334.12424343)
 node[ohio,red] render(
 	"(=(+ 1 (st+num 'INDEX))th node) {_NAME:case(title)}
-	River Flow = {streamflow:calc(/1000):f(3)?\"NA\"}"
+	River Flow = {streamflow:calc(/10000):f(3)?\"NA\"} x 10^4"
 )
 ```
 As seen in above example, you can render variables, transform them, use basic calculations.

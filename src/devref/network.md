@@ -33,6 +33,19 @@ markland -> mcalpine
 golconda -> smithland
 ```
 
+Drawing it out:
+```task run image
+!network load_file("./data/mississippi.net")
+network export_svg(
+   "./output/mississippi.svg",
+	label="[{INDEX}] {_NAME:repl(-, ):case(title)}"
+)
+!network clip()
+!# the link path needs to be relative to this file
+!network echo("../output/mississippi.svg")
+```
+
+
 The program also plans to support the connection import from the [DOT
 format (graphviz package)](https://graphviz.org/doc/info/lang.html).
 

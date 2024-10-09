@@ -1,0 +1,4 @@
+<Name => {_NAME:repl(-, ):case(title)}
+^Ind => =(+ (st+num 'INDEX) 1)
+>Order => {ORDER}
+^Level => {LEVEL}

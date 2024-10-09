@@ -1,0 +1,9 @@
+river = "Ohio River"
+outlet = "Smithland Lock and Dam"
+outlet_is_gage = true
+outlet_site_no = ""
+streamflow_start = 1930-06-07
+mean_streamflow = 123456.0
+obs_7q10 = 19405.3
+nat_7q10 = 12335.9
+num_dams_gages = 2348

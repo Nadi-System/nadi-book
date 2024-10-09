@@ -14,7 +14,7 @@ smart-punctuation = true
 mathjax-support = true
 
 [output.html.code]
-hidelines = { task = "!" }
+hidelines = { task = "!", table = "!" }
 
 [output.html.fold]
 enable = true
@@ -22,6 +22,8 @@ enable = true
 [output.html.playground]
 runnable = false
 line-numbers = true
+
+# [output.markdown]
 
 # this is really glitchy for now.
 # [output.tectonic]

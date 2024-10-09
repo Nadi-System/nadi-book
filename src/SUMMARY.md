@@ -10,6 +10,14 @@
 
 ---
 - [Core Concepts](./system/intro.md)
+  - [Node](./intro/node.md)
+  - [Network](./intro/network.md)
+  - [Attributes](./intro/attrs.md)
+  - [String Template](./intro/template.md)
+  - [Node Function](./intro/node-func.md)
+  - [Network Function](./intro/network-func.md)
+  - [Task](./intro/task.md)
+  - [Further Reading](./intro/further.md)
 - [Nadi System]()
   - [Nadi Core]()
   - [Nadi Plugin]()
@@ -31,6 +39,12 @@
   - [Network Functions]()
 
 # User Reference
+- [Example Usage](./example-usage.md)
+  - [Making Tables](./example/tables.md)
+  - [Generating Reports](./example/gen-report.md)
+  - [Analysing Timeseries](./example/timeseries.md)
+	- [Looking at Data Gaps](./example/data-gap.md)
+	- [Visualizing Data Gaps](./example/data-gap-vis.md)
 
 # Developer Reference
 - [Data Structure](./devref/data-structures.md)
@@ -51,6 +65,7 @@
   - [Plugin System Experiments]()
 	- [First Prototype: cdylib]()
 	- [Second Prototype: `abi_stable`]()
+  - [Writing this Book](./notes/writing-book.md)
 - [Future Ideas to Implement]()
   - [Optimization Algorithms](./future/optimization.md)
   - [Interactive Plots](./future/interactive-plots.md)

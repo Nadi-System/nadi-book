@@ -3,8 +3,8 @@
 tenessee -> ohio
 # if your node name has characters outside of a-zA-Z_, you need to
 # quote them as strings
-ohio -> "lower-mississipi"
-"upper-mississipi" -> "lower-mississipi"
-missouri -> "lower-mississipi"
-arkansas -> "lower-mississipi"
-red -> "lower-mississipi"
+ohio -> "lower-mississippi"
+"upper-mississippi" -> "lower-mississippi"
+missouri -> "lower-mississippi"
+arkansas -> "lower-mississippi"
+red -> "lower-mississippi"

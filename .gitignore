@@ -1,6 +1,7 @@
 book
+src/output
 
 # emacs
 *~
-\#*\#
-.\#*
+\#*#
+.#*
