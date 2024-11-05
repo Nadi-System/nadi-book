@@ -1,12 +1,12 @@
 # Network Functions
 ## save_graphviz {#network.save_graphviz}
 ```sig
-network graphviz.save_graphviz (
-    outfile:'&Path',
-    name:'&str'="network",
-    global_attrs:'&str'="",
-    node_attr:'Option<&Template>',
-    edge_attr:'Option<&Template>'
+network graphviz.save_graphviz(
+    outfile: '& Path',
+    name: '& str' = "network",
+    global_attrs: '& str' = "",
+    node_attr: 'Option < & Template >',
+    edge_attr: 'Option < & Template >'
 )
 ```
 

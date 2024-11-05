@@ -1,21 +1,25 @@
 # Node Functions
 ## list_ts {#node.list_ts}
 ```sig
-node timeseries.list_ts (label: 'bool' = true)
+node timeseries.list_ts(label: 'bool' = true)
 ```
 
 Print the list of available timeseries for the node
+
 ### Arguments
-- `label` - Label the line with node name
+- `label`: Label the line with node name
 ## show_ts {#node.show_ts}
 ```sig
-node timeseries.show_ts (
-    name:'&String',
-    header:'bool'=true,
-    head:'Option<i64>'
+node timeseries.show_ts(
+    name: '& String',
+    header: 'bool' = true,
+    head: 'Option < i64 >'
 )
 ```
 
 Print the given timeseries values in csv format
+
 ### Arguments
-- `name` - name
+- `name`: name of the timeseries
+- `header`: whether to show header or not
+- `head`: number of head rows to show (all by default)

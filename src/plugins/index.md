@@ -1,46 +1,52 @@
 # All Plugin Functions
 All the functions available on this instance of nadi, are listed here.
 
-| Plugin                          | Type    | Name                                                               |
-|:--------------------------------|:--------|:-------------------------------------------------------------------|
-| [`fancy_print`](fancy_print.md) | network | [`fancy_print`](fancy_print.md#network.fancy_print)                |
-| [`streamflow`](streamflow.md)   | node    | [`check_negative`](streamflow.md#node.check_negative)              |
-| [`graphviz`](graphviz.md)       | network | [`save_graphviz`](graphviz.md#network.save_graphviz)               |
-| [`attrs2`](attrs2.md)           | node    | [`set_attrs`](attrs2.md#node.set_attrs)                            |
-| [`attrs2`](attrs2.md)           | node    | [`set_attrs_render`](attrs2.md#node.set_attrs_render)              |
-| [`attrs2`](attrs2.md)           | network | [`set_attrs`](attrs2.md#network.set_attrs)                         |
-| [`attrs2`](attrs2.md)           | network | [`set_attrs_render`](attrs2.md#network.set_attrs_render)           |
-| [`dams`](dams.md)               | node    | [`count_dams`](dams.md#node.count_dams)                            |
-| [`dams`](dams.md)               | node    | [`count_gages`](dams.md#node.count_gages)                          |
-| [`dams`](dams.md)               | node    | [`min_year`](dams.md#node.min_year)                                |
-| [`gnuplot`](gnuplot.md)         | network | [`plot_timeseries`](gnuplot.md#network.plot_timeseries)            |
-| [`timeseries`](timeseries.md)   | node    | [`list_ts`](timeseries.md#node.list_ts)                            |
-| [`timeseries`](timeseries.md)   | node    | [`show_ts`](timeseries.md#node.show_ts)                            |
-| [`errors`](errors.md)           | node    | [`calc_ts_error`](errors.md#node.calc_ts_error)                    |
-| [`errors`](errors.md)           | node    | [`calc_ts_errors`](errors.md#node.calc_ts_errors)                  |
-| [`errors`](errors.md)           | network | [`calc_attr_error`](errors.md#network.calc_attr_error)             |
-| [`connections`](connections.md) | network | [`load_file`](connections.md#network.load_file)                    |
-| [`connections`](connections.md) | network | [`save_file`](connections.md#network.save_file)                    |
-| [`command`](command.md)         | node    | [`command`](command.md#node.command)                               |
-| [`command`](command.md)         | network | [`parallel`](command.md#network.parallel)                          |
-| [`command`](command.md)         | network | [`command`](command.md#network.command)                            |
-| [`debug`](debug.md)             | network | [`debug`](debug.md#network.debug)                                  |
-| [`debug`](debug.md)             | network | [`echo`](debug.md#network.echo)                                    |
-| [`debug`](debug.md)             | network | [`clip`](debug.md#network.clip)                                    |
-| [`attrs`](attrs.md)             | node    | [`load_attrs`](attrs.md#node.load_attrs)                           |
-| [`attrs`](attrs.md)             | node    | [`print_all_attrs`](attrs.md#node.print_all_attrs)                 |
-| [`attrs`](attrs.md)             | node    | [`print_attrs`](attrs.md#node.print_attrs)                         |
-| [`table`](table.md)             | network | [`table_to_markdown`](table.md#network.table_to_markdown)          |
-| [`print_node`](print_node.md)   | node    | [`print_node`](print_node.md#node.print_node)                      |
-| [`print_node`](print_node.md)   | network | [`print_attr_csv`](print_node.md#network.print_attr_csv)           |
-| [`graphics`](graphics.md)       | network | [`csv_load_ts`](graphics.md#network.csv_load_ts)                   |
-| [`graphics`](graphics.md)       | network | [`csv_count_na`](graphics.md#network.csv_count_na)                 |
-| [`graphics`](graphics.md)       | network | [`csv_data_blocks_svg`](graphics.md#network.csv_data_blocks_svg)   |
-| [`graphics`](graphics.md)       | network | [`export_svg`](graphics.md#network.export_svg)                     |
-| [`graphics`](graphics.md)       | network | [`table_to_svg`](graphics.md#network.table_to_svg)                 |
-| [`render`](render.md)           | node    | [`render`](render.md#node.render)                                  |
-| [`render`](render.md)           | network | [`render`](render.md#network.render)                               |
-| [`nadi_gis`](nadi_gis.md)       | network | [`gis_load_attrs`](nadi_gis.md#network.gis_load_attrs)             |
-| [`nadi_gis`](nadi_gis.md)       | network | [`gis_save_connections`](nadi_gis.md#network.gis_save_connections) |
-| [`nadi_gis`](nadi_gis.md)       | network | [`gis_save_nodes`](nadi_gis.md#network.gis_save_nodes)             |
+## Node Functions
+| Plugin                        | Function                                                 | Help                                                            |
+|:------------------------------|:---------------------------------------------------------|:----------------------------------------------------------------|
+| [`attrs`](attrs.md)           | [`load_attrs`](attrs.md#network.load_attrs)              | Loads attrs from file for all nodes based on the given template |
+| [`dams`](dams.md)             | [`count_dams`](dams.md#network.count_dams)               | Count the number of dams upstream at each point                 |
+| [`print_node`](print_node.md) | [`print_node`](print_node.md#network.print_node)         | Print the node with its inputs and outputs                      |
+| [`attrs`](attrs.md)           | [`print_attrs`](attrs.md#network.print_attrs)            | Print the given node attributes if present                      |
+| [`command`](command.md)       | [`command`](command.md#network.command)                  | Run the given template as a shell command.                      |
+| [`errors`](errors.md)         | [`calc_ts_errors`](errors.md#network.calc_ts_errors)     | Calculate Error from two timeseries values in the node          |
+| [`streamflow`](streamflow.md) | [`check_negative`](streamflow.md#network.check_negative) | Check the given streamflow timeseries for negative values       |
+| [`errors`](errors.md)         | [`calc_ts_error`](errors.md#network.calc_ts_error)       | Calculate Error from two timeseries values in the node          |
+| [`attrs`](attrs.md)           | [`print_all_attrs`](attrs.md#network.print_all_attrs)    | Print all attrs in a node                                       |
+| [`attrs`](attrs.md)           | [`set_attrs_render`](attrs.md#network.set_attrs_render)  | Set node attributes based on string templates                   |
+| [`render`](render.md)         | [`render`](render.md#network.render)                     | Render the template based on the node attributes                |
+| [`timeseries`](timeseries.md) | [`list_ts`](timeseries.md#network.list_ts)               | Print the list of available timeseries for the node             |
+| [`timeseries`](timeseries.md) | [`show_ts`](timeseries.md#network.show_ts)               | Print the given timeseries values in csv format                 |
+| [`dams`](dams.md)             | [`count_gages`](dams.md#network.count_gages)             | Count the number of gages upstream at each point                |
+| [`attrs`](attrs.md)           | [`set_attrs`](attrs.md#network.set_attrs)                | Set node attributes                                             |
+| [`dams`](dams.md)             | [`min_year`](dams.md#network.min_year)                   | Propagage the minimum year downstream                           |
+
+
+## Network Functions
+| Plugin                          | Function                                                        | Help                                                                                 |
+|:--------------------------------|:----------------------------------------------------------------|:-------------------------------------------------------------------------------------|
+| [`render`](render.md)           | [`render`](render.md#node.render)                               | Render a File template for the nodes in the whole network                            |
+| [`gnuplot`](gnuplot.md)         | [`plot_timeseries`](gnuplot.md#node.plot_timeseries)            | Generate a gnuplot file that plots the timeseries data in the network                |
+| [`command`](command.md)         | [`command`](command.md#node.command)                            | Run the given template as a shell command.                                           |
+| [`debug`](debug.md)             | [`debug`](debug.md#node.debug)                                  | Print the args and kwargs on this function                                           |
+| [`fancy_print`](fancy_print.md) | [`fancy_print`](fancy_print.md#node.fancy_print)                | Fancy print a network                                                                |
+| [`nadi_gis`](nadi_gis.md)       | [`gis_save_connections`](nadi_gis.md#node.gis_save_connections) | Save GIS file of the connections                                                     |
+| [`attrs`](attrs.md)             | [`set_attrs`](attrs.md#node.set_attrs)                          | Set network attributes                                                               |
+| [`graphics`](graphics.md)       | [`export_svg`](graphics.md#node.export_svg)                     | Create a SVG file with the given network structure                                   |
+| [`attrs`](attrs.md)             | [`set_attrs_render`](attrs.md#node.set_attrs_render)            | Set network attributes based on string templates                                     |
+| [`connections`](connections.md) | [`save_file`](connections.md#node.save_file)                    | Save the network into the given file                                                 |
+| [`nadi_gis`](nadi_gis.md)       | [`gis_load_attrs`](nadi_gis.md#node.gis_load_attrs)             | Load node attributes from a GIS file                                                 |
+| [`table`](table.md)             | [`table_to_markdown`](table.md#node.table_to_markdown)          | Render the Table as a rendered markdown                                              |
+| [`graphviz`](graphviz.md)       | [`save_graphviz`](graphviz.md#node.save_graphviz)               | Save the network as a graphviz file                                                  |
+| [`graphics`](graphics.md)       | [`csv_load_ts`](graphics.md#node.csv_load_ts)                   | Count the number of na values in CSV file for each nodes in a network                |
+| [`graphics`](graphics.md)       | [`csv_data_blocks_svg`](graphics.md#node.csv_data_blocks_svg)   | Draw the data blocks with arrows in timeline                                         |
+| [`debug`](debug.md)             | [`echo`](debug.md#node.echo)                                    | Echo the string to stdout or stderr                                                  |
+| [`connections`](connections.md) | [`load_file`](connections.md#node.load_file)                    | Load the given file into the network                                                 |
+| [`print_node`](print_node.md)   | [`print_attr_csv`](print_node.md#node.print_attr_csv)           | Print the given attributes in csv format with first column with node name            |
+| [`graphics`](graphics.md)       | [`csv_count_na`](graphics.md#node.csv_count_na)                 | Count the number of na values in CSV file for each nodes in a network                |
+| [`debug`](debug.md)             | [`clip`](debug.md#node.clip)                                    | Echo the ----8<---- line for clipping sytax                                          |
+| [`graphics`](graphics.md)       | [`table_to_svg`](graphics.md#node.table_to_svg)                 | Create a SVG file with the given network structure                                   |
+| [`command`](command.md)         | [`parallel`](command.md#node.parallel)                          | Run the given template as a shell command for each nodes in the network in parallel. |
+| [`errors`](errors.md)           | [`calc_attr_error`](errors.md#node.calc_attr_error)             | Calculate Error from two attribute values in the network                             |
+| [`nadi_gis`](nadi_gis.md)       | [`gis_save_nodes`](nadi_gis.md#node.gis_save_nodes)             | Save GIS file of the nodes                                                           |
 

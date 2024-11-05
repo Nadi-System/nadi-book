@@ -1,10 +1,13 @@
 # Node Functions
 ## render {#node.render}
 ```sig
-node render.render (template: '& Template', safe: 'bool' = false)
+node render.render(template: '& Template', safe: 'bool' = false)
 ```
 
 Render the template based on the node attributes
+
+For more details on the template system. Refer to the String
+Template section of the NADI book.
 
 ### Arguments
 - `template` - String template to render
@@ -12,7 +15,7 @@ Render the template based on the node attributes
 # Network Functions
 ## render {#network.render}
 ```sig
-network render.render (template: 'PathBuf', outfile: 'Option < PathBuf >')
+network render.render(template: 'PathBuf', outfile: 'Option < PathBuf >')
 ```
 
 Render a File template for the nodes in the whole network

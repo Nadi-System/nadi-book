@@ -1,5 +1,5 @@
 // custom syntax highlight for the nadi related syntax
-
+const NADI_INTERNAL_FUNCS = "command show_ts load_attrs set_attrs_render print_attrs set_attrs render list_ts print_all_attrs dummy_ts render set_attrs parallel set_attrs_render debug";
 const STRING_TEMPLATE_MODE = hljs.inherit(
     hljs.QUOTE_STRING_MODE,
     // assume strings are also templates, and highlight them
@@ -39,7 +39,7 @@ hljs.registerLanguage("task", (hljs) => ({
     name: "Task",
     keywords: {
 	keyword: "help node network sequential inverse inputsfirst outputfirst",
-	built_in: "command show_ts load_attrs set_attrs_render print_attrs set_attrs render list_ts print_all_attrs dummy_ts render set_attrs parallel set_attrs_render debug",
+	built_in: NADI_INTERNAL_FUNCS,
 	literal: "false true",
     },
     contains: [
@@ -55,19 +55,17 @@ hljs.registerLanguage("signature", (hljs) => ({
     name: "Signature",
     aliases: ["sig"],
     keywords: {
-	keyword: "Bool String Integer Float Date Time DateTime Array Table PathBuf Template Attribute AttrMap",
-	built_in: "Option",
+	keyword: "Bool String Integer Float Date Time DateTime Array Table PathBuf Template Attribute AttrMap Option str bool",
+	built_in: NADI_INTERNAL_FUNCS,
+	literal: "false true",
     },
     contains: [
 	STRING_TEMPLATE_MODE,
 	{
-	    begin: '^[a-zA-Z_]+',
-	    end: '\\(',
-	    excludeEnd: true,
-	    className: "addition",
+	    begin: '^(node|network)',
+	    className: "deletion",
 	}
     ]
-
 }));
 
 

@@ -27,7 +27,6 @@
 - [Nadi Extension Capabilities](./system/extensions.md)
 - [Plugins](plugins/intro.md)
   - [List of All Functions](plugins/index.md)
-  - [Attrs2](plugins/attrs2.md)
   - [Attrs](plugins/attrs.md)
   - [Command](plugins/command.md)
   - [Connections](plugins/connections.md)
