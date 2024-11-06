@@ -1,5 +1,4 @@
-# Default Plugins
-
+# Internal Plugins
 There are some plugins that are provided with the `nadi_core`
 library. They are part of the library, so users can directly use them.
 
