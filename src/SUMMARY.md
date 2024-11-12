@@ -45,8 +45,9 @@
 - [Internal Plugins](plugins/intro.md)
   - [Attrs](plugins/attrs.md)
   - [Command](plugins/command.md)
-  - [Debug](plugins/debug.md)
   - [Connections](plugins/connections.md)
+  - [Debug](plugins/debug.md)
+  - [Render](plugins/render.md)
   - [Table](plugins/table.md)
   - [Timeseries](plugins/timeseries.md)
 - [External Plugins](plugins/intro-ex.md)
@@ -58,7 +59,6 @@
   - [Graphviz](plugins/graphviz.md)
   - [Nadi GIS](plugins/nadi_gis.md)
   - [Print Node](plugins/print_node.md)
-  - [Render](plugins/render.md)
   - [Streamflow](plugins/streamflow.md)
 
 # Developer Reference

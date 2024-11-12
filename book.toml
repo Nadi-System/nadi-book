@@ -23,6 +23,10 @@ enable = true
 runnable = false
 line-numbers = true
 
+# [output.typst]
+# [output.typst.output]
+# format = "pdf"
+
 # [output.markdown]
 
 # this is really glitchy for now.
