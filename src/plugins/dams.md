@@ -1,19 +1,21 @@
 # Node Functions
-## count_dams {#node.count_dams}
+## count_node_if {#node.count_node_if}
 ```sig
-node dams.count_dams(outvar: '& str' = "DAMS_COUNT")
+node dams.count_node_if(count_attr: '& str', cond: 'bool')
 ```
 
-Count the number of dams upstream at each point
-## count_gages {#node.count_gages}
-```sig
-node dams.count_gages(outvar: '& str' = "GAGES_COUNT")
-```
+### Arguments
+- `count_attr: '& str'` => 
+- `cond: 'bool'` => 
 
-Count the number of gages upstream at each point
+Count the number of nodes upstream at each point that satisfies a certain condition
 ## min_year {#node.min_year}
 ```sig
 node dams.min_year(yearattr: '& str', write_var: '& str' = "MIN_YEAR")
 ```
 
-Propagage the minimum year downstream
+### Arguments
+- `yearattr: '& str'` => 
+- `write_var: '& str' = "MIN_YEAR"` => 
+
+Propagate the minimum year downstream

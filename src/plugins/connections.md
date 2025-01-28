@@ -1,13 +1,26 @@
 # Network Functions
 ## load_file {#network.load_file}
 ```sig
-network connections.load_file(file: 'PathBuf')
+network connections.load_file(file: 'PathBuf', append: 'bool' = false)
 ```
+
+### Arguments
+- `file: 'PathBuf'` => File to load the network connections from
+- `append: 'bool' = false` => Append the connections in the current network
 
 Load the given file into the network
 
 This replaces the current network with the one loaded from the
 file.
+## subset {#network.subset}
+```sig
+network connections.subset(keep: 'bool' = true)
+```
+
+### Arguments
+- `keep: 'bool' = true` => Keep the selected nodes (false = removes the selected)
+
+Take a subset of network by only including the selected nodes
 ## save_file {#network.save_file}
 ```sig
 network connections.save_file(
@@ -17,12 +30,12 @@ network connections.save_file(
 )
 ```
 
+### Arguments
+- `file: 'PathBuf'` => Path to the output file
+- `quote_all: 'bool' = true` => quote all node names; if false, doesn't quote valid identifier names
+- `graphviz: 'bool' = false` => wrap the network into a valid graphviz file
+
 Save the network into the given file
 
-### Arguments
-- `file`: Path to the output file
-- `quote_all` [default: true]: quote all node names.
-if false, doesn't quote valid identifier names
-- `graphviz` [default: false]: wrap the network into
-a valid graphviz file. For more control on file
+For more control on graphviz file writing use
 `save_graphviz` from `graphviz` plugin instead.

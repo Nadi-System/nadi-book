@@ -1,13 +1,43 @@
+# Env Functions
+## strmap {#env.strmap}
+```sig
+env attrs.strmap(
+    attr: '& str',
+    attrmap: '& AttrMap',
+    default: 'Option < Attribute >'
+)
+```
+
+### Arguments
+- `attr: '& str'` => Value to transform the attribute
+- `attrmap: '& AttrMap'` => Dictionary of key=value to map the data to
+- `default: 'Option < Attribute >'` => Default value if key not found in `attrmap`
+
+map values from the attribute based on the given table
+## float_transform {#env.float_transform}
+```sig
+env attrs.float_transform(value: 'f64', transformation: '& str')
+```
+
+### Arguments
+- `value: 'f64'` => value to transform
+- `transformation: '& str'` => transformation function, can be one of log/log10/sqrt
+
+map values from the attribute based on the given table
 # Node Functions
 ## load_attrs {#node.load_attrs}
 ```sig
-node attrs.load_attrs(filename)
+node attrs.load_attrs(filename: 'PathBuf')
 ```
+
+### Arguments
+- `filename: 'PathBuf'` => Template for the filename to load node attributes from
 
 Loads attrs from file for all nodes based on the given template
 
 ### Arguments
 - `filename`: Template for the filename to load node attributes from
+- `verbose`: print verbose message
 
 The template will be rendered for each node, and that filename from the
 rendered template will be used to load the attributes.
@@ -23,6 +53,9 @@ The function will error out in following conditions:
 node attrs.print_all_attrs()
 ```
 
+### Arguments
+
+
 Print all attrs in a node
 
 No arguments and no errors, it'll just print all the attributes in a node with
@@ -33,8 +66,12 @@ No arguments and no errors, it'll just print all the attributes in a node with
 
 ## print_attrs {#node.print_attrs}
 ```sig
-node attrs.print_attrs(*args, name: 'bool')
+node attrs.print_attrs(*attrs, name: 'bool')
 ```
+
+### Arguments
+- `*attrs` => 
+- `name: 'bool'` => 
 
 Print the given node attributes if present
 
@@ -50,17 +87,17 @@ The function will error if
 The attributes will be printed in `key=val` format.
 ## set_attrs {#node.set_attrs}
 ```sig
-node attrs.set_attrs(**kwargs)
+node attrs.set_attrs(**attrs)
 ```
+
+### Arguments
+- `**attrs` => Key value pairs of the attributes to set
 
 Set node attributes
 
 Use this function to set the node attributes of all nodes, or
 a select few nodes using the node selection methods (path or
 list of nodes)
-
-### Arguments
-- `key=value` - Kwargs of attr = value
 
 ### Error
 The function should not error.
@@ -72,20 +109,72 @@ from `A` to `D`
 ```task
 node[A -> D] set_attrs(a2d = true)
 ```
+## get_attr {#node.get_attr}
+```sig
+node attrs.get_attr(attr: '& str', default: 'Option < Attribute >')
+```
+
+### Arguments
+- `attr: '& str'` => Name of the attribute to get
+- `default: 'Option < Attribute >'` => Default value if the attribute is not found
+
+Retrive attribute
+## has_attr {#node.has_attr}
+```sig
+node attrs.has_attr(attr: '& str')
+```
+
+### Arguments
+- `attr: '& str'` => Name of the attribute to check
+
+Check if the attribute is present
+## first_attr {#node.first_attr}
+```sig
+node attrs.first_attr(attrs: '& [String]', default: 'Option < Attribute >')
+```
+
+### Arguments
+- `attrs: '& [String]'` => attribute names
+- `default: 'Option < Attribute >'` => Default value if not found
+
+Return the first Attribute that exists
+## set_attrs_ifelse {#node.set_attrs_ifelse}
+```sig
+node attrs.set_attrs_ifelse(cond: 'bool', **values)
+```
+
+### Arguments
+- `cond: 'bool'` => Condition to check
+- `**values` => key = [val1, val2] where key is set as first if `cond` is true else second
+
+if else condition with multiple attributes
 ## set_attrs_render {#node.set_attrs_render}
 ```sig
 node attrs.set_attrs_render(**kwargs)
 ```
 
+### Arguments
+- `**kwargs` => key value pair of attribute to set and the Template to render
+
 Set node attributes based on string templates
+## load_toml_render {#node.load_toml_render}
+```sig
+node attrs.load_toml_render(toml: '& Template', echo: 'bool' = false)
+```
 
 ### Arguments
-- `attr=template` - Kwargs of attr = String template to render
+- `toml: '& Template'` => String template to render and load as TOML string
+- `echo: 'bool' = false` => Print the rendered toml or not
+
+Set node attributes based on string templates
 # Network Functions
 ## set_attrs {#network.set_attrs}
 ```sig
-network attrs.set_attrs(**kwargs)
+network attrs.set_attrs(**attrs)
 ```
+
+### Arguments
+- `**attrs` => key value pair of attributes to set
 
 Set network attributes
 
@@ -96,7 +185,7 @@ Set network attributes
 network attrs.set_attrs_render(**kwargs)
 ```
 
-Set network attributes based on string templates
-
 ### Arguments
-- `attr=template` - Kwargs of attr = String template to render
+- `**kwargs` => Kwargs of attr = String template to render
+
+Set network attributes based on string templates

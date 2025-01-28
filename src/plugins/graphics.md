@@ -1,3 +1,25 @@
+# Node Functions
+## attr_fraction_svg {#node.attr_fraction_svg}
+```sig
+node graphics.attr_fraction_svg(
+    attr: '& str',
+    outfile: '& Template',
+    color: '& AttrColor',
+    height: 'f64' = 80.0,
+    width: 'f64' = 80.0,
+    margin: 'f64' = 10.0
+)
+```
+
+### Arguments
+- `attr: '& str'` => 
+- `outfile: '& Template'` => 
+- `color: '& AttrColor'` => 
+- `height: 'f64' = 80.0` => 
+- `width: 'f64' = 80.0` => 
+- `margin: 'f64' = 10.0` => 
+
+Create a SVG file with the given network structure
 # Network Functions
 ## csv_load_ts {#network.csv_load_ts}
 ```sig
@@ -9,6 +31,13 @@ network graphics.csv_load_ts(
     data_type: 'String' = "Floats"
 )
 ```
+
+### Arguments
+- `file: 'PathBuf'` => 
+- `name: 'String'` => 
+- `date_col: 'String' = "date"` => 
+- `timefmt: 'String' = "%Y-%m-%d"` => 
+- `data_type: 'String' = "Floats"` => 
 
 Count the number of na values in CSV file for each nodes in a network
 
@@ -30,6 +59,13 @@ network graphics.csv_count_na(
 )
 ```
 
+### Arguments
+- `file: 'PathBuf'` => 
+- `outattr: 'Option < String >'` => 
+- `sort: 'bool' = false` => 
+- `skip_zero: 'bool' = false` => 
+- `head: 'Option < i64 >'` => 
+
 Count the number of na values in CSV file for each nodes in a network
 
 ### Arguments
@@ -45,36 +81,39 @@ network graphics.csv_data_blocks_svg(
     outfile: 'PathBuf',
     label: 'Template',
     date_col: 'String' = "date",
-    config: 'NetworkPlotConfig' = NetworkPlotConfig { width: 250.0,
-    height: 300.0,
-    delta_x: 20.0,
-    delta_y: 20.0,
-    offset: 30.0,
-    radius: 3.0,
-    fontsize: 16.0,
-    fontface: FontFace { inner: Shared { inner: 0x58f60f720320 } } },
+    config: 'NetworkPlotConfig' = NetworkPlotConfig { width: 250.0, height: 300.0, delta_x: 20.0, delta_y: 20.0, offset: 30.0, radius: 3.0, fontsize: 16.0, fontface: FontFace { inner: Shared { inner: 0x5747b6ea6a20 } } },
     blocks_width: 'f64' = 500.0,
     fit: 'bool' = false
 )
 ```
+
+### Arguments
+- `csvfile: 'PathBuf'` => 
+- `outfile: 'PathBuf'` => 
+- `label: 'Template'` => 
+- `date_col: 'String' = "date"` => 
+- `config: 'NetworkPlotConfig' = NetworkPlotConfig { width: 250.0, height: 300.0, delta_x: 20.0, delta_y: 20.0, offset: 30.0, radius: 3.0, fontsize: 16.0, fontface: FontFace { inner: Shared { inner: 0x5747b6ea6a20 } } }` => 
+- `blocks_width: 'f64' = 500.0` => 
+- `fit: 'bool' = false` => 
 
 Draw the data blocks with arrows in timeline
 ## export_svg {#network.export_svg}
 ```sig
 network graphics.export_svg(
     outfile: 'PathBuf',
-    config: 'NetworkPlotConfig' = NetworkPlotConfig { width: 250.0,
-    height: 300.0,
-    delta_x: 20.0,
-    delta_y: 20.0,
-    offset: 30.0,
-    radius: 3.0,
-    fontsize: 16.0,
-    fontface: FontFace { inner: Shared { inner: 0x58f60f720320 } } },
+    config: 'NetworkPlotConfig' = NetworkPlotConfig { width: 250.0, height: 300.0, delta_x: 20.0, delta_y: 20.0, offset: 30.0, radius: 3.0, fontsize: 16.0, fontface: FontFace { inner: Shared { inner: 0x5747b6ea6a20 } } },
     fit: 'bool' = false,
-    label: 'Option < Template >'
+    label: 'Option < Template >',
+    highlight: '& [usize]' = []
 )
 ```
+
+### Arguments
+- `outfile: 'PathBuf'` => 
+- `config: 'NetworkPlotConfig' = NetworkPlotConfig { width: 250.0, height: 300.0, delta_x: 20.0, delta_y: 20.0, offset: 30.0, radius: 3.0, fontsize: 16.0, fontface: FontFace { inner: Shared { inner: 0x5747b6ea6a20 } } }` => 
+- `fit: 'bool' = false` => 
+- `label: 'Option < Template >'` => 
+- `highlight: '& [usize]' = []` => 
 
 Create a SVG file with the given network structure
 ## table_to_svg {#network.table_to_svg}
@@ -83,16 +122,18 @@ network graphics.table_to_svg(
     outfile: 'PathBuf',
     table: 'Option < PathBuf >',
     template: 'Option < String >',
-    config: 'NetworkPlotConfig' = NetworkPlotConfig { width: 250.0,
-    height: 300.0,
-    delta_x: 20.0,
-    delta_y: 20.0,
-    offset: 30.0,
-    radius: 3.0,
-    fontsize: 16.0,
-    fontface: FontFace { inner: Shared { inner: 0x58f60f720320 } } },
-    fit: 'bool' = false
+    config: 'NetworkPlotConfig' = NetworkPlotConfig { width: 250.0, height: 300.0, delta_x: 20.0, delta_y: 20.0, offset: 30.0, radius: 3.0, fontsize: 16.0, fontface: FontFace { inner: Shared { inner: 0x5747b6ea6a20 } } },
+    fit: 'bool' = false,
+    highlight: '& [String]' = []
 )
 ```
+
+### Arguments
+- `outfile: 'PathBuf'` => 
+- `table: 'Option < PathBuf >'` => 
+- `template: 'Option < String >'` => 
+- `config: 'NetworkPlotConfig' = NetworkPlotConfig { width: 250.0, height: 300.0, delta_x: 20.0, delta_y: 20.0, offset: 30.0, radius: 3.0, fontsize: 16.0, fontface: FontFace { inner: Shared { inner: 0x5747b6ea6a20 } } }` => 
+- `fit: 'bool' = false` => 
+- `highlight: '& [String]' = []` => 
 
 Create a SVG file with the given network structure

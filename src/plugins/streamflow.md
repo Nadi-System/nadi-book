@@ -4,4 +4,7 @@
 node streamflow.check_negative(ts_name: '& str')
 ```
 
+### Arguments
+- `ts_name: '& str'` => 
+
 Check the given streamflow timeseries for negative values

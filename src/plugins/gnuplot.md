@@ -7,12 +7,18 @@ network gnuplot.plot_timeseries(
     datacol: '& str',
     outfile: '& Path',
     timefmt: '& str' = "%Y-%m-%d",
-    config: '& GnuplotConfig' = GnuplotConfig { outfile: None,
-    terminal: None,
-    csv: false,
-    preamble: "" },
+    config: '& GnuplotConfig' = GnuplotConfig { outfile: None, terminal: None, csv: false, preamble: "" },
     skip_missing: 'bool' = false
 )
 ```
+
+### Arguments
+- `csvfile: 'Template'` => 
+- `datecol: '& str'` => 
+- `datacol: '& str'` => 
+- `outfile: '& Path'` => 
+- `timefmt: '& str' = "%Y-%m-%d"` => 
+- `config: '& GnuplotConfig' = GnuplotConfig { outfile: None, terminal: None, csv: false, preamble: "" }` => 
+- `skip_missing: 'bool' = false` => 
 
 Generate a gnuplot file that plots the timeseries data in the network

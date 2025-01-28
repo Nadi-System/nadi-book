@@ -1,21 +1,21 @@
 
 ## Ohio River Routing Project
 
-<!-- ---8<---:[smithland] -->
+<!-- ---8<---:[smithland]: -->
 Our basin Outlet is at {_description:case(title):repl(Ky,KY)} with the total basin area {basin_area:f(1)} acre-ft.
 <!-- ---8<--- -->
 
 The lower part of the Ohio basin are specifically important to us. Those are:
 | ID      | Basin Area   | Length to Outlet |
 |---------|-------------:|-----------------:|
-<!-- ---8<---:[greenup -> smithland] -->
+<!-- ---8<---:[greenup -> smithland]: -->
 | {_NAME} | {basin_area:f(1)} | {length:f(2)}  |
 <!-- ---8<--- -->
 
 
 We used 4 locks and dams in the ohio river as representative locks and dams as below:
 
-<!-- ---8<---:["willow-island",racine,markland,smithland] -->
+<!-- ---8<---:["willow-island",racine,markland,smithland]: -->
 - {_NAME:repl(-, ):case(title)?}
 
   ![](../data/{_NAME}.svg)

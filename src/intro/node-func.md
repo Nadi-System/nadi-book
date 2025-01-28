@@ -5,7 +5,7 @@ For example following node function takes multiple attribute names and prints th
 
 ```task run
 !network load_file("./data/mississippi.net")
-node print_attrs("NAME", "INDEX")
+node print_attrs("INDEX", name=false)
 ```
 
 Only the `NAME` is printed as they do not have any other attributes.
@@ -26,7 +26,7 @@ Given this network:
 ### Inverse Order
 ```task run
 !network load_file("./data/mississippi.net")
-node.inverse print_attrs("NAME")
+node<inverse> print_attrs("NAME")
 ```
 
 ## List of Nodes
@@ -34,7 +34,6 @@ node.inverse print_attrs("NAME")
 !network load_file("./data/mississippi.net")
 node[tenessee,"lower-mississippi"] print_attrs("NAME")
 ```
-
 
 ## Path of Nodes
 ```task run

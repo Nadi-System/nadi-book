@@ -1,5 +1,5 @@
 // custom syntax highlight for the nadi related syntax
-const NADI_INTERNAL_FUNCS = "command show_ts load_attrs set_attrs_render print_attrs set_attrs render list_ts print_all_attrs dummy_ts render set_attrs parallel set_attrs_render debug";
+const NADI_INTERNAL_FUNCS = "count attr_fraction_svg csv_load_ts csv_count_na csv_data_blocks_svg export_svg table_to_svg check_negative gis_load_attrs gis_save_connections gis_save_nodes plot_timeseries load_file subset save_file save_csv table_to_markdown count_node_if min_year exists command run parallel command sr_count sr_list sr_dtype sr_len sr_mean sr_sum set_series sr_to_array set_nodesize_attrs print_node print_attr_csv render render ts_count ts_list ts_dtype ts_len ts_print ts_print_csv fancy_print load_csv_fill export_map save_graphviz load_attrs print_all_attrs print_attrs set_attrs get_attr has_attr first_attr set_attrs_ifelse set_attrs_render load_toml_render set_attrs set_attrs_render calc_ts_error calc_ts_errors calc_attr_error debug echo clip";
 const STRING_TEMPLATE_MODE = hljs.inherit(
     hljs.QUOTE_STRING_MODE,
     // assume strings are also templates, and highlight them
@@ -62,7 +62,7 @@ hljs.registerLanguage("signature", (hljs) => ({
     contains: [
 	STRING_TEMPLATE_MODE,
 	{
-	    begin: '^(node|network)',
+	    begin: '^(node|network|env)',
 	    className: "deletion",
 	}
     ]

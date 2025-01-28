@@ -4,5 +4,8 @@
 network fancy_print.fancy_print()
 ```
 
+### Arguments
+
+
 Fancy print a network
 

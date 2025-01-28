@@ -1,4 +1,14 @@
 # Network Functions
+## save_csv {#network.save_csv}
+```sig
+network table.save_csv(path: '& Path', *fields)
+```
+
+### Arguments
+- `path: '& Path'` => 
+- `*fields` => 
+
+Save CSV
 ## table_to_markdown {#network.table_to_markdown}
 ```sig
 network table.table_to_markdown(
@@ -9,13 +19,13 @@ network table.table_to_markdown(
 )
 ```
 
-Render the Table as a rendered markdown
-
 ### Arguments
-- `table`: Path to the table file
-- `template`: String template for table
-- `outfile`: Path to the output file
-- `connetions`: Show connections column or not
+- `table: 'Option < PathBuf >'` => Path to the table file
+- `template: 'Option < String >'` => String template for table
+- `outfile: 'Option < PathBuf >'` => Path to the output file
+- `connections: 'Option < String >'` => Show connections column or not
+
+Render the Table as a rendered markdown
 
 ### Error
 The function will error out if,

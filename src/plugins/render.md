@@ -4,19 +4,23 @@
 node render.render(template: '& Template', safe: 'bool' = false)
 ```
 
+### Arguments
+- `template: '& Template'` => String template to render
+- `safe: 'bool' = false` => if render fails keep it as it is instead of exiting
+
 Render the template based on the node attributes
 
 For more details on the template system. Refer to the String
 Template section of the NADI book.
-
-### Arguments
-- `template` - String template to render
-- `safe` - if render fails keep it as it is instead of exiting
 # Network Functions
 ## render {#network.render}
 ```sig
 network render.render(template: 'PathBuf', outfile: 'Option < PathBuf >')
 ```
+
+### Arguments
+- `template: 'PathBuf'` => Path to the template file
+- `outfile: 'Option < PathBuf >'` => output file
 
 Render a File template for the nodes in the whole network
 

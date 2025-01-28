@@ -4,6 +4,10 @@
 network debug.debug(*args, **kwargs)
 ```
 
+### Arguments
+- `*args` => Function arguments
+- `**kwargs` => Function Keyword arguments
+
 Print the args and kwargs on this function
 
 This function will just print out the args and kwargs the
@@ -20,6 +24,11 @@ network debug.echo(
 )
 ```
 
+### Arguments
+- `line: 'String'` => line to print
+- `error: 'bool' = false` => print to stderr instead of stdout
+- `newline: 'bool' = true` => print newline at the end
+
 Echo the string to stdout or stderr
 
 This simply echoes anything given to it. This can be used in
@@ -33,7 +42,10 @@ Also useful for nadi preprocessor.
 network debug.clip(error: 'bool' = false)
 ```
 
-Echo the ----8<---- line for clipping sytax
+### Arguments
+- `error: 'bool' = false` => print in stderr instead of in stdout
+
+Echo the ----8<---- line for clipping syntax
 
 This function is a utility function for the generation of nadi
 book. This prints out the `----8<----` line when called, so
