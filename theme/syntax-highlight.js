@@ -1,5 +1,5 @@
 // custom syntax highlight for the nadi related syntax
-const NADI_INTERNAL_FUNCS = "count attr_fraction_svg csv_load_ts csv_count_na csv_data_blocks_svg export_svg table_to_svg check_negative gis_load_attrs gis_save_connections gis_save_nodes plot_timeseries load_file subset save_file save_csv table_to_markdown count_node_if min_year exists command run parallel command sr_count sr_list sr_dtype sr_len sr_mean sr_sum set_series sr_to_array set_nodesize_attrs print_node print_attr_csv render render ts_count ts_list ts_dtype ts_len ts_print ts_print_csv fancy_print load_csv_fill export_map save_graphviz load_attrs print_all_attrs print_attrs set_attrs get_attr has_attr first_attr set_attrs_ifelse set_attrs_render load_toml_render set_attrs set_attrs_render calc_ts_error calc_ts_errors calc_attr_error debug echo clip";
+const NADI_INTERNAL_FUNCS = "and array attrmap clip command count debug echo eq exists first_attr float float_div float_mult float_transform get_attr gt has_attr has_outlet ifelse inputs inputs_len int load_attrs load_file load_toml_render lt not or output parallel print_all_attrs print_attrs render run save_csv save_file series_csv set_attrs set_attrs_ifelse set_attrs_render set_nodesize_attrs set_series sleep sr_count sr_dtype sr_len sr_list sr_mean sr_sum sr_to_array str str_count str_find str_find_all str_match str_replace strmap subset table_to_markdown ts_count ts_dtype ts_len ts_list ts_print ts_print_csv type_name";
 const STRING_TEMPLATE_MODE = hljs.inherit(
     hljs.QUOTE_STRING_MODE,
     // assume strings are also templates, and highlight them
@@ -47,6 +47,26 @@ hljs.registerLanguage("task", (hljs) => ({
 	hljs.HASH_COMMENT_MODE,
 	hljs.C_NUMBER_MODE,
 	NODE_LIST_OR_PATH,
+	{
+	    begin: '^(node|network|env)',
+	    className: "deletion",
+	},
+    ],
+}));
+
+hljs.registerLanguage("output", (hljs) => ({
+    name: "Output",
+    keywords: {
+	literal: "nadi:var:",
+    },
+    contains: [
+	hljs.QUOTE_STRING_MODE,
+	hljs.C_NUMBER_MODE,
+	NODE_LIST_OR_PATH,
+	{
+	    begin: '[a-zA-Z_][a-zA-Z_0-9]* *=',
+	    className: "deletion"
+	},
     ],
 }));
 
@@ -115,8 +135,6 @@ hljs.registerLanguage("table", (hljs) => ({
 }));
 
 // syntax highlight for the string template system
-
-const IDENTIFIER = '[a-zA-Z_]+';
 
 // this breaks the syntax, not used right now
 const DATE_TIME_FMT = {

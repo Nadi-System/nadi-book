@@ -13,7 +13,7 @@ network calc_attr_errors(
     "rmse", "nse", "abserr"
 )
 node sum_safe("Latitude")
-node.inputsfirst render("Hi {SUM_ATTR}")
+node<inputsfirst> render("Hi {SUM_ATTR}")
 # multiple line for function arguments
 network save_table(
 	"test.table",
@@ -23,7 +23,7 @@ network save_table(
 	start = 2012-19-20,
 	end = 2012-19-23 12:04
 	)
-node set_attrs(testattr = 2)
+node.testattr = 2
 node set_attrs_render(testattr2 = "{testattr:calc(+2)}")
 node[WV04112] render("{testattr} {testattr2}")
 

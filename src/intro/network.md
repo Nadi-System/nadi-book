@@ -18,6 +18,7 @@ Example Network file:
 The given network can be visualized as follows:
 ```task run image
 !network load_file("./data/mississippi.net")
+!network command("mkdir -p output")
 network export_svg(
    "./output/mississippi.svg",
 	label="[{INDEX}] {_NAME:repl(-, ):case(title)}"
