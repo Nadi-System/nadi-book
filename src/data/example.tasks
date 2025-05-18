@@ -1,5 +1,5 @@
 # sample .tasks file which is like a script with functions
-node print_attrs("uniqueID")
+node<inputsfirst> print_attrs("uniqueID")
 node show_node()
 network save_graphviz("/tmp/test.gv")
 

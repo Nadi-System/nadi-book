@@ -3,6 +3,12 @@
 NADI is group of software packages that facilitate network analysis and do data analysis on data related to network/nodes.
 
 
+NADI System consists of:
+| NADI GIS         | Geographic Information (GIS) Tool for Network Detection     |
+| NADI Task System | Domain Specific Programming Language                        |
+| NADI library     | Rust and Python library to use in your programs             |
+| NADI CLI         | Command Line Interface to run NADI Tasks                    |
+| NADI IDE         | Integrated Development Environment to write/ run NADI Tasks |
 
 
 # Trivia
