@@ -1,6 +1,6 @@
 # Summary
- - [Why NADI?](./why-nadi.md)
 [Preface](preface.md)
+ - [Why NADI?](./why-nadi.md)
  - [Who this book is for](./who-book.md)
  - [How to use this book](./how-to.md)
  - [Acknowledgements]()
