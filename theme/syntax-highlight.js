@@ -39,7 +39,7 @@ const NODE_LIST_OR_PATH = {
 hljs.registerLanguage("task", (hljs) => ({
     name: "Task",
     keywords: {
-	keyword: "help node network sequential inverse inputsfirst outputfirst",
+	keyword: "help",
 	built_in: NADI_INTERNAL_FUNCS,
 	literal: "false true",
     },
@@ -49,13 +49,7 @@ hljs.registerLanguage("task", (hljs) => ({
 	hljs.C_NUMBER_MODE,
 	NODE_LIST_OR_PATH,
 	{
-	    begin: '^(node|network|env)',
-	    className: "deletion",
-	},
-	{
-	    begin: '(node|network|env|nodes|inputs|output)',
-	    end: '[.]',
-	    excludeEnd: true,
+	    begin: '\\b(end|exit|node|network|env|nodes|inputs|output|match|in|inf|nan)\\b',
 	    className: "deletion",
 	},
 	{

@@ -2,6 +2,7 @@
 node<inputsfirst> print_attrs("uniqueID")
 node show_node()
 network save_graphviz("/tmp/test.gv")
+node<inputsfirst>.cum_val = node.val + sum(inputs.cum_val);
 
 node[WV04113,WV04112,WV04112] print_attr_toml("testattr2")
 node render("{NAME} {uniqueID} {_Dam_Height_(Ft)?}")
