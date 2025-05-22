@@ -4,7 +4,7 @@ You can read this book sequentially to understand the concepts used in the NADI 
 
 If you are in a hurry, but this is your first time reading this book,
 at least read the [Core Concepts](./intro.md), then refer to the
-section you are interested in.
+section you are interested in. [Learn by Example](./learn-examples.md)
 
 ## Code Blocks
 

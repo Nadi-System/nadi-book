@@ -14,6 +14,7 @@ NADI System consists of:
 | NADI IDE         | Integrated Development Environment to write/ run NADI Tasks |
 
 
+
 # Trivia
 - Nadi means River in Nepali (and probably in many south asian languages).
 - First prototype of NADI was Not Available Data Integration, as it

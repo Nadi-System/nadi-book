@@ -9,5 +9,3 @@ Hence it can be useful for people who:
 - Want to contribute to the NADI system packages, etc.
 
 Although not intended, it might include resources and links to other materials related to Rust concepts, Geographical Information System (GIS) concepts, Hydrology concepts, etc. that people could potentially benefit from.
-
-

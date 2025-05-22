@@ -68,10 +68,6 @@ hljs.registerLanguage("output", (hljs) => ({
 	hljs.QUOTE_STRING_MODE,
 	hljs.C_NUMBER_MODE,
 	NODE_LIST_OR_PATH,
-	{
-	    begin: '[a-zA-Z_][a-zA-Z_0-9]* *=',
-	    className: "deletion"
-	},
     ],
 }));
 

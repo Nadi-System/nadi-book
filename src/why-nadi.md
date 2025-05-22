@@ -28,6 +28,14 @@ Some example functionality of NADI system includes:
 ## Network Based Data Analysis
 If you have data that are network based, like in case of data related to points in a river. NADI provides a text representation of the network that can be manually created with any text editor, or through NADI GIS tool. 
 
+<!-- TODO -->
+<!-- ## Interactive outputs -->
+<!-- Here is a sample interactive plot made using NADI. -->
+
+<!-- ```task run svg -->
+
+<!-- ``` -->
+
 ## Task System
 The Domain Specific Programming Language (DSPL) developed for network analysis in NADI makes network analysis simple and intutive. So, it is easier to understand, interpret and catch mistakes. While the NADI IDE has network visualization tools built in that can help you visualiza the network attributes for visual analysis.
 

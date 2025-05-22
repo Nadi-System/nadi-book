@@ -19,8 +19,8 @@ For example the following template can be used to generate a table.
 ```
 
 ```task run markdown
-!network load_file("./data/mississippi.net")
-network render("./data/example.template")
+!network load_file("./data/mississippi.net");
+network echo(render_template("./data/example.template"))
 ```
 
 Of course, there are better ways to generate table than this, but this
