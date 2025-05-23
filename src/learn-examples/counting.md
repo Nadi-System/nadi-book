@@ -11,7 +11,7 @@ g1 -> d4
 g2 -> d4
 d4 -> g3
 !");
-!network export_svg(
+!network svg_save(
 !   "./output/simple-count.svg",
 !	label="[{INDEX}] {_NAME}"
 !)
@@ -59,7 +59,7 @@ Counting the number of nodes upstream of each node gives us the order of the nod
 !d4 -> g3
 !");
 node<inputsfirst>.nodes_us = 1 + sum(inputs.nodes_us);
-!network export_svg(
+!network svg_save(
 !   "./output/simple-count-1.svg",
 !	label="{_NAME} = {nodes_us}"
 !)
@@ -78,7 +78,7 @@ We can add a condition and count the nodes that satisfy that condition only. Lik
 !");
 node.is_dam = NAME match "^d[0-9]+";
 node<inputsfirst>.dams_us = int(is_dam) + sum(inputs.dams_us);
-!network export_svg(
+!network svg_save(
 !   "./output/simple-count-2.svg",
 !	label="{_NAME} = {dams_us}"
 !)
@@ -101,7 +101,7 @@ node<outputfirst>.gages_ds = int(is_gage) + if (output._?) {
 	} else {
 	0
 };
-!network export_svg(
+!network svg_save(
 !   "./output/simple-count-3.svg",
 !	label="{_NAME} = {gages_ds}"
 !)

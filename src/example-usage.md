@@ -4,8 +4,7 @@
 
 The Network for the flow routing is as follows:
 
-```task run svg
+```task run svg ../output/ohio.svg
 !network load_file("./data/ohio.network")
-network export_svg(label="{_NAME}", outfile = "./output/ohio.svg")
-!network echo("../output/ohio.svg")
+network svg_save(label="{_NAME}", outfile = "./output/ohio.svg", height=1000)
 ```

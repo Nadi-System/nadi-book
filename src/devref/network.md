@@ -34,9 +34,9 @@ golconda -> smithland
 ```
 
 Drawing it out:
-```task run image
+```task run image ../output/mississippi.sv
 !network load_file("./data/mississippi.net")
-network export_svg(
+network svg_save(
    "./output/mississippi.svg",
 	label="[{INDEX}] {_NAME:repl(-, ):case(title)}"
 )

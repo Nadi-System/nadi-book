@@ -15,13 +15,32 @@ Example Network file:
 {{#include ../data/mississippi.net}}
 ```
 
-The given network can be visualized as follows:
-```task run image ../output/mississippi.svg
+The given network can be visualized using `svg_save` function.
+
+```task run image ../output/network-mississippi.svg
 !network load_file("./data/mississippi.net")
 !network command("mkdir -p output")
-network export_svg(
-   "./output/mississippi.svg",
-	label="[{INDEX}] {_NAME:repl(-, ):case(title)}"
+network svg_save(
+   "./output/network-mississippi.svg",
+	label="[{INDEX}] {_NAME:repl(-, ):case(title)}",
+	bgcolor="gray"
+)
+```
+
+You can assign different graphical properties through node properties. 
+
+```task run image ../output/network-mississippi-colors.svg
+!network load_file("./data/mississippi.net")
+node[red].visual.nodecolor = "red";
+node[ohio].visual.linecolor = "blue";
+node[ohio].visual.linewidth = 3;
+node["upper-mississippi", red].visual.nodesize = 8;
+node[red].visual.nodeshape = "triangle";
+node["upper-mississippi"].visual.nodeshape = "ellipse:0.5";
+network svg_save(
+   "./output/network-mississippi-colors.svg",
+   label="[{INDEX}] {_NAME:repl(-, ):case(title)}",
+	bgcolor="gray"
 )
 ```
 
