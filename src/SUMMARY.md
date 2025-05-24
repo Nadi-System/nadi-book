@@ -19,7 +19,6 @@
   - [Network Function](./intro/network-func.md)
   - [Task](./intro/task.md)
   - [Further Reading](./intro/further.md)
-- [Nadi System](./nadi-system.md)
 - [Learn by Examples](./learn-examples.md)
   - [Attributes](./learn-examples/attributes.md)
   - [Connections](./learn-examples/connections.md)

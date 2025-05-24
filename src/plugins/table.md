@@ -1,12 +1,17 @@
 # Network Functions
 ## save_csv {#network.save_csv}
 ```sig
-network table.save_csv(path: '& Path', *fields)
+network table.save_csv(
+    path: '& Path',
+    fields: '& [String]',
+    filter: 'Vec < bool >'
+)
 ```
 
 ### Arguments
 - `path: '& Path'` => 
-- `*fields` => 
+- `fields: '& [String]'` => 
+- `filter: 'Vec < bool >'` => 
 
 Save CSV
 ## table_to_markdown {#network.table_to_markdown}

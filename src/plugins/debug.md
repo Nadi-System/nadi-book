@@ -1,7 +1,16 @@
-# Network Functions
-## debug {#network.debug}
+# Env Functions
+## sleep {#env.sleep}
 ```sig
-network debug.debug(*args, **kwargs)
+env debug.sleep(time: 'u64' = 1000)
+```
+
+### Arguments
+- `time: 'u64' = 1000` => 
+
+sleep for given number of milliseconds
+## debug {#env.debug}
+```sig
+env debug.debug(*args, **kwargs)
 ```
 
 ### Arguments
@@ -15,9 +24,9 @@ function is called with. This is for debugging purposes to see
 if the args/kwargs are identified properly. And can also be
 used to see how the nadi system takes the input from the
 function call.
-## echo {#network.echo}
+## echo {#env.echo}
 ```sig
-network debug.echo(
+env debug.echo(
     line: 'String',
     error: 'bool' = false,
     newline: 'bool' = true
@@ -37,9 +46,9 @@ etc). The `echo` function can be called to get the link to
 those files back to the stdout.
 
 Also useful for nadi preprocessor.
-## clip {#network.clip}
+## clip {#env.clip}
 ```sig
-network debug.clip(error: 'bool' = false)
+env debug.clip(error: 'bool' = false)
 ```
 
 ### Arguments

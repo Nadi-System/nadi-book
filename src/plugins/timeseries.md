@@ -74,3 +74,20 @@ Save timeseries from all nodes into a single csv file
 TODO: error/not on unqual length
 TODO: error/not on no timeseries, etc...
 TODO: output to `file: PathBuf`
+## series_csv {#network.series_csv}
+```sig
+network timeseries.series_csv(
+    filter: 'Vec < bool >',
+    outfile: 'PathBuf',
+    attrs: 'Vec < String >',
+    series: 'Vec < String >'
+)
+```
+
+### Arguments
+- `filter: 'Vec < bool >'` => 
+- `outfile: 'PathBuf'` => Path to the output csv
+- `attrs: 'Vec < String >'` => list of attributes to write
+- `series: 'Vec < String >'` => list of series to write
+
+Write the given nodes to csv with given attributes and series

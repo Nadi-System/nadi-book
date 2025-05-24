@@ -15,12 +15,36 @@ Template section of the NADI book.
 # Network Functions
 ## render {#network.render}
 ```sig
-network render.render(template: 'PathBuf', outfile: 'Option < PathBuf >')
+network render.render(template: '& Template', safe: 'bool' = false)
+```
+
+### Arguments
+- `template: '& Template'` => Path to the template file
+- `safe: 'bool' = false` => if render fails keep it as it is instead of exiting
+
+Render from network attributes
+## render_nodes {#network.render_nodes}
+```sig
+network render.render_nodes(
+    template: '& Template',
+    safe: 'bool' = false,
+    join: '& str' = "\n"
+)
+```
+
+### Arguments
+- `template: '& Template'` => Path to the template file
+- `safe: 'bool' = false` => if render fails keep it as it is instead of exiting
+- `join: '& str' = "\n"` => String to join the render results
+
+Render each node of the network and combine to same variable
+## render_template {#network.render_template}
+```sig
+network render.render_template(template: 'PathBuf')
 ```
 
 ### Arguments
 - `template: 'PathBuf'` => Path to the template file
-- `outfile: 'Option < PathBuf >'` => output file
 
 Render a File template for the nodes in the whole network
 

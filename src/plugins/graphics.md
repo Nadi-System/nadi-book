@@ -81,7 +81,7 @@ network graphics.csv_data_blocks_svg(
     outfile: 'PathBuf',
     label: 'Template',
     date_col: 'String' = "date",
-    config: 'NetworkPlotConfig' = NetworkPlotConfig { width: 250.0, height: 300.0, delta_x: 20.0, delta_y: 20.0, offset: 30.0, radius: 3.0, fontsize: 16.0, fontface: FontFace { inner: Shared { inner: 0x5747b6ea6a20 } } },
+    config: 'NetworkPlotConfig' = NetworkPlotConfig { width: 250.0, height: 300.0, delta_x: 20.0, delta_y: 20.0, offset: 30.0, radius: 3.0, fontsize: 16.0, fontface: FontFace { inner: Shared { inner: 0x64a7356cd4c0 } } },
     blocks_width: 'f64' = 500.0,
     fit: 'bool' = false
 )
@@ -92,7 +92,7 @@ network graphics.csv_data_blocks_svg(
 - `outfile: 'PathBuf'` => 
 - `label: 'Template'` => 
 - `date_col: 'String' = "date"` => 
-- `config: 'NetworkPlotConfig' = NetworkPlotConfig { width: 250.0, height: 300.0, delta_x: 20.0, delta_y: 20.0, offset: 30.0, radius: 3.0, fontsize: 16.0, fontface: FontFace { inner: Shared { inner: 0x5747b6ea6a20 } } }` => 
+- `config: 'NetworkPlotConfig' = NetworkPlotConfig { width: 250.0, height: 300.0, delta_x: 20.0, delta_y: 20.0, offset: 30.0, radius: 3.0, fontsize: 16.0, fontface: FontFace { inner: Shared { inner: 0x64a7356cd4c0 } } }` => 
 - `blocks_width: 'f64' = 500.0` => 
 - `fit: 'bool' = false` => 
 
@@ -101,7 +101,7 @@ Draw the data blocks with arrows in timeline
 ```sig
 network graphics.export_svg(
     outfile: 'PathBuf',
-    config: 'NetworkPlotConfig' = NetworkPlotConfig { width: 250.0, height: 300.0, delta_x: 20.0, delta_y: 20.0, offset: 30.0, radius: 3.0, fontsize: 16.0, fontface: FontFace { inner: Shared { inner: 0x5747b6ea6a20 } } },
+    config: 'NetworkPlotConfig' = NetworkPlotConfig { width: 250.0, height: 300.0, delta_x: 20.0, delta_y: 20.0, offset: 30.0, radius: 3.0, fontsize: 16.0, fontface: FontFace { inner: Shared { inner: 0x64a7356cd4c0 } } },
     fit: 'bool' = false,
     label: 'Option < Template >',
     highlight: '& [usize]' = []
@@ -110,7 +110,7 @@ network graphics.export_svg(
 
 ### Arguments
 - `outfile: 'PathBuf'` => 
-- `config: 'NetworkPlotConfig' = NetworkPlotConfig { width: 250.0, height: 300.0, delta_x: 20.0, delta_y: 20.0, offset: 30.0, radius: 3.0, fontsize: 16.0, fontface: FontFace { inner: Shared { inner: 0x5747b6ea6a20 } } }` => 
+- `config: 'NetworkPlotConfig' = NetworkPlotConfig { width: 250.0, height: 300.0, delta_x: 20.0, delta_y: 20.0, offset: 30.0, radius: 3.0, fontsize: 16.0, fontface: FontFace { inner: Shared { inner: 0x64a7356cd4c0 } } }` => 
 - `fit: 'bool' = false` => 
 - `label: 'Option < Template >'` => 
 - `highlight: '& [usize]' = []` => 
@@ -122,7 +122,7 @@ network graphics.table_to_svg(
     outfile: 'PathBuf',
     table: 'Option < PathBuf >',
     template: 'Option < String >',
-    config: 'NetworkPlotConfig' = NetworkPlotConfig { width: 250.0, height: 300.0, delta_x: 20.0, delta_y: 20.0, offset: 30.0, radius: 3.0, fontsize: 16.0, fontface: FontFace { inner: Shared { inner: 0x5747b6ea6a20 } } },
+    config: 'NetworkPlotConfig' = NetworkPlotConfig { width: 250.0, height: 300.0, delta_x: 20.0, delta_y: 20.0, offset: 30.0, radius: 3.0, fontsize: 16.0, fontface: FontFace { inner: Shared { inner: 0x64a7356cd4c0 } } },
     fit: 'bool' = false,
     highlight: '& [String]' = []
 )
@@ -132,7 +132,7 @@ network graphics.table_to_svg(
 - `outfile: 'PathBuf'` => 
 - `table: 'Option < PathBuf >'` => 
 - `template: 'Option < String >'` => 
-- `config: 'NetworkPlotConfig' = NetworkPlotConfig { width: 250.0, height: 300.0, delta_x: 20.0, delta_y: 20.0, offset: 30.0, radius: 3.0, fontsize: 16.0, fontface: FontFace { inner: Shared { inner: 0x5747b6ea6a20 } } }` => 
+- `config: 'NetworkPlotConfig' = NetworkPlotConfig { width: 250.0, height: 300.0, delta_x: 20.0, delta_y: 20.0, offset: 30.0, radius: 3.0, fontsize: 16.0, fontface: FontFace { inner: Shared { inner: 0x64a7356cd4c0 } } }` => 
 - `fit: 'bool' = false` => 
 - `highlight: '& [String]' = []` => 
 

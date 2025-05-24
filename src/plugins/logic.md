@@ -71,3 +71,21 @@ env logic.not(cond: 'bool')
 - `cond: 'bool'` => attribute that can be cast to bool
 
 boolean not
+## all {#env.all}
+```sig
+env logic.all(vars: '& [bool]')
+```
+
+### Arguments
+- `vars: '& [bool]'` => 
+
+check if all of the bool are true
+## any {#env.any}
+```sig
+env logic.any(vars: '& [bool]')
+```
+
+### Arguments
+- `vars: '& [bool]'` => 
+
+check if any of the bool are true

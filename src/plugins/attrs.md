@@ -24,6 +24,26 @@ env attrs.float_transform(value: 'f64', transformation: '& str')
 - `transformation: '& str'` => transformation function, can be one of log/log10/sqrt
 
 map values from the attribute based on the given table
+## float_div {#env.float_div}
+```sig
+env attrs.float_div(value1: 'f64', value2: 'f64')
+```
+
+### Arguments
+- `value1: 'f64'` => numerator
+- `value2: 'f64'` => denominator
+
+map values from the attribute based on the given table
+## float_mult {#env.float_mult}
+```sig
+env attrs.float_mult(value1: 'f64', value2: 'f64')
+```
+
+### Arguments
+- `value1: 'f64'` => numerator
+- `value2: 'f64'` => denominator
+
+map values from the attribute based on the given table
 # Node Functions
 ## load_attrs {#node.load_attrs}
 ```sig
@@ -66,12 +86,12 @@ No arguments and no errors, it'll just print all the attributes in a node with
 
 ## print_attrs {#node.print_attrs}
 ```sig
-node attrs.print_attrs(*attrs, name: 'bool')
+node attrs.print_attrs(*attrs, name: 'bool' = false)
 ```
 
 ### Arguments
 - `*attrs` => 
-- `name: 'bool'` => 
+- `name: 'bool' = false` => 
 
 Print the given node attributes if present
 

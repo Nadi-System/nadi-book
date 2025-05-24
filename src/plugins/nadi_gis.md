@@ -31,7 +31,8 @@ network nadi_gis.gis_save_connections(
     file: 'PathBuf',
     geometry: 'String',
     driver: 'Option < String >',
-    layer: 'String' = "network"
+    layer: 'String' = "network",
+    filter: 'Option < Vec < bool > >'
 )
 ```
 
@@ -40,6 +41,7 @@ network nadi_gis.gis_save_connections(
 - `geometry: 'String'` => 
 - `driver: 'Option < String >'` => 
 - `layer: 'String' = "network"` => 
+- `filter: 'Option < Vec < bool > >'` => 
 
 Save GIS file of the connections
 ## gis_save_nodes {#network.gis_save_nodes}
@@ -49,7 +51,8 @@ network nadi_gis.gis_save_nodes(
     geometry: 'String',
     attrs: 'HashMap < String, String >' = {},
     driver: 'Option < String >',
-    layer: 'String' = "nodes"
+    layer: 'String' = "nodes",
+    filter: 'Option < Vec < bool > >'
 )
 ```
 
@@ -59,5 +62,6 @@ network nadi_gis.gis_save_nodes(
 - `attrs: 'HashMap < String, String >' = {}` => 
 - `driver: 'Option < String >'` => 
 - `layer: 'String' = "nodes"` => 
+- `filter: 'Option < Vec < bool > >'` => 
 
 Save GIS file of the nodes

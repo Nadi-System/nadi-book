@@ -12,12 +12,26 @@ Load the given file into the network
 
 This replaces the current network with the one loaded from the
 file.
-## subset {#network.subset}
+## load_str {#network.load_str}
 ```sig
-network connections.subset(keep: 'bool' = true)
+network connections.load_str(contents: '& str', append: 'bool' = false)
 ```
 
 ### Arguments
+- `contents: '& str'` => String containing Network connections
+- `append: 'bool' = false` => Append the connections in the current network
+
+Load the given file into the network
+
+This replaces the current network with the one loaded from the
+file.
+## subset {#network.subset}
+```sig
+network connections.subset(filter: '& [bool]', keep: 'bool' = true)
+```
+
+### Arguments
+- `filter: '& [bool]'` => 
 - `keep: 'bool' = true` => Keep the selected nodes (false = removes the selected)
 
 Take a subset of network by only including the selected nodes
