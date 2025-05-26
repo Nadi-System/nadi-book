@@ -1,3 +1,7 @@
+<div class="warning">
+This plugin uses gdal to read/write GIS files, it can be compiled easily in Linux and Mac by installing gdal as a prerequisite, but on windows that step might be complicated. Please refer to the documentation of gdal to know how to install it in windows. Or use the provided dlls from the plugin repo.
+</div>
+
 # Network Functions
 ## gis_load_attrs {#network.gis_load_attrs}
 ```sig

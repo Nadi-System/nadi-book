@@ -33,6 +33,55 @@ Rust and Python library to use in your programs. Rust library `nadi_core` is ava
 While Python library requires you to clone the repo and build it with `maturin` (for now).
 Future plan for it includes publishing it in pypi.
 
+### Rust Libraries
+If you are not writing your own rust programs or plugins, you can skip this section.
+
+There are three rust libraries:
+
+| Library                | Use                                                 |
+|------------------------|-----------------------------------------------------|
+| `nadi_core`            | Core library with data types, and plugin structure  |
+| `nadi_plugin`          | Rust Procedural macro library to write nadi plugins |
+| `string_template_plus` | Library for string templates with variables         |
+
+
+Everything is loaded by `nadi_core` so you don't need to load them separately.
+
+### NADI Python
+
+While using NADI from python library, you only have access to nadi data types (Node, Network, etc), and the plugin functions, which are enough for most cases as python language syntax, variables, loops etc will give you a lot of flexibility on how to do your own analysis. The python module is structured as follows:
+
+    nadi [contains Node, Network, etc]
+     +-- functions
+     | +-- node [contains node functions]
+     | +-- network [contains network functions]
+     | +-- env [contains env functions]
+     +-- plugins
+       +-- <plugin> [each plugin will be added here]
+         +-- node [contains node functions]
+         +-- network [contains network functions]
+         +-- env [contains env functions]
+
+The functions are available directly through `functions` submodule, or through each plugin in `plugins` submodule. An example python script looks like this:
+
+```python
+import nadi
+import nadi.functions as fn
+
+net = nadi.Network("data/ohio.network")
+for node in net.nodes:
+    try:
+        _ = int(node.name)
+        node.is_usgs = True
+        print(fn.node.render(node, "Node {_NAME} is USGS Site"))
+    except ValueError:
+        node.is_usgs = False
+```
+
+This code shows how to load a network, how to loop through the nodes, and use python logic, or use nadi functions for the node and assign attributes.
+
+More detail on how to use NADI from python will be explained in NADI Python chapter.
+
 ## NADI CLI
 Command Line Interface to run NADI Tasks.
 

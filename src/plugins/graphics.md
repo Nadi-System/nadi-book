@@ -1,3 +1,8 @@
+<div class="warning">
+This plugin uses cairo to draw graphics, so far it has only been tested on Linux, but this should also work on Mac. Compiling it in windows might need additional steps that are not documented here.
+</div>
+
+
 # Node Functions
 ## attr_fraction_svg {#node.attr_fraction_svg}
 ```sig
