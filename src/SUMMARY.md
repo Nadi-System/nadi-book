@@ -21,6 +21,7 @@
   - [Further Reading](./intro/further.md)
 - [Learn by Examples](./learn-examples.md)
   - [Attributes](./learn-examples/attributes.md)
+  - [Control Flow](./learn-examples/control.md)
   - [Connections](./learn-examples/connections.md)
   - [Counting Nodes](./learn-examples/counting.md)
   - [Cumulative Sum](./learn-examples/cumulative.md)
