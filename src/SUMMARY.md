@@ -31,12 +31,14 @@
 - [List of All Functions](plugins/index.md)
 
 
-# Developer Guide
-- [Plugin Development](dev/plugins.md)
-  - [Internal Plugins]()
-  - [External Plugins]()
-  - [Node Functions]()
-  - [Network Functions]()
+# Plugin Developer Guide
+- [Executable Plugins](plugin-dev/exe-plugins.md)
+- [Compiled Plugins](plugin-dev/plugins.md)
+  - [Internal Plugins](plugin-dev/internal-plugins.md)
+  - [External Plugins](plugin-dev/external-plugins.md)
+  - [Environment Functions](plugin-dev/env-functions.md)
+  - [Node Functions](plugin-dev/node-functions.md)
+  - [Network Functions](plugin-dev/network-functions.md)
 
 # User Reference
 - [Example Usage](./example-usage.md)

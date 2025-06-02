@@ -1,4 +1,4 @@
-# Plugin Development
+# Compiled Plugins
 
 As it is not possible to forsee all the use cases in advance, the nadi
 software can be easily extended (easy being an relative term) to

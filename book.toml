@@ -14,7 +14,7 @@ smart-punctuation = true
 mathjax-support = true
 
 [output.html.code]
-hidelines = { task = "!", table = "!" }
+hidelines = { task = "!", table = "!", python ='!'}
 
 [output.html.fold]
 enable = true
