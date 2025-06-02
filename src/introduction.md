@@ -14,6 +14,15 @@ NADI System consists of:
 | NADI CLI         | Command Line Interface to run NADI Tasks                    |
 | NADI IDE         | Integrated Development Environment to write/ run NADI Tasks |
 
+The github repositories consisting of source codes:
+| Repo                                                                  | Tool                      |
+|-----------------------------------------------------------------------|---------------------------|
+| [nadi-gis](https://github.com/Nadi-System/nadi-gis)                   | Nadi GIS                  |
+| [nadi-system](https://github.com/Nadi-System/nadi-system)             | Nadi CLI/ IDE/ Core       |
+| [nadi-plugins-rust](https://github.com/Nadi-System/nadi-plugins-rust) | Sample Plugins            |
+| [nadi-book](https://github.com/Nadi-System/nadi-book)                 | Source for this Nadi Book |
+
+
 ## NADI GIS
 Geographic Information (GIS) Tool for Network Detection. The main purpose of the NADI GIS is to find the network connectivity between a set of points using a stream network (which can be developed from elevation models, or downloaded from national databases).
 

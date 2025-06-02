@@ -12,4 +12,3 @@ problems with the program, or would like some new features, please
 make an github issue, we will try to accomodate it if it fits within
 the scope of the program.
 </div>
-
