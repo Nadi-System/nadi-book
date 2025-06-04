@@ -25,6 +25,19 @@ Load the given file into the network
 
 This replaces the current network with the one loaded from the
 file.
+## load_edges {#network.load_edges}
+```sig
+network connections.load_edges(edges: '& [(String, String)]', append: 'bool' = false)
+```
+
+### Arguments
+- `edges: '& [(String, String)]'` => String containing Network connections
+- `append: 'bool' = false` => Append the connections in the current network
+
+Load the given edges into the network
+
+This replaces the current network with the one loaded from the
+file.
 ## subset {#network.subset}
 ```sig
 network connections.subset(filter: '& [bool]', keep: 'bool' = true)

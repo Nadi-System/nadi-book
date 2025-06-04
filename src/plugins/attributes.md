@@ -1,7 +1,7 @@
 # Env Functions
 ## strmap {#env.strmap}
 ```sig
-env attrs.strmap(
+env attributes.strmap(
     attr: '& str',
     attrmap: '& AttrMap',
     default: 'Option < Attribute >'
@@ -14,9 +14,27 @@ env attrs.strmap(
 - `default: 'Option < Attribute >'` => Default value if key not found in `attrmap`
 
 map values from the attribute based on the given table
+## parse_attr {#env.parse_attr}
+```sig
+env attributes.parse_attr(toml: '& str')
+```
+
+### Arguments
+- `toml: '& str'` => String to parse into attribute
+
+Set node attributes based on string templates
+## parse_attrmap {#env.parse_attrmap}
+```sig
+env attributes.parse_attrmap(toml: 'String')
+```
+
+### Arguments
+- `toml: 'String'` => String to parse into attribute
+
+Set node attributes based on string templates
 ## float_transform {#env.float_transform}
 ```sig
-env attrs.float_transform(value: 'f64', transformation: '& str')
+env attributes.float_transform(value: 'f64', transformation: '& str')
 ```
 
 ### Arguments
@@ -26,7 +44,7 @@ env attrs.float_transform(value: 'f64', transformation: '& str')
 map values from the attribute based on the given table
 ## float_div {#env.float_div}
 ```sig
-env attrs.float_div(value1: 'f64', value2: 'f64')
+env attributes.float_div(value1: 'f64', value2: 'f64')
 ```
 
 ### Arguments
@@ -36,7 +54,7 @@ env attrs.float_div(value1: 'f64', value2: 'f64')
 map values from the attribute based on the given table
 ## float_mult {#env.float_mult}
 ```sig
-env attrs.float_mult(value1: 'f64', value2: 'f64')
+env attributes.float_mult(value1: 'f64', value2: 'f64')
 ```
 
 ### Arguments
@@ -47,7 +65,7 @@ map values from the attribute based on the given table
 # Node Functions
 ## load_attrs {#node.load_attrs}
 ```sig
-node attrs.load_attrs(filename: 'PathBuf')
+node attributes.load_attrs(filename: 'PathBuf')
 ```
 
 ### Arguments
@@ -70,7 +88,7 @@ The function will error out in following conditions:
 
 ## print_all_attrs {#node.print_all_attrs}
 ```sig
-node attrs.print_all_attrs()
+node attributes.print_all_attrs()
 ```
 
 ### Arguments
@@ -86,7 +104,7 @@ No arguments and no errors, it'll just print all the attributes in a node with
 
 ## print_attrs {#node.print_attrs}
 ```sig
-node attrs.print_attrs(*attrs, name: 'bool' = false)
+node attributes.print_attrs(*attrs, name: 'bool' = false)
 ```
 
 ### Arguments
@@ -107,7 +125,7 @@ The function will error if
 The attributes will be printed in `key=val` format.
 ## set_attrs {#node.set_attrs}
 ```sig
-node attrs.set_attrs(**attrs)
+node attributes.set_attrs(**attrs)
 ```
 
 ### Arguments
@@ -131,7 +149,7 @@ node[A -> D] set_attrs(a2d = true)
 ```
 ## get_attr {#node.get_attr}
 ```sig
-node attrs.get_attr(attr: '& str', default: 'Option < Attribute >')
+node attributes.get_attr(attr: '& str', default: 'Option < Attribute >')
 ```
 
 ### Arguments
@@ -141,7 +159,7 @@ node attrs.get_attr(attr: '& str', default: 'Option < Attribute >')
 Retrive attribute
 ## has_attr {#node.has_attr}
 ```sig
-node attrs.has_attr(attr: '& str')
+node attributes.has_attr(attr: '& str')
 ```
 
 ### Arguments
@@ -150,7 +168,7 @@ node attrs.has_attr(attr: '& str')
 Check if the attribute is present
 ## first_attr {#node.first_attr}
 ```sig
-node attrs.first_attr(attrs: '& [String]', default: 'Option < Attribute >')
+node attributes.first_attr(attrs: '& [String]', default: 'Option < Attribute >')
 ```
 
 ### Arguments
@@ -160,7 +178,7 @@ node attrs.first_attr(attrs: '& [String]', default: 'Option < Attribute >')
 Return the first Attribute that exists
 ## set_attrs_ifelse {#node.set_attrs_ifelse}
 ```sig
-node attrs.set_attrs_ifelse(cond: 'bool', **values)
+node attributes.set_attrs_ifelse(cond: 'bool', **values)
 ```
 
 ### Arguments
@@ -170,7 +188,7 @@ node attrs.set_attrs_ifelse(cond: 'bool', **values)
 if else condition with multiple attributes
 ## set_attrs_render {#node.set_attrs_render}
 ```sig
-node attrs.set_attrs_render(**kwargs)
+node attributes.set_attrs_render(**kwargs)
 ```
 
 ### Arguments
@@ -179,7 +197,7 @@ node attrs.set_attrs_render(**kwargs)
 Set node attributes based on string templates
 ## load_toml_render {#node.load_toml_render}
 ```sig
-node attrs.load_toml_render(toml: '& Template', echo: 'bool' = false)
+node attributes.load_toml_render(toml: '& Template', echo: 'bool' = false)
 ```
 
 ### Arguments
@@ -190,7 +208,7 @@ Set node attributes based on string templates
 # Network Functions
 ## set_attrs {#network.set_attrs}
 ```sig
-network attrs.set_attrs(**attrs)
+network attributes.set_attrs(**attrs)
 ```
 
 ### Arguments
@@ -202,7 +220,7 @@ Set network attributes
 - `key=value` - Kwargs of attr = value
 ## set_attrs_render {#network.set_attrs_render}
 ```sig
-network attrs.set_attrs_render(**kwargs)
+network attributes.set_attrs_render(**kwargs)
 ```
 
 ### Arguments

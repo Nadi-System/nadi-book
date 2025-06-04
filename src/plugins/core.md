@@ -91,6 +91,25 @@ env core.attrmap(**attributes)
 - `**attributes` => name and values of attributes
 
 make an array from the arguments
+## append {#env.append}
+```sig
+env core.append(array: 'Vec < Attribute >', value: 'Attribute')
+```
+
+### Arguments
+- `array: 'Vec < Attribute >'` => List of attributes
+- `value: 'Attribute'` => 
+
+append a value to an array
+## length {#env.length}
+```sig
+env core.length(value: '& Attribute')
+```
+
+### Arguments
+- `value: '& Attribute'` => Array or a HashMap
+
+length of an array or hashmap
 ## year {#env.year}
 ```sig
 env core.year(value: 'Attribute')
@@ -202,6 +221,16 @@ env core.count_str(vars: 'Vec < String >')
 - `vars: 'Vec < String >'` => 
 
 Get a count of unique string values
+## concat {#env.concat}
+```sig
+env core.concat(*vars, join: '& str' = "")
+```
+
+### Arguments
+- `*vars` => 
+- `join: '& str' = ""` => 
+
+Concat the strings
 # Node Functions
 ## inputs_count {#node.inputs_count}
 ```sig

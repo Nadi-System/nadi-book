@@ -1,3 +1,22 @@
+# Env Functions
+## render {#env.render}
+```sig
+env render.render(
+    template: '& Template',
+    **keyval,
+    safe: 'bool' = false
+)
+```
+
+### Arguments
+- `template: '& Template'` => String template to render
+- `**keyval` => 
+- `safe: 'bool' = false` => if render fails keep it as it is instead of exiting
+
+Render the template based on the node attributes
+
+For more details on the template system. Refer to the String
+Template section of the NADI book.
 # Node Functions
 ## render {#node.render}
 ```sig

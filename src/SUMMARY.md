@@ -49,7 +49,7 @@
 	- [Looking at Data Gaps](./example/data-gap.md)
 	- [Visualizing Data Gaps](./example/data-gap-vis.md)
 - [Internal Plugins](plugins/intro.md)
-  - [Attrs](plugins/attrs.md)
+  - [Attributes](plugins/attributes.md)
   - [Command](plugins/command.md)
   - [Connections](plugins/connections.md)
   - [Core](plugins/core.md)
@@ -70,7 +70,7 @@
   - [Graphics](plugins/graphics.md)
   - [Graphviz](plugins/graphviz.md)
   - [HTML](plugins/html.md)
-  - [Nadi GIS](plugins/nadi_gis.md)
+  - [GIS](plugins/gis.md)
   - [Print Node](plugins/print_node.md)
   - [Streamflow](plugins/streamflow.md)
 

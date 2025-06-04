@@ -4,14 +4,14 @@
 network table.save_csv(
     path: '& Path',
     fields: '& [String]',
-    filter: 'Vec < bool >'
+    filter: 'Option < Vec < bool > >'
 )
 ```
 
 ### Arguments
 - `path: '& Path'` => 
 - `fields: '& [String]'` => 
-- `filter: 'Vec < bool >'` => 
+- `filter: 'Option < Vec < bool > >'` => 
 
 Save CSV
 ## table_to_markdown {#network.table_to_markdown}

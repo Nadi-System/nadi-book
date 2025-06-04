@@ -1,25 +1,4 @@
-# Env Functions
-## exists {#env.exists}
-```sig
-env command.exists(path: 'PathBuf', min_lines: 'Option < usize >')
-```
-
-### Arguments
-- `path: 'PathBuf'` => Path to check
-- `min_lines: 'Option < usize >'` => Minimum number of lines the file should have
-
-Checks if the given path exists
 # Node Functions
-## exists {#node.exists}
-```sig
-node command.exists(path: 'Template', min_lines: 'Option < usize >')
-```
-
-### Arguments
-- `path: 'Template'` => Path to check
-- `min_lines: 'Option < usize >'` => Minimum number of lines the file should have
-
-Checks if the given path exists when rendering the template
 ## command {#node.command}
 ```sig
 node command.command(
