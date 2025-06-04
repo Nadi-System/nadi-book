@@ -1,10 +1,10 @@
 # Summary
 [Preface](preface.md)
+[Acknowledgements](./acknowledgements.md)
  - [Why NADI?](./why-nadi.md)
  - [Who this book is for](./who-book.md)
  - [How to use this book](./how-to.md)
- - [Acknowledgements]()
- - [How to Cite]()
+ - [How to Cite](./citation.md)
 # User Guide
 - [Introduction](./introduction.md)
 - [Installation](./installation.md)
@@ -15,9 +15,9 @@
   - [Network](./intro/network.md)
   - [Attributes](./intro/attrs.md)
   - [String Template](./intro/template.md)
+  - [Task](./intro/task.md)
   - [Node Function](./intro/node-func.md)
   - [Network Function](./intro/network-func.md)
-  - [Task](./intro/task.md)
   - [Further Reading](./intro/further.md)
 - [Learn by Examples](./learn-examples.md)
   - [Attributes](./learn-examples/attributes.md)
@@ -36,9 +36,10 @@
 - [Compiled Plugins](plugin-dev/plugins.md)
   - [Internal Plugins](plugin-dev/internal-plugins.md)
   - [External Plugins](plugin-dev/external-plugins.md)
-  - [Environment Functions](plugin-dev/env-functions.md)
-  - [Node Functions](plugin-dev/node-functions.md)
-  - [Network Functions](plugin-dev/network-functions.md)
+  - [Functions](plugin-dev/functions.md)
+    - [Environment Functions](plugin-dev/env-functions.md)
+    - [Node Functions](plugin-dev/node-functions.md)
+    - [Network Functions](plugin-dev/network-functions.md)
 
 # User Reference
 - [Example Usage](./example-usage.md)

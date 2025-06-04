@@ -49,7 +49,7 @@ hljs.registerLanguage("task", (hljs) => ({
 	hljs.C_NUMBER_MODE,
 	NODE_LIST_OR_PATH,
 	{
-	    begin: '\\b(end|exit|node|network|env|nodes|inputs|output|match|in|inf|nan)\\b',
+	    begin: '\\b(node|network|env|exit|end|help|inputs|output|nodes|if|else|while|in|match|function|map|attrs|loop|for|inf|nan)\\b',
 	    className: "deletion",
 	},
 	{
@@ -68,7 +68,23 @@ hljs.registerLanguage("output", (hljs) => ({
 	hljs.QUOTE_STRING_MODE,
 	hljs.C_NUMBER_MODE,
 	NODE_LIST_OR_PATH,
+	{
+	    begin: '^[$] ',
+	    end: '$',
+	    className: "addition",
+	},
     ],
+}));
+
+hljs.registerLanguage("error", (hljs) => ({
+    name: "Error",
+    contains: [
+	{
+	    begin: '^',
+	    end: '$',
+	    className: "deletion",
+	}
+    ]
 }));
 
 // for function signatures saved in plugin help system

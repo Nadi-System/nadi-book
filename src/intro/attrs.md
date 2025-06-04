@@ -14,6 +14,8 @@ Attributes are TOML like values. They can be one of the following types:
 | Table     | `AttrMap`         | Key Value pairs of any attribute values |
 
 
+You can write attributes directly into the task system to assign them, use them in functions. You can also load attributes from a file into the node/network.
+
 Example Attribute File:
 ```toml
 {{#include ../data/attrs/ohio.toml}}

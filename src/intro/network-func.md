@@ -1,6 +1,5 @@
 # Network Function
 
-
 Network function runs on the network as a whole. It takes arguments and keyword arguments.
 
 For example following network function takes file path as input to save the network in graphviz format:

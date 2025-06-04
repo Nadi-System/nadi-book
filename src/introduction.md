@@ -67,9 +67,10 @@ While using NADI from python library, you only have access to nadi data types (N
      | +-- env [contains env functions]
      +-- plugins
        +-- <plugin> [each plugin will be added here]
-         +-- node [contains node functions]
-         +-- network [contains network functions]
-         +-- env [contains env functions]
+       | +-- node [contains node functions]
+       | +-- network [contains network functions]
+       | +-- env [contains env functions]
+	   +-- <next-plugin> and so on ...
 
 The functions are available directly through `functions` submodule, or through each plugin in `plugins` submodule. An example python script looks like this:
 

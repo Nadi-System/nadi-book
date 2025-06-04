@@ -1,5 +1,5 @@
 # Further Reading
-If you need help on any functions. Use the `help` as a `task`. You can use `help node` or `help network` for specific help.
+If you need help on any functions. Use the `help` as a `task`. You can use `help node` or `help network` for specific help. You can also browse through the function help window in the `nadi-ide` for help related to each functions.
 
 ```task run
 help node render

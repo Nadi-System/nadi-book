@@ -16,6 +16,7 @@ To setup the nadi-systme to load the plugins you have to place them inside the d
 The binaries should be able to run directly without needing extra steps. If you get a security warnings because the binaries are not signed, you might have to ignore it.
 
 # Building from Source
+This is currently the preferred way of installing `nadi-system` (and `nadi-gis` for Linux and MacOS). Although it includes a bit more steps this makes sure the compiled program is compatible with your OS.
 
 ## Prerequisites
 The prerequisites for building from source are:
@@ -57,17 +58,31 @@ The plugins files if present in the system are automatically loaded from `NADI_P
 ## NADI GIS
 NADI GIS uses `gdal` to read/write GIS files, so it needs to be installed. Please refer to [gdal installation documentation](https://gdal.org/en/stable/download.html) for that.
 
-Assuming you have `git` and `cargo`,
+Assuming you have `git`, `cargo`, and `gdal` installed in your system you can build it like this:
 ```bash
 git clone https://github.com/Nadi-System/nadi-gis
 cd nadi-gis
+cargo build --release --features bindgen
+```
+The `bindgen` feature will link the `nadi-gis` binary with the `gdal` from your system. So that you do not have to distribute `gdal` with the binary for your OS.
+
+If you do not have `gdal` installed in your system, then you can still build the nadi-gis without the `bindgen` feature. This will still require `gdal` to be available and distributed with the binary.
+```bash
 cargo build --release
 ```
 
+### QGIS Plugin
 The `nadi-gis` repo also contains the QGIS plugin that can be installed to run it through QGIS. The plugin will use the `nadi-gis` binary in your `PATH` if available. And it also contains the nadi plugin that can be loaded into the nadi system to import/export GIS files into/from the system.
 
-## Plugins
-The executable plugins are just simple commands, they do not need to be installed along side nadi, just make sure the executables that you are using from `nadi` can be found in path. A simple way to verify that is to try to run that from terminal and see if it works.
+You can download the zip file for plugin from releases page, and use the "Install from Zip" option on QGIS plugins tab. Or copy the `nadi` directory inside `qgis` to your python plugin directory for qgis.
+
+Refer to the [QGIS plugins page](https://docs.qgis.org/3.40/en/docs/training_manual/qgis_plugins/fetching_plugins.html) for more instructions. In future we are planning on publishing the plugin so that you can simply add it from QGIS without downloading from here.
+
+### Nadi GIS Plugin
+The nadi plugin on this repo provides the functions to import attributes, geometries from GIS files, and export them into GIS files.
+
+## Nadi Plugins
+Out of the two types of plugins, the executable plugins are just simple commands, they do not need to be installed along side nadi, just make sure the executables that you are using from `nadi` can be found in path. A simple way to verify that is to try to run that from terminal and see if it works.
 
 The compiled plugins can be loaded by setting the `NADI_PLUGIN_DIRS` environmental variable. The environment variable should be the path to the folder containing the nadi plugins (in `.dll`, `.so`, or `.dylib` formats for windows, linux and mac). You can write your own plugins based on our examples and compile them.
 
