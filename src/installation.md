@@ -53,11 +53,35 @@ The compiled binaries will be saved in the `target/release` directory, you can c
 
 The plugins files if present in the system are automatically loaded from `NADI_PLUGIN_DIRS` environmental variable. Look into installing the plugin section below.
 
-
+Note: all programs will compile and run in Windows, Linux, and MacOS, while only `nadi-cli` and `mdbook-nadi` will run in Android (tmux). `nadi-ide` and family need the GUI libraries that are not available for android (tmux) yet.
 
 ## NADI GIS
 NADI GIS uses `gdal` to read/write GIS files, so it needs to be installed. Please refer to [gdal installation documentation](https://gdal.org/en/stable/download.html) for that.
 
+### Windows
+First download compiled gdal from here:
+- https://www.gisinternals.com/sdk.php
+Then download clang from here:
+- https://github.com/llvm/llvm-project/releases
+
+Extract it into a folder, and then set environmental variables to point to that:
+- `GDAL_VERSION`: Version of gdal e.g. '3.10.0'
+- `LIBCLANG_PATH`: Path to the `lib` directory of `clang`
+- `GDAL_HOME`: Path to the `gdal` that has the subdirectories like `bin`, `lib`, etc.
+
+You can also follow the errors from the rust compilers as you compile to set the correct variables.
+
+Finally you can get the source code and compile `nadi-gis` with the following command:
+
+```bash
+git clone https://github.com/Nadi-System/nadi-gis
+cd nadi-gis
+cargo build --release
+```
+
+This will generate the `nadi-gis` binary and `gis.dll` plugin in the `target/release` folder, they need to be run along side the `gdal` shared libraries (`.dll`s). Place the binaries in the same folder as the `dll`s from `gdal` and run it. To use the `gis.dll` plugin from `nadi`, `nadi-ide`, etc. same thing applies there, those binaries should be run with the `gdal`'s `dll`s to be able to load the `gis` plugin.
+
+### Linux and Mac
 Assuming you have `git`, `cargo`, and `gdal` installed in your system you can build it like this:
 ```bash
 git clone https://github.com/Nadi-System/nadi-gis

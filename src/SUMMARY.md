@@ -5,11 +5,15 @@
  - [Who this book is for](./who-book.md)
  - [How to use this book](./how-to.md)
  - [How to Cite](./citation.md)
-# User Guide
+# Nadi System Setup
 - [Introduction](./introduction.md)
 - [Installation](./installation.md)
 
----
+# Network Detection
+- [Nadi GIS](./gis/intro.md)
+- [Example](./gis/example.md)
+
+# Network Analysis
 - [Core Concepts](./system/intro.md)
   - [Node](./intro/node.md)
   - [Network](./intro/network.md)
