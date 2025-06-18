@@ -18,9 +18,6 @@ After you have streams (tributaries), you can use the **Check Streams** tool to 
 
 ![Check Streams Result](../images/qgis-branch.png)
 
-<div class="warning">
-Note: Clicking the checkbox for different node types in the Layers tab seems to be glitchy in my QGIS, so you might have to goto Symbology to turn on/off the different node types here. If it's a bug from the plugin code being incorrect, I'll fix it later.
-</div>
 
 **Find Connections** tool will find the connection between the points using the stream network. The results below shows the tool being run on the NWIS points.
 

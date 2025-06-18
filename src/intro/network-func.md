@@ -1,6 +1,20 @@
 # Network Function
 
-Network function runs on the network as a whole. It takes arguments and keyword arguments.
+Network function runs on the network as a whole. It takes arguments and keyword arguments. Few network functions we have been using throughout the examples are `load_file`, `load_str` and `svg_save`:
+
+```task run image ../output/network-mississippi-sdf.svg
+network load_file("./data/mississippi.net")
+!network command("mkdir -p output")
+network svg_save(
+   "./output/network-mississippi-sdf.svg",
+	label="[{INDEX}] {_NAME:repl(-, ):case(title)}",
+	bgcolor="gray"
+)
+```
+
+<div class="warning">
+The examples below use the graphviz plugin. Make sure you have it loaded. Refer to the plugins section to learn how to load the plugins in to the Nadi System.
+</div>
 
 For example following network function takes file path as input to save the network in graphviz format:
 ```sig

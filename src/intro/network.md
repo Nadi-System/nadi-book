@@ -15,10 +15,10 @@ Example Network file:
 {{#include ../data/mississippi.net}}
 ```
 
-The given network can be visualized using `svg_save` function.
+The given network can be loaded and visualized using `svg_save` function.
 
 ```task run image ../output/network-mississippi.svg
-!network load_file("./data/mississippi.net")
+network load_file("./data/mississippi.net")
 !network command("mkdir -p output")
 network svg_save(
    "./output/network-mississippi.svg",

@@ -15,13 +15,15 @@
 
 # Network Analysis
 - [Core Concepts](./system/intro.md)
+  - [Task](./intro/task.md)
+  - [Attributes](./intro/attrs.md)
   - [Node](./intro/node.md)
   - [Network](./intro/network.md)
-  - [Attributes](./intro/attrs.md)
+  - [Expression](./intro/expression.md)
   - [String Template](./intro/template.md)
-  - [Task](./intro/task.md)
   - [Node Function](./intro/node-func.md)
   - [Network Function](./intro/network-func.md)
+  - [Cross Context Functions and Variables](./intro/cross-context.md)
   - [Further Reading](./intro/further.md)
 - [Learn by Examples](./learn-examples.md)
   - [Attributes](./learn-examples/attributes.md)
