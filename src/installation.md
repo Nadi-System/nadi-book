@@ -1,8 +1,22 @@
 # Installation
 
-Nadi System is a suite of software packages each have different installation methods. The packages are planned to be uploaded to `crates.io` or `pypi.org` later to make it easier to install. 
+Nadi System is a suite of software packages each have different
+installation methods. Some of the packages are uploaded to `crates.io`
+(rust) and `pypi` (python).  For others, you can either get the
+compiled binaries from the Releases page of the
+github repo [windows]. Or you can get the source code using `git`, and using
+`cargo` build the packages [all OS].
 
-For now, you can either get the binaries compiled for different OS from the Releases page of the github repo. Or you can get the source code using `git`, and using `cargo` build the packages.
+## Packages
+ 
+For `nadi-py` you can use `pip`:
+```bash
+pip install nadi-py
+```
+For `nadi-cli` you can use `cargo`:
+```bash
+cargo install nadi
+```
 
 # Downloading Binaries
 Goto the repo of each component and refer to the releases section for binaries of different versions.

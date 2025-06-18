@@ -106,18 +106,21 @@ Arguments:
   [TASK_FILE]  Tasks file to run; if `--stdin` is also provided this runs before stdin
 
 Options:
-  -C, --completion <FUNC_TYPE>  list all functions and exit for completions [possible values: node, network, env]
-  -c, --fncode <FUNCTION>       print code for a function
-  -f, --fnhelp <FUNCTION>       print help for a function
-  -g, --generate-doc <DOC_DIR>  Generate markdown doc for all plugins and functions
-  -l, --list-functions          list all functions and exit
-  -n, --network <NETWORK_FILE>  network file to load before executing tasks
-  -p, --print-tasks             print tasks before running
-  -s, --show                    Show the tasks file, do not do anything
-  -S, --stdin                   Use stdin for the tasks; reads the whole stdin before execution
-  -t, --task <TASK_STR>         Run given string as task before running the file
-  -h, --help                    Print help
-  -V, --version                 Print version
+  -C, --completion <FUNC_TYPE>   list all functions and exit for completions [possible values: node, network, env]
+  -c, --fncode <FUNCTION>        print code for a function
+  -f, --fnhelp <FUNCTION>        print help for a function
+  -g, --generate-doc <DOC_DIR>   Generate markdown doc for all plugins and functions
+  -l, --list-functions           list all functions and exit
+  -n, --network <NETWORK_FILE>   network file to load before executing tasks
+  -p, --print-tasks              print tasks before running
+  -P, --new-plugin <NEW_PLUGIN>  Create the files for a new nadi_plugin
+  -N, --nadi-core <NADI_CORE>    Path to the nadi_core library for the new nadi_plugin
+  -s, --show                     Show the tasks file, do not do anything
+  -S, --stdin                    Use stdin for the tasks; reads the whole stdin before execution
+  -r, --repl                     Open the REPL (interactive session) before exiting
+  -t, --task <TASK_STR>          Run given string as task before running the file
+  -h, --help                     Print help
+  -V, --version                  Print version
 ```
 
 ## NADI IDE

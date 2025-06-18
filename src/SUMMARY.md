@@ -34,6 +34,8 @@
 - [Nadi Extension Capabilities](./system/extensions.md)
 - [List of All Functions](plugins/index.md)
 
+# Python Library
+- [Nadi Py](python.md)
 
 # Plugin Developer Guide
 - [Executable Plugins](plugin-dev/exe-plugins.md)
