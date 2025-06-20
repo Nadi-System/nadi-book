@@ -38,6 +38,9 @@
 
 # Python Library
 - [Nadi Py](python.md)
+- [Differences with Task System](python/difference.md)
+- [Plugins](python/plugins.md)
+- [Examples](python/examples.md)
 
 # Plugin Developer Guide
 - [Executable Plugins](plugin-dev/exe-plugins.md)
