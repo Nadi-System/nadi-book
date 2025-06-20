@@ -8,6 +8,7 @@
 # Nadi System Setup
 - [Introduction](./introduction.md)
 - [Installation](./installation.md)
+- [Plugins](./plugins.md)
 
 # Network Detection
 - [Nadi GIS](./gis/intro.md)
@@ -24,6 +25,7 @@
   - [Node Function](./intro/node-func.md)
   - [Network Function](./intro/network-func.md)
   - [Cross Context Functions and Variables](./intro/cross-context.md)
+  - [Plugins](./intro/plugins.md)
   - [Further Reading](./intro/further.md)
 - [Learn by Examples](./learn-examples.md)
   - [Attributes](./learn-examples/attributes.md)

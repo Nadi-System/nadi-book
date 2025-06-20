@@ -8,9 +8,9 @@ And the output from the programs are taken by reading their stdout (standard out
 
 The executable plugin or commands are language agnostic, as long as the command is available to run from the parent shell they will be run.
 
-The following section shows example programs written in different languages that can interact with nadi in this way.
+To learn how to write code in your language to parse command line arguments refer to the [Wikipedia page on Command Line Arguments](https://en.wikipedia.org/wiki/Command-line_argument_parsing)
 
-
+The following section shows example programs written in python and R that can interact with nadi in this way.
 ## Python
 Here is an example python script that can be called from nadi for each node. This script just reads a CSV file and passes the attributes to nadi, but more complicated programs can be written by the users.
 
@@ -88,3 +88,4 @@ So you can use the same method like in python to pass arguments, do analysis and
 ```r
 cat(sprintf("nadi:var:this_val=%d\n", 1200))
 ```
+

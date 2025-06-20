@@ -25,7 +25,7 @@ Goto the repo of each component and refer to the releases section for binaries o
 - [nadi-gis binaries](https://github.com/Nadi-System/nadi-gis/releases)
 - [plugins binaries](https://github.com/Nadi-System/nadi-plugins-rust/releases)
 
-To setup the nadi-systme to load the plugins you have to place them inside the directory included in the `NADI_PLUGIN_DIRS` environmental variable. Refer to your Operating System's documentation on how to set environemental variables.
+To setup the nadi-systm to load the plugins you have to place them inside the directory included in the `NADI_PLUGIN_DIRS` environmental variable. Refer to your Operating System's documentation on how to set environemental variables.
 
 The binaries should be able to run directly without needing extra steps. If you get a security warnings because the binaries are not signed, you might have to ignore it.
 
