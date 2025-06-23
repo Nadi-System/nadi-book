@@ -1,17 +1,26 @@
 #set document(title: "Network Analysis and Data Integration (NADI)")
 #set document(author: ("Gaurav Atreya"))
-#set heading(numbering: "1.")
+#set heading(numbering: "1.", depth: 3)
 #set page(paper: "us-letter")
 #set text(size: 11pt)
 #set text(font: "Noto Sans")
 #set par(spacing:2em)
+#set raw(syntaxes: "typst/task.sublime-syntax")
 #set par(leading: .8em)
 
         #show heading: it => [
             #block(above: 2em, below: 2em, it)
         ]
-#show link: underline
-#show link: set text(blue)
+#show link: it => {
+  if type(it.dest) != str {
+    underline(text(fill:green, it))
+  }
+  else {
+    underline(text(fill:blue, it))
+  }
+}
+#show ref: underline
+#show ref: set text(green)
 #show raw: set block(fill: luma(230), inset: 8pt, radius: 4pt, width: 100%)
 #show outline.entry.where(level: 1):it => {
                                     v(11pt, weak: true)
@@ -31,7 +40,7 @@
 = Why NADI?
 #par()[Network Analysis amd Data Integration (NADI) System is a system of programs made to make network based data analysis easier and more accessible.]
 #par()[It consists of multiple tools, that perform two important functions, network detection and network analysis. First part is done throuh the #strong[Geographic Information (GIS) Tool], while the second part is done using a #strong[Domain Specific Programming Language (DSPL)] called NADI Task system.]
-#image("src/images/nadi-workflow-simple.svg")
+#image("src/images/nadi-workflow-simple.png")
 == Why use NADI System?
 #par()[Hydrologic modeling involves the integration of diverse data to simulate complex (and often poorly understood) hydrological processes. The analysis of complex hydrological processes often requires using domain specific calculations, and the visual representation requires the creation of custom maps and plots. Both of which can be a repetitive and error-prone processes, diverting time from data interpretation and scientific inquiry. Efficient methods are needed to automate these tasks, allowing researchers to focus on higher-level analysis and translation of their findings.]
 #par()[Current solution to that problem is to either use general purpose programming languages like Python, R, Julia, etc., or use domain specific software packages to increase the reliability of the tasks. Domain Specific Programming Languages (DSPLs) like the NADI Task system provides better syntax for domain specific tasks, while also are general purpose enough for users to extend it for their use cases. NADI System is trying to be the software framework that can connect those two by integrating with various softwares and providing a intuitive way to do network based data analysis.]
@@ -78,7 +87,7 @@ for node in network.nodes():
 #pagebreak(weak: true)
 = How to use this book
 #par()[You can read this book sequentially to understand the concepts used in the NADI system. And then go through the references sections for a specific use cases you want to get into the details of.]
-#par()[If you are in a hurry, but this is your first time reading this book, at least read the #link("./intro.md")[Core Concepts], then refer to the section you are interested in. #link("./learn-examples.md")[Learn by Example]]
+#par()[If you are in a hurry, but this is your first time reading this book, at least read the #ref(<intro>) Core Concepts, then refer to the section you are interested in. #ref(<learn-examples>) Learn by Example]
 === Code Blocks
 #par()[The code blocks will have example codes for various languages, most common will be #raw("string template"), #raw("task"), and #raw("rust") codes.]
 #par()[String template and task have custom syntax highlights that is intended to make it easier for the reader to understand different semantic blocks.]
@@ -137,15 +146,7 @@ This shows var = {var:unknown()}, {_var:case(title)}
 ``````
 #pagebreak(weak: true)
 
-                        #set page(
-                            header: none,
-                        )
-                        #heading(level: 1, outlined: true, "Nadi System Setup")
-                        #pagebreak()
-                        #set page(
-                            header:  text(size: 8pt, fill: gray)[#align(right)[Nadi System Setup]],
-                        )
-                        
+= Nadi System Setup     
 == Introduction
 #par()[NADI is group of software packages that facilitate network analysis and do data analysis on data related to network/nodes.]
 #par()[NADI System consists of:]
@@ -175,7 +176,7 @@ This shows var = {var:unknown()}, {_var:case(title)}
 )
 ==== NADI GIS
 #par()[Geographic Information (GIS) Tool for Network Detection. The main purpose of the NADI GIS is to find the network connectivity between a set of points using a stream network (which can be developed from elevation models, or downloaded from national databases).]
-#par()[NADI GIS can be used as a terminal command or QGIS plugin, refer to #link("installation.md#nadi-gis")[installation] section for how to install it.]
+#par()[NADI GIS can be used as a terminal command or QGIS plugin, refer to #ref(<installation-nadi-gis>) for how to install it.]
 ==== NADI Task System
 #par()[Task System is a Domain Specific Programming Language (DSL) that is designed for river network analysis. This is the main core of the network analysis. This is included when you install NADI as a library, CLI or GUI.]
 ==== NADI Plugins
@@ -280,7 +281,7 @@ Options:
 === Trivia
 - Nadi means River in Nepali (and probably in many south asian languages).
 - First prototype of NADI was Not Available Data Integration, as it was meant to be an algorithm to fill data gaps using network information, but it was modified to be more generic for many network related analysis.
-#pagebreak(weak: true)
+
 == Installation
 #par()[Nadi System is a suite of software packages each have different installation methods. Some of the packages are uploaded to #raw("crates.io") (rust) and #raw("pypi") (python).  For others, you can either get the compiled binaries from the Releases page of the github repo [windows]. Or you can get the source code using #raw("git"), and using #raw("cargo") build the packages [all OS].]
 ==== Packages
@@ -326,7 +327,8 @@ cargo run --release --bin nadi-ide
 #par()[The compiled binaries will be saved in the #raw("target/release") directory, you can copy them and distribute it. The binaries do not need any other files to run.]
 #par()[The plugins files if present in the system are automatically loaded from #raw("NADI_PLUGIN_DIRS") environmental variable. Look into installing the plugin section below.]
 #par()[Note: all programs will compile and run in Windows, Linux, and MacOS, while only #raw("nadi-cli") and #raw("mdbook-nadi") will run in Android (tmux). #raw("nadi-ide") and family need the GUI libraries that are not available for android (tmux) yet.]
-==== NADI GIS
+
+==== NADI GIS <installation-nadi-gis>
 #par()[NADI GIS uses #raw("gdal") to read/write GIS files, so it needs to be installed. Please refer to #link("https://gdal.org/en/stable/download.html")[gdal installation documentation] for that.]
 ===== Windows
 #par()[First download compiled gdal from here:]
@@ -374,10 +376,10 @@ cargo build --release
 ``````
 #par()[The plugins will be inside the #raw("target/release") directory. Copy them to the #raw("NADI_PLUGIN_DIRS") directory for nadi to load them.]
 #par()[You can take any one of the plugins as an example to build your own, or following the plugin development instructions from the plugins chapter.]
-#pagebreak(weak: true)
+
 == Plugins
 #par()[Plugins allow users to extend the use case of the Nadi System by adding more functions or scripts. User are expected to only use plugins from trusted sources, or develop it in-house. Although the compiled plugin functions have their code exposed in their documentation for the transparency purposes even if the source code is not available, always make sure the plugin you run are not malicious.]
-#par()[There are two types of nadi plugins. Compiled plugins (shared libraries) are loaded dynamically from shared libraries, while executable plugins are called as shell commands. Refer to #link("./intro/plugins.md")[Plugins] section of core concepts for more details.]
+#par()[There are two types of nadi plugins. Compiled plugins (shared libraries) are loaded dynamically from shared libraries, while executable plugins are called as shell commands. Refer to #ref(<intro-plugins>) of core concepts for more details.]
 ==== Compiled Plugins
 #par()[Compiled plugins are shared libraries (#raw(".so") in linux, #raw(".dll") in windows, and #raw(".dylib") on macOS). They can be generated by compiling the nadi plugin in rust, or you can download the correct plugin for your OS and #raw("nadi_core") version from the plugin repositories. It is recommended to only use plugins from trusted source.]
 #par()[To setup the nadi-systm to load the compiled plugins you have to place them inside the directory included in the #raw("NADI_PLUGIN_DIRS") environmental variable. Refer to your Operating System's documentation on how to set environemental variables.]
@@ -404,19 +406,11 @@ $ julia --version
 julia version 1.11.5
 ``````
 #par()[Here we can see, the commands that ran successfully and returned a version are valid.]
-#par()[To write scripts and run them from nadi refer to #link("plugin-dev/exe-plugins.md")[Executable Plugins] section on Plugin Developer Guide.]
+#par()[To write scripts and run them from nadi refer to #link(<plugin-dev-exe-plugins>)[Executable Plugins] section on Plugin Developer Guide.]
 #pagebreak(weak: true)
 #pagebreak(weak: true)
 
-                        #set page(
-                            header: none,
-                        )
-                        #heading(level: 1, outlined: true, "Network Detection")
-                        #pagebreak()
-                        #set page(
-                            header:  text(size: 8pt, fill: gray)[#align(right)[Network Detection]],
-                        )
-                        
+= Network Detection     
 == Nadi GIS
 #par()[Nadi GIS is available as a CLI tool and QGIS plugin, the CLI tool has the following functions:]
 ``````
@@ -473,23 +467,23 @@ Options:
 #par()[The QGIS plugin for nadi has a subset of the CLI functionality. It can be accessed from the Processing Toolbox.]
 #figure(image("src/images/qgis-processing.png", width: 40%), caption: [QGIS Processing Toolbox])
 #par()[You can run the tools from there and use the layers in QGIS as inputs. The QGIS plugin will first try to find #raw("nadi-gis") binary on your #raw("PATH") and use it, if not it'll try to use the binary provided with the plugins. It is preferred to have #raw("nadi-gis") available in #raw("PATH") and running without errors.]
-#pagebreak(weak: true)
+
 == Example
 #par()[The examples here will be given using QGIS plugin, and using the CLI tool both. CLI tool is great for quickly running things, and doing things in batch, while QGIS plugin will be better on visualization and manual fixes using other GIS tools.]
 ==== Using QGIS Plugin
 #par()[First #strong[downloading the data] is done through the #raw("Download USGS Data") tool. As shown in the screenshot below, input the USGS site ID and the data type you want to download.]
-#figure(image("src/images/qgis-download.png"),caption: [QGIS Download])
+#figure(image("src/images/qgis-download.png", width: 80%),caption: [QGIS Download])
 #par()[You will need, #raw("tributaries") for the upstream tributaries for network, and #raw("nwis-site") will download the USGS NWIS sites upstream of the location. We will use those two for the example. If you have national data from other sources, you can use the basin polygon to crop them.]
 #par()[#strong[Stream Order] tool is mostly for visual purposes. The figure below shows the results from stream order on right compared to the raw download on left.]
-#par()[Stream Order Result]
+#figure(image("src/images/qgis-order.png", width: 80%),caption: [Stream Order Result])
 #par()[After you have streams (tributaries), you can use the #strong[Check Streams] tool to see if there are any errors. It will give all the nodes and their categories, you can filter them to see if it has branches, or if it has more than one outlet. The figure below shows the branches with red dot. If we zoom in we can see how the bifurcation on the stream is detected, and how stream order calculation is confused there.]
-#par()[Check Streams Result]
+#figure(image("src/images/qgis-branch.png"),caption: [Check Streams Result])
 #par()[#strong[Find Connections] tool will find the connection between the points using the stream network. The results below shows the tool being run on the NWIS points.]
-#par()[Find Connections Result]
+#figure(image("src/images/qgis-network.png"),caption:[Find Connections Result])
 #par()[If we select #strong[simplify] option, it'll only save the start and end point of the connection instead of the whole stream.]
-#par()[Find Connections Result Alt]
+#figure(image("src/images/qgis-network2.png"),caption: [Find Connections Result Alt])
 #par()[Of course you can run #strong[Stream Order] on the results to get a more aesthetically pleasing result.]
-#par()[Find Connections Result with Order]
+#figure(image("src/images/qgis-network3.png"),caption: [Find Connections Result with Order])
 ==== Using CLI
 #par()[An example of running #raw("nadi-gis") using CLI can be done in the following steps:]
 ===== Download data
@@ -571,16 +565,8 @@ nadi-gis network -i output/03217200_nwis-site.json output/03217200_tributaries.j
 #pagebreak(weak: true)
 #pagebreak(weak: true)
 
-                        #set page(
-                            header: none,
-                        )
-                        #heading(level: 1, outlined: true, "Network Analysis")
-                        #pagebreak()
-                        #set page(
-                            header:  text(size: 8pt, fill: gray)[#align(right)[Network Analysis]],
-                        )
-                        
-== Core Concepts
+= Network Analysis      
+== Core Concepts <intro>
 #par()[This section contains a brief explanation of core concepts.]
 #par()[The main concepts that you need to know are:]
 - #par()[#strong[Attributes] are values, it can be float, integer, boolean, strings, or list of attributes, or a map of attributes (key=value),]
@@ -624,7 +610,7 @@ nadi-gis network -i output/03217200_nwis-site.json output/03217200_tributaries.j
 [loop], [loop task],
 [for], [for loop task for looping through array/attrmap],
 )
-#par()[Continue with the chapters for details on each concept. Or skip ahead to #link("/learn-examples.md")[Learn by Examples] if you want to jump into the examples.]
+#par()[Continue with the chapters for details on each concept. Or skip ahead to #link(<learn-examples>)[Learn by Examples] if you want to jump into the examples.]
 == Task
 #par()[Task is an execution body in the task system. There are different types of tasks, specially environment, network and node type tasks, and there can be conditional tasks that only execute based on a condition or loops.]
 #par()[Some examples of different tasks are given below to show a general overview, but the concepts inside the tasks system will be introduced as we progress through the chapters,]
@@ -723,7 +709,7 @@ node[
 # selecting a path
 node[WV04112 -> WV04113] render("=(> 2 3)")
 ``````
-#pagebreak(weak: true)
+
 == Attributes
 #par()[Attributes are #link("https://toml.io/en/")[TOML] like values. They can be one of the following types:]
 #table(columns: 3, table.header(
@@ -780,7 +766,7 @@ node.outlet
 }
 ``````
 #par()[With plugins, you can load attributes from different file types.]
-#pagebreak(weak: true)
+
 == Node
 #par()[A Node is a point in network. A Node can have multiple input nodes and only one output node. And a Node can also have multiple attributes identifiable with their unique name, along with timeseries values also identifiable with their names.]
 #par()[If you understand graph theory, then node in nadi network is the same as a node in a graph.]
@@ -812,7 +798,7 @@ Error in function load_str: Error: Parse Error at Line 1 Column 8
   123 -> node-1
          ^ Incomplete Path; expected node here
 ``````
-#pagebreak(weak: true)
+
 == Network
 #par()[A Network is a collection of nodes. The network can also have attributes associated with it. The connection information is stored within the nodes itself. But Network will have nodes ordered based on their connection information. So that when you loop from node from first to last, you will always find output node before its input nodes.]
 #par()[A condition a nadi network is that it can only be a directed graph with tree structure.]
@@ -840,7 +826,7 @@ network svg_save(
 )
 ``````
 #par()[Results:]
-#par()[]
+#align(center,image("./src/output/network-mississippi.svg"))
 #par()[You can assign different graphical properties through node properties.]
 ``````task
 network load_file("./data/mississippi.net")
@@ -857,8 +843,8 @@ network svg_save(
 )
 ``````
 #par()[Results:]
-#par()[]
-#pagebreak(weak: true)
+#align(center, image("./src/output/network-mississippi-colors.svg"))
+
 == Expression
 #par()[Expressions are airthmetic or logical operations. They can appear inside the conditional statements, or as input to a task, or nested in other expression or function calls.]
 #par()[Expressions are defined into the following categories:]
@@ -900,7 +886,7 @@ network echo(json(env.value))
 [1, true, "no maybe"]
 ``````
 #par()[Special variable types like #raw("nodes"), #raw("inputs"), #raw("output") are available besides #raw("env"), #raw("network") and #raw("node") based on what type of task the expression is on.]
-#par()[You will learn more about this on #link("/intro/cross-context.md")[Cross Context Functions and Variables] chapter.]
+#par()[You will learn more about this on #link(<intro-cross-context>)[Cross Context Functions and Variables] chapter.]
 ==== Unary Operator
 ``````task
 env !true
@@ -953,8 +939,8 @@ Hello world!
 Function echo did not return a value
 ``````
 #par()[Special function types like #raw("nodes"), #raw("inputs"), #raw("output") are available besides #raw("env"), #raw("network") and #raw("node") based on what type of task the expression is on.]
-#par()[You will learn more about this on #link("/intro/cross-context.md")[Cross Context Functions and Variables] chapter.]
-#pagebreak(weak: true)
+#par()[You will learn more about this on #link(<intro-cross-context>)[Cross Context Functions and Variables] chapter.]
+
 == String Template
 #par()[String templates are strings with dynamic components that can be rendered for each node based on the node attributes.]
 #par()[A simple template can be like below:]
@@ -983,7 +969,7 @@ network echo(render_template("./data/example.template"))
 #par()[Results:#linebreak()
 |Name|Index| |----|-----| |LOWER-MISSISSIPPI|0| |UPPER-MISSISSIPPI|1| |MISSOURI|2| |ARKANSAS|3| |RED|4| |OHIO|5| |TENESSEE|6|]
 #par()[Of course, there are better ways to generate table than this, but this shows how flexible the template system is.]
-#pagebreak(weak: true)
+
 == Node Function
 #par()[Node function runs on each node. It takes arguments and keyword arguments.]
 #par()[For example following node function takes multiple attribute names and prints them. The signature of the node function is #raw("print_attrs(*args)").]
@@ -1043,7 +1029,7 @@ NAME = "ohio"
 NAME = "lower-mississippi"
 ``````
 #par()[As we can see in the diagram, the path from tenessee to lower mississippi includes the ohio node.]
-#pagebreak(weak: true)
+
 == Network Function
 #par()[Network function runs on the network as a whole. It takes arguments and keyword arguments. Few network functions we have been using throughout the examples are #raw("load_file"), #raw("load_str") and #raw("svg_save"):]
 ``````task
@@ -1056,7 +1042,7 @@ network svg_save(
 )
 ``````
 #par()[Results:]
-#par()[]
+#align(center, image("./src/output/network-mississippi-sdf.svg"))
 #par()[For example following network function takes file path as input to save the network in graphviz format:]
 ``````sig
 save_graphviz(
@@ -1093,14 +1079,11 @@ digraph network {
 network load_file("./data/mississippi.net")
 network save_graphviz("./output/test.gv")
 network command("dot -Tsvg ./output/test.gv -o ./output/test.svg")
-network clip()
-# the link path needs to be relative to this file
-network echo("../output/test.svg")
 ``````
 #par()[Results:]
-#par()[]
-#pagebreak(weak: true)
-== Cross Context Functions and Variables
+#align(center, image("./src/output/test.svg"))
+
+== Cross Context Functions and Variables <intro-cross-context>
 #par()[You can access variable and call functions based on their default context (e.g. node variable/function in a node task). Additionally, you can also access the variables or call functions in select few other context.]
 #par()[By default, if a function is not available, node/network task calls the environment function of the same name.]
 #par()[For example, here the #raw("sum") and #raw("array") functions are environment functions, while the #raw("count") is a network function. When you use Nadi IDE, it'll show you which function is actually being called at the top of the editor.]
@@ -1197,9 +1180,9 @@ env nodes.render("Node [{INDEX}] {_NAME}")
 ``````output
 ["Node [0] lower-mississippi", "Node [1] upper-mississippi", "Node [2] missouri", "Node [3] arkansas", "Node [4] red", "Node [5] ohio", "Node [6] tenessee"]
 ``````
-#pagebreak(weak: true)
-== Plugins
-#pagebreak(weak: true)
+
+== Plugins <intro-plugins>
+
 == Further Reading
 #par()[If you need help on any functions. Use the #raw("help") as a #raw("task"). You can use #raw("help node") or #raw("help network") for specific help. You can also browse through the function help window in the #raw("nadi-ide") for help related to each functions.]
 ``````task
@@ -1223,19 +1206,19 @@ Template section of the NADI book.
 #pagebreak(weak: true)
 #pagebreak(weak: true)
 #pagebreak(weak: true)
-= Learn by Examples
+= Learn by Examples <learn-examples>
 #table(columns: 2, table.header(
 [Topic], [Learn About]
 ),
-[#link("./learn-examples/attributes.md")[Attributes]], [Setting and Getting Attributes],
-[#link("./learn-examples/control.md")[Control Flow]], [Control flow, if, else, while loops etc],
-[#link("./learn-examples/connections.md")[Connections]], [Loading and modifying connections],
-[#link("./learn-examples/counting.md")[Counting]], [Counting nodes in network, conditional],
-[#link("./learn-examples/cumulative.md")[Cumulative]], [Calculating Network cumulative sums and those],
-[#link("./learn-examples/import-export.md")[Import Export]], [Importing and exporting multiple data formats],
-[#link("./learn-examples/str-templates.md")[String Template]], [Using String Templates to do various things],
+[#link(<learn-examples-attributes>)[Attributes]], [Setting and Getting Attributes],
+[#link(<learn-examples-control>)[Control Flow]], [Control flow, if, else, while loops etc],
+[#link(<learn-examples-connections>)[Connections]], [Loading and modifying connections],
+[#link(<learn-examples-counting>)[Counting]], [Counting nodes in network, conditional],
+[#link(<learn-examples-cumulative>)[Cumulative]], [Calculating Network cumulative sums and those],
+[#link(<learn-examples-import-export>)[Import Export]], [Importing and exporting multiple data formats],
+[#link(<learn-examples-str-templates>)[String Template]], [Using String Templates to do various things],
 )
-== Attributes
+== Attributes <learn-examples-attributes>
 #par()[There are 3 kind of attributes in nadi. Environment, Network and Node attributes. as their name suggests environment attributes are general attributes available in the current context. Network attributes are associated with the currenly loaded network. and node attributes are associated with each nodes.]
 #par()[nadi has special syntax where you can get/set attributes for multiple nodes at once.]
 ``````task
@@ -1308,9 +1291,9 @@ network load_str("a -> b\n b -> d\n c -> d\n");
 network svg_save("./output/attrs-simp.svg")
 ``````
 #par()[Results:]
-#par()[]
-#pagebreak(weak: true)
-== Control Flow
+#align(center, image("./src/output/attrs-simp.svg"))
+
+== Control Flow <learn-examples-control>
 #par()[Task has some basic control flow required to write programs. They are if-else branches and while loops.]
 ==== Conditional (If-Else) Blocks
 #par()[There are two kind of if-else branches. One is on an expression level. which means there has to be if and else branch both as it expects a return value. The following example shows the expression with if-else block.]
@@ -1361,8 +1344,8 @@ while (somevar < 10) {
 9
 ``````
 #par()[This can be used to repeat a set of tasks for a various reasons.]
-#pagebreak(weak: true)
-== Connections
+
+== Connections <learn-examples-connections>
 #par()[Connections between the nodes is the most important part of nadi. you can load networks by loading a file or string. The network is a simple multiline text with one edge (#raw("input -> output")) in each line. comments starting with #raw("#") are supported.]
 ==== Default is Empty Network
 #par()[Tasks are run by default with an empty network. So you might still be able to work with network attributes, but the nodes will be empty. also note that when you load network it replaces the old one including the attributes.]
@@ -1409,7 +1392,7 @@ network svg_save(
 )
 ``````
 #par()[Results:]
-#par()[]
+#align(center, image("./src/output/simple-count.svg"))
 ==== Loading Network from a File
 #par()[we can load a network from a file:]
 ``````task
@@ -1420,7 +1403,7 @@ network svg_save(
 )
 ``````
 #par()[Results:]
-#par()[]
+#align(center, image("./src/output/ex-network-conn.svg"))
 ==== Modifying the network
 #par()[You can modify the network after loading it as well. The example below extracts just the nodes that are dams. Compare this with the previous network to see how the connections are retained during the subsets.]
 ``````task
@@ -1440,10 +1423,10 @@ network svg_save(
 )
 ``````
 #par()[Results:]
-#par()[]
+#align(center, image("./src/output/simple-count-subset.svg"))
 #par()[This can be useful when you want to remove nodes that do not satisfy some selection criteria for your analysis without having to redo the network detection part.]
-#pagebreak(weak: true)
-== Counting Nodes
+
+== Counting Nodes <learn-examples-counting>
 #par()[Here assume we have a network consisting of nodes of dams and gages like the following where dam nodes start with d and gages with g:]
 ``````task
 network load_str("
@@ -1460,7 +1443,7 @@ network svg_save(
 )
 ``````
 #par()[Results:]
-#par()[]
+#align(center, image("./src/output/simple-count.svg"))
 #par()[Simply counting number of nodes, or certain types of nodes in a network is done through #raw("count") function.]
 ``````task
 network load_str("
@@ -1525,7 +1508,7 @@ network svg_save(
 )
 ``````
 #par()[Results:]
-#par()[]
+#align(center, image("./src/output/simple-count-1.svg"))
 #par()[We can add a condition and count the nodes that satisfy that condition only. Like counting the number of dams upstream of each node (including the node).]
 ``````task
 network load_str("
@@ -1544,7 +1527,7 @@ network svg_save(
 )
 ``````
 #par()[Results:]
-#par()[]
+#align(center, image("./src/output/simple-count-2.svg"))
 #par()[You can similarly count the number of gages downstream. Here we need a conditional unlike in previous cases as not all nodes have output. In case of inputs, a leaf node would have no inputs but #raw("sum([])") would still be a valid output of #raw("0"). But for node without output nodes, the variable type #raw("output") fails with #raw("NoOutputNode") error, so we add a conditional check to avoid that.]
 ``````task
 network load_str("
@@ -1567,10 +1550,10 @@ network svg_save(
 )
 ``````
 #par()[Results:]
-#par()[]
+#align(center, image("./src/output/simple-count-3.svg"))
 #par()[Here the condition #raw("(output._?)") checks if there is output on the node or not by checking for the dummy variable #raw("_") which is present in all nodes/network.]
-#pagebreak(weak: true)
-== Cumulative Sum
+
+== Cumulative Sum <learn-examples-cumulative>
 #par()[Here we can use the stream ordering formula to calculate the stream order for each node:]
 ``````task
 network load_str("
@@ -1588,7 +1571,7 @@ network svg_save(
 )
 ``````
 #par()[Results:]
-#par()[]
+#align(center, image("./src/output/cumulative-1.svg"))
 #par()[The first part takes the maximum order of the input nodes, then the second part #raw("int(count(inputs._?) > 1)") checks if there are more than one input, adding one to the order when multiple streams combine into one. You can use the funciton #raw("inputs_count()") instead of #raw("count(inputs._?)") to do the same thing.]
 #par()[That is the core of the NADI Task System, you can write functions that have their own logic and then load them into the system. You can then use the syntax and network based analysis methods of NADI using those functions.]
 #par()[And of course, we can visualize the different order of streams for easier understanding.]
@@ -1612,9 +1595,9 @@ network svg_save(
 )
 ``````
 #par()[Results:]
-#par()[]
-#pagebreak(weak: true)
-== Import Export Files
+#align(center, image("./src/output/cumulative-2.svg"))
+
+== Import Export Files <learn-examples-import-export>
 #par()[Similar to how you can load network files, you can load attributes from files as well. Direct load of TOML format is supported from the internal plugins, while you might need external plugins for other formats.]
 #par()[#raw("load_attrs") function takes a template, and reads a different files for each node to load the attributes from.]
 ``````task
@@ -1628,7 +1611,7 @@ network svg_save(
 )
 ``````
 #par()[Results:]
-#par()[]
+#align(center, image("./src/output/ohio-import-export.svg"))
 #par()[You can use the render function to see if the files being loaded are correct. Here we can see the examples for the first 4 nodes:]
 ``````task
 network load_file("data/ohio.network")
@@ -1715,14 +1698,14 @@ network svg_save(
 )
 ``````
 #par()[Results:]
-#par()[]
+#align(center, image("./src/output/ohio-from-gis.svg"))
 #par()[As we can see the plugins make it easier to interoperate with a lot of different data formats. Here GIS plugin will support any file types supported by #raw("gdal"). Similarly, other formats can be supported by writing plugins.]
+
+== String Templates <learn-examples-str-templates>
 #pagebreak(weak: true)
-== String Templates
 #pagebreak(weak: true)
 #pagebreak(weak: true)
-#pagebreak(weak: true)
-= Nadi Extension Capabilities
+= Nadi Extension Capabilities <system-extensions>
 #par()[Nadi System can be extended for custom use cases with the following ways:]
 - #link("../devref/string-templates.md#advanced-string-template-with-lisp")[LISP on String Template]
 - Task System
@@ -1741,15 +1724,7 @@ network svg_save(
 #pagebreak(weak: true)
 #pagebreak(weak: true)
 
-                        #set page(
-                            header: none,
-                        )
-                        #heading(level: 1, outlined: true, "Python Library")
-                        #pagebreak()
-                        #set page(
-                            header:  text(size: 8pt, fill: gray)[#align(right)[Python Library]],
-                        )
-                        
+= Python Library        
 == Nadi Py
 #par()[This can be installed from #raw("pypi") with #raw("pip install nadi-py") command.]
 #par()[Then you can simply import and use it:]
@@ -1770,7 +1745,7 @@ fn.network.svg_save(net, "test.svg")
 === Combining the power of python and Task System
 #par()[You can combine the power of python with task system using the #raw("command") function from Nadi. Basically, you write your logic that cannot be written in nadi in python, you can use #raw("nadi-py") if you need to parse network files, load attributes or call any other nadi functions. And you can pass the results of the python script at the end by simply printing it to the standard output.]
 #par()[Future work is under consideration to have a tight couple between the python and nadi system.]
-#pagebreak(weak: true)
+
 == Differences with Task System
 #par()[The difference from Task system is that now we use python syntax and the python functions. The environment from task system is no longer available, and the node functions are not automatically run in a loop.]
 #par()[We lose the advantages brought by the Domain Specific Programming Language, while gaining the flexibility and the well developed libraries of the python language.]
@@ -1814,7 +1789,7 @@ for node in net.nodes():
 	    continue
 ``````
 #par()[In case of multiple variables being used, the #raw("AttributeError") might catch all of them, further fine tuning in python could make the code far longer than in nadi.]
-#pagebreak(weak: true)
+
 == Plugins
 #par()[Not only can you use #raw("nadi-py") to write network based algorithms in python, you can also use it to write executable plugins that you can use to run analysis in python and feed it back to nadi system.]
 #par()[First thing to say about that is, you don't need #raw("nadi-py") for writing python plugins, as they are run as a normal python scripts.]
@@ -1900,23 +1875,15 @@ for node in nadi.Network(network).nodes():
 ``````
 #par()[Here we load the network using #raw("nadi-py"), and then loop through the node, and pass the variables back to nadi through stdout. We have to pass the node names with the #raw("nadi:var:") as this is being run for the whole network. Without the node name, it'll take the #raw("key=val") pair as network attribute.]
 #par()[This should allow users to have a lot of flexibility in using python to do complex analysis and get the results back into nadi directly. You can also save the results of the python script into a file, and check if the file exists before running the command from nadi to save the redundant computations.]
-#pagebreak(weak: true)
+
 == Examples
 #par()[TODO: add examples from papers' case studies.]
 #pagebreak(weak: true)
 #pagebreak(weak: true)
 
-                        #set page(
-                            header: none,
-                        )
-                        #heading(level: 1, outlined: true, "Plugin Developer Guide")
-                        #pagebreak()
-                        #set page(
-                            header:  text(size: 8pt, fill: gray)[#align(right)[Plugin Developer Guide]],
-                        )
-                        
-== Executable Plugins
-#par()[Executable plugins are programs that can be called from terminal. The #link("../plugins/command.md#node.command")[node #raw("command") function], #link("../plugins/command.md#network.command")[network #raw("command") function] and their families in the #link("../plugins/command.md")[#raw("command") plugin] have the capacity to run external programs through the command line.]
+= Plugin Developer Guide  
+== Executable Plugins <plugin-dev-exe-plugins>
+#par()[Executable plugins are programs that can be called from terminal. The #link(<plugins-command-node.command>)[node #raw("command") function], #link(<plugins-command-network.command>)[network #raw("command") function] and their families in the #link(<plugins-command>)[#raw("command") plugin] have the capacity to run external programs through the command line.]
 #par()[The inputs to the program is given through the command line arguments, while the output of the programs are read through the standard output of the program. This can be used to call different/same commands for nodes with arguments dependent on their attributes.]
 #par()[And the output from the programs are taken by reading their stdout (standard output). Any lines starting from #raw("nadi:var:") (prefix) is considered a communication attempt with Nadi. Currently, you can set attribute values by providing #raw("key=val") pairs after the prefix. The node function will set it for current node, and network function will set it for the network. Furthermore, in network function, you can add one more section after prefix to set node attributes. For example, #raw("nadi:var:node1:value=12") will set the #raw("value") attribute to #raw("12") in the node named #raw("node1") in the current network.]
 #par()[The executable plugin or commands are language agnostic, as long as the command is available to run from the parent shell they will be run.]
@@ -1965,7 +1932,7 @@ print(args)
 ``````r
 cat(sprintf("nadi:var:this_val=%d\n", 1200))
 ``````
-#pagebreak(weak: true)
+
 == Compiled Plugins
 #par()[As it is not possible to forsee all the use cases in advance, the nadi software can be easily extended (easy being an relative term) to account for different use cases.]
 #par()[The program can load compiled shared libraries (#raw(".dll") in windows, #raw(".so") in linux, and #raw(".dylib") on mac). Since they are shared libraries compiled into binaries, any programming languages can be used to generate those. So far, the #raw("nadi_core") library is available for #raw("Rust") only. Using that, plugins can be written and those functions can be made available from the system.]
@@ -1980,7 +1947,7 @@ cat(sprintf("nadi:var:this_val=%d\n", 1200))
 #par()[Internal plugins come with the nadi system. They are only modified between the different versions of Nadi.]
 #par()[The internal plugins provide core functionality of the Task system like data conversion, parsing network/attribute files, logical operations, template rendering, etc.]
 #par()[Future planned internal plugin functions can be found in #link("https://github.com/Nadi-System/nadi-futures")[nadi-futures] repository. Which in itself is an external plugin.]
-#pagebreak(weak: true)
+
 === External Plugins
 #par()[External plugins are plugins that are their own separate programs that compile to a shared library. The shared library has information about the name of the plugin, the functions that are available, as well as the bytecode required to run the functions.]
 #par()[You have to use the #raw("nadi_core") library and the macros available there to make the plugins. Although it might be possible to write it without the macros (an example is provided), it is strongly discouraged. The example only serves as a way to demonstrate the inner working of the external plugins.]
@@ -2061,7 +2028,6 @@ mod sample {
 }
 ``````
 #par()[The plugin can be compiled with the #raw("cargo build") or #raw("cargo build --release") command, it'll generate the shared library in the #raw("target/debug") or #raw("target/release") folder. You can simply copy it to directory in #raw("NADI_PLUGIN_DIRS") for it to be loaded.]
-#pagebreak(weak: true)
 === Functions
 #par()[Plugin functions are very close to normal rust functions, with extra syntax for the function arguments, and limited function argument and return types.]
 ===== Function Types
@@ -2192,11 +2158,11 @@ true
 true
 false
 ``````
-#pagebreak(weak: true)
+
 === Node Functions
 #par()[Node functions are run for each node in the network (or a selected group of nodes). Hence, it takes the first argument as #raw("& NodeInner") or #raw("& mut NodeInner") depending on the purpose of the function. Immutable functions can be called from any place, while mutable functions can only be called once on the outermost layer on the task.]
 #par()[Other arguments and the return types for node functions are the same as the environement functions.]
-#pagebreak(weak: true)
+
 === Network Functions
 #par()[Network functions, like node functions take #raw("&Network") or #raw("& mut Network") as the first argument. It has the same restrictions as the env/node functions for the arguments and the return types.]
 #pagebreak(weak: true)
@@ -2205,15 +2171,7 @@ false
 #pagebreak(weak: true)
 #pagebreak(weak: true)
 
-                        #set page(
-                            header: none,
-                        )
-                        #heading(level: 1, outlined: true, "User Reference")
-                        #pagebreak()
-                        #set page(
-                            header:  text(size: 8pt, fill: gray)[#align(right)[User Reference]],
-                        )
-                        
+= User Reference
 == Example Usage
 ==== Ohio River Streamflow Routing Project
 #par()[The Network for the flow routing is as follows:]
@@ -2222,7 +2180,7 @@ network load_file("./data/ohio.network")
 network svg_save(label="{_NAME}", outfile = "./output/ohio.svg", height=1000)
 ``````
 #par()[Results:]
-#par()[]
+#align(center, image("./src/output/ohio.svg"))
 === Making Tables
 ``````table
 <Node ID => {_NAME}
@@ -2292,7 +2250,10 @@ network echo("../output/ohio-table.svg")
 ``````error
 network function: "table_to_svg" not found
 ``````
-#pagebreak(weak: true)
+
+#par()[Old Result (needs graphics plugin):]
+#align(center, image("./src/output/ohio-table.svg"))
+
 === Generating Reports
 #par()[So we write this template:]
 ``````stp-md
@@ -2328,7 +2289,7 @@ network render("./data/ohio-report.template")
 ``````
 #par()[Results:#linebreak()
 "./data/ohio-report.template"]
-#pagebreak(weak: true)
+
 === Analysing Timeseries
 ==== Looking at Data Gaps
 #par()[Couting the gaps in a csv data with all the nodes is easy. Let's look at the top 5 nodes with data gaps.]
@@ -2353,27 +2314,21 @@ network load_file("./data/ohio.network")
 network csv_count_na("./data/ts/observed.csv", outattr = "observed_missing")
 network csv_count_na("./data/ts/natural.csv", outattr = "natural_missing")
 network table_to_svg(
-!	template="
-!<Node=> {_NAME}
-!>Observed => {observed_missing}
-!>Natural => {natural_missing}
-!",
-!	outfile="./output/natural-gaps.svg"
-!)
-network clip()
-network echo("
-!<center>
-!Number of Missing Days in Timeseries Data
-!
-! ![](../output/natural-gaps.svg)
-!<center>
-!")
+	template="
+<Node=> {_NAME}
+>Observed => {observed_missing}
+>Natural => {natural_missing}
+",
+	outfile="./output/natural-gaps.svg"
+)
 ``````
 #par()[\*Error\*:]
 ``````error
 network function: "csv_count_na" not found
 ``````
-#pagebreak(weak: true)
+#par()[Old Result:]
+#align(center, image("./src/output/natural-gaps.svg"))
+
 === Visualizing Data Gaps
 #par()[To look at the temporal distribution of the gaps, we can use this function.]
 ``````task
@@ -2391,6 +2346,8 @@ network echo("../output/natural-blocks.svg")
 ``````error
 network function: "csv_count_na" not found
 ``````
+#par()[Old Result:]
+#align(center, image("./src/output/natural-blocks.svg"))
 ``````task
 network load_file("./data/ohio.network")
 network csv_count_na("./data/ts/observed.csv", outattr = "obs_na")
@@ -2406,6 +2363,9 @@ network echo("../output/observed-blocks.svg")
 ``````error
 network function: "csv_count_na" not found
 ``````
+#par()[Old Result:]
+#align(center, image("./src/output/observed-blocks.svg"))
+
 #pagebreak(weak: true)
 #pagebreak(weak: true)
 #pagebreak(weak: true)
@@ -2632,9 +2592,9 @@ network attributes.set_attrs_render(**kwargs)
 ===== Arguments
 - #raw("**kwargs") =\> Kwargs of attr = String template to render
 #par()[Set network attributes based on string templates]
-#pagebreak(weak: true)
-== Command
-==== command { \#node.command }
+
+== Command <plugins-command>
+==== command <plugins-command-node.command>
 ``````sig
 node command.command(
     cmd: '& Template',
@@ -2690,7 +2650,7 @@ network command.parallel(
 #par()[Run the given template as a shell command for each nodes in the network in parallel.]
 ===== Warning
 #par()[Currently there is no way to limit the number of parallel processes, so please be careful with this command if you have very large number of nodes.]
-==== command { \#network.command }
+==== command <plugins-command-network.command>
 ``````sig
 network command.command(
     cmd: 'Template',
@@ -2705,7 +2665,7 @@ network command.command(
 #par()[Run the given template as a shell command.]
 #par()[Run any command in the shell. The standard output of the command will be consumed and if there are lines starting with #raw("nadi:var:") and followed by #raw("key=val") pairs, it'll be read as new attributes to that node.]
 #par()[See #raw("node command.command") for more details as they have the same implementation]
-#pagebreak(weak: true)
+
 == Connections
 ==== load \_file { \#network.load \_file }
 ``````sig
@@ -2756,7 +2716,7 @@ network connections.save_file(
 - #raw("graphviz: 'bool' = false") =\> wrap the network into a valid graphviz file
 #par()[Save the network into the given file]
 #par()[For more control on graphviz file writing use #raw("save_graphviz") from #raw("graphviz") plugin instead.]
-#pagebreak(weak: true)
+
 == Core
 ==== count { \#env.count }
 ``````sig
@@ -2973,7 +2933,7 @@ network core.count(vars: 'Option < Vec < bool > >')
 ===== Arguments
 - #raw("vars: 'Option < Vec < bool > >'") =\>
 #par()[Count the number of nodes in the network]
-#pagebreak(weak: true)
+
 == Debug
 ==== sleep { \#env.sleep }
 ``````sig
@@ -3024,7 +2984,7 @@ net clip()
 net render("{_NAME} {attr1}")
 ``````
 #par()[The clip function's output will let the preprocessor know that only the parts after that are relevant to the user. Hence, it'll discard outputs before that during documentation generation.]
-#pagebreak(weak: true)
+
 == Logic
 ==== ifelse { \#env.ifelse }
 ``````sig
@@ -3098,7 +3058,7 @@ env logic.any(vars: '& [bool]')
 ===== Arguments
 - #raw("vars: '& [bool]'") =\>
 #par()[check if any of the bool are true]
-#pagebreak(weak: true)
+
 == Regex
 ==== str \_filter { \#env.str \_filter }
 ``````sig
@@ -3154,7 +3114,7 @@ env regex.str_count(attr: '& str', pattern: 'Regex')
 - #raw("attr: '& str'") =\> attribute to check for pattern
 - #raw("pattern: 'Regex'") =\> Regex pattern to match
 #par()[Count the number of matches of given pattern in the value]
-#pagebreak(weak: true)
+
 == Render
 ==== render { \#env.render }
 ``````sig
@@ -3213,7 +3173,7 @@ network render.render_template(template: 'PathBuf')
 ===== Arguments
 - #raw("template"): Path to the template file
 - #raw("outfile") [Optional]: Path to save the template file, if none it'll be printed in stdout
-#pagebreak(weak: true)
+
 == Series
 ==== sr \_count { \#node.sr \_count }
 ``````sig
@@ -3278,7 +3238,7 @@ node series.sr_to_array(name: '& str', safe: 'bool' = false)
 - #raw("name: '& str'") =\> Name of the series
 - #raw("safe: 'bool' = false") =\> Do not error if series does't exist
 #par()[Make an array from the series]
-#pagebreak(weak: true)
+
 == Table
 ==== save \_csv { \#network.save \_csv }
 ``````sig
@@ -3315,7 +3275,7 @@ network table.table_to_markdown(
 - neither one of table file or table template is provided,
 - error while rendering markdown (caused by error on rendering cell values from templates)
 - error while writing to the output file
-#pagebreak(weak: true)
+
 == Timeseries
 ==== ts \_count { \#node.ts \_count }
 ``````sig
@@ -3389,7 +3349,7 @@ network timeseries.series_csv(
 - #raw("attrs: 'Vec < String >'") =\> list of attributes to write
 - #raw("series: 'Vec < String >'") =\> list of series to write
 #par()[Write the given nodes to csv with given attributes and series]
-#pagebreak(weak: true)
+
 == Visuals
 ==== set \_nodesize \_attrs { \#network.set \_nodesize \_attrs }
 ``````sig
@@ -3460,7 +3420,7 @@ node dams.min_year(yearattr: '& str', write_var: '& str' = "MIN_YEAR")
 - #raw("yearattr: '& str'") =\>
 - #raw("write_var: '& str' = \"MIN_YEAR\"") =\>
 #par()[Propagate the minimum year downstream]
-#pagebreak(weak: true)
+
 == Data Fill
 ==== load \_csv \_fill { \#node.load \_csv \_fill }
 ``````sig
@@ -3515,7 +3475,7 @@ network datafill.save_experiments_csv(
 - #raw("errors: 'Vec < String >'") =\> list of errors to write
 - #raw("filter: 'Option < Vec < bool > >'") =\>
 #par()[Write the given nodes to csv with given attributes and experiment results]
-#pagebreak(weak: true)
+
 == Errors
 ==== calc \_ts \_error { \#node.calc \_ts \_error }
 ``````sig
@@ -3559,7 +3519,7 @@ network errors.calc_attr_error(
 - #raw("error: 'String' = \"rmse\"") =\> Error type, one of rmse/nrmse/abserr/nse
 #par()[Calculate Error from two attribute values in the network]
 #par()[It calculates the error using two attribute values from all the nodes.]
-#pagebreak(weak: true)
+
 == Fancy Print
 ==== fancy \_print { \#network.fancy \_print }
 ``````sig
@@ -3567,7 +3527,7 @@ network fancy_print.fancy_print()
 ``````
 ===== Arguments
 #par()[Fancy print a network]
-#pagebreak(weak: true)
+
 == Gnuplot
 ==== plot \_timeseries { \#network.plot \_timeseries }
 ``````sig
@@ -3590,7 +3550,7 @@ network gnuplot.plot_timeseries(
 - #raw("config: '& GnuplotConfig' = GnuplotConfig { outfile: None, terminal: None, csv: false, preamble: \"\" }") =\>
 - #raw("skip_missing: 'bool' = false") =\>
 #par()[Generate a gnuplot file that plots the timeseries data in the network]
-#pagebreak(weak: true)
+
 == Graphics
 === Node Functions
 ``````sig
@@ -3714,7 +3674,7 @@ network graphics.table_to_svg(
 - #raw("fit: 'bool' = false") =\>
 - #raw("highlight: '& [String]' = []") =\>
 #par()[Create a SVG file with the given network structure]
-#pagebreak(weak: true)
+
 == Graphviz
 ==== save \_graphviz { \#network.save \_graphviz }
 ``````sig
@@ -3736,7 +3696,7 @@ network graphviz.save_graphviz(
 ===== Arguments:
 - #raw("outfile") - Path to the output file
 - #raw("name") - Name of the graph
-#pagebreak(weak: true)
+
 == HTML
 ==== export \_map { \#network.export \_map }
 ``````sig
@@ -3755,7 +3715,7 @@ network html.export_map(
 - #raw("nodetitle: 'Template' = Template { original: \"{_NAME}\", parts: [Var(\"_NAME\", \"\")] }") =\>
 - #raw("connections: 'bool' = true") =\>
 #par()[Exports the network as a HTML map]
-#pagebreak(weak: true)
+
 == GIS
 === Network Functions
 ``````sig
@@ -3833,7 +3793,7 @@ network gis.gis_save_nodes(
 - #raw("layer: 'String' = \"nodes\"") =\>
 - #raw("filter: 'Option < Vec < bool > >'") =\>
 #par()[Save GIS file of the nodes]
-#pagebreak(weak: true)
+
 == Print Node
 ==== print \_node { \#node.print \_node }
 ``````sig
@@ -3848,7 +3808,7 @@ network print_node.print_attr_csv(*args)
 ===== Arguments
 - #raw("*args") =\>
 #par()[Print the given attributes in csv format with first column with node name]
-#pagebreak(weak: true)
+
 == Streamflow
 ==== check \_negative { \#node.check \_negative }
 ``````sig
@@ -3862,15 +3822,7 @@ node streamflow.check_negative(ts_name: '& str')
 #pagebreak(weak: true)
 #pagebreak(weak: true)
 
-                        #set page(
-                            header: none,
-                        )
-                        #heading(level: 1, outlined: true, "Developer Reference")
-                        #pagebreak()
-                        #set page(
-                            header:  text(size: 8pt, fill: gray)[#align(right)[Developer Reference]],
-                        )
-                        
+= Developer Reference
 == Data Structure
 #par()[This section will describe the data structures associated with NADI system in brief.]
 #par()[For more accurate and upto date details on the data structures and their available methods. Look at the API reference of #link("https://docs.rs/nadi_core/latest/nadi_core/")[#raw("nadi_core") on docs.rs].]
@@ -3888,7 +3840,7 @@ lock=true
 [ts.csv]
 streamflow = {path="data/smithland.csv", datetime="date", data="flow"}
 ``````
-#pagebreak(weak: true)
+
 == Network
 #par()[Collection of Nodes, with Connection information. The connection information is saved in the nodes itself (=inputs= and =output= variables), but they are assigned from the network.]
 #par()[The nadi system (lit, river system), is designed for the connections between points along a river. Out of different types of river networks possible, it can only handle non-branching tributaries system, where each point can have zero to multiple inputs, but can only have one output. Overall the system should have a single output point. There can be branches in the river itself in the physical sense as long as they converse before the next point of interests. There cannot be node points that have more than one path to reach another node in the representative system.]
@@ -3920,11 +3872,11 @@ network echo("../output/mississippi.svg")
 #par()[The program also plans to support the connection import from the #link("https://graphviz.org/doc/info/lang.html")[DOT format (graphviz package)].]
 #par()[Network file without any connection format can be written as a node per line, but those network can only call sequential functions, and not input dependent ones.]
 #par()[Depending on the use cases, it can probably be applied to other systems that are similar to a river system. Or even without the connection information, the functions that are independent to each other can be run in sequential order.]
-#pagebreak(weak: true)
+
 == Timeseries
 #par()[Timeseries of values, at regular interval. Can support integers, floats, booleans, strings, Arrays and Tables.]
 #par()[For timeseries that are not in a format that NADI can understand. The path to the timeseries can be provided as a node attribute and plugin functions can be written to use that path to load the timeseries for the node.]
-#pagebreak(weak: true)
+
 == String Templates
 #par()[The templating system will be used by an external library developed by me. The library can be modified if there are specific needs for this project.]
 #par()[The template system is feature rich, allowing for formatting, simple string transformations, and airthmatic calculations based on the variables (node attributes in this case). This can be used to generate file paths, and similar strings based on node attributes, as well as to format the cell values for exported table, figures, etc.]
@@ -4007,7 +3959,7 @@ node[ohio,red] render(
 }
 ``````
 #par()[As seen in above example, you can render variables, transform them, use basic calculations.]
-#par()[Or you can use #raw("lisp") syntax to do more complex calculations. Refer to #link("../system/extensions.md")[Nadi Extension Capabilities] section for more info on how to use #raw("lisp") on string template.]
+#par()[Or you can use #raw("lisp") syntax to do more complex calculations. Refer to #link(<system-extensions>)[Nadi Extension Capabilities] section for more info on how to use #raw("lisp") on string template.]
 ``````task
 network load_file("./data/mississippi.net")
 !node[ohio] set_attrs(river="the Ohio River", streamflow=45334.12424343)
@@ -4107,7 +4059,7 @@ network command("echo today=$(date +%Y-%m-%d) {%Y-%m-%d}")
 $ echo today=$(date +%Y-%m-%d) 2025-06-20
 ``````
 #par()[Here although the #raw("$(date +%Y-%m-%d)") portion was not rendered on template rendering process, the command was still valid, and was executed.]
-#pagebreak(weak: true)
+
 == Tables
 #par()[Tables are data types with headers and the value template. Tables can be rendered/exported into CSV, JSON, and LaTeX format. Other formats can be added later. Although tables are not exposed to the plugin system, functions to export different table formats can be written as a network function.]
 #par()[A sample Table file showing two columns, left aligned name for station in title case, and right aligned columns for latitude and longitude with float value of 4 digits after decimal:]
@@ -4154,7 +4106,7 @@ network echo("../output/example-table.svg")
 ``````error
 network function: "table_to_svg" not found
 ``````
-#pagebreak(weak: true)
+
 == File Templates
 #par()[File templates are templates that use string templates, but they are a whole file that can be used to generate rendered text files.]
 #par()[File templates also have sections which can be repeated for different nodes, with corresponding syntax.]
@@ -4166,7 +4118,7 @@ network function: "table_to_svg" not found
 | {_NAME} | {INDEX} |
 <!-- ---8<--- -->
 ``````
-#pagebreak(weak: true)
+
 == Tasks
 #par()[Task is a function call that the system performs. The function call can be a node function or a network function. The function can have arguments and keyword arguments that can determine its functionality. Node functions will be called on a node at a time, while the network function will be called with the whole network at once.]
 #par()[Currently tasks are performed one after another. The functions that any task can use can be internal functions provided by the library or the external functions provided by the plugins.]
@@ -4185,7 +4137,7 @@ node render("Node {NAME} at index {INDEX}")
 ``````
 #par()[Here each line corresponds to one task. And if it's a node task, then it'll be called for each node (in sequential order by default). The last line #raw("node.inputsfirst") will call that function in input node before the current node. Those functions can only be called for network with an output node.]
 #par()[Please note that although the string in the examples are highlighted as if they are string templates for readability. Those are just normal strings that functions take as inputs. Whether they are used as template or not depends on the individual function, refer to their help to see if they take #raw("Template") type or #raw("String") type.]
-#pagebreak(weak: true)
+
 == Node Functions
 #par()[Node functions are functions that take a node, and the function context to do some operations on it. They take mutable reference to the node, hence can read all node attributes, inputs, outputs, their attributes and timeseries.]
 #par()[Node functions can be run from the system for all the nodes in the network in different orders.]
@@ -4197,7 +4149,7 @@ node render("Node {NAME} at index {INDEX}")
 - Run a list of nodes, and
 - Run on a path between two nodes (inclusive).
 #par()[Depending on the way the function works, it might be required to be run in a particular order. For example, a function that counts the number of dams upstream of each point, might have to be run inputs first, so that you can cumulate the number as you move downstream.]
-#pagebreak(weak: true)
+
 == Network Functions
 #par()[Network functions are functions that take the network as a mutable reference and run on it.]
 #par()[Some examples of network functions:]
@@ -4212,15 +4164,7 @@ node render("Node {NAME} at index {INDEX}")
 #pagebreak(weak: true)
 #pagebreak(weak: true)
 
-                        #set page(
-                            header: none,
-                        )
-                        #heading(level: 1, outlined: true, "Developer Notes and Future Direction")
-                        #pagebreak()
-                        #set page(
-                            header:  text(size: 8pt, fill: gray)[#align(right)[Developer Notes and Future Direction]],
-                        )
-                        
+= Developer Notes and Future Direction
 == Developer Notes
 #par()[This section contains my notes as I develop the NADI system. Kind of like a dev blog.]
 #par()[The software package will consists of multiple components. It is planned to be designed in such a way that users can add their functionality and extend it with ease.]
@@ -4232,17 +4176,17 @@ node render("Node {NAME} at index {INDEX}")
 #par()[Besides plot, the example below shows how simply adding a column with connection visual can immediately make it easier to understand the relationship between the data points in a river. Without it people need to be familiar with the names of the data points and their location, or consult a different image/map to understand the relationship.]
 #par()[Table with Connection Information]
 #par()[The inspiration on making this software package comes from many years of struggle with doing the same thing again and again in different projects like these. And the motivation to make something generic that can be used for plethora of projects in the future.]
-#pagebreak(weak: true)
+
 === Why Rust?
 #par()[Rust^fn1 is an open source programming language that claims to be fast and memory efficient to power performance critical services. Rust is also able to integrate with other programming languages.]
 #par()[Rust provides a memory safe way to do modern programming. The White House has a recent press release^fn2 about the need to have memory safe language in future softwares. The report^fn3 has following sentense about the Rust language.]
 #par()[The results of the survey from stackoverflow^fn4 shows Rust has been a top choice for developers who want to use a new technology for the past 8 years, and the analysis also shows Rust is a language that generates for desire to use it once you get to know.]
-#pagebreak(weak: true)
+
 === Plugin System Experiments
 #pagebreak(weak: true)
 #pagebreak(weak: true)
 #pagebreak(weak: true)
-#pagebreak(weak: true)
+
 == Writing this Book
 #par()[I'm used to #raw("emacs")'s #raw("org-mode"), where you can evaluate code and show output and all those things. Like #raw("markdown") in steroids.]
 #par()[#raw("mdbook") seems to have some of those functionality in it as well. Though I think #raw("emacs")'s extension through #raw("elisp") is lot more flexible and easier to extend. #raw("mdbook") supporting custom preprocessors and renderer means we can extend it as well.]
@@ -4445,7 +4389,7 @@ network echo("../images/ohio-low.svg")
 #par()[One simple idea can be to take a command template to run. So we will change the input variables, run the command for each node or network, and then that command will update the output variable that we can optimize for.]
 #par()[We might require an option to call other functions in this case. Then maybe we can just pass the name of the function.]
 #par()[Complex idea could be to add the support for loop syntax in task system.]
-#pagebreak(weak: true)
+
 == Interactive Plots
 #par()[An experiment using the #raw("cairo") graphics library shows that a PDF can be directly produced without using LaTeX as intermediate using the network information. This functionality --- although not as complete as the one in the example --- has been exposed as an internal network function for now. Further functionality related to this idea can be embedding network information in simple plots, or generate the whole plot along side the network information.]
 #par()[It might be a good idea to make several functions that can export the interactive plots in LaTeX, PDF, PNG, SVG, HTML, etc. separately instead of single format.]
