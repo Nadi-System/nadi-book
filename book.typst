@@ -1,4 +1,4 @@
-#set document(title: "Network Analysis and Data Integration (NADI)")
+#set document(title: "Network Analysis and Data Integration (NADI) Book")
 #set document(author: ("Gaurav Atreya"))
 #set heading(numbering: "1.", depth: 3)
 #set page(paper: "us-letter")
