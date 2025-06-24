@@ -6,6 +6,8 @@
 #set text(font: "Noto Sans")
 #set par(spacing:2em)
 #set raw(syntaxes: "typst/task.sublime-syntax")
+#set raw(syntaxes: "typst/signature.sublime-syntax")
+#set raw(syntaxes: "typst/stp.sublime-syntax")
 #set par(leading: .8em)
 
         #show heading: it => [
