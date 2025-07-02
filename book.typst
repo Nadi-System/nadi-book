@@ -10,9 +10,9 @@
 #set raw(syntaxes: "typst/stp.sublime-syntax")
 #set par(leading: .8em)
 
-        #show heading: it => [
-            #block(above: 2em, below: 2em, it)
-        ]
+#show heading: it => [
+    #block(above: 2em, below: 2em, it)
+]
 #show link: it => {
   if type(it.dest) != str {
     underline(text(fill:green, it))
@@ -28,8 +28,42 @@
                                     v(11pt, weak: true)
                                    strong(it) 
                                 }
+
+#{
+    set page(fill: gradient.linear(luma(100), luma(200)).sharp(20, smoothness: 40%))
+    set align(center)
+    text(17pt, [Network Analysis and Data Integration (NADI) System])
+    v(2mm)
+    text(17pt, [User Manual])
+
+    {
+        image("cover.png", width:100%)
+    }
+    text(27pt, [NADI Book ])
+    text(17pt, [Version: 0.7.0])
+
+    v(1mm)
+    text(12pt, [Web Version: ] + link("https://nadi-system.github.io/"))
+
+    v(1fr)
+    grid(
+        rows: 0.5cm,
+        columns: 1,
+        [Gaurav Atreya],
+        [2025-06-27]
+    )
+}
+
+#pagebreak()
+#set page(numbering: "i")
+#counter(page).update(1)
+
+
 #outline(depth: 2, indent: 2em)
 #pagebreak()
+#counter(page).update(1)
+#set page(numbering: "1")
+
 = Preface
 #par()[NADI is currently under active development. As such does not have stable API yet, and many of the concepts explained in this book might not work yet.]
 #par()[If you still want to use it for your projects, please do them with the knowledge that the API might change in next versions, and you might have to keep it updated until the system is stable. If you have any problems with the program, or would like some new features, please make an github issue, we will try to accomodate it if it fits within the scope of the program.]
