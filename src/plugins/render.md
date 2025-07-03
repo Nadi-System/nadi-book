@@ -3,20 +3,34 @@
 ```sig
 env render.render(
     template: '& Template',
-    **keyval,
-    safe: 'bool' = false
+    safe: 'bool' = false,
+    **keyval
 )
 ```
 
 ### Arguments
 - `template: '& Template'` => String template to render
-- `**keyval` => 
 - `safe: 'bool' = false` => if render fails keep it as it is instead of exiting
+- `**keyval` => 
 
 Render the template based on the node attributes
 
 For more details on the template system. Refer to the String
 Template section of the NADI book.
+
+```task
+env assert_eq(render("abc {_x}", x="ab"), "abc ab")
+env assert_eq(render("abc {x}", x=23), "abc 23")
+```
+
+If safe parameter is true, then it doesn't error out even if
+the variable is not present, and will just return the original
+template. By default it errors out if there are any variables
+in the template without a value.
+
+```task
+env assert_eq(render("abc {x}", safe=true), "abc {x}")
+```
 # Node Functions
 ## render {#node.render}
 ```sig
@@ -31,6 +45,12 @@ Render the template based on the node attributes
 
 For more details on the template system. Refer to the String
 Template section of the NADI book.
+
+```task
+network load_str("a -> b")
+node.x = 13
+node assert_eq(render("abc {x}"), "abc 13")
+```
 # Network Functions
 ## render {#network.render}
 ```sig
@@ -42,6 +62,11 @@ network render.render(template: '& Template', safe: 'bool' = false)
 - `safe: 'bool' = false` => if render fails keep it as it is instead of exiting
 
 Render from network attributes
+
+```task
+network.x = 13
+network assert_eq(render("abc {x}"), "abc 13")
+```
 ## render_nodes {#network.render_nodes}
 ```sig
 network render.render_nodes(
@@ -57,6 +82,12 @@ network render.render_nodes(
 - `join: '& str' = "\n"` => String to join the render results
 
 Render each node of the network and combine to same variable
+
+```task
+network load_str("a -> b")
+node.x = INDEX + 1
+network assert_eq(render_nodes("abc {x}"), "abc 1\nabc 2")
+```
 ## render_template {#network.render_template}
 ```sig
 network render.render_template(template: 'PathBuf')

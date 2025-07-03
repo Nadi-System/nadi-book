@@ -4,11 +4,10 @@
 #set page(paper: "us-letter")
 #set text(size: 11pt)
 #set text(font: "Noto Sans")
-#set par(spacing:2em)
+#set par(spacing:2em, leading: .8em, justify: true)
 #set raw(syntaxes: "typst/task.sublime-syntax")
 #set raw(syntaxes: "typst/signature.sublime-syntax")
 #set raw(syntaxes: "typst/stp.sublime-syntax")
-#set par(leading: .8em)
 
 #show heading: it => [
     #block(above: 2em, below: 2em, it)
@@ -2094,7 +2093,7 @@ mod sample {
 ===== Verbosity
 #par()[In future versions the functions will also get a flag that will let them know how verbose the functions can be. This will also come with a way to pass progress and other information while the function is still running.]
 ===== Examples
-#par()[Refer to the nadi \_core, and other plugin repositories for sample codes for plugin functions as they are always up to date with the current version.]
+#par()[Refer to the nadi\_core, and other plugin repositories for sample codes for plugin functions as they are always up to date with the current version.]
 #par()[Here is an example containing render function that is available on all function types.]
 ``````rust
     /// Render the template based on the given attributes
@@ -2458,7 +2457,7 @@ node[
 node[WV04112 -> WV04113] render("=(> 2 3)")
 ``````
 == Attributes
-==== strmap { \#env.strmap }
+==== strmap <plugins-attributes-env.strmap>
 ``````sig
 env attributes.strmap(
     attr: '& str',
@@ -2471,44 +2470,137 @@ env attributes.strmap(
 - #raw("attrmap: '& AttrMap'") =\> Dictionary of key=value to map the data to
 - #raw("default: 'Option < Attribute >'") =\> Default value if key not found in #raw("attrmap")
 #par()[map values from the attribute based on the given table]
-==== parse \_attr { \#env.parse \_attr }
+``````task
+env.val = strmap("Joe", {Dave = 2, Joe = 20});
+env assert_eq(val, 20)
+env.val2 = strmap("Joe", {Dave=2}, default = 12);
+env assert_eq(val2, 12)
+``````
+==== parse\_attr <plugins-attributes-env.parse_attr>
 ``````sig
 env attributes.parse_attr(toml: '& str')
 ``````
 ===== Arguments
 - #raw("toml: '& str'") =\> String to parse into attribute
-#par()[Set node attributes based on string templates]
-==== parse \_attrmap { \#env.parse \_attrmap }
+#par()[Parse attribute from string]
+``````task
+env assert_eq(parse_attr("true"), true)
+env assert_eq(parse_attr("123"), 123)
+env assert_eq(parse_attr("12.34"), 12.34)
+env assert_eq(parse_attr("\"my value\""), "my value")
+env assert_eq(parse_attr("1234-12-12"), 1234-12-12)
+``````
+==== parse\_attrmap <plugins-attributes-env.parse_attrmap>
 ``````sig
 env attributes.parse_attrmap(toml: 'String')
 ``````
 ===== Arguments
 - #raw("toml: 'String'") =\> String to parse into attribute
-#par()[Set node attributes based on string templates]
-==== float \_transform { \#env.float \_transform }
+#par()[Parse attribute map from string]
+``````task
+env assert_eq(parse_attrmap("y = true"), {y = true})
+env assert_eq(parse_attrmap(
+"x = [1234-12-12, true]"),
+{x = [1234-12-12, true]}
+)
+``````
+==== get <plugins-attributes-env.get>
 ``````sig
-env attributes.float_transform(value: 'f64', transformation: '& str')
+env attributes.get(
+    parent: 'Attribute',
+    index: 'Attribute',
+    default: 'Option < Attribute >'
+)
 ``````
 ===== Arguments
-- #raw("value: 'f64'") =\> value to transform
-- #raw("transformation: '& str'") =\> transformation function, can be one of log/log10/sqrt
-#par()[map values from the attribute based on the given table]
-==== float \_div { \#env.float \_div }
+- #raw("parent: 'Attribute'") =\> Array or AttrMap Attribute to index
+- #raw("index: 'Attribute'") =\> Index value (Integer for Array, String for AttrMap)
+- #raw("default: 'Option < Attribute >'") =\> Default value if the index is not present
+#par()[get the choosen attribute from Array or AttrMap]
+``````task
+env.some_ar = ["this", 12, true];
+env.some_am = {x = "this", y = [12, true]};
+env assert_eq(get(some_ar, 0), "this")
+env assert_eq(get(some_ar, 2), true)
+env assert_eq(get(some_am, "x"), "this")
+env assert_eq(get(some_am, "y"), [12, true])
+``````
+==== powi <plugins-attributes-env.powi>
+``````sig
+env attributes.powi(value: 'f64', power: 'i64')
+``````
+===== Arguments
+- #raw("value: 'f64'") =\> base value
+- #raw("power: 'i64'") =\>
+#par()[Integer power]
+``````task
+env assert_eq(powi(10.0, 2), 100.0)
+``````
+==== powf <plugins-attributes-env.powf>
+``````sig
+env attributes.powf(value: 'f64', power: 'f64')
+``````
+===== Arguments
+- #raw("value: 'f64'") =\> base value
+- #raw("power: 'f64'") =\>
+#par()[Float power]
+``````task
+env assert_eq(powf(100.0, 0.5), 10.0)
+``````
+==== exp <plugins-attributes-env.exp>
+``````sig
+env attributes.exp(value: 'f64')
+``````
+===== Arguments
+- #raw("value: 'f64'") =\>
+#par()[Exponential]
+``````task
+env assert_eq(log(exp(5.0)), 5.0)
+``````
+==== sqrt <plugins-attributes-env.sqrt>
+``````sig
+env attributes.sqrt(value: 'f64')
+``````
+===== Arguments
+- #raw("value: 'f64'") =\>
+#par()[Square Root]
+``````task
+env assert_eq(sqrt(25.0), 5.0)
+``````
+==== log <plugins-attributes-env.log>
+``````sig
+env attributes.log(value: 'f64', base: 'Option < f64 >')
+``````
+===== Arguments
+- #raw("value: 'f64'") =\>
+- #raw("base: 'Option < f64 >'") =\>
+#par()[Logarithm of a value, natural if base not given]
+``````task
+env assert_eq(log(exp(2.0)), 2.0)
+env assert_eq(log(2.0, 2.0), 1.0)
+``````
+==== float\_div <plugins-attributes-env.float_div>
 ``````sig
 env attributes.float_div(value1: 'f64', value2: 'f64')
 ``````
 ===== Arguments
 - #raw("value1: 'f64'") =\> numerator
 - #raw("value2: 'f64'") =\> denominator
-#par()[map values from the attribute based on the given table]
-==== float \_mult { \#env.float \_mult }
+#par()[Float Division (same as / operator)]
+``````task
+env assert_eq(float_div(10.0, 2), 10.0 / 2)
+``````
+==== float\_mult <plugins-attributes-env.float_mult>
 ``````sig
 env attributes.float_mult(value1: 'f64', value2: 'f64')
 ``````
 ===== Arguments
 - #raw("value1: 'f64'") =\> numerator
 - #raw("value2: 'f64'") =\> denominator
-#par()[map values from the attribute based on the given table]
+#par()[Float Multiplication (same as \* operator)]
+``````task
+env assert_eq(float_mult(5.0, 2), 5.0 * 2)
+``````
 === Node Functions
 ``````sig
 node attributes.load_attrs(filename: 'PathBuf')
@@ -2525,7 +2617,7 @@ node attributes.load_attrs(filename: 'PathBuf')
 - Template for filename is not given,
 - The template couldn't be rendered,
 - There was error loading attributes from the file.
-==== print \_all \_attrs { \#node.print \_all \_attrs }
+==== print\_all\_attrs <plugins-attributes-node.print_all_attrs>
 ``````sig
 node attributes.print_all_attrs()
 ``````
@@ -2535,7 +2627,7 @@ node attributes.print_all_attrs()
 - node is node name
 - attr is attribute name
 - val is attribute value (string representation)
-==== print \_attrs { \#node.print \_attrs }
+==== print\_attrs <plugins-attributes-node.print_attrs>
 ``````sig
 node attributes.print_attrs(*attrs, name: 'bool' = false)
 ``````
@@ -2551,7 +2643,7 @@ node attributes.print_attrs(*attrs, name: 'bool' = false)
 - list of arguments are not #raw("String")
 - the #raw("name") argument is not Boolean
 #par()[The attributes will be printed in #raw("key=val") format.]
-==== set \_attrs { \#node.set \_attrs }
+==== set\_attrs <plugins-attributes-node.set_attrs>
 ``````sig
 node attributes.set_attrs(**attrs)
 ``````
@@ -2564,9 +2656,14 @@ node attributes.set_attrs(**attrs)
 ===== Example
 #par()[Following will set the attribute #raw("a2d") to #raw("true") for all nodes from #raw("A") to #raw("D")]
 ``````task
+network load_str("A -> B\n B -> D");
 node[A -> D] set_attrs(a2d = true)
 ``````
-==== get \_attr { \#node.get \_attr }
+#par()[This is equivalent to the following:]
+``````task
+node[A->D].a2d = true;
+``````
+==== get\_attr <plugins-attributes-node.get_attr>
 ``````sig
 node attributes.get_attr(attr: '& str', default: 'Option < Attribute >')
 ``````
@@ -2574,14 +2671,24 @@ node attributes.get_attr(attr: '& str', default: 'Option < Attribute >')
 - #raw("attr: '& str'") =\> Name of the attribute to get
 - #raw("default: 'Option < Attribute >'") =\> Default value if the attribute is not found
 #par()[Retrive attribute]
-==== has \_attr { \#node.has \_attr }
+``````task
+network load_str("A -> B\n B -> D");
+node assert_eq(get_attr("NAME"), NAME);
+``````
+==== has\_attr <plugins-attributes-node.has_attr>
 ``````sig
 node attributes.has_attr(attr: '& str')
 ``````
 ===== Arguments
 - #raw("attr: '& str'") =\> Name of the attribute to check
 #par()[Check if the attribute is present]
-==== first \_attr { \#node.first \_attr }
+``````task
+network load_str("A -> B\n B -> D");
+node.x = 90;
+node assert(has_attr("x"))
+node assert(!has_attr("y"))
+``````
+==== first\_attr <plugins-attributes-node.first_attr>
 ``````sig
 node attributes.first_attr(attrs: '& [String]', default: 'Option < Attribute >')
 ``````
@@ -2589,7 +2696,14 @@ node attributes.first_attr(attrs: '& [String]', default: 'Option < Attribute >')
 - #raw("attrs: '& [String]'") =\> attribute names
 - #raw("default: 'Option < Attribute >'") =\> Default value if not found
 #par()[Return the first Attribute that exists]
-==== set \_attrs \_ifelse { \#node.set \_attrs \_ifelse }
+#par()[This is useful when you have a bunch of attributes that might be equivalent but are using different names. Normally due to them being combined from different datasets.]
+``````task
+network load_str("A -> B\n B -> D");
+node.x = 90;
+node assert_eq(first_attr(["y", "x"]), 90)
+node assert_eq(first_attr(["x", "NAME"]), 90)
+``````
+==== set\_attrs\_ifelse <plugins-attributes-node.set_attrs_ifelse>
 ``````sig
 node attributes.set_attrs_ifelse(cond: 'bool', **values)
 ``````
@@ -2597,21 +2711,51 @@ node attributes.set_attrs_ifelse(cond: 'bool', **values)
 - #raw("cond: 'bool'") =\> Condition to check
 - #raw("**values") =\> key = [val1, val2] where key is set as first if #raw("cond") is true else second
 #par()[if else condition with multiple attributes]
-==== set \_attrs \_render { \#node.set \_attrs \_render }
+``````task
+network load_str("a -> b");
+env.some_condition = true;
+node set_attrs_ifelse(
+env.some_condition,
+val1 = [1, 2],
+val2 = ["a", "b"]
+);
+env assert_eq(nodes.val1, [1, 1])
+env assert_eq(nodes.val2, ["a", "a"])
+``````
+#par()[This is equivalent to using the if-else expression directly,]
+``````task
+node.val1 = if (env.some_condition) {1} else {2};
+env assert_eq(nodes.val1, [1, 1])
+``````
+#par()[Furthermore if-else expression will give a lot more flexibility than this function in normal use cases. But this function is useful when you have to do something in a batch.]
+==== set\_attrs\_render <plugins-attributes-node.set_attrs_render>
 ``````sig
 node attributes.set_attrs_render(**kwargs)
 ``````
 ===== Arguments
 - #raw("**kwargs") =\> key value pair of attribute to set and the Template to render
 #par()[Set node attributes based on string templates]
-==== load \_toml \_render { \#node.load \_toml \_render }
+#par()[This renders the template for each node, then it sets the values from the rendered results.]
+``````task
+network load_str("a -> b");
+node set_attrs_render(val1 = "Node: {_NAME}");
+node[a] assert_eq(val1, "Node: a")
+``````
+==== load\_toml\_render <plugins-attributes-node.load_toml_render>
 ``````sig
 node attributes.load_toml_render(toml: '& Template', echo: 'bool' = false)
 ``````
 ===== Arguments
-- #raw("toml: '& Template'") =\> String template to render and load as TOML string
+- #raw("toml: '& Template'") =\> String template to render and load as toml string
 - #raw("echo: 'bool' = false") =\> Print the rendered toml or not
-#par()[Set node attributes based on string templates]
+#par()[Set node attributes by loading a toml from rendered template]
+#par()[This function will render a string, and loads it as a toml string. This is useful when you need to make attributes based on some other variables that you can combine using the string template system.]
+#par()[In most cases it is better to use the string manipulation functions and other environmental functions to get new attribute values to set.]
+``````task
+network load_str("a -> b");
+node load_toml_render("label = \\\"Node: {_NAME}\\\"")
+node assert_eq(label, render("Node: {_NAME}"))
+``````
 === Network Functions
 ``````sig
 network attributes.set_attrs(**attrs)
@@ -2621,14 +2765,23 @@ network attributes.set_attrs(**attrs)
 #par()[Set network attributes]
 ===== Arguments
 - #raw("key=value") - Kwargs of attr = value
-==== set \_attrs \_render { \#network.set \_attrs \_render }
+``````task
+network set_attrs(val = 23.4)
+network assert_eq(val, 23.4)
+``````
+==== set\_attrs\_render <plugins-attributes-network.set_attrs_render>
 ``````sig
 network attributes.set_attrs_render(**kwargs)
 ``````
 ===== Arguments
 - #raw("**kwargs") =\> Kwargs of attr = String template to render
 #par()[Set network attributes based on string templates]
-
+#par()[It will set the attribute as a String]
+``````task
+network.val = 23.4
+network set_attrs_render(val2 = "{val}05")
+network assert_eq(val2, "23.405")
+``````
 == Command <plugins-command>
 ==== command <plugins-command-node.command>
 ``````sig
@@ -2651,7 +2804,12 @@ node command.command(
 - The command template cannot be rendered,
 - The command cannot be executed,
 - The attributes from command's stdout cannot be parsed properly
-==== run { \#node.run }
+``````task
+network load_str("a -> b");
+node command("echo 'nadi:var:sth={NAME}'");
+node assert_eq(sth, NAME)
+``````
+==== run <plugins-command-node.run>
 ``````sig
 node command.run(
     command: '& str',
@@ -2673,19 +2831,23 @@ node command.run(
 ``````sig
 network command.parallel(
     cmd: '& Template',
-    _workers: 'i64' = 4,
+    workers: 'i64' = 16,
     verbose: 'bool' = true,
     echo: 'bool' = false
 )
 ``````
 ===== Arguments
 - #raw("cmd: '& Template'") =\> String Command template to run
-- #raw("_workers: 'i64' = 4") =\> Number of workers to run in parallel
+- #raw("workers: 'i64' = 16") =\> Number of workers to run in parallel
 - #raw("verbose: 'bool' = true") =\> Print the command being run
 - #raw("echo: 'bool' = false") =\> Show the output of the command
 #par()[Run the given template as a shell command for each nodes in the network in parallel.]
-===== Warning
-#par()[Currently there is no way to limit the number of parallel processes, so please be careful with this command if you have very large number of nodes.]
+#par()[Other than parallel execution this is same as the #raw("node") function #raw("command")]
+``````task
+network load_str("a -> b");
+network parallel("echo 'nadi:var:sth={NAME}'");
+node assert_eq(sth, NAME)
+``````
 ==== command <plugins-command-network.command>
 ``````sig
 network command.command(
@@ -2699,11 +2861,18 @@ network command.command(
 - #raw("verbose: 'bool' = true") =\> Print the command being run
 - #raw("echo: 'bool' = false") =\> Show the output of the command
 #par()[Run the given template as a shell command.]
-#par()[Run any command in the shell. The standard output of the command will be consumed and if there are lines starting with #raw("nadi:var:") and followed by #raw("key=val") pairs, it'll be read as new attributes to that node.]
+#par()[Run any command in the shell. The standard output of the command will be consumed and if there are lines starting with #raw("nadi:var:") and followed by #raw("key=val") pairs, it'll be read as new attributes to the network. If you want to pass node attributes add node name with #raw("nadi:var:name:") as the prefix for #raw("key=val").]
 #par()[See #raw("node command.command") for more details as they have the same implementation]
-
+#par()[The examples below run #raw("echo") command to set the variables, you can use any command that are scripting languages (python, R, Julia, etc) or individual programs.]
+``````task
+network load_str("a -> b");
+network command("echo 'nadi:var:sth=123'");
+network assert_eq(sth, 123)
+network command("echo 'nadi:var:a:sth=123'");
+node[a] assert_eq(sth, 123)
+``````
 == Connections
-==== load \_file { \#network.load \_file }
+==== load\_file <plugins-connections-network.load_file>
 ``````sig
 network connections.load_file(file: 'PathBuf', append: 'bool' = false)
 ``````
@@ -2712,7 +2881,7 @@ network connections.load_file(file: 'PathBuf', append: 'bool' = false)
 - #raw("append: 'bool' = false") =\> Append the connections in the current network
 #par()[Load the given file into the network]
 #par()[This replaces the current network with the one loaded from the file.]
-==== load \_str { \#network.load \_str }
+==== load\_str <plugins-connections-network.load_str>
 ``````sig
 network connections.load_str(contents: '& str', append: 'bool' = false)
 ``````
@@ -2721,7 +2890,11 @@ network connections.load_str(contents: '& str', append: 'bool' = false)
 - #raw("append: 'bool' = false") =\> Append the connections in the current network
 #par()[Load the given file into the network]
 #par()[This replaces the current network with the one loaded from the file.]
-==== load \_edges { \#network.load \_edges }
+``````task
+network load_str("a -> b");
+env assert_eq(nodes.NAME, ["b", "a"])
+``````
+==== load\_edges <plugins-connections-network.load_edges>
 ``````sig
 network connections.load_edges(edges: '& [(String, String)]', append: 'bool' = false)
 ``````
@@ -2730,7 +2903,11 @@ network connections.load_edges(edges: '& [(String, String)]', append: 'bool' = f
 - #raw("append: 'bool' = false") =\> Append the connections in the current network
 #par()[Load the given edges into the network]
 #par()[This replaces the current network with the one loaded from the file.]
-==== subset { \#network.subset }
+``````task
+network load_edges([["a", "b"], ["b", "c"]]);
+env assert_eq(nodes.NAME, ["c", "b", "a"])
+``````
+==== subset <plugins-connections-network.subset>
 ``````sig
 network connections.subset(filter: '& [bool]', keep: 'bool' = true)
 ``````
@@ -2738,7 +2915,14 @@ network connections.subset(filter: '& [bool]', keep: 'bool' = true)
 - #raw("filter: '& [bool]'") =\>
 - #raw("keep: 'bool' = true") =\> Keep the selected nodes (false = removes the selected)
 #par()[Take a subset of network by only including the selected nodes]
-==== save \_file { \#network.save \_file }
+``````task
+network load_str("a -> b\n b->c");
+node[a->b].sth = true;
+node[c].sth = false;
+network subset(nodes.sth);
+env assert_eq(nodes.NAME, ["b", "a"])
+``````
+==== save\_file <plugins-connections-network.save_file>
 ``````sig
 network connections.save_file(
     file: 'PathBuf',
@@ -2751,17 +2935,19 @@ network connections.save_file(
 - #raw("quote_all: 'bool' = true") =\> quote all node names; if false, doesn't quote valid identifier names
 - #raw("graphviz: 'bool' = false") =\> wrap the network into a valid graphviz file
 #par()[Save the network into the given file]
-#par()[For more control on graphviz file writing use #raw("save_graphviz") from #raw("graphviz") plugin instead.]
-
+#par()[For more control on graphviz file writing, use #raw("save_graphviz") from #raw("graphviz") plugin instead.]
 == Core
-==== count { \#env.count }
+==== count <plugins-core-env.count>
 ``````sig
 env core.count(vars: '& [bool]')
 ``````
 ===== Arguments
 - #raw("vars: '& [bool]'") =\>
 #par()[Count the number of true values in the array]
-==== type \_name { \#env.type \_name }
+``````task
+env assert_eq(count([true, false, true, false]), 2)
+``````
+==== type\_name <plugins-connections-env.type_name>
 ``````sig
 env core.type_name(value: 'Attribute', recursive: 'bool' = false)
 ``````
@@ -2769,21 +2955,33 @@ env core.type_name(value: 'Attribute', recursive: 'bool' = false)
 - #raw("value: 'Attribute'") =\> Argument to get type
 - #raw("recursive: 'bool' = false") =\> Recursively check types for array and table
 #par()[Type name of the arguments]
-==== isna { \#env.isna }
+``````task
+env assert_eq(type_name(true), "Bool")
+env assert_eq(type_name([true, 12]), "Array")
+env assert_eq(type_name([true, 12], recursive=true), ["Bool", "Integer"])
+env assert_eq(type_name("true"), "String")
+``````
+==== isna <plugins-core-env.isna>
 ``````sig
 env core.isna(val: 'f64')
 ``````
 ===== Arguments
 - #raw("val: 'f64'") =\>
 #par()[check if a float is nan]
-==== isinf { \#env.isinf }
+``````task
+env assert(isna(nan + 5))
+``````
+==== isinf <plugins-core-env.isinf>
 ``````sig
 env core.isinf(val: 'f64')
 ``````
 ===== Arguments
 - #raw("val: 'f64'") =\>
 #par()[check if a float is +/- infinity]
-==== float { \#env.float }
+``````task
+env assert(isinf(12.0 / 0))
+``````
+==== float <plugins-core-env.float>
 ``````sig
 env core.float(value: 'Attribute', parse: 'bool' = true)
 ``````
@@ -2791,7 +2989,11 @@ env core.float(value: 'Attribute', parse: 'bool' = true)
 - #raw("value: 'Attribute'") =\> Argument to convert to float
 - #raw("parse: 'bool' = true") =\> parse string to float
 #par()[make a float from value]
-==== str { \#env.str }
+``````task
+env assert_eq(float(5), 5.0)
+env assert_eq(float("5.0"), 5.0)
+``````
+==== str <plugins-core-env.str>
 ``````sig
 env core.str(value: 'Attribute', quote: 'bool' = false)
 ``````
@@ -2799,7 +3001,14 @@ env core.str(value: 'Attribute', quote: 'bool' = false)
 - #raw("value: 'Attribute'") =\> Argument to convert to float
 - #raw("quote: 'bool' = false") =\> quote it if it's literal string
 #par()[make a string from value]
-==== int { \#env.int }
+``````task
+env assert_eq(str(nan + 5), "nan")
+env assert_eq(str(2 + 5), "7")
+env assert_eq(str(12.34), "12.34")
+env assert_eq(str("nan + 5"), "nan + 5")
+env assert_eq(str("true", quote=true), "\"true\"")
+``````
+==== int <plugins-core-env.int>
 ``````sig
 env core.int(
     value: 'Attribute',
@@ -2814,21 +3023,45 @@ env core.int(
 - #raw("round: 'bool' = true") =\> round float into integer
 - #raw("strfloat: 'bool' = false") =\> parse string first as float before converting to int
 #par()[make an int from the value]
-==== array { \#env.array }
+``````task
+env assert_eq(int(5.0), 5)
+env assert_eq(int(5.1), 5)
+env assert_eq(int("45"), 45)
+env assert_eq(int("5.0", strfloat=true), 5)
+``````
+==== array <plugins-core-env.array>
 ``````sig
 env core.array(*attributes)
 ``````
 ===== Arguments
 - #raw("*attributes") =\> List of attributes
 #par()[make an array from the arguments]
-==== attrmap { \#env.attrmap }
+``````task
+env assert_eq(array(5, true), [5, true])
+``````
+==== attrmap <plugins-core-env.attrmap>
 ``````sig
 env core.attrmap(**attributes)
 ``````
 ===== Arguments
 - #raw("**attributes") =\> name and values of attributes
-#par()[make an array from the arguments]
-==== append { \#env.append }
+#par()[make an attrmap from the arguments]
+``````task
+env assert_eq(attrmap(val=5), {val=5})
+``````
+==== json <plugins-core-env.json>
+``````sig
+env core.json(value: 'Attribute')
+``````
+===== Arguments
+- #raw("value: 'Attribute'") =\> attribute to format
+#par()[format the attribute as a json string]
+``````task
+env assert_eq(json(5), "5")
+env assert_eq(json([5, true]), "[5, true]")
+env assert_eq(json({a=5}), "{\"a\": 5}")
+``````
+==== append <plugins-core-env.append>
 ``````sig
 env core.append(array: 'Vec < Attribute >', value: 'Attribute')
 ``````
@@ -2836,53 +3069,81 @@ env core.append(array: 'Vec < Attribute >', value: 'Attribute')
 - #raw("array: 'Vec < Attribute >'") =\> List of attributes
 - #raw("value: 'Attribute'") =\>
 #par()[append a value to an array]
-==== length { \#env.length }
+``````task
+env assert_eq(append([4], 5), [4, 5])
+``````
+==== length <plugins-core-env.length>
 ``````sig
 env core.length(value: '& Attribute')
 ``````
 ===== Arguments
 - #raw("value: '& Attribute'") =\> Array or a HashMap
 #par()[length of an array or hashmap]
-==== year { \#env.year }
+``````task
+env assert_eq(length([4, 5]), 2)
+env assert_eq(length({x=4, y=5}), 2)
+``````
+==== year <plugins-core-env.year>
 ``````sig
 env core.year(value: 'Attribute')
 ``````
 ===== Arguments
 - #raw("value: 'Attribute'") =\> Date or DateTime
 #par()[year from date/datetime]
-==== month { \#env.month }
+``````task
+env assert_eq(year(1223-12-12), 1223)
+env assert_eq(year(1223-12-12T12:12), 1223)
+env assert_eq(year(1223-12-12 12:12:08), 1223)
+``````
+==== month <plugins-core-env.month>
 ``````sig
 env core.month(value: 'Attribute')
 ``````
 ===== Arguments
 - #raw("value: 'Attribute'") =\> Date or DateTime
 #par()[month from date/datetime]
-==== day { \#env.day }
+``````task
+env assert_eq(month(1223-12-14), 12)
+env assert_eq(month(1223-12-14T15:19), 12)
+``````
+==== day <plugins-core-env.day>
 ``````sig
 env core.day(value: 'Attribute')
 ``````
 ===== Arguments
 - #raw("value: 'Attribute'") =\> Date or DateTime
 #par()[day from date/datetime]
-==== min \_num { \#env.min \_num }
+``````task
+env assert_eq(day(1223-12-14), 14)
+env assert_eq(day(1223-12-14T15:19), 14)
+``````
+==== min\_num <plugins-core-env.min_num>
 ``````sig
-env core.min_num(vars: 'Vec < Attribute >', start: 'Attribute' = Integer(9223372036854775807))
+env core.min_num(vars: 'Vec < Attribute >', start: 'Attribute' = Float(inf))
 ``````
 ===== Arguments
 - #raw("vars: 'Vec < Attribute >'") =\>
-- #raw("start: 'Attribute' = Integer(9223372036854775807)") =\>
+- #raw("start: 'Attribute' = Float(inf)") =\>
 #par()[Minimum of the variables]
-#par()[Starts with integer for type purpose, MAX float is larger than max int, so it'll be incorrect for large numbers]
-==== max \_num { \#env.max \_num }
+``````task
+env assert_eq(min_num([1, 2, 3]), 1)
+env assert_eq(min_num([1.0, 2, 3]), 1.0)
+env assert_eq(min_num([1, 2, 3], start = 0), 0)
+``````
+==== max\_num <plugins-core-env.max_num>
 ``````sig
-env core.max_num(vars: 'Vec < Attribute >', start: 'Attribute' = Integer(-9223372036854775808))
+env core.max_num(vars: 'Vec < Attribute >', start: 'Attribute' = Float(-inf))
 ``````
 ===== Arguments
 - #raw("vars: 'Vec < Attribute >'") =\>
-- #raw("start: 'Attribute' = Integer(-9223372036854775808)") =\>
+- #raw("start: 'Attribute' = Float(-inf)") =\>
 #par()[Minimum of the variables]
-#par()[Starts with integer for type purpose, MAX float is larger than max int, so it'll be incorrect for large numbers]
-==== min { \#env.min }
+``````task
+env assert_eq(max_num([1, 2, 3.0]), 3.0)
+env assert_eq(max_num([1.0, 2, 3]), 3)
+env assert_eq(max_num([1, inf, 3], 0), inf)
+``````
+==== min <plugins-core-env.min>
 ``````sig
 env core.min(vars: 'Vec < Attribute >', start: 'Attribute')
 ``````
@@ -2890,15 +3151,27 @@ env core.min(vars: 'Vec < Attribute >', start: 'Attribute')
 - #raw("vars: 'Vec < Attribute >'") =\>
 - #raw("start: 'Attribute'") =\>
 #par()[Minimum of the variables]
-==== max { \#env.max }
+``````task
+env assert_eq(min([1, 2, 3], 100), 1)
+env assert_eq(min([1.0, 2, 3], 100), 1.0)
+env assert_eq(min([1, 2, 3], inf), 1)
+env assert_eq(min(["b", "a", "d"], "zzz"), "a")
+``````
+==== max <plugins-core-env.max>
 ``````sig
 env core.max(vars: 'Vec < Attribute >', start: 'Attribute')
 ``````
 ===== Arguments
 - #raw("vars: 'Vec < Attribute >'") =\>
 - #raw("start: 'Attribute'") =\>
-#par()[Minimum of the variables]
-==== sum { \#env.sum }
+#par()[Maximum of the variables]
+``````task
+env assert_eq(max([1, 2, 3], -1), 3)
+env assert_eq(max([1.0, 2, 3], -1), 3)
+env assert_eq(max([1, 2, 3], -inf), 3)
+env assert_eq(max(["b", "a", "d"], ""), "d")
+``````
+==== sum <plugins-core-env.sum>
 ``````sig
 env core.sum(vars: 'Vec < Attribute >', start: 'Attribute' = Integer(0))
 ``````
@@ -2906,7 +3179,12 @@ env core.sum(vars: 'Vec < Attribute >', start: 'Attribute' = Integer(0))
 - #raw("vars: 'Vec < Attribute >'") =\>
 - #raw("start: 'Attribute' = Integer(0)") =\>
 #par()[Sum of the variables]
-==== prod { \#env.prod }
+#par()[This function is for numeric attributes. You need to give the start attribute so that data type is valid.]
+``````task
+env assert_eq(sum([2, 3, 4]), 9)
+env assert_eq(sum([2, 3, 4], start=0.0), 9.0)
+``````
+==== prod <plugins-core-env.prod>
 ``````sig
 env core.prod(vars: 'Vec < Attribute >', start: 'Attribute' = Integer(1))
 ``````
@@ -2914,21 +3192,37 @@ env core.prod(vars: 'Vec < Attribute >', start: 'Attribute' = Integer(1))
 - #raw("vars: 'Vec < Attribute >'") =\>
 - #raw("start: 'Attribute' = Integer(1)") =\>
 #par()[Product of the variables]
-==== unique \_str { \#env.unique \_str }
+#par()[This function is for numerical values/attributes]
+``````task
+env assert_eq(prod([1, 2, 3]), 6)
+env assert_eq(prod([1.0, 2, 3]), 6.0)
+``````
+==== unique\_str <plugins-core-env.unique_str>
 ``````sig
 env core.unique_str(vars: 'Vec < String >')
 ``````
 ===== Arguments
 - #raw("vars: 'Vec < String >'") =\>
 #par()[Get a list of unique string values]
-==== count \_str { \#env.count \_str }
+#par()[The order of the strings returned is not guaranteed]
+``````task
+env.uniq = unique_str(["hi", "me", "hi", "you"]);
+env assert_eq(length(uniq), 3)
+``````
+==== count\_str <plugins-core-env.count_str>
 ``````sig
 env core.count_str(vars: 'Vec < String >')
 ``````
 ===== Arguments
 - #raw("vars: 'Vec < String >'") =\>
 #par()[Get a count of unique string values]
-==== concat { \#env.concat }
+``````task
+env assert_eq(
+count_str(["Hi", "there", "Deliah", "Hi"]),
+{Hi = 2, there = 1, Deliah=1}
+)
+``````
+==== concat <plugins-core-env.concat>
 ``````sig
 env core.concat(*vars, join: '& str' = "")
 ``````
@@ -2936,32 +3230,105 @@ env core.concat(*vars, join: '& str' = "")
 - #raw("*vars") =\>
 - #raw("join: '& str' = \"\"") =\>
 #par()[Concat the strings]
+``````task
+env assert_eq(concat("Hello", "World", join=" "), "Hello World")
+``````
+==== range <plugins-core-env.range>
+``````sig
+env core.range(start: 'i64', end: 'i64')
+``````
+===== Arguments
+- #raw("start: 'i64'") =\>
+- #raw("end: 'i64'") =\>
+#par()[Generate integer array, end is not included]
+``````task
+env assert_eq(range(1, 5), [1, 2, 3, 4])
+``````
+==== assert <plugins-core-env.assert>
+``````sig
+env core.assert(condition: 'bool', note: 'String' = "Condition False")
+``````
+===== Arguments
+- #raw("condition: 'bool'") =\>
+- #raw("note: 'String' = \"Condition False\"") =\>
+#par()[Assert the condition is true]
+#par()[Use #raw("assert_eq")/#raw("assert_neq") if you are testing equality for better error message.]
+``````task
+env assert(true)
+``````
+==== assert\_eq <plugins-core-env.assert_eq>
+``````sig
+env core.assert_eq(left: 'Attribute', right: 'Attribute')
+``````
+===== Arguments
+- #raw("left: 'Attribute'") =\>
+- #raw("right: 'Attribute'") =\>
+#par()[Assert the two values are equal]
+#par()[This function is for testing the code, as well as for terminating the execution when certain values are not equal]
+``````task
+env assert_eq(1, 1)
+env assert_eq(true, 1 > 0)
+env assert_eq("string val", concat("string", " ", "val"))
+``````
+==== assert\_neq <plugins-core-env.assert_neq>
+``````sig
+env core.assert_neq(left: 'Attribute', right: 'Attribute')
+``````
+===== Arguments
+- #raw("left: 'Attribute'") =\>
+- #raw("right: 'Attribute'") =\>
+#par()[Assert the two values are not equal]
+#par()[This function is for testing the code, as well as for terminating the execution when certain values are not equal]
+``````task
+env assert_neq(1, 1.0)
+env assert_neq(true, 1 < 0)
+env assert_neq("string val", concat("string", "val"))
+``````
 === Node Functions
 ``````sig
 node core.inputs_count()
 ``````
 ===== Arguments
 #par()[Count the number of input nodes in the node]
-==== inputs \_attr { \#node.inputs \_attr }
+``````task
+network load_str("a -> b\n b -> d\n c -> d")
+node assert_eq(inputs_count(), length(inputs._))
+``````
+==== inputs\_attr <plugins-attributes-node.inputs_attr>
 ``````sig
 node core.inputs_attr(attr: 'String' = "NAME")
 ``````
 ===== Arguments
 - #raw("attr: 'String' = \"NAME\"") =\> Attribute to get from inputs
 #par()[Get attributes of the input nodes]
-==== has \_outlet { \#node.has \_outlet }
+#par()[This is equivalent to using the #raw("inputs") keyword]
+``````task
+network load_str("a -> b\n b -> d\n c -> d")
+node assert_eq(inputs_attr("NAME"), inputs.NAME)
+``````
+==== has\_outlet <plugins-core-node.has_outlet>
 ``````sig
 node core.has_outlet()
 ``````
 ===== Arguments
 #par()[Node has an outlet or not]
-==== output \_attr { \#node.output \_attr }
+#par()[This is equivalent to using #raw("output._?"), as #raw("_") is a dummy variable that will always be present in all cases, it being absent is because there is no output/outlet of that node.]
+``````task
+network load_str("a -> b\n b -> d\n c -> d")
+node assert_eq(has_outlet(), output._?)
+``````
+==== output\_attr <plugins-core-node.output_attr>
 ``````sig
 node core.output_attr(attr: 'String' = "NAME")
 ``````
 ===== Arguments
 - #raw("attr: 'String' = \"NAME\"") =\> Attribute to get from inputs
 #par()[Get attributes of the output node]
+#par()[This is equivalent to using the #raw("output") keyword]
+``````task
+network load_str("a -> b\n b -> d\n c -> d")
+node(output._?) assert_eq(output_attr("NAME"), output.NAME)
+``````
 === Network Functions
 ``````sig
 network core.count(vars: 'Option < Vec < bool > >')
@@ -2969,16 +3336,44 @@ network core.count(vars: 'Option < Vec < bool > >')
 ===== Arguments
 - #raw("vars: 'Option < Vec < bool > >'") =\>
 #par()[Count the number of nodes in the network]
-
+``````task
+network assert_eq(count(), 0)
+network load_str("a -> b")
+network assert_eq(count(), 2)
+node.sel = INDEX < 1
+network assert_eq(count(nodes.sel), 1)
+``````
+==== outlet <plugins-core-network.outlet>
+``````sig
+network core.outlet()
+``````
+===== Arguments
+#par()[Get the name of the outlet node]
+``````task
+network load_str("a -> b")
+network assert_eq(outlet(), "b")
+``````
+==== node\_attr <plugins-core-network.node_attr>
+``````sig
+network core.node_attr(name: 'String', attribute: 'String' = "_")
+``````
+===== Arguments
+- #raw("name: 'String'") =\> name of the node
+- #raw("attribute: 'String' = \"_\"") =\> attribute to get
+#par()[Get the attr of the provided node]
+``````task
+network load_str("a -> b")
+network assert_eq(node_attr("a", "NAME"), "a")
+``````
 == Debug
-==== sleep { \#env.sleep }
+==== sleep <plugins-debug-env.sleep>
 ``````sig
 env debug.sleep(time: 'u64' = 1000)
 ``````
 ===== Arguments
 - #raw("time: 'u64' = 1000") =\>
 #par()[sleep for given number of milliseconds]
-==== debug { \#env.debug }
+==== debug <plugins-debug-env.debug>
 ``````sig
 env debug.debug(*args, **kwargs)
 ``````
@@ -2987,7 +3382,7 @@ env debug.debug(*args, **kwargs)
 - #raw("**kwargs") =\> Function Keyword arguments
 #par()[Print the args and kwargs on this function]
 #par()[This function will just print out the args and kwargs the function is called with. This is for debugging purposes to see if the args/kwargs are identified properly. And can also be used to see how the nadi system takes the input from the function call.]
-==== echo { \#env.echo }
+==== echo <plugins-debug-env.echo>
 ``````sig
 env debug.echo(
     line: 'String',
@@ -3002,7 +3397,7 @@ env debug.echo(
 #par()[Echo the string to stdout or stderr]
 #par()[This simply echoes anything given to it. This can be used in combination with nadi tasks that create files (image, text, etc). The #raw("echo") function can be called to get the link to those files back to the stdout.]
 #par()[Also useful for nadi preprocessor.]
-==== clip { \#env.clip }
+==== clip <plugins-debug-env.clip>
 ``````sig
 env debug.clip(error: 'bool' = false)
 ``````
@@ -3013,16 +3408,15 @@ env debug.clip(error: 'bool' = false)
 #par()[This makes it easier to only show the relevant parts of the output in the documentation instead of having the user see output of other unrelated parts which are necessary for generating the results.]
 ===== Example
 #par()[Given the following tasks file:]
-``````task
+``````task,ignore
 net load_file("...")
 net load_attrs("...")
 net clip()
 net render("{_NAME} {attr1}")
 ``````
 #par()[The clip function's output will let the preprocessor know that only the parts after that are relevant to the user. Hence, it'll discard outputs before that during documentation generation.]
-
 == Logic
-==== ifelse { \#env.ifelse }
+==== ifelse <plugins-logic-env.ifelse>
 ``````sig
 env logic.ifelse(
     cond: 'bool',
@@ -3035,7 +3429,14 @@ env logic.ifelse(
 - #raw("iftrue: 'Attribute'") =\> Output if #raw("cond") is true
 - #raw("iffalse: 'Attribute'") =\> Output if #raw("cond") is false
 #par()[Simple if else condition]
-==== gt { \#env.gt }
+#par()[This is similar to using the #raw("if-else") expression, the difference being the condition is relaxed. For example, for #raw("if-else") the condition should be true or false, but for this function, the attribute can be anything that can be cast as true or false. (e.g. 1 =\> true, 0 =\> false)]
+``````task
+env assert_eq(ifelse(true, 1, 2), 1)
+env assert_eq(ifelse(false, 1, 2), 2)
+env assert_eq(ifelse(100.0, 1, 2), 1)
+env assert_eq(ifelse(true, 1, 2), if (true) {1} else {2})
+``````
+==== gt <plugins-logic-env.gt>
 ``````sig
 env logic.gt(a: '& Attribute', b: '& Attribute')
 ``````
@@ -3043,68 +3444,114 @@ env logic.gt(a: '& Attribute', b: '& Attribute')
 - #raw("a: '& Attribute'") =\> first attribute
 - #raw("b: '& Attribute'") =\> second attribute
 #par()[Greater than check]
-==== lt { \#env.lt }
+``````task
+env assert_eq(gt(1, 2), 1 > 2)
+env assert_eq(gt(1.0, 20), 1.0 > 20)
+``````
+==== lt <plugins-logic-env.lt>
 ``````sig
 env logic.lt(a: '& Attribute', b: '& Attribute')
 ``````
 ===== Arguments
 - #raw("a: '& Attribute'") =\> first attribute
 - #raw("b: '& Attribute'") =\> second attribute
-#par()[Greater than check]
-==== eq { \#env.eq }
+#par()[Less than check]
+``````task
+env assert_eq(lt(1, 2), 1 < 2)
+env assert_eq(lt(1.0, 20), 1.0 < 20)
+``````
+==== eq <plugins-logic-env.eq>
 ``````sig
 env logic.eq(a: '& Attribute', b: '& Attribute')
 ``````
 ===== Arguments
 - #raw("a: '& Attribute'") =\> first attribute
 - #raw("b: '& Attribute'") =\> second attribute
-#par()[Greater than check]
-==== and { \#env.and }
+#par()[Equality than check]
+``````task
+env assert_eq(eq(1, 2), 1 == 2)
+env assert_eq(eq(2.0, 2.0), 2.0 == 2.0)
+env assert_eq(eq(2.0, 2), 2.0 == 2)
+``````
+==== and <plugins-logic-env.and>
 ``````sig
 env logic.and(*conds)
 ``````
 ===== Arguments
 - #raw("*conds") =\> List of attributes that can be cast to bool
 #par()[Boolean and]
-==== or { \#env.or }
+#par()[Similar to the operator #raw("&") but the values are cast to boolean]
+``````task
+env assert_eq(and(true, true), true)
+env assert_eq(and(true, false), false)
+env assert_eq(and(true, false), false & true)
+``````
+==== or <plugins-logic-env.or>
 ``````sig
 env logic.or(*conds)
 ``````
 ===== Arguments
 - #raw("*conds") =\> List of attributes that can be cast to bool
 #par()[boolean or]
-==== not { \#env.not }
+#par()[Similar to the operator #raw("|") but the values are cast to boolean]
+``````task
+env assert_eq(or(true, false), true)
+env assert_eq(or(false, false), false)
+env assert_eq(or(true, false), false | true)
+``````
+==== not <plugins-logic-env.not>
 ``````sig
 env logic.not(cond: 'bool')
 ``````
 ===== Arguments
 - #raw("cond: 'bool'") =\> attribute that can be cast to bool
 #par()[boolean not]
-==== all { \#env.all }
+#par()[Similar to the operator #raw("!") but the values are cast to boolean]
+``````task
+env assert_eq(not(true), false)
+env assert_eq(not(false), true)
+env assert_eq(not(true), !true)
+env assert_eq(not(false), !false)
+``````
+==== all <plugins-logic-env.all>
 ``````sig
 env logic.all(vars: '& [bool]')
 ``````
 ===== Arguments
 - #raw("vars: '& [bool]'") =\>
 #par()[check if all of the bool are true]
-==== any { \#env.any }
+``````task
+env assert_eq(all([true]), true)
+env assert_eq(all([false, true]), false)
+env assert_eq(all([true, true]), true)
+env assert_eq(all([false]), false)
+``````
+==== any <plugins-logic-env.any>
 ``````sig
 env logic.any(vars: '& [bool]')
 ``````
 ===== Arguments
 - #raw("vars: '& [bool]'") =\>
 #par()[check if any of the bool are true]
-
+``````task
+env assert_eq(any([true]), true)
+env assert_eq(any([false, true]), true)
+env assert_eq(any([false, false]), false)
+env assert_eq(any([false]), false)
+``````
 == Regex
-==== str \_filter { \#env.str \_filter }
+==== str\_filter <plugins-regex-env.str_filter>
 ``````sig
 env regex.str_filter(attrs: 'Vec < String >', pattern: 'Regex')
 ``````
 ===== Arguments
 - #raw("attrs: 'Vec < String >'") =\> attribute to check for pattern
 - #raw("pattern: 'Regex'") =\> Regex pattern to match
-#par()[Check if the given pattern matches the value or not]
-==== str \_match { \#env.str \_match }
+#par()[Filter from the string list with only the values matching pattern]
+``````task
+env assert_eq(str_filter(["abc", "and", "xyz"], "^a"), ["abc", "and"])
+``````
+==== str\_match <plugins-regex-env.str_match>
 ``````sig
 env regex.str_match(attr: '& str', pattern: 'Regex')
 ``````
@@ -3113,7 +3560,11 @@ env regex.str_match(attr: '& str', pattern: 'Regex')
 - #raw("pattern: 'Regex'") =\> Regex pattern to match
 #par()[Check if the given pattern matches the value or not]
 #par()[You can also use match operator for this]
-==== str \_replace { \#env.str \_replace }
+``````task
+env assert_eq(str_match("abc", "^a"), true)
+env assert_eq(str_match("abc", "^a"), "abc" match "^a")
+``````
+==== str\_replace <plugins-regex-env.str_replace>
 ``````sig
 env regex.str_replace(
     attr: '& str',
@@ -3126,7 +3577,11 @@ env regex.str_replace(
 - #raw("pattern: 'Regex'") =\> Regex pattern to match
 - #raw("rep: '& str'") =\> replacement string
 #par()[Replace the occurances of the given match]
-==== str \_find { \#env.str \_find }
+``````task
+env assert_eq(str_replace("abc", "^a", 2), "2bc")
+env assert_eq(str_replace("abc", "[abc]", 2), "222")
+``````
+==== str\_find <plugins-regex-env.str_find>
 ``````sig
 env regex.str_find(attr: '& str', pattern: 'Regex')
 ``````
@@ -3134,7 +3589,10 @@ env regex.str_find(attr: '& str', pattern: 'Regex')
 - #raw("attr: '& str'") =\> attribute to check for pattern
 - #raw("pattern: 'Regex'") =\> Regex pattern to match
 #par()[Find the given pattern in the value]
-==== str \_find \_all { \#env.str \_find \_all }
+``````task
+env assert_eq(str_find("abc", "^[ab]"), "a")
+``````
+==== str\_find\_all <plugins-regex-env.str_find_all>
 ``````sig
 env regex.str_find_all(attr: '& str', pattern: 'Regex')
 ``````
@@ -3142,30 +3600,59 @@ env regex.str_find_all(attr: '& str', pattern: 'Regex')
 - #raw("attr: '& str'") =\> attribute to check for pattern
 - #raw("pattern: 'Regex'") =\> Regex pattern to match
 #par()[Find all the matches of the given pattern in the value]
-==== str \_count { \#env.str \_count }
+``````task
+env assert_eq(str_find_all("abc", "[ab]"), ["a", "b"])
+``````
+==== str\_count <plugins-regex-env.str_count>
 ``````sig
 env regex.str_count(attr: '& str', pattern: 'Regex')
 ``````
 ===== Arguments
 - #raw("attr: '& str'") =\> attribute to check for pattern
 - #raw("pattern: 'Regex'") =\> Regex pattern to match
-#par()[Count the number of matches of given pattern in the value]
-
+#par()[Count the number of matches of given pattern in the string]
+``````task
+env assert_eq(str_count("abc", "[ab]"), 2)
+``````
+==== str\_split <plugins-regex-env.str_split>
+``````sig
+env regex.str_split(
+    attr: '& str',
+    pattern: 'Regex',
+    limit: 'Option < usize >'
+)
+``````
+===== Arguments
+- #raw("attr: '& str'") =\> String to split
+- #raw("pattern: 'Regex'") =\> Regex pattern to split with
+- #raw("limit: 'Option < usize >'") =\> Limit the split to maximum number
+#par()[Split the string with the given pattern]
+``````task
+env assert_eq(str_split("abc", "^[ab]"), ["", "bc"])
+``````
 == Render
-==== render { \#env.render }
+==== render <plugins-render-env.render>
 ``````sig
 env render.render(
     template: '& Template',
-    **keyval,
-    safe: 'bool' = false
+    safe: 'bool' = false,
+    **keyval
 )
 ``````
 ===== Arguments
 - #raw("template: '& Template'") =\> String template to render
-- #raw("**keyval") =\>
 - #raw("safe: 'bool' = false") =\> if render fails keep it as it is instead of exiting
+- #raw("**keyval") =\>
 #par()[Render the template based on the node attributes]
 #par()[For more details on the template system. Refer to the String Template section of the NADI book.]
+``````task
+env assert_eq(render("abc {_x}", x="ab"), "abc ab")
+env assert_eq(render("abc {x}", x=23), "abc 23")
+``````
+#par()[If safe parameter is true, then it doesn't error out even if the variable is not present, and will just return the original template. By default it errors out if there are any variables in the template without a value.]
+``````task
+env assert_eq(render("abc {x}", safe=true), "abc {x}")
+``````
 === Node Functions
 ``````sig
 node render.render(template: '& Template', safe: 'bool' = false)
@@ -3175,6 +3662,11 @@ node render.render(template: '& Template', safe: 'bool' = false)
 - #raw("safe: 'bool' = false") =\> if render fails keep it as it is instead of exiting
 #par()[Render the template based on the node attributes]
 #par()[For more details on the template system. Refer to the String Template section of the NADI book.]
+``````task
+network load_str("a -> b")
+node.x = 13
+node assert_eq(render("abc {x}"), "abc 13")
+``````
 === Network Functions
 ``````sig
 network render.render(template: '& Template', safe: 'bool' = false)
@@ -3183,7 +3675,11 @@ network render.render(template: '& Template', safe: 'bool' = false)
 - #raw("template: '& Template'") =\> Path to the template file
 - #raw("safe: 'bool' = false") =\> if render fails keep it as it is instead of exiting
 #par()[Render from network attributes]
-==== render \_nodes { \#network.render \_nodes }
+``````task
+network.x = 13
+network assert_eq(render("abc {x}"), "abc 13")
+``````
+==== render\_nodes <plugins-render-network.render_nodes>
 ``````sig
 network render.render_nodes(
     template: '& Template',
@@ -3196,7 +3692,12 @@ network render.render_nodes(
 - #raw("safe: 'bool' = false") =\> if render fails keep it as it is instead of exiting
 - #raw("join: '& str' = \"\\n\"") =\> String to join the render results
 #par()[Render each node of the network and combine to same variable]
-==== render \_template { \#network.render \_template }
+``````task
+network load_str("a -> b")
+node.x = INDEX + 1
+network assert_eq(render_nodes("abc {x}"), "abc 1\nabc 2")
+``````
+==== render\_template <plugins-render-network.render_template>
 ``````sig
 network render.render_template(template: 'PathBuf')
 ``````
@@ -3205,25 +3706,24 @@ network render.render_template(template: 'PathBuf')
 #par()[Render a File template for the nodes in the whole network]
 #par()[Write the file with templates for input variables in the same way you write string templates. It's useful for markdown files, as the curly braces syntax won't be used for anything else that way. Do be careful about that. And the program will replace those templates with their values when you run it with inputs.]
 #par()[It'll repeat the same template for each node and render them. If you want only a portion of the file repeated for nodes inclose them with lines with #raw("---8<---") on both start and the end. The lines containing the clip syntax will be ignored, ideally you can put them in comments.]
-#par()[You can also use #raw("---include:<filename>[::line_range]") syntax to include a file, the line \_range syntax, if present, should be in the form of #raw("start[:increment]:end"), you can exclude start or end to denote the line 1 or last line (e.g. #raw(":5") is 1:5, and #raw("3:") is from line 3 to the end)]
+#par()[You can also use #raw("---include:<filename>[::line_range]") syntax to include a file, the line\_range syntax, if present, should be in the form of #raw("start[:increment]:end"), you can exclude start or end to denote the line 1 or last line (e.g. #raw(":5") is 1:5, and #raw("3:") is from line 3 to the end)]
 ===== Arguments
 - #raw("template"): Path to the template file
 - #raw("outfile") [Optional]: Path to save the template file, if none it'll be printed in stdout
-
 == Series
-==== sr \_count { \#node.sr \_count }
+==== sr\_count <plugins-series-node.sr_count>
 ``````sig
 node series.sr_count()
 ``````
 ===== Arguments
 #par()[Number of series in the node]
-==== sr \_list { \#node.sr \_list }
+==== sr\_list <plugins-series-node.sr_list>
 ``````sig
 node series.sr_list()
 ``````
 ===== Arguments
 #par()[List all series in the node]
-==== sr \_dtype { \#node.sr \_dtype }
+==== sr\_dtype <plugins-series-node.sr_dtype>
 ``````sig
 node series.sr_dtype(name: '& str', safe: 'bool' = false)
 ``````
@@ -3231,7 +3731,7 @@ node series.sr_dtype(name: '& str', safe: 'bool' = false)
 - #raw("name: '& str'") =\> Name of the series
 - #raw("safe: 'bool' = false") =\> Do not error if series does't exist
 #par()[Type name of the series]
-==== sr \_len { \#node.sr \_len }
+==== sr\_len <plugins-series-node.sr_len>
 ``````sig
 node series.sr_len(name: '& str', safe: 'bool' = false)
 ``````
@@ -3239,21 +3739,21 @@ node series.sr_len(name: '& str', safe: 'bool' = false)
 - #raw("name: '& str'") =\> Name of the series
 - #raw("safe: 'bool' = false") =\> Do not error if series does't exist
 #par()[Length of the series]
-==== sr \_mean { \#node.sr \_mean }
+==== sr\_mean <plugins-series-node.sr_mean>
 ``````sig
 node series.sr_mean(name: '& str')
 ``````
 ===== Arguments
 - #raw("name: '& str'") =\> Name of the series
 #par()[Type name of the series]
-==== sr \_sum { \#node.sr \_sum }
+==== sr\_sum <plugins-series-node.sr_sum>
 ``````sig
 node series.sr_sum(name: '& str')
 ``````
 ===== Arguments
 - #raw("name: '& str'") =\> Name of the series
 #par()[Sum of the series]
-==== set \_series { \#node.set \_series }
+==== set\_series <plugins-series-node.set_series>
 ``````sig
 node series.set_series(
     name: '& str',
@@ -3266,7 +3766,7 @@ node series.set_series(
 - #raw("value: 'Attribute'") =\> Argument to convert to series
 - #raw("dtype: '& str'") =\> type
 #par()[set the following series to the node]
-==== sr \_to \_array { \#node.sr \_to \_array }
+==== sr\_to\_array <plugins-series-node.sr_to_array>
 ``````sig
 node series.sr_to_array(name: '& str', safe: 'bool' = false)
 ``````
@@ -3274,9 +3774,8 @@ node series.sr_to_array(name: '& str', safe: 'bool' = false)
 - #raw("name: '& str'") =\> Name of the series
 - #raw("safe: 'bool' = false") =\> Do not error if series does't exist
 #par()[Make an array from the series]
-
 == Table
-==== save \_csv { \#network.save \_csv }
+==== save\_csv <plugins-table-network.save_csv>
 ``````sig
 network table.save_csv(
     path: '& Path',
@@ -3289,7 +3788,7 @@ network table.save_csv(
 - #raw("fields: '& [String]'") =\>
 - #raw("filter: 'Option < Vec < bool > >'") =\>
 #par()[Save CSV]
-==== table \_to \_markdown { \#network.table \_to \_markdown }
+==== table\_to\_markdown <plugins-table-network.table_to_markdown>
 ``````sig
 network table.table_to_markdown(
     table: 'Option < PathBuf >',
@@ -3311,21 +3810,20 @@ network table.table_to_markdown(
 - neither one of table file or table template is provided,
 - error while rendering markdown (caused by error on rendering cell values from templates)
 - error while writing to the output file
-
 == Timeseries
-==== ts \_count { \#node.ts \_count }
+==== ts\_count <plugins-timeseries-node.ts_count>
 ``````sig
 node timeseries.ts_count()
 ``````
 ===== Arguments
 #par()[Number of timeseries in the node]
-==== ts \_list { \#node.ts \_list }
+==== ts\_list <plugins-timeseries-node.ts_list>
 ``````sig
 node timeseries.ts_list()
 ``````
 ===== Arguments
 #par()[List all timeseries in the node]
-==== ts \_dtype { \#node.ts \_dtype }
+==== ts\_dtype <plugins-timeseries-node.ts_dtype>
 ``````sig
 node timeseries.ts_dtype(name: '& str', safe: 'bool' = false)
 ``````
@@ -3333,7 +3831,7 @@ node timeseries.ts_dtype(name: '& str', safe: 'bool' = false)
 - #raw("name: '& str'") =\> Name of the timeseries
 - #raw("safe: 'bool' = false") =\> Do not error if timeseries does't exist
 #par()[Type name of the timeseries]
-==== ts \_len { \#node.ts \_len }
+==== ts\_len <plugins-timeseries-node.ts_len>
 ``````sig
 node timeseries.ts_len(name: '& str', safe: 'bool' = false)
 ``````
@@ -3341,7 +3839,7 @@ node timeseries.ts_len(name: '& str', safe: 'bool' = false)
 - #raw("name: '& str'") =\> Name of the timeseries
 - #raw("safe: 'bool' = false") =\> Do not error if timeseries does't exist
 #par()[Length of the timeseries]
-==== ts \_print { \#node.ts \_print }
+==== ts\_print <plugins-timeseries-node.ts_print>
 ``````sig
 node timeseries.ts_print(
     name: '& String',
@@ -3370,7 +3868,7 @@ network timeseries.ts_print_csv(
 - #raw("nodes: 'Option < HashSet < String > >'") =\> Include only these nodes (all by default)
 #par()[Save timeseries from all nodes into a single csv file]
 #par()[TODO: error/not on unqual length TODO: error/not on no timeseries, etc... TODO: output to #raw("file: PathBuf")]
-==== series \_csv { \#network.series \_csv }
+==== series\_csv <plugins-timeseries-network.series_csv>
 ``````sig
 network timeseries.series_csv(
     filter: 'Vec < bool >',
@@ -3385,9 +3883,8 @@ network timeseries.series_csv(
 - #raw("attrs: 'Vec < String >'") =\> list of attributes to write
 - #raw("series: 'Vec < String >'") =\> list of series to write
 #par()[Write the given nodes to csv with given attributes and series]
-
 == Visuals
-==== set \_nodesize \_attrs { \#network.set \_nodesize \_attrs }
+==== set\_nodesize\_attrs <plugins-visuals-network.set_nodesize_attrs>
 ``````sig
 network visuals.set_nodesize_attrs(
     attrs: '& [f64]',
@@ -3400,7 +3897,7 @@ network visuals.set_nodesize_attrs(
 - #raw("minsize: 'f64' = 4.0") =\> minimum size of the node
 - #raw("maxsize: 'f64' = 12.0") =\> maximum size of the node
 #par()[Set the node size of the nodes based on the attribute value]
-==== svg \_save { \#network.svg \_save }
+==== svg\_save <plugins-visuals-network.svg_save>
 ``````sig
 network visuals.svg_save(
     outfile: '& Path',
@@ -3440,7 +3937,7 @@ network visuals.svg_save(
 - compile it locally with cargo,
 - move all generated dynamic libraries to the nadi plugin directory.
 == Dams
-==== count \_node \_if { \#node.count \_node \_if }
+==== count\_node\_if <plugins-dams-node.count_node_if>
 ``````sig
 node dams.count_node_if(count_attr: '& str', cond: 'bool')
 ``````
@@ -3448,7 +3945,7 @@ node dams.count_node_if(count_attr: '& str', cond: 'bool')
 - #raw("count_attr: '& str'") =\>
 - #raw("cond: 'bool'") =\>
 #par()[Count the number of nodes upstream at each point that satisfies a certain condition]
-==== min \_year { \#node.min \_year }
+==== min\_year <plugins-dams-node.min_year>
 ``````sig
 node dams.min_year(yearattr: '& str', write_var: '& str' = "MIN_YEAR")
 ``````
@@ -3456,9 +3953,8 @@ node dams.min_year(yearattr: '& str', write_var: '& str' = "MIN_YEAR")
 - #raw("yearattr: '& str'") =\>
 - #raw("write_var: '& str' = \"MIN_YEAR\"") =\>
 #par()[Propagate the minimum year downstream]
-
 == Data Fill
-==== load \_csv \_fill { \#node.load \_csv \_fill }
+==== load\_csv\_fill <plugins-datafill-node.load_csv_fill>
 ``````sig
 node datafill.load_csv_fill(
     name: 'String',
@@ -3476,7 +3972,7 @@ node datafill.load_csv_fill(
 - #raw("columns: '(String, String)'") =\> Names of date column and value column
 - #raw("method: 'DataFillMethod' = Linear") =\> Method to use for data filling: forward/backward/linear
 - #raw("dtype: 'String' = \"Floats\"") =\> DataType to load into timeseries
-==== datafill \_experiment { \#node.datafill \_experiment }
+==== datafill\_experiment <plugins-datafill-node.datafill_experiment>
 ``````sig
 node datafill.datafill_experiment(
     name: 'String',
@@ -3511,9 +4007,8 @@ network datafill.save_experiments_csv(
 - #raw("errors: 'Vec < String >'") =\> list of errors to write
 - #raw("filter: 'Option < Vec < bool > >'") =\>
 #par()[Write the given nodes to csv with given attributes and experiment results]
-
 == Errors
-==== calc \_ts \_error { \#node.calc \_ts \_error }
+==== calc\_ts\_error <plugins-errors-node.calc_ts_error>
 ``````sig
 node errors.calc_ts_error(
     ts1: '& str',
@@ -3527,7 +4022,7 @@ node errors.calc_ts_error(
 - #raw("error: '& str' = \"rmse\"") =\> Error type, one of rmse/nrmse/abserr/nse
 #par()[Calculate Error from two timeseries values in the node]
 #par()[It calculates the error between two timeseries values from the node]
-==== calc \_ts \_errors { \#node.calc \_ts \_errors }
+==== calc\_ts\_errors <plugins-errors-node.calc_ts_errors>
 ``````sig
 node errors.calc_ts_errors(
     ts1: '& String',
@@ -3555,17 +4050,15 @@ network errors.calc_attr_error(
 - #raw("error: 'String' = \"rmse\"") =\> Error type, one of rmse/nrmse/abserr/nse
 #par()[Calculate Error from two attribute values in the network]
 #par()[It calculates the error using two attribute values from all the nodes.]
-
 == Fancy Print
-==== fancy \_print { \#network.fancy \_print }
+==== fancy\_print <plugins-fancy_print-network.fancy_print>
 ``````sig
 network fancy_print.fancy_print()
 ``````
 ===== Arguments
 #par()[Fancy print a network]
-
 == Gnuplot
-==== plot \_timeseries { \#network.plot \_timeseries }
+==== plot\_timeseries <plugins-gnuplot-network.plot_timeseries>
 ``````sig
 network gnuplot.plot_timeseries(
     csvfile: 'Template',
@@ -3586,7 +4079,6 @@ network gnuplot.plot_timeseries(
 - #raw("config: '& GnuplotConfig' = GnuplotConfig { outfile: None, terminal: None, csv: false, preamble: \"\" }") =\>
 - #raw("skip_missing: 'bool' = false") =\>
 #par()[Generate a gnuplot file that plots the timeseries data in the network]
-
 == Graphics
 === Node Functions
 ``````sig
@@ -3630,7 +4122,7 @@ network graphics.csv_load_ts(
 - #raw("date_col"): Date Column name
 - #raw("timefmt"): date time format, if you only have date, but have time on format string, it will panic
 - #raw("data_type"): Type of the data to cast into
-==== csv \_count \_na { \#network.csv \_count \_na }
+==== csv\_count\_na <plugins-graphics-network.csv_count_na>
 ``````sig
 network graphics.csv_count_na(
     file: 'PathBuf',
@@ -3653,7 +4145,7 @@ network graphics.csv_count_na(
 - #raw("sort"): show the nodes with larger gaps on top, only applicable while printing
 - #raw("head"): at max show only this number of nodes
 - #raw("skip_zero"): skip nodes with zero missing numbers
-==== csv \_data \_blocks \_svg { \#network.csv \_data \_blocks \_svg }
+==== csv\_data\_blocks\_svg <plugins-graphics-network.csv_data_blocks_svg>
 ``````sig
 network graphics.csv_data_blocks_svg(
     csvfile: 'PathBuf',
@@ -3674,7 +4166,7 @@ network graphics.csv_data_blocks_svg(
 - #raw("blocks_width: 'f64' = 500.0") =\>
 - #raw("fit: 'bool' = false") =\>
 #par()[Draw the data blocks with arrows in timeline]
-==== export \_svg { \#network.export \_svg }
+==== export\_svg <plugins-graphics-network.export_svg>
 ``````sig
 network graphics.export_svg(
     outfile: 'PathBuf',
@@ -3691,7 +4183,7 @@ network graphics.export_svg(
 - #raw("label: 'Option < Template >'") =\>
 - #raw("highlight: '& [usize]' = []") =\>
 #par()[Create a SVG file with the given network structure]
-==== table \_to \_svg { \#network.table \_to \_svg }
+==== table\_to\_svg <plugins-graphics-network.table_to_svg>
 ``````sig
 network graphics.table_to_svg(
     outfile: 'PathBuf',
@@ -3710,9 +4202,8 @@ network graphics.table_to_svg(
 - #raw("fit: 'bool' = false") =\>
 - #raw("highlight: '& [String]' = []") =\>
 #par()[Create a SVG file with the given network structure]
-
 == Graphviz
-==== save \_graphviz { \#network.save \_graphviz }
+==== save\_graphviz <plugins-graphics-network.save_graphviz>
 ``````sig
 network graphviz.save_graphviz(
     outfile: '& Path',
@@ -3732,9 +4223,8 @@ network graphviz.save_graphviz(
 ===== Arguments:
 - #raw("outfile") - Path to the output file
 - #raw("name") - Name of the graph
-
 == HTML
-==== export \_map { \#network.export \_map }
+==== export\_map <plugins-html-network.export_map>
 ``````sig
 network html.export_map(
     outfile: '& Path',
@@ -3751,7 +4241,6 @@ network html.export_map(
 - #raw("nodetitle: 'Template' = Template { original: \"{_NAME}\", parts: [Var(\"_NAME\", \"\")] }") =\>
 - #raw("connections: 'bool' = true") =\>
 #par()[Exports the network as a HTML map]
-
 == GIS
 === Network Functions
 ``````sig
@@ -3771,7 +4260,7 @@ network gis.gis_load_network(
 - #raw("ignore_null: 'bool' = false") =\> Ignore feature if it has fields with null value
 #par()[Load network from a GIS file]
 #par()[Loads the network from a gis file containing the edges in fields]
-==== gis \_load \_attrs { \#network.gis \_load \_attrs }
+==== gis\_load\_attrs <plugins-gis-network.gis_load_attrs>
 ``````sig
 network gis.gis_load_attrs(
     file: 'PathBuf',
@@ -3793,7 +4282,7 @@ network gis.gis_load_attrs(
 - #raw("err_no_node: 'bool' = false") =\> Error if all nodes are not found in the GIS file
 #par()[Load node attributes from a GIS file]
 #par()[The function reads a GIS file in any format (CSV, GPKG, SHP, JSON, etc) and loads their fields as attributes to the nodes.]
-==== gis \_save \_connections { \#network.gis \_save \_connections }
+==== gis\_save\_connections <plugins-gis-network.gis_save_connections>
 ``````sig
 network gis.gis_save_connections(
     file: 'PathBuf',
@@ -3810,7 +4299,7 @@ network gis.gis_save_connections(
 - #raw("layer: 'String' = \"network\"") =\>
 - #raw("filter: 'Option < Vec < bool > >'") =\>
 #par()[Save GIS file of the connections]
-==== gis \_save \_nodes { \#network.gis \_save \_nodes }
+==== gis\_save\_nodes <plugins-gis-network.gis_save_nodes>
 ``````sig
 network gis.gis_save_nodes(
     file: 'PathBuf',
@@ -3829,9 +4318,8 @@ network gis.gis_save_nodes(
 - #raw("layer: 'String' = \"nodes\"") =\>
 - #raw("filter: 'Option < Vec < bool > >'") =\>
 #par()[Save GIS file of the nodes]
-
 == Print Node
-==== print \_node { \#node.print \_node }
+==== print\_node <plugins-print_node-node.print_node>
 ``````sig
 node print_node.print_node()
 ``````
@@ -3844,9 +4332,8 @@ network print_node.print_attr_csv(*args)
 ===== Arguments
 - #raw("*args") =\>
 #par()[Print the given attributes in csv format with first column with node name]
-
 == Streamflow
-==== check \_negative { \#node.check \_negative }
+==== check\_negative <plugins-streamflow-node.check_negative>
 ``````sig
 node streamflow.check_negative(ts_name: '& str')
 ``````
@@ -3858,7 +4345,15 @@ node streamflow.check_negative(ts_name: '& str')
 #pagebreak(weak: true)
 #pagebreak(weak: true)
 
-= Developer Reference
+                        #set page(
+                            header: none,
+                        )
+                        #heading(level: 1, outlined: true, "Developer Reference")
+                        #pagebreak()
+                        #set page(
+                            header:  text(size: 8pt, fill: gray)[#align(right)[Developer Reference]],
+                        )
+                        
 == Data Structure
 #par()[This section will describe the data structures associated with NADI system in brief.]
 #par()[For more accurate and upto date details on the data structures and their available methods. Look at the API reference of #link("https://docs.rs/nadi_core/latest/nadi_core/")[#raw("nadi_core") on docs.rs].]
@@ -3876,7 +4371,6 @@ lock=true
 [ts.csv]
 streamflow = {path="data/smithland.csv", datetime="date", data="flow"}
 ``````
-
 == Network
 #par()[Collection of Nodes, with Connection information. The connection information is saved in the nodes itself (=inputs= and =output= variables), but they are assigned from the network.]
 #par()[The nadi system (lit, river system), is designed for the connections between points along a river. Out of different types of river networks possible, it can only handle non-branching tributaries system, where each point can have zero to multiple inputs, but can only have one output. Overall the system should have a single output point. There can be branches in the river itself in the physical sense as long as they converse before the next point of interests. There cannot be node points that have more than one path to reach another node in the representative system.]
@@ -3894,25 +4388,23 @@ golconda -> smithland
 ``````
 #par()[Drawing it out:]
 ``````task
-network load_file("./data/mississippi.net")
+!network load_file("./data/mississippi.net")
 network svg_save(
    "./output/mississippi.svg",
 	label="[{INDEX}] {_NAME:repl(-, ):case(title)}"
 )
-network clip()
+!network clip()
 !# the link path needs to be relative to this file
-network echo("../output/mississippi.svg")
+!network echo("../output/mississippi.svg")
 ``````
 #par()[Results:]
 #par()[]
 #par()[The program also plans to support the connection import from the #link("https://graphviz.org/doc/info/lang.html")[DOT format (graphviz package)].]
 #par()[Network file without any connection format can be written as a node per line, but those network can only call sequential functions, and not input dependent ones.]
 #par()[Depending on the use cases, it can probably be applied to other systems that are similar to a river system. Or even without the connection information, the functions that are independent to each other can be run in sequential order.]
-
 == Timeseries
 #par()[Timeseries of values, at regular interval. Can support integers, floats, booleans, strings, Arrays and Tables.]
 #par()[For timeseries that are not in a format that NADI can understand. The path to the timeseries can be provided as a node attribute and plugin functions can be written to use that path to load the timeseries for the node.]
-
 == String Templates
 #par()[The templating system will be used by an external library developed by me. The library can be modified if there are specific needs for this project.]
 #par()[The template system is feature rich, allowing for formatting, simple string transformations, and airthmatic calculations based on the variables (node attributes in this case). This can be used to generate file paths, and similar strings based on node attributes, as well as to format the cell values for exported table, figures, etc.]
@@ -3928,7 +4420,7 @@ Current time is {%H} hour  {%M} minutes.
 #par()[Results (with:  name=John; address=123 Road, USA):]
 ``````output
 Hi, my name is John, my address is 123 Road, USA.
-Current time is 00 hour  14 minutes.
+Current time is 21 hour  19 minutes.
 ``````
 ==== Optional Variables
 #par()[Variables can be chained in an optional way, so the first one that's found will be used (e.g. #raw("{nickname?name}") will render nickname if it's present, else name);]
@@ -3964,7 +4456,7 @@ Today is {%B %d} of the year {%Y}.
 ``````
 #par()[Results (with:  name=John):]
 ``````output
-Today is June 20 of the year 2025.
+Today is July 02 of the year 2025.
 ``````
 ==== Lisp Expressions
 #par()[expressions are lisp expressions that will be evaluated and the results will be used. The lisp expression can also access any variables and do any supported programming. (e.g. #raw("(+ 1 1)") in lisp will become #raw("2"));]
@@ -3980,7 +4472,7 @@ guess my age(x) if: (x + 21) * 4 = 164.
 #par()[Nadi system uses templates in a variety of place, and plugin functions also sometimes take templates for file path, or strings, and such things. Look at the help string of the function to see if it takes #raw("String") or #raw("Template") type.]
 #par()[For example #raw("render") is a function that takes a template and prints it after rendering it for each node.]
 ``````task
-network load_file("./data/mississippi.net")
+!network load_file("./data/mississippi.net")
 !node[ohio] set_attrs(river="the Ohio River", streamflow=45334.12424343)
 node[ohio,red] render(
 	"(=(+ 1 (st+num 'INDEX))th node) {_NAME:case(title)}
@@ -3995,9 +4487,9 @@ node[ohio,red] render(
 }
 ``````
 #par()[As seen in above example, you can render variables, transform them, use basic calculations.]
-#par()[Or you can use #raw("lisp") syntax to do more complex calculations. Refer to #link(<system-extensions>)[Nadi Extension Capabilities] section for more info on how to use #raw("lisp") on string template.]
+#par()[Or you can use #raw("lisp") syntax to do more complex calculations. Refer to #link("../system/extensions.md")[Nadi Extension Capabilities] section for more info on how to use #raw("lisp") on string template.]
 ``````task
-network load_file("./data/mississippi.net")
+!network load_file("./data/mississippi.net")
 !node[ohio] set_attrs(river="the Ohio River", streamflow=45334.12424343)
 node[ohio] render(
 	"{_river:case(title)} Streamflow
@@ -4034,7 +4526,7 @@ more {formatting?} options on {%F} and
 ``````
 #par()[Results (with:  command=Error;variable=Var):]
 ``````output
-more  options on 2025-06-20 and
+more  options on 2025-07-02 and
 \latex{command}{with Var}, should work.
 ``````
 #par()[This just combined a lot of different things from above:]
@@ -4084,7 +4576,7 @@ echo today=$(date +%Y-%m-%d) {%Y-%m-%d}
 ``````
 #par()[Results (with: ):]
 ``````output
-echo today=$(date +%Y-%m-%d) 2025-06-20
+echo today=$(date +%Y-%m-%d) 2025-07-02
 ``````
 #par()[But if you are writing a command template to run in bash, then it'll be executed as the syntax is similar.]
 ``````task
@@ -4092,15 +4584,14 @@ network command("echo today=$(date +%Y-%m-%d) {%Y-%m-%d}")
 ``````
 #par()[Results:]
 ``````output
-$ echo today=$(date +%Y-%m-%d) 2025-06-20
+$ echo today=$(date +%Y-%m-%d) 2025-07-02
 ``````
 #par()[Here although the #raw("$(date +%Y-%m-%d)") portion was not rendered on template rendering process, the command was still valid, and was executed.]
-
 == Tables
 #par()[Tables are data types with headers and the value template. Tables can be rendered/exported into CSV, JSON, and LaTeX format. Other formats can be added later. Although tables are not exposed to the plugin system, functions to export different table formats can be written as a network function.]
 #par()[A sample Table file showing two columns, left aligned name for station in title case, and right aligned columns for latitude and longitude with float value of 4 digits after decimal:]
 ``````table
-network load_file("./data/mississippi.net")
+!network load_file("./data/mississippi.net")
 <Name => {_NAME:repl(-, ):case(title)}
 ^Ind => =(+ (st+num 'INDEX) 1)
 >Order => {ORDER}
@@ -4113,8 +4604,8 @@ network load_file("./data/mississippi.net")
 #par()[Here the part before #raw("=>") is the column header and the part after is the template. Presence of #raw("<") or #raw(">") in the beginning of the line makes the column left or right aligned, with center aligned (#raw("^")) by default.]
 #par()[Exporting the table in svg instead of markdown allows us better network diagram.]
 ``````table
-network load_file("./data/mississippi.net")
-network echo("../output/example-table2.svg")
+!network load_file("./data/mississippi.net")
+!network echo("../output/example-table2.svg")
 <Name => {_NAME:repl(-, ):case(title)}
 ^Ind => =(+ (st+num 'INDEX) 1)
 >Order => {ORDER}
@@ -4126,23 +4617,22 @@ network function: "table_to_svg" not found
 ``````
 #par()[A SVG Table can also be generated using the table file, using the task system like this:]
 ``````task
-network load_file("./data/mississippi.net")
+!network load_file("./data/mississippi.net")
 network table_to_svg(
 	table = "./data/sample.table",
 	# either table = "path/to/table", or template = "table template"
 	outfile = "./output/example-table.svg",
 	config = {fontsize = 16, delta_y = 20, fontface="Noto Serif"}
 )
-network clip()
+!network clip()
 !# the link path needs to be relative to this file
-network echo("../output/example-table.svg")
+!network echo("../output/example-table.svg")
 
 ``````
 #par()[\*Error\*:]
 ``````error
 network function: "table_to_svg" not found
 ``````
-
 == File Templates
 #par()[File templates are templates that use string templates, but they are a whole file that can be used to generate rendered text files.]
 #par()[File templates also have sections which can be repeated for different nodes, with corresponding syntax.]
@@ -4154,7 +4644,6 @@ network function: "table_to_svg" not found
 | {_NAME} | {INDEX} |
 <!-- ---8<--- -->
 ``````
-
 == Tasks
 #par()[Task is a function call that the system performs. The function call can be a node function or a network function. The function can have arguments and keyword arguments that can determine its functionality. Node functions will be called on a node at a time, while the network function will be called with the whole network at once.]
 #par()[Currently tasks are performed one after another. The functions that any task can use can be internal functions provided by the library or the external functions provided by the plugins.]
@@ -4173,7 +4662,6 @@ node render("Node {NAME} at index {INDEX}")
 ``````
 #par()[Here each line corresponds to one task. And if it's a node task, then it'll be called for each node (in sequential order by default). The last line #raw("node.inputsfirst") will call that function in input node before the current node. Those functions can only be called for network with an output node.]
 #par()[Please note that although the string in the examples are highlighted as if they are string templates for readability. Those are just normal strings that functions take as inputs. Whether they are used as template or not depends on the individual function, refer to their help to see if they take #raw("Template") type or #raw("String") type.]
-
 == Node Functions
 #par()[Node functions are functions that take a node, and the function context to do some operations on it. They take mutable reference to the node, hence can read all node attributes, inputs, outputs, their attributes and timeseries.]
 #par()[Node functions can be run from the system for all the nodes in the network in different orders.]
@@ -4185,7 +4673,6 @@ node render("Node {NAME} at index {INDEX}")
 - Run a list of nodes, and
 - Run on a path between two nodes (inclusive).
 #par()[Depending on the way the function works, it might be required to be run in a particular order. For example, a function that counts the number of dams upstream of each point, might have to be run inputs first, so that you can cumulate the number as you move downstream.]
-
 == Network Functions
 #par()[Network functions are functions that take the network as a mutable reference and run on it.]
 #par()[Some examples of network functions:]
@@ -4200,7 +4687,15 @@ node render("Node {NAME} at index {INDEX}")
 #pagebreak(weak: true)
 #pagebreak(weak: true)
 
-= Developer Notes and Future Direction
+                        #set page(
+                            header: none,
+                        )
+                        #heading(level: 1, outlined: true, "Developer Notes and Future Direction")
+                        #pagebreak()
+                        #set page(
+                            header:  text(size: 8pt, fill: gray)[#align(right)[Developer Notes and Future Direction]],
+                        )
+                        
 == Developer Notes
 #par()[This section contains my notes as I develop the NADI system. Kind of like a dev blog.]
 #par()[The software package will consists of multiple components. It is planned to be designed in such a way that users can add their functionality and extend it with ease.]
@@ -4212,17 +4707,14 @@ node render("Node {NAME} at index {INDEX}")
 #par()[Besides plot, the example below shows how simply adding a column with connection visual can immediately make it easier to understand the relationship between the data points in a river. Without it people need to be familiar with the names of the data points and their location, or consult a different image/map to understand the relationship.]
 #par()[Table with Connection Information]
 #par()[The inspiration on making this software package comes from many years of struggle with doing the same thing again and again in different projects like these. And the motivation to make something generic that can be used for plethora of projects in the future.]
-
 === Why Rust?
 #par()[Rust^fn1 is an open source programming language that claims to be fast and memory efficient to power performance critical services. Rust is also able to integrate with other programming languages.]
 #par()[Rust provides a memory safe way to do modern programming. The White House has a recent press release^fn2 about the need to have memory safe language in future softwares. The report^fn3 has following sentense about the Rust language.]
 #par()[The results of the survey from stackoverflow^fn4 shows Rust has been a top choice for developers who want to use a new technology for the past 8 years, and the analysis also shows Rust is a language that generates for desire to use it once you get to know.]
-
 === Plugin System Experiments
 #pagebreak(weak: true)
 #pagebreak(weak: true)
 #pagebreak(weak: true)
-
 == Writing this Book
 #par()[I'm used to #raw("emacs")'s #raw("org-mode"), where you can evaluate code and show output and all those things. Like #raw("markdown") in steroids.]
 #par()[#raw("mdbook") seems to have some of those functionality in it as well. Though I think #raw("emacs")'s extension through #raw("elisp") is lot more flexible and easier to extend. #raw("mdbook") supporting custom preprocessors and renderer means we can extend it as well.]
@@ -4281,9 +4773,9 @@ Hi my name is {name}.
 #par()[If you add #raw("run") into it, it'll run the template with any #raw("key=val") pairs provided after run.]
 #par()[Basically writing the following in the #raw("mdbook") markdown:]
 ``````
-```stp run name=John
+``````stp run name=John
 Hi my name is {name}.
-```
+``````
 ``````
 #par()[Will become:]
 #v(1em)
@@ -4300,15 +4792,15 @@ Hi my name is John.
 #v(1em)===== Tasks
 #par()[For tasks, similary write a block with #raw("task") as language. You can use #raw("!") character at the start of the line to hide it in the view. Use them for essential code that are needed for results but are not the current focus. And when you add #raw("run") it'll run and show the output.]
 ``````
-```task run
-network load_file("data/mississippi.net")
+``````task run
+!network load_file("data/mississippi.net")
 node render("Node {NAME}")
-```
+``````
 ``````
 #v(1em)
 #line(length: 100%)
 #v(1em)``````task
-network load_file("data/mississippi.net")
+!network load_file("data/mississippi.net")
 node render("Node {NAME}")
 ``````
 #par()[Results:]
@@ -4329,27 +4821,34 @@ node render("Node {NAME}")
 #par()[The implementation for tables are little weird right now, but it works. Since we need to be able to load network, and perform actions before showing a table.]
 #par()[So the current implementation takes the hidden lines using #raw("!")and runs them as task system, with additional task of rendering the table at the end.]
 #par()[Example:]
-``````
-```table run markdown
-network load_file("./data/mississippi.net")
+``````table run markdown
+!network load_file("./data/mississippi.net")
 <Name => {_NAME:repl(-, ):case(title)}
 ^Ind => =(+ (st+num 'INDEX) 1)
 >Order => {ORDER}
-```
 ``````
 #par()[Becomes:]
 #v(1em)
 #line(length: 100%)
-#v(1em)``````table
-network load_file("./data/mississippi.net")
+#v(1em)
+``````table
+!network load_file("./data/mississippi.net")
 <Name => {_NAME:repl(-, ):case(title)}
 ^Ind => =(+ (st+num 'INDEX) 1)
 >Order => {ORDER}
 ``````
-#par()[Results:#linebreak()
-|Name|Ind|Order| |:---|:-:|----:| |Lower Mississippi|1|7| |Upper Mississippi|2|1| |Missouri|3|1| |Arkansas|4|1| |Red|5|1| |Ohio|6|2| |Tenessee|7|1|]
-#v(1em)
-#line(length: 100%)
+#par()[Results:]
+``````
+|Name|Ind|Order|
+|:---|:-:|----:|
+|Lower Mississippi|1|7|
+|Upper Mississippi|2|1|
+|Missouri|3|1|
+|Arkansas|4|1|
+|Red|5|1|
+|Ohio|6|2|
+|Tenessee|7|1|
+``````
 #v(1em)#par()[I'd like to refine this further.]
 #par()[Task can be used to generate markdown in the same way as the tables can:]
 #par()[For example #raw("task run") of this:]
@@ -4382,8 +4881,18 @@ network table_to_markdown(template="
 >Order => {ORDER}
 ")
 ``````
-#par()[Results:#linebreak()
-|Name|Ind|Order| |:---|:-:|----:| |Lower Mississippi|1|7| |Upper Mississippi|2|1| |Missouri|3|1| |Arkansas|4|1| |Red|5|1| |Ohio|6|2| |Tenessee|7|1|]
+#par()[Results:]
+``````
+|Name|Ind|Order|
+|:---|:-:|----:|
+|Lower Mississippi|1|7|
+|Upper Mississippi|2|1|
+|Missouri|3|1|
+|Arkansas|4|1|
+|Red|5|1|
+|Ohio|6|2|
+|Tenessee|7|1|
+``````
 #par()[Which means it can be used for other things:]
 ``````task
 network load_file("./data/mississippi.net");
@@ -4425,7 +4934,6 @@ network echo("../images/ohio-low.svg")
 #par()[One simple idea can be to take a command template to run. So we will change the input variables, run the command for each node or network, and then that command will update the output variable that we can optimize for.]
 #par()[We might require an option to call other functions in this case. Then maybe we can just pass the name of the function.]
 #par()[Complex idea could be to add the support for loop syntax in task system.]
-
 == Interactive Plots
 #par()[An experiment using the #raw("cairo") graphics library shows that a PDF can be directly produced without using LaTeX as intermediate using the network information. This functionality --- although not as complete as the one in the example --- has been exposed as an internal network function for now. Further functionality related to this idea can be embedding network information in simple plots, or generate the whole plot along side the network information.]
 #par()[It might be a good idea to make several functions that can export the interactive plots in LaTeX, PDF, PNG, SVG, HTML, etc. separately instead of single format.]

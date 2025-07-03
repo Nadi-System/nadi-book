@@ -68,7 +68,7 @@ generating the results.
 
 ### Example
 Given the following tasks file:
-```task
+```task,ignore
 net load_file("...")
 net load_attrs("...")
 net clip()

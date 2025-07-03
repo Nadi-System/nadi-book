@@ -34,6 +34,13 @@ The function will error if,
 - The command template cannot be rendered,
 - The command cannot be executed,
 - The attributes from command's stdout cannot be parsed properly
+
+```task
+network load_str("a -> b");
+node command("echo 'nadi:var:sth={NAME}'");
+node assert_eq(sth, NAME)
+```
+
 ## run {#node.run}
 ```sig
 node command.run(
@@ -62,7 +69,7 @@ tasks with input files and output files.
 ```sig
 network command.parallel(
     cmd: '& Template',
-    _workers: 'i64' = 4,
+    workers: 'i64' = 16,
     verbose: 'bool' = true,
     echo: 'bool' = false
 )
@@ -70,16 +77,20 @@ network command.parallel(
 
 ### Arguments
 - `cmd: '& Template'` => String Command template to run
-- `_workers: 'i64' = 4` => Number of workers to run in parallel
+- `workers: 'i64' = 16` => Number of workers to run in parallel
 - `verbose: 'bool' = true` => Print the command being run
 - `echo: 'bool' = false` => Show the output of the command
 
 Run the given template as a shell command for each nodes in the network in parallel.
 
-### Warning
-Currently there is no way to limit the number of parallel
-processes, so please be careful with this command if you have very
-large number of nodes.
+Other than parallel execution this is same as the `node` function `command`
+
+```task
+network load_str("a -> b");
+network parallel("echo 'nadi:var:sth={NAME}'");
+node assert_eq(sth, NAME)
+```
+
 ## command {#network.command}
 ```sig
 network command.command(
@@ -99,7 +110,20 @@ Run the given template as a shell command.
 Run any command in the shell. The standard output of the command
 will be consumed and if there are lines starting with `nadi:var:`
 and followed by `key=val` pairs, it'll be read as new attributes
-to that node.
+to the network. If you want to pass node attributes add node name
+with `nadi:var:name:` as the prefix for `key=val`.
 
 See `node command.command` for more details as they have
 the same implementation
+
+The examples below run `echo` command to set the variables, you
+can use any command that are scripting languages (python, R,
+Julia, etc) or individual programs.
+
+```task
+network load_str("a -> b");
+network command("echo 'nadi:var:sth=123'");
+network assert_eq(sth, 123)
+network command("echo 'nadi:var:a:sth=123'");
+node[a] assert_eq(sth, 123)
+```
