@@ -7,6 +7,16 @@ compiled binaries from the Releases page of the
 github repo [windows]. Or you can get the source code using `git`, and using
 `cargo` build the packages [all OS].
 
+| Program     | Linux    | Windows | Mac      | Android (Termux) |
+|-------------|----------|---------|----------|------------------|
+| Nadi CLI    | yes      | yes     | yes      | yes              |
+| Nadi IDE    | yes      | yes     | yes      | no               |
+| mdbook nadi | untested | yes     | untested | yes              |
+| Nadi-py     | yes      | yes     | yes      | yes              |
+| QGIS Plugin | yes      | yes     | untested | no               |
+
+Untested means it should work in theory, but I have not tested it.
+
 ## Packages
  
 For `nadi-py` you can use `pip`:
@@ -28,6 +38,8 @@ Goto the repo of each component and refer to the releases section for binaries o
 To setup the nadi-systm to load the plugins you have to place them inside the directory included in the `NADI_PLUGIN_DIRS` environmental variable. Refer to your Operating System's documentation on how to set environemental variables.
 
 The binaries should be able to run directly without needing extra steps. If you get a security warnings because the binaries are not signed, you might have to ignore it.
+
+For QGIS Plugin, you can install it from Plugins Wizard on QGIS if you turn on experiemental plugins. But the `nadi-gis` binary should be available from PATH (i.e. you can call it from terminal).
 
 # Building from Source
 This is currently the preferred way of installing `nadi-system` (and `nadi-gis` for Linux and MacOS). Although it includes a bit more steps this makes sure the compiled program is compatible with your OS.

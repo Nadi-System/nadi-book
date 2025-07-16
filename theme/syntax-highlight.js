@@ -53,8 +53,8 @@ hljs.registerLanguage("task", (hljs) => ({
 	    className: "deletion",
 	},
 	{
-	    begin: '<(sequential|inverse|inputsfirst|outputfirst)>',
-	    className: "string",
+	    begin: '<(sequential|inverse|inputsfirst|outputfirst|seq|inv|inp|out)>',
+	    className: "regexp",
 	},
     ],
 }));
