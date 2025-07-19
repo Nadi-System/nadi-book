@@ -2,6 +2,7 @@
 
 The examples here will be given using QGIS plugin, and using the CLI tool both. CLI tool is great for quickly running things, and doing things in batch, while QGIS plugin will be better on visualization and manual fixes using other GIS tools.
 
+If you want a video demostration, [there is a Demo Video on YouTube](https://youtu.be/PIGoVnXb7ck).
 ## Using QGIS Plugin
 
 First **downloading the data** is done through the `Download USGS Data` tool. As shown in the screenshot below, input the USGS site ID and the data type you want to download.
