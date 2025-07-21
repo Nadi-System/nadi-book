@@ -42,4 +42,20 @@ And here are some keywords reserved for future:
 | for           | for loop task for looping through array/attrmap |
 
 
+## Symbols
+Some special symbols and their functions are listed below:
+- `.` dot accessor for variables, e.g. `node.var`, `node.var.another`, etc.,
+- `?` variable check (only used after a variable) e.g. `node.var?` evaluates to a `true` or `false`,
+- `()`, `{}`, `[]` brackets for functions/expressions, attrmaps and arrays,
+- `;` suppress current task output (only used at the end of a task),
+- `+`, `-`, `*`, `/`, and `//` are mathematical operators,
+- `&`, `|`, and `!` are logical operators,
+- `>`, `<`, `>=`, `<=`, and `==` are comparision operators,
+- `->` path operator (only used in node propagation, or network),
+- `=` is assignment operator,
+- `#` starts a comment,
+
+There might be more functions of each symbol depending on the context.
+
+
 Continue with the chapters for details on each concept. Or skip ahead to [Learn by Examples](/learn-examples.md) if you want to jump into the examples.

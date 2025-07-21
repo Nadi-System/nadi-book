@@ -1,6 +1,4 @@
-# Example Usage
-
-## Ohio River Streamflow Routing Project
+# Ohio River Streamflow Routing Project
 
 The Network for the flow routing is as follows:
 

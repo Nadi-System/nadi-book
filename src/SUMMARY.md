@@ -10,11 +10,11 @@
 - [Installation](./installation.md)
 - [Plugins](./plugins.md)
 
-# Network Detection
+# Network Detection (GIS)
 - [Nadi GIS](./gis/intro.md)
 - [Example](./gis/example.md)
 
-# Network Analysis
+# Network Analysis (DSL)
 - [Getting Started](./getting-started.md)
 - [Core Concepts](./system/intro.md)
   - [Task](./intro/task.md)
@@ -55,13 +55,7 @@
     - [Node Functions](plugin-dev/node-functions.md)
     - [Network Functions](plugin-dev/network-functions.md)
 
-# User Reference
-- [Example Usage](./example-usage.md)
-  - [Making Tables](./example/tables.md)
-  - [Generating Reports](./example/gen-report.md)
-  - [Analysing Timeseries](./example/timeseries.md)
-	- [Looking at Data Gaps](./example/data-gap.md)
-	- [Visualizing Data Gaps](./example/data-gap-vis.md)
+# Plugin Functions
 - [Internal Plugins](plugins/intro.md)
   - [Attributes](plugins/attributes.md)
   - [Command](plugins/command.md)
@@ -88,6 +82,15 @@
   - [Print Node](plugins/print_node.md)
   - [Streamflow](plugins/streamflow.md)
 
+# Slightly Complex Examples
+- [LaTeX Table](./example/latex-table.md)
+- [Ohio River Routing](./example-usage.md)
+  - [Making Tables](./example/tables.md)
+  - [Generating Reports](./example/gen-report.md)
+  - [Analysing Timeseries](./example/timeseries.md)
+	- [Looking at Data Gaps](./example/data-gap.md)
+	- [Visualizing Data Gaps](./example/data-gap-vis.md)
+	
 # Developer Reference
 - [Data Structure](./devref/data-structures.md)
   - [Node](./devref/node.md)
