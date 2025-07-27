@@ -14,4 +14,4 @@ Hence it can be useful for people who:
 
 Although not intended, it might include resources and links to other materials related to Rust concepts, Geographical Information System (GIS) concepts, Hydrology concepts, etc. that people could potentially benefit from.
 
-
+Please note that, this book assumes you have some knowledge of programming, like control flow, loops, functions, variables, etc. As as well some knowledge of GIS if you are reading network detection + GIS visualization specific functions. Those concepts will not be covered in this book. And if you are reading the developer reference or compiled plugin development, some knowledge of rust is assumed, but this is not necessary for the users of NADI that will only write code in NADI.

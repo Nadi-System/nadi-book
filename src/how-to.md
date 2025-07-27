@@ -2,13 +2,21 @@
 
 You can read this book sequentially to understand the concepts used in the NADI system. And then go through the references sections for a specific use cases you want to get into the details of.
 
-If you are in a hurry, but this is your first time reading this book,
+- If you are in a hurry, but this is your first time reading this book,
 at least read the [Core Concepts](./intro.md), then refer to the
-section you are interested in. [Learn by Example](./learn-examples.md)
+section you are interested in.
+- If you want to know a specific details, click on the search icon at the top left of the book to get the search bar. You can search text there and visit the pages.
+- If you want to learn about the QGIS Plugin, NADI GIS, goto "Network Detection (GIS)" section.
+- If you want to learn about the Domain Specific Programming Language (DSL), refer to the "Network Analysis (DSL)" section.
+  - [Learn by Example](./learn-examples.md) contains some simple examples you can follow to learn the basic syntax of the Task System.
+  - If you want more detailed examples of the use of Task System, refer to the "Slightly Complex Examples" section.
+- If you want reference for functions used in Task System goto "Plugin Functions", the [Internal Plugins](./plugins/intro.md) section contains details on the functions that are available with nadi system, while the external plugins are plugins that were loaded while this book was compiled.
+
+If you have suggestions on the formatting, or arrangement of chapters in this book, please make an issue on [the GitHub repository for this book](https://github.com/Nadi-System/nadi-book).
 
 ## Code Blocks
 
-The code blocks will have example codes for various languages, most common will be `string template`, `task`, and `rust` codes.
+The code blocks will have example codes for various languages, most common will be `string template`, `task`, `python`, and `rust` codes.
 
 String template and task have custom syntax highlights that is
 intended to make it easier for the reader to understand different

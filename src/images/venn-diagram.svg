@@ -1,0 +1,1163 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="301.43958mm"
+   height="212.2496mm"
+   viewBox="0 0 301.43958 212.2496"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="venn-diagram.svg"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   inkscape:export-filename="venn-diagram.pdf"
+   inkscape:export-xdpi="120"
+   inkscape:export-ydpi="120"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.46870917"
+     inkscape:cx="420.30328"
+     inkscape:cy="676.32558"
+     inkscape:window-width="1920"
+     inkscape:window-height="1023"
+     inkscape:window-x="1920"
+     inkscape:window-y="28"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer6" />
+  <defs
+     id="defs1">
+    <rect
+       x="573.75134"
+       y="673.77582"
+       width="125.03056"
+       height="119.47365"
+       id="rect26" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:none"
+     transform="translate(1.693481,-0.56449354)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.2889px;line-height:1.5;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:justify;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="75.905663"
+       y="33.622639"
+       id="text4"><tspan
+         sodipodi:role="line"
+         id="tspan4"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1"
+         x="75.905663"
+         y="33.622639" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="110.28994"
+       y="62.201435"
+       id="text47"><tspan
+         sodipodi:role="line"
+         id="tspan47"
+         style="stroke:none;stroke-width:1"
+         x="110.28994"
+         y="62.201435" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.2889px;line-height:1.5;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:justify;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#2709ff;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="670.14728"
+       y="159.07413"
+       id="text79"><tspan
+         sodipodi:role="line"
+         id="tspan79"
+         style="fill:#2709ff;fill-opacity:1;stroke-width:1"
+         x="670.14728"
+         y="159.07413">NADI System</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="368.57837"
+       y="7.1466885"
+       id="text83"><tspan
+         sodipodi:role="line"
+         id="tspan82"
+         style="line-height:1;text-align:start;text-anchor:start;fill:#1a1a1a;stroke-width:1"
+         x="368.57837"
+         y="7.1466885">Download USGS</tspan><tspan
+         sodipodi:role="line"
+         style="line-height:1;text-align:start;text-anchor:start;fill:#1a1a1a;stroke-width:1"
+         x="368.57837"
+         y="15.613358"
+         id="tspan83">Gages shapefile</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="438.15216"
+       y="6.8575153"
+       id="text85"><tspan
+         sodipodi:role="line"
+         id="tspan84"
+         style="line-height:1;text-align:start;text-anchor:start;fill:#1a1a1a;stroke-width:1"
+         x="438.15216"
+         y="6.8575153">Download NID</tspan><tspan
+         sodipodi:role="line"
+         style="line-height:1;text-align:start;text-anchor:start;fill:#1a1a1a;stroke-width:1"
+         x="438.15216"
+         y="15.324185"
+         id="tspan85">Database</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="395.06613"
+       y="40.830669"
+       id="text87"><tspan
+         sodipodi:role="line"
+         id="tspan86"
+         style="fill:#1a1a1a;stroke-width:1"
+         x="395.06613"
+         y="40.830669">Map Projection</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#1a1a1a;stroke-width:1"
+         x="395.06613"
+         y="49.29734"
+         id="tspan87">(make them same)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="471.52365"
+       y="40.592278"
+       id="text89"><tspan
+         sodipodi:role="line"
+         id="tspan88"
+         style="fill:#1a1a1a;stroke-width:1"
+         x="471.52365"
+         y="40.592278">Clipping Vector</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#1a1a1a;stroke-width:1"
+         x="471.52365"
+         y="49.058949"
+         id="tspan89">Layers by basin</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="536.64795"
+       y="175.24892"
+       id="text91"><tspan
+         sodipodi:role="line"
+         id="tspan90"
+         style="fill:#1a1a1a;stroke-width:1"
+         x="536.64795"
+         y="175.24892">Visualize GIS files</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#1a1a1a;stroke-width:1"
+         x="536.64795"
+         y="183.71559"
+         id="tspan91">(map generation)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="444.28796"
+       y="185.88785"
+       id="text92"><tspan
+         sodipodi:role="line"
+         id="tspan92"
+         style="fill:#1a1a1a;stroke-width:1"
+         x="444.28796"
+         y="185.88785">Plot CSV data</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.2889px;line-height:1.5;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:justify;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="667.70026"
+       y="145.15428"
+       id="text113"><tspan
+         sodipodi:role="line"
+         id="tspan113"
+         style="fill:#1a1a1a;fill-opacity:1;stroke-width:1"
+         x="667.70026"
+         y="145.15428">External</tspan></text>
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       id="rect133"
+       width="286.12997"
+       height="23.973051"
+       x="362.28583"
+       y="-2.0349636" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       id="rect134"
+       width="286.12997"
+       height="23.973051"
+       x="361.51251"
+       y="29.671329" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       id="rect135"
+       width="286.12997"
+       height="23.973051"
+       x="362.28583"
+       y="67.564217" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       id="rect136"
+       width="286.12994"
+       height="49.492752"
+       x="362.28583"
+       y="99.270508" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       id="rect137"
+       width="286.12991"
+       height="29.386322"
+       x="364.6058"
+       y="162.68309" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="388.5285"
+       y="81.134239"
+       id="text101"><tspan
+         sodipodi:role="line"
+         id="tspan101"
+         style="fill:#0000ff;stroke-width:1"
+         x="388.5285"
+         y="81.134239">Visualize Network</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="454.08752"
+       y="82.219017"
+       id="text102"><tspan
+         sodipodi:role="line"
+         id="tspan102"
+         style="fill:#0000ff;stroke-width:1"
+         x="454.08752"
+         y="82.219017">Run Tasks</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="578.72821"
+       y="83.716904"
+       id="text114"><tspan
+         sodipodi:role="line"
+         id="tspan114"
+         style="fill:#0000ff;stroke-width:1"
+         x="578.72821"
+         y="83.716904">Save Images</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="514.4068"
+       y="82.530487"
+       id="text115"><tspan
+         sodipodi:role="line"
+         id="tspan115"
+         style="fill:#0000ff;stroke-width:1"
+         x="514.4068"
+         y="82.530487">Make Tables</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.2889px;line-height:1.5;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:justify;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="670.9729"
+       y="172.52672"
+       id="text78"><tspan
+         sodipodi:role="line"
+         id="tspan78"
+         style="fill:#008000;stroke-width:1"
+         x="670.9729"
+         y="172.52672">NADI GIS</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="511.30701"
+       y="6.5006552"
+       id="text94"><tspan
+         sodipodi:role="line"
+         style="fill:#008000;stroke-width:1"
+         x="511.30701"
+         y="6.5006552"
+         id="tspan93">Download Streams</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#008000;stroke-width:1"
+         x="511.30701"
+         y="14.967325"
+         id="tspan94">Network (NHD+)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="582.56293"
+       y="7.0197783"
+       id="text96"><tspan
+         sodipodi:role="line"
+         id="tspan95"
+         style="fill:#008000;stroke-width:1"
+         x="582.56293"
+         y="7.0197783">Download Basin</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#008000;stroke-width:1"
+         x="582.56293"
+         y="15.486448"
+         id="tspan96">Boundary</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="542.17224"
+       y="41.183102"
+       id="text98"><tspan
+         sodipodi:role="line"
+         id="tspan97"
+         style="fill:#008000;stroke-width:1"
+         x="542.17224"
+         y="41.183102">Detect Network</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#008000;stroke-width:1"
+         x="542.17224"
+         y="49.649773"
+         id="tspan98">Connections</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="496.30176"
+       y="111.07103"
+       id="text100"><tspan
+         sodipodi:role="line"
+         style="fill:#008000;stroke-width:1"
+         x="496.30176"
+         y="111.07103"
+         id="tspan99">Import/Export Node Attributes as</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#008000;stroke-width:1"
+         x="496.30176"
+         y="119.5377"
+         id="tspan100">GIS File (CSV, shp, GPKG, etc)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.2889px;line-height:1.5;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:justify;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;fill:#a05a2c;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="671.56256"
+       y="186.56258"
+       id="text80"><tspan
+         id="tspan80"
+         style="fill:#a05a2c;stroke-width:1"
+         x="671.56256"
+         y="186.56258"
+         sodipodi:role="line">NADI Plugins</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;fill:#a05a2c;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="377.37"
+       y="109.72832"
+       id="text103"><tspan
+         sodipodi:role="line"
+         id="tspan103"
+         style="fill:#a05a2c;stroke-width:1"
+         x="377.37"
+         y="109.72832">Import/Export CSV File</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;fill:#a05a2c;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="378.41425"
+       y="134.37399"
+       id="text104"><tspan
+         sodipodi:role="line"
+         id="tspan104"
+         style="fill:#a05a2c;stroke-width:1"
+         x="378.41425"
+         y="134.37399">Count Nodes based on attrs</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;fill:#a05a2c;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="377.71985"
+       y="122.23478"
+       id="text105"><tspan
+         sodipodi:role="line"
+         id="tspan105"
+         style="fill:#a05a2c;stroke-width:1"
+         x="377.71985"
+         y="122.23478">Run Custom Python Scripts</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;fill:#a05a2c;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="491.15021"
+       y="132.37936"
+       id="text110"><tspan
+         sodipodi:role="line"
+         id="tspan110"
+         style="fill:#a05a2c;stroke-width:1"
+         x="491.15021"
+         y="132.37936">Make PDF/PNG/SVG plots</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;fill:#a05a2c;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="499.18829"
+       y="143.91953"
+       id="text111"><tspan
+         sodipodi:role="line"
+         id="tspan111"
+         style="fill:#a05a2c;stroke-width:1"
+         x="499.18829"
+         y="143.91953">Calculate RMSE,NSE,MSE, etc.</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;fill:#a05a2c;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="373.71503"
+       y="145.43622"
+       id="text112"><tspan
+         sodipodi:role="line"
+         id="tspan112"
+         style="fill:#a05a2c;stroke-width:1"
+         x="373.71503"
+         y="145.43622">Fill data with attr Ratio Method</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer6"
+     inkscape:label="Rectangles"
+     style="display:inline"
+     transform="translate(1.693481,-0.56449354)">
+    <rect
+       style="fill:#ffffff;fill-opacity:0.619149;fill-rule:evenodd;stroke:none;stroke-width:0.47625;paint-order:markers stroke fill"
+       id="rect2"
+       width="301.43958"
+       height="212.2496"
+       x="-1.693481"
+       y="0.56449354"
+       rx="7.1775317"
+       ry="7.1775317" />
+    <path
+       id="rect1"
+       style="fill:none;stroke:#1f19ff"
+       d="M 160.46044,7.4408178 H 295.7677 V 208.22401 H 79.258255 V 7.4408178 h 11.881353"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       id="rect3"
+       style="fill:none;stroke:#008734;stroke-dasharray:4, 1"
+       d="m 150.51841,19.197289 h 8.05371 l 133.34999,-0.02427 V 39.670147 H 158.57212 V 113.2883 H 82.82431 V 19.197289 h 13.397551"
+       sodipodi:nodetypes="ccccccccc" />
+    <path
+       id="rect4"
+       style="fill:none;stroke:#cc8500;stroke-dasharray:4, 1"
+       d="m 243.32009,14.219099 h 50.71583 V 203.03093 H 160.42233 V 14.219099 h 13.57693"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       id="rect7"
+       style="fill:none;stroke:#cc8500;stroke-dasharray:4, 1"
+       d="m 202.1962,56.553971 h 87.99201 V 113.43665 H 162.40089 V 56.553971 h 10.69115"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       id="path45"
+       style="fill:none;stroke:#000000;stroke-dasharray:none;stroke-opacity:1"
+       d="M 54.132914,7.4823129 H 77.332076 V 208.15084 H 2.9851507 V 7.4709195 h 9.3436003"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       id="path1"
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1"
+       d="M 56.271595,24.580867 H 155.90528 V 64.530213 H 5.3637852 V 24.580867 H 16.054935"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       style="fill:none;stroke:#c79d47;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 133.3846,153.44717 h 26.36672"
+       id="path11" />
+    <path
+       id="path12"
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1"
+       d="m 64.132631,74.862104 h 91.597149 l 0.11028,17.920645 -81.072781,-10e-7 V 138.47705 H 4.228988 V 74.862104 h 10.69115"
+       sodipodi:nodetypes="cccccccc" />
+    <path
+       id="path13"
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1"
+       d="m 67.307631,152.81295 h 7.459648 v 51.97334 H 4.228988 v -51.97334 h 10.69115"
+       sodipodi:nodetypes="cccccc" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="External"
+     style="display:inline"
+     transform="translate(1.693481,-0.56449354)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="17.971779"
+       y="38.241234"
+       id="text9"><tspan
+         sodipodi:role="line"
+         style="line-height:1;text-align:start;text-anchor:start;fill:#1a1a1a;stroke-width:1"
+         x="17.971779"
+         y="38.241234"
+         id="tspan10">USGS Gages</tspan><tspan
+         sodipodi:role="line"
+         style="line-height:1;text-align:start;text-anchor:start;fill:#1a1a1a;stroke-width:1"
+         x="17.971779"
+         y="46.707905"
+         id="tspan3">(shapefile)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="17.245367"
+       y="60.434837"
+       id="text11"><tspan
+         sodipodi:role="line"
+         style="line-height:1;text-align:start;text-anchor:start;fill:#1a1a1a;stroke-width:1"
+         x="17.245367"
+         y="60.434837"
+         id="tspan12">NID Database</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="5.9516549"
+       y="108.94621"
+       id="text14"><tspan
+         sodipodi:role="line"
+         id="tspan14"
+         style="fill:#1a1a1a;stroke-width:1"
+         x="5.9516549"
+         y="108.94621">Clipping Vector</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#1a1a1a;stroke-width:1"
+         x="5.9516549"
+         y="117.41288"
+         id="tspan15">Layers by basin</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="6.163322"
+       y="166.06807"
+       id="text17"><tspan
+         sodipodi:role="line"
+         id="tspan17"
+         style="fill:#1a1a1a;stroke-width:1"
+         x="6.163322"
+         y="166.06807">Visualize GIS files</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#1a1a1a;stroke-width:1"
+         x="6.163322"
+         y="174.53474"
+         id="tspan18">(map generation)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="5.612988"
+       y="187.20691"
+       id="text19"><tspan
+         sodipodi:role="line"
+         id="tspan19"
+         style="fill:#1a1a1a;stroke-width:1"
+         x="5.612988"
+         y="187.20691">Plot CSV data</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.2889px;line-height:1.5;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:justify;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="13.097867"
+       y="10.595866"
+       id="text46"><tspan
+         sodipodi:role="line"
+         id="tspan46"
+         style="fill:#1a1a1a;fill-opacity:1;stroke-width:1"
+         x="13.097867"
+         y="10.595866">External</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.1266px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#aa0000;fill-opacity:1;stroke:none;stroke-width:1.31416;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="6.5035772"
+       y="23.286938"
+       id="text53"><tspan
+         sodipodi:role="line"
+         id="tspan53"
+         style="fill:#aa0000;stroke-width:1.31416"
+         x="6.5035772"
+         y="23.286938">①</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.1266px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#aa0000;fill-opacity:1;stroke:none;stroke-width:1.31416;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="5.5842295"
+       y="73.535988"
+       id="text54"><tspan
+         sodipodi:role="line"
+         id="tspan54"
+         style="fill:#aa0000;stroke-width:1.31416"
+         x="5.5842295"
+         y="73.535988">②</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.1266px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#aa0000;fill-opacity:1;stroke:none;stroke-width:1.31416;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="4.5740633"
+       y="150.93819"
+       id="text62"><tspan
+         sodipodi:role="line"
+         id="tspan62"
+         style="fill:#aa0000;stroke-width:1.31416"
+         x="4.5740633"
+         y="150.93819">⑨</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="16.420795"
+       y="27.646084"
+       id="text2"><tspan
+         sodipodi:role="line"
+         style="line-height:1;text-align:start;text-anchor:start;fill:#1a1a1a;stroke-width:1"
+         x="16.420795"
+         y="27.646084"
+         id="tspan2">Download</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="16.420795"
+       y="77.373253"
+       id="text21"><tspan
+         sodipodi:role="line"
+         style="line-height:1;text-align:start;text-anchor:start;fill:#1a1a1a;stroke-width:1"
+         x="16.420795"
+         y="77.373253"
+         id="tspan20">Pre-Process</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="16.420795"
+       y="155.4874"
+       id="text22"><tspan
+         sodipodi:role="line"
+         style="line-height:1;text-align:start;text-anchor:start;fill:#1a1a1a;stroke-width:1"
+         x="16.420795"
+         y="155.4874"
+         id="tspan21">Post-Process</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="5.612988"
+       y="199.24661"
+       id="text65"><tspan
+         sodipodi:role="line"
+         id="tspan65"
+         style="fill:#1a1a1a;stroke-width:1"
+         x="5.612988"
+         y="199.24661">Serve HTML Files</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="5.5592737"
+       y="128.19087"
+       id="text69"><tspan
+         sodipodi:role="line"
+         style="fill:#1a1a1a;stroke-width:1"
+         x="5.5592737"
+         y="128.19087"
+         id="tspan69">Manual Edits on</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#1a1a1a;stroke-width:1"
+         x="5.5592737"
+         y="136.65755"
+         id="tspan70">GIS Files</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="5.672255"
+       y="89.445694"
+       id="text13"><tspan
+         sodipodi:role="line"
+         id="tspan13"
+         style="fill:#1a1a1a;stroke-width:1"
+         x="5.672255"
+         y="89.445694">Map Projection</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#1a1a1a;stroke-width:1"
+         x="5.672255"
+         y="97.912361"
+         id="tspan16">(make them same)</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="System"
+     style="display:inline"
+     transform="translate(1.693481,-0.56449354)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.2889px;line-height:1.5;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:justify;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#2709ff;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="92.877289"
+       y="10.595866"
+       id="text5"><tspan
+         sodipodi:role="line"
+         id="tspan5"
+         style="fill:#2709ff;fill-opacity:1;stroke-width:1"
+         x="92.877289"
+         y="10.595866">NADI System</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="90.453636"
+       y="141.57133"
+       id="text29"><tspan
+         sodipodi:role="line"
+         id="tspan29"
+         style="text-align:start;text-anchor:start;fill:#0000ff;stroke-width:1"
+         x="90.453636"
+         y="141.57133">Visualize Network</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="88.760963"
+       y="47.892601"
+       id="text30"><tspan
+         sodipodi:role="line"
+         id="tspan30"
+         style="stroke-width:1"
+         x="88.760963"
+         y="47.892601" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="89.903297"
+       y="156.24248"
+       id="text34"><tspan
+         sodipodi:role="line"
+         id="tspan34"
+         style="text-align:start;text-anchor:start;fill:#0000ff;stroke-width:1"
+         x="89.903297"
+         y="156.24248">Run Tasks</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="90.174232"
+       y="185.68633"
+       id="text48"><tspan
+         sodipodi:role="line"
+         id="tspan48"
+         style="text-align:start;text-anchor:start;fill:#0000ff;stroke-width:1"
+         x="90.174232"
+         y="185.68633">Save Images</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="89.903297"
+       y="170.9136"
+       id="text49"><tspan
+         sodipodi:role="line"
+         id="tspan49"
+         style="text-align:start;text-anchor:start;fill:#0000ff;stroke-width:1"
+         x="89.903297"
+         y="170.9136">Make Tables</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="89.903297"
+       y="125.2493"
+       id="text50"><tspan
+         sodipodi:role="line"
+         id="tspan50"
+         style="text-align:start;text-anchor:start;fill:#0000ff;stroke-width:1"
+         x="89.903297"
+         y="125.2493">Load Plugins</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="89.903297"
+       y="196.71686"
+       id="text51"><tspan
+         sodipodi:role="line"
+         id="tspan51"
+         style="text-align:start;text-anchor:start;fill:#0000ff;stroke-width:1"
+         x="89.903297"
+         y="196.71686">Browse</tspan><tspan
+         sodipodi:role="line"
+         style="text-align:start;text-anchor:start;fill:#0000ff;stroke-width:1"
+         x="89.903297"
+         y="205.18353"
+         id="tspan52">Documentations</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.1266px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#aa0000;fill-opacity:1;stroke:none;stroke-width:1.31416;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="80.789406"
+       y="126.27362"
+       id="text56"><tspan
+         sodipodi:role="line"
+         id="tspan56"
+         style="fill:#aa0000;stroke-width:1.31416"
+         x="80.789406"
+         y="126.27362">④</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.1266px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#aa0000;fill-opacity:1;stroke:none;stroke-width:1.31416;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="81.047745"
+       y="142.20869"
+       id="text57"><tspan
+         sodipodi:role="line"
+         id="tspan57"
+         style="fill:#aa0000;stroke-width:1.31416"
+         x="81.047745"
+         y="142.20869">⑤</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.1266px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#aa0000;fill-opacity:1;stroke:none;stroke-width:1.31416;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="80.313461"
+       y="156.5793"
+       id="text58"><tspan
+         sodipodi:role="line"
+         style="fill:#aa0000;stroke-width:1.31416"
+         x="80.313461"
+         y="156.5793"
+         id="tspan59">⑥</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.1266px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#aa0000;fill-opacity:1;stroke:none;stroke-width:1.31416;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="80.789406"
+       y="171.19373"
+       id="text60"><tspan
+         sodipodi:role="line"
+         id="tspan60"
+         style="fill:#aa0000;stroke-width:1.31416"
+         x="80.789406"
+         y="171.19373">⑦</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.1266px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#aa0000;fill-opacity:1;stroke:none;stroke-width:1.31416;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="81.017921"
+       y="185.73697"
+       id="text61"><tspan
+         sodipodi:role="line"
+         id="tspan61"
+         style="fill:#aa0000;stroke-width:1.31416"
+         x="81.017921"
+         y="185.73697">⑧</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="GIS"
+     style="display:inline"
+     transform="translate(1.693481,-0.56449354)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.2889px;line-height:1.5;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:justify;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="99.116196"
+       y="23.275148"
+       id="text6"><tspan
+         sodipodi:role="line"
+         id="tspan6"
+         style="fill:#008000;stroke-width:1"
+         x="99.116196"
+         y="23.275148">NADI GIS</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="86.19915"
+       y="38.241234"
+       id="text20"><tspan
+         sodipodi:role="line"
+         style="fill:#008000;stroke-width:1"
+         x="86.19915"
+         y="38.241234"
+         id="tspan22">Streams Network</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#008000;stroke-width:1"
+         x="86.19915"
+         y="46.707905"
+         id="tspan9">(NHD+)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="86.728317"
+       y="60.434837"
+       id="text23"><tspan
+         sodipodi:role="line"
+         style="fill:#008000;stroke-width:1"
+         x="86.728317"
+         y="60.434837"
+         id="tspan24">Basin Boundary</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="93.416992"
+       y="101.67429"
+       id="text25"><tspan
+         sodipodi:role="line"
+         id="tspan25"
+         style="fill:#008000;stroke-width:1"
+         x="93.416992"
+         y="101.67429">Detect Network</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#008000;stroke-width:1"
+         x="93.416992"
+         y="110.14096"
+         id="tspan26">Connections</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="170.02174"
+       y="28.325331"
+       id="text27"><tspan
+         sodipodi:role="line"
+         style="fill:#008000;stroke-width:1"
+         x="170.02174"
+         y="28.325331"
+         id="tspan33">Import/Export Node Attributes as</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#008000;stroke-width:1"
+         x="170.02174"
+         y="36.792"
+         id="tspan45">GIS File (CSV, shp, GPKG, etc)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="85.479485"
+       y="82.445503"
+       id="text67"><tspan
+         sodipodi:role="line"
+         id="tspan66"
+         style="fill:#008000;stroke-width:1"
+         x="85.479485"
+         y="82.445503">Validate Network</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#008000;stroke-width:1"
+         x="85.479485"
+         y="90.91217"
+         id="tspan67">Input GIS Files</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.1266px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#aa0000;fill-opacity:1;stroke:none;stroke-width:1.31416;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="83.737022"
+       y="103.19123"
+       id="text55"><tspan
+         sodipodi:role="line"
+         id="tspan55"
+         style="fill:#aa0000;stroke-width:1.31416"
+         x="83.737022"
+         y="103.19123">③</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Plugins"
+     style="display:inline"
+     transform="translate(1.693481,-0.56449354)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.2889px;line-height:1.5;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:justify;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#a05a2c;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="175.49165"
+       y="17.204571"
+       id="text7"><tspan
+         id="tspan7"
+         style="fill:#a05a2c;stroke-width:1"
+         x="175.49165"
+         y="17.204571"
+         sodipodi:role="line">NADI Plugins</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1.5;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:justify;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#a05a2c;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="173.98308"
+       y="58.805492"
+       id="text8"><tspan
+         sodipodi:role="line"
+         id="tspan8"
+         style="font-size:8.46667px;fill:#a05a2c;stroke-width:1"
+         x="173.98308"
+         y="58.805492">Internal</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#a05a2c;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="172.80576"
+       y="139.49773"
+       id="text35"><tspan
+         sodipodi:role="line"
+         id="tspan35"
+         style="text-align:start;text-anchor:start;fill:#a05a2c;stroke-width:1"
+         x="172.80576"
+         y="139.49773">Import/Export CSV File</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#a05a2c;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="173.31377"
+       y="123.84701"
+       id="text36"><tspan
+         sodipodi:role="line"
+         id="tspan36"
+         style="text-align:start;text-anchor:start;fill:#a05a2c;stroke-width:1"
+         x="173.31377"
+         y="123.84701">Count Nodes based on attrs</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#a05a2c;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="175.50082"
+       y="67.276878"
+       id="text37"><tspan
+         sodipodi:role="line"
+         id="tspan37"
+         style="fill:#a05a2c;stroke-width:1"
+         x="175.50082"
+         y="67.276878">Run Custom Commands</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#a05a2c;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="175.8056"
+       y="79.336884"
+       id="text38"><tspan
+         sodipodi:role="line"
+         id="tspan38"
+         style="fill:#a05a2c;stroke-width:1"
+         x="175.8056"
+         y="79.336884">Conversions, Conditional, etc.</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#a05a2c;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="175.50082"
+       y="92.446762"
+       id="text39"><tspan
+         sodipodi:role="line"
+         id="tspan39"
+         style="fill:#a05a2c;stroke-width:1"
+         x="175.50082"
+         y="92.446762">Render String Templates</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#a05a2c;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="175.48389"
+       y="106.15776"
+       id="text40"><tspan
+         sodipodi:role="line"
+         id="tspan40"
+         style="fill:#a05a2c;stroke-width:1"
+         x="175.48389"
+         y="106.15776">Regex Match/Count/Replace</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#a05a2c;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="172.9751"
+       y="183.80264"
+       id="text41"><tspan
+         sodipodi:role="line"
+         id="tspan41"
+         style="text-align:start;text-anchor:start;fill:#a05a2c;stroke-width:1"
+         x="172.9751"
+         y="183.80264">Export Interactive HTML</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#a05a2c;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="172.9751"
+       y="197.9294"
+       id="text42"><tspan
+         sodipodi:role="line"
+         id="tspan42"
+         style="fill:#a05a2c;stroke-width:1"
+         x="172.9751"
+         y="197.9294">Make PDF/PNG/SVG plots</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#a05a2c;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="173.47073"
+       y="168.81877"
+       id="text43"><tspan
+         sodipodi:role="line"
+         id="tspan43"
+         style="fill:#a05a2c;stroke-width:1"
+         x="173.47073"
+         y="168.81877">Calculate RMSE,NSE,MSE, etc.</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#a05a2c;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:4, 1;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="172.9751"
+       y="155.53239"
+       id="text44"><tspan
+         sodipodi:role="line"
+         id="tspan44"
+         style="fill:#a05a2c;stroke-width:1"
+         x="172.9751"
+         y="155.53239">Fill data with attr Ratio Method</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.1266px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1.31416;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="161.01167"
+       y="28.258898"
+       id="text24"><tspan
+         sodipodi:role="line"
+         id="tspan23"
+         style="fill:#000080;stroke-width:1.31416"
+         x="161.01167"
+         y="28.258898">①</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.1266px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1.31416;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="163.51538"
+       y="68.394615"
+       id="text28"><tspan
+         sodipodi:role="line"
+         id="tspan27"
+         style="fill:#000080;stroke-width:1.31416"
+         x="163.51538"
+         y="68.394615">②</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.1266px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1.31416;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="163.51538"
+       y="124.14912"
+       id="text31"><tspan
+         sodipodi:role="line"
+         id="tspan28"
+         style="fill:#000080;stroke-width:1.31416"
+         x="163.51538"
+         y="124.14912">③</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.1266px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1.31416;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="163.51538"
+       y="136.34244"
+       id="text32"><tspan
+         sodipodi:role="line"
+         id="tspan31"
+         style="fill:#000080;stroke-width:1.31416"
+         x="163.51538"
+         y="136.34244">④</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.1266px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1.31416;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="163.51538"
+       y="155.76395"
+       id="text33"><tspan
+         sodipodi:role="line"
+         id="tspan32"
+         style="fill:#000080;stroke-width:1.31416"
+         x="163.51538"
+         y="155.76395">⑤</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.1266px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1.31416;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="163.51538"
+       y="169.61687"
+       id="text59"><tspan
+         sodipodi:role="line"
+         style="fill:#000080;stroke-width:1.31416"
+         x="163.51538"
+         y="169.61687"
+         id="tspan58">⑥</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.1266px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1.31416;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="163.51538"
+       y="144.40331"
+       id="text63"><tspan
+         sodipodi:role="line"
+         id="tspan63"
+         style="fill:#000080;stroke-width:1.31416"
+         x="163.51538"
+         y="144.40331">⑦</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.1266px;line-height:1;font-family:FreeSans;-inkscape-font-specification:FreeSans;text-align:start;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000080;fill-opacity:1;stroke:none;stroke-width:1.31416;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       x="161.01167"
+       y="37.778576"
+       id="text64"><tspan
+         sodipodi:role="line"
+         id="tspan64"
+         style="fill:#000080;stroke-width:1.31416"
+         x="161.01167"
+         y="37.778576">⑧</tspan></text>
+  </g>
+</svg>

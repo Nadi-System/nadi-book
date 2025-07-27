@@ -1,10 +1,10 @@
 # Summary
 [Preface](preface.md)
 [Acknowledgements](./acknowledgements.md)
- - [Why NADI?](./why-nadi.md)
- - [Who this book is for](./who-book.md)
- - [How to use this book](./how-to.md)
- - [How to Cite](./citation.md)
+- [Why NADI?](./why-nadi.md)
+- [Who this book is for](./who-book.md)
+- [How to use this book](./how-to.md)
+- [How to Cite](./citation.md)
 # Nadi System Setup
 - [Introduction](./introduction.md)
 - [Installation](./installation.md)
@@ -39,6 +39,19 @@
 - [Nadi Extension Capabilities](./system/extensions.md)
 - [List of All Functions](plugins/index.md)
 
+# Slightly Complex Examples
+- [LaTeX Table](./example/latex-table.md)
+- [Effects of Dams](./example/ohio-dams-intro.md)
+  - [Validating Network](./example/ohio-validation.md)
+  - [Counting Ohio Dams](./example/ohio-dams.md)
+  - [Earliest Dam Year](./example/ohio-dam-years.md)
+- [Ohio River Routing](./example-usage.md)
+  - [Making Tables](./example/tables.md)
+  - [Generating Reports](./example/gen-report.md)
+  - [Analysing Timeseries](./example/timeseries.md)
+	- [Looking at Data Gaps](./example/data-gap.md)
+	- [Visualizing Data Gaps](./example/data-gap-vis.md)
+
 # Python Library
 - [Nadi Py](python.md)
 - [Differences with Task System](python/difference.md)
@@ -55,7 +68,7 @@
     - [Node Functions](plugin-dev/node-functions.md)
     - [Network Functions](plugin-dev/network-functions.md)
 
-# Plugin Functions
+# List of Plugin Functions
 - [Internal Plugins](plugins/intro.md)
   - [Attributes](plugins/attributes.md)
   - [Command](plugins/command.md)
@@ -82,15 +95,6 @@
   - [Print Node](plugins/print_node.md)
   - [Streamflow](plugins/streamflow.md)
 
-# Slightly Complex Examples
-- [LaTeX Table](./example/latex-table.md)
-- [Ohio River Routing](./example-usage.md)
-  - [Making Tables](./example/tables.md)
-  - [Generating Reports](./example/gen-report.md)
-  - [Analysing Timeseries](./example/timeseries.md)
-	- [Looking at Data Gaps](./example/data-gap.md)
-	- [Visualizing Data Gaps](./example/data-gap-vis.md)
-	
 # Developer Reference
 - [Data Structure](./devref/data-structures.md)
   - [Node](./devref/node.md)

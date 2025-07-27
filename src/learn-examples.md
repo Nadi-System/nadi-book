@@ -1,4 +1,5 @@
 # Learn by Examples
+This section teaches you the basics of the Nadi's syntax with small examples. If you want a higher level example that focuses on the actual research problem instead of syntax then refer to the Slightly Complex Examples Section.
 
 For example data download the [zip file here](./data.zip)
 
