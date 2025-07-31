@@ -81,7 +81,7 @@ The plugins files if present in the system are automatically loaded from `NADI_P
 
 Note: all programs will compile and run in Windows, Linux, and MacOS, while only `nadi-cli` and `mdbook-nadi` will run in Android (tmux). `nadi-ide` and family need the GUI libraries that are not available for android (tmux) yet.
 
-## NADI GIS
+## NADI GIS { #nadi-gis }
 NADI GIS uses `gdal` to read/write GIS files, so it needs to be installed. Please refer to [gdal installation documentation](https://gdal.org/en/stable/download.html) for that.
 
 ### Windows

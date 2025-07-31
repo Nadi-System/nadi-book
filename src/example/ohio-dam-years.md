@@ -37,5 +37,4 @@ network count(nodes.dam_affected & nodes.is_usgs) / count(!nodes.no_dam_us & nod
 
 This shows we have the construction year for 95% of the USGS gages that were constructed after at least one upstream dams.
 
-
-
+<!-- After exporting this result, and loading them in Python, we can use the following python script, we can load CSV files and see how much of the streamflow data was before, and after the dam. -->

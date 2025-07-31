@@ -28,6 +28,14 @@ Some example functionality of NADI system includes:
 ## Network Based Data Analysis
 If you have data that are network based, like in case of data related to points in a river. NADI provides a text representation of the network that can be manually created with any text editor, or through NADI GIS tool. 
 
+Some domains where the data are network based (directed tree graph) are:
+- River networks,
+- File/Directory structures,
+- Human Resources in a Company,
+- Decision Tree / Policy Tree,
+- Modeling work with dependencies to component models,
+
+
 <!-- TODO -->
 <!-- ## Interactive outputs -->
 <!-- Here is a sample interactive plot made using NADI. -->

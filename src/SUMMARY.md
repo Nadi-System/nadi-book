@@ -39,18 +39,18 @@
 - [Nadi Extension Capabilities](./system/extensions.md)
 - [List of All Functions](plugins/index.md)
 
-# Slightly Complex Examples
-- [LaTeX Table](./example/latex-table.md)
+# Example Research Problems
 - [Effects of Dams](./example/ohio-dams-intro.md)
   - [Validating Network](./example/ohio-validation.md)
   - [Counting Ohio Dams](./example/ohio-dams.md)
   - [Earliest Dam Year](./example/ohio-dam-years.md)
-- [Ohio River Routing](./example-usage.md)
-  - [Making Tables](./example/tables.md)
-  - [Generating Reports](./example/gen-report.md)
-  - [Analysing Timeseries](./example/timeseries.md)
-	- [Looking at Data Gaps](./example/data-gap.md)
-	- [Visualizing Data Gaps](./example/data-gap-vis.md)
+- [LaTeX Table](./example/latex-table.md)
+<!-- - [Ohio River Routing](./example-usage.md) -->
+<!--   - [Making Tables](./example/tables.md) -->
+<!--   - [Generating Reports](./example/gen-report.md) -->
+<!--   - [Analysing Timeseries](./example/timeseries.md) -->
+<!-- 	- [Looking at Data Gaps](./example/data-gap.md) -->
+<!-- 	- [Visualizing Data Gaps](./example/data-gap-vis.md) -->
 
 # Python Library
 - [Nadi Py](python.md)
@@ -75,6 +75,7 @@
   - [Connections](plugins/connections.md)
   - [Core](plugins/core.md)
   - [Debug](plugins/debug.md)
+  - [Files](plugins/files.md)
   - [Logic](plugins/logic.md)
   - [Regex](plugins/regex.md)
   - [Render](plugins/render.md)
@@ -84,7 +85,8 @@
   - [Visuals](plugins/visuals.md)
 - [External Plugins](plugins/intro-ex.md)
   - [Dams](plugins/dams.md)
-  - [Data Fill](plugins/datafill.md)
+  - [DataFill](plugins/datafill.md)
+  - [DSS](plugins/dss.md)
   - [Errors](plugins/errors.md)
   - [Fancy Print](plugins/fancy_print.md)
   - [Gnuplot](plugins/gnuplot.md)
@@ -94,13 +96,14 @@
   - [GIS](plugins/gis.md)
   - [Print Node](plugins/print_node.md)
   - [Streamflow](plugins/streamflow.md)
+  - [Nadi PDF](plugins/nadi_pdf.md)
 
 # Developer Reference
 - [Data Structure](./devref/data-structures.md)
   - [Node](./devref/node.md)
   - [Network](./devref/network.md)
   - [Timeseries](./devref/timeseries.md)
-  - [String Templates](./devref/string-templates.md)
+  - [String Templates](./devref/string_templates.md)
   - [Tables](./devref/tables.md)
   - [File Templates](./devref/file-templates.md)
   - [Tasks](./devref/tasks.md)

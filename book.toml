@@ -23,7 +23,7 @@ enable = true
 runnable = false
 line-numbers = true
 
-# [output.typst]
+[output.typst]
 # [output.typst.output]
 # format = "pdf"
 

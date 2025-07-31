@@ -46,7 +46,7 @@ env attributes.parse_attrmap(toml: 'String')
 ### Arguments
 - `toml: 'String'` => String to parse into attribute
 
-Parse attribute from string
+Parse attribute map from string
 
 ```task
 env assert_eq(parse_attrmap("y = true"), {y = true})

@@ -13,4 +13,7 @@ make an github issue, we will try to accomodate it if it fits within
 the scope of the program.
 </div>
 
+
 [The PDF version of this book (Experimental)](./data/nadi-book.pdf)
+
+The PDF Book is generated using automated script, so it might have some problems, please refer to the web version of the Nadi Book if there are problematic/incomplete contents.
