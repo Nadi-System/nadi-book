@@ -76,6 +76,7 @@ yet, and many of the concepts explained in this book might not work
 yet.
 
 
+
 If you still want to use it for your projects, please do them with the
 knowledge that the API might change in next versions, and you might
 have to keep it updated until the system is stable. If you have any
@@ -85,11 +86,10 @@ the scope of the program.
 
 ]
 
+
 #link("./data/nadi-book.pdf")[The PDF version of this book (Experimental)]
 
-
-
-The PDF Book is generated using automated script, so it might have some problems, please refer to the web version of the Nadi Book if there are problematic/incomplete contents.
+The PDF Book is generated using automated script, so it might have some problems, please refer to the web version of the NADI Book if there are problematic/incomplete contents.
 
 
 
@@ -98,10 +98,12 @@ The PDF Book is generated using automated script, so it might have some problems
 *Acknowledgements:*\
 
 
+
 Thank you everyone who has been consistently testing this software throughout the development and providing feedbacks. Specially the members of Water System Analysis Lab in University of Cincinnati.
 
 
 *Funding:*\
+
 
 
 Grant: \#W912HZ-24-2-0049 Investigators: Ray, Patrick 09-30-2024 -- 09-29-2025 U.S. Army Corps of Engineers Advanced Software Tools for Network Analysis and Data Integration (NADI) 74263.03 Hold Level:Federal
@@ -113,20 +115,18 @@ Grant: \#W912HZ-24-2-0049 Investigators: Ray, Patrick 09-30-2024 -- 09-29-2025 U
 == What is NADI System?
 
 
+
 Network Analysis amd Data Integration (NADI) System is a system of programs made to make network based data analysis easier and more accessible.
-
-
 
 It consists of multiple tools, that perform two important functions, network detection and network analysis. First part is done throuh the *Geographic Information (GIS) Tool*, while the second part is done using a *Domain Specific Programming Language (DSPL)* called NADI Task system.
 
 
-
-
-#figure(image("./images/nadi-workflow-simple.svg"), caption: [Nadi Workflow])
+#figure(image("./images/nadi-workflow-simple.svg"), caption: [NADI System Workflow])
 
 
 
 == Why use NADI System?
+
 
 
 Hydrologic modeling involves the integration of diverse data to
@@ -139,11 +139,7 @@ from data interpretation and scientific inquiry. Efficient methods are
 needed to automate these tasks, allowing researchers to focus on
 higher-level analysis and translation of their findings.
 
-
-
 Current solution to that problem is to either use general purpose programming languages like Python, R, Julia, etc., or use domain specific software packages to increase the reliability of the tasks. Domain Specific Programming Languages (DSPLs) like the NADI Task system provides better syntax for domain specific tasks, while also are general purpose enough for users to extend it for their use cases. NADI System is trying to be the software framework that can connect those two by integrating with various softwares and providing a intuitive way to do network based data analysis.
-
-
 
 Some example functionality of NADI system includes:
 
@@ -156,9 +152,8 @@ Some example functionality of NADI system includes:
 === Network Based Data Analysis
 
 
+
 If you have data that are network based, like in case of data related to points in a river. NADI provides a text representation of the network that can be manually created with any text editor, or through NADI GIS tool.
-
-
 
 Some domains where the data are network based (directed tree graph) are:
 
@@ -172,9 +167,8 @@ Some domains where the data are network based (directed tree graph) are:
 === Task System
 
 
+
 The Domain Specific Programming Language (DSPL) developed for network analysis in NADI makes network analysis simple and intutive. So, it is easier to understand, interpret and catch mistakes. While the NADI IDE has network visualization tools built in that can help you visualiza the network attributes for visual analysis.
-
-
 
 For example, implementing "cumulative sum of streamflow" in nadi:
 
@@ -182,6 +176,7 @@ For example, implementing "cumulative sum of streamflow" in nadi:
 ``````task
 node<inputsfirst>.cum_sf = node.streamflow + sum(inputs.streamflow);
 ``````
+
 
 
 The trying to do this in Python while making sure input nodes are run before the output. So you might have to write a recursive algorithm like this:
@@ -196,6 +191,7 @@ cum_sf(network.outlet())
 ``````
 
 
+
 While a common mistake people might make is to write a simple loop like this:
 
 
@@ -207,10 +203,12 @@ for node in network.nodes():
 ``````
 
 
+
 Which doesn't make sure input nodes are run before output in this case, and can error out when some variables are not present. NADI provides special syntax for cases where you can make sure variables exist before running something.
 
 
 === Extensibility
+
 
 
 NADI has two types of plugin systems, which means users can write their own analysis in any programming language and have it interact with NADI through attributes, or they can write it in rust and have even more direct interaction.
@@ -221,9 +219,8 @@ NADI has two types of plugin systems, which means users can write their own anal
 #htmlblock("warning")[If you are a developer and want an API documentation for the data types used in the NADI Rust library refer to the [docs.rs `nadi_core` page](https://docs.rs/nadi_core/latest/nadi_core/). But if you want to understand the core concepts, use cases, and examples then proceed.
 ]
 
+
 This book has sections explaining the concepts of the NADI system, its developmental notes, user guide and developer guide.
-
-
 
 Hence it can be useful for people who:
 
@@ -234,9 +231,8 @@ Hence it can be useful for people who:
 - Want to contribute to the NADI system packages, etc.
 
 
+
 Although not intended, it might include resources and links to other materials related to Rust concepts, Geographical Information System (GIS) concepts, Hydrology concepts, etc. that people could potentially benefit from.
-
-
 
 Please note that, this book assumes you have some knowledge of programming, like control flow, loops, functions, variables, etc. As as well some knowledge of GIS if you are reading network detection + GIS visualization specific functions. Those concepts will not be covered in this book. And if you are reading the developer reference or compiled plugin development, some knowledge of rust is assumed, but this is not necessary for the users of NADI that will only write code in NADI.
 
@@ -245,19 +241,21 @@ Please note that, this book assumes you have some knowledge of programming, like
 #heading(level:1)[How to use this book]
 
 
+
 You can read this book sequentially to understand the concepts used in the NADI system. And then go through the references sections for a specific use cases you want to get into the details of.
 
 
 - If you are in a hurry, but this is your first time reading this book,
-at least read the #link("./intro.md")[Core Concepts], then refer to the
+at least read the #link("./system/intro.md")[Core Concepts], then refer to the
 section you are interested in.
 - If you want to know a specific details, click on the search icon at the top left of the book to get the search bar. You can search text there and visit the pages.
 - If you want to learn about the QGIS Plugin, NADI GIS, goto "Network Detection (GIS)" section.
 - If you want to learn about the Domain Specific Programming Language (DSL), refer to the "Network Analysis (DSL)" section.
 - #link("./learn-examples.md")[Learn by Example] contains some simple examples you can follow to learn the basic syntax of the Task System.
-- If you want more detailed examples of the use of Task System, refer to the "Slightly Complex Examples" section.
+- If you want more detailed examples of the use of Task System, refer to the chapters in "Example Research Problems" section on the sidebar.
 
 - If you want reference for functions used in Task System goto "Plugin Functions", the #link("./plugins/intro.md")[Internal Plugins] section contains details on the functions that are available with nadi system, while the external plugins are plugins that were loaded while this book was compiled.
+
 
 
 If you have suggestions on the formatting, or arrangement of chapters in this book, please make an issue on #link("https://github.com/Nadi-System/nadi-book")[the GitHub repository for this book].
@@ -266,21 +264,16 @@ If you have suggestions on the formatting, or arrangement of chapters in this bo
 == Code Blocks
 
 
+
 The code blocks will have example codes for various languages, most common will be `string template`, `task`, `python`, and `rust` codes.
-
-
 
 String template and task have custom syntax highlights that is
 intended to make it easier for the reader to understand different
 semantic blocks.
 
-
-
 For `task` scripts/functions, if relevant to the topic, they might
 have `Results` block following immediately showing the results of the
 execution.
-
-
 
 For example:
 
@@ -289,6 +282,7 @@ For example:
 network load_file("./data/mississippi.net")
 node[ohio] render("{_NAME:case(title)} River")
 ``````
+
 
 
 Results:
@@ -301,6 +295,7 @@ Results:
 ``````
 
 
+
 Task and Rust code block might also include lines that are needed to
 get the results, but hidden due to being irrelevant to the
 discussion. In those cases you can use the eye icon on the top right
@@ -309,6 +304,7 @@ icon to copy the visible code into clipboard.
 
 
 == String Template Syntax Highlight
+
 
 
 The syntax highlight here in this book makes it so that any unknown
@@ -320,11 +316,10 @@ This shows var = {var:unknown()}, {_var:case(title)}
 ``````
 
 
+
 Besides this, the syntax highlight can help you detect the variables
 part (within `{}`), lisp expression (within `=()`), or commands
 (within `$()`) in the template.
-
-
 
 Note: commands are disabled, so they won't run during template
 rendering process. But if you are rendering a template to run as a
@@ -337,10 +332,12 @@ command, then they will be executed during that process.
 == How to Cite
 
 
+
 The sections below show you a bibliography entry in ASCE format, and BibTeX format that you can copy.
 
 
 === Journal Papers: TODO
+
 
 
 The papers are currently still being worked on, and will be added here when they are published.
@@ -349,9 +346,8 @@ The papers are currently still being worked on, and will be added here when they
 === This book
 
 
+
 You can cite the link to this book as follows Make sure to replace Accessed Data by today's date.
-
-
 
 Atreya, G. 2025. “Network Analysis and Data Integration (NADI).” Accessed May 1, 2025. https://nadi-system.github.io/.
 
@@ -366,7 +362,8 @@ Atreya, G. 2025. “Network Analysis and Data Integration (NADI).” Accessed Ma
 }
 ``````
 
-== Works using Nadi System
+== Works using NADI System
+
 
 
 Atreya, G., G. Mandavya, and P. Ray. 2024. “Which came first? Streamgages or Dams: Diving into the History of Unaltered River Flow Data with a Novel Analytical tool.” H51L-0865.
@@ -389,17 +386,16 @@ Atreya, G., G. Mandavya, and P. Ray. 2024. “Which came first? Streamgages or D
 
 
 #pagebreak()
-#set page(header:[#h(1fr) Nadi System Setup])
-#bookpart()[Nadi System Setup]
+#set page(header:[#h(1fr) NADI System Setup])
+#bookpart()[NADI System Setup]
 
 #heading(level:1)[Introduction]
 
 == Network Analysis and Data Integration (NADI)
 
 
+
 NADI is group of software packages that facilitate network analysis and do data analysis on data related to network/nodes.
-
-
 
 NADI System consists of:
 
@@ -412,17 +408,19 @@ NADI System consists of:
 
 
 
+
 The github repositories consisting of source codes:
 
 
 #table(
   columns: 2,
   table.header([*Repo*], [*Tool*]),
-  [#link("https://github.com/Nadi-System/nadi-gis")[nadi-gis]], [Nadi GIS], [#link("https://github.com/Nadi-System/nadi-system")[nadi-system]], [Nadi CLI/ IDE/ Core], [#link("https://github.com/Nadi-System/nadi-plugins-rust")[nadi-plugins-rust]], [Sample Plugins], [#link("https://github.com/Nadi-System/nadi-book")[nadi-book]], [Source for this Nadi Book]
+  [#link("https://github.com/Nadi-System/nadi-gis")[nadi-gis]], [Nadi GIS], [#link("https://github.com/Nadi-System/nadi-system")[nadi-system]], [Nadi CLI/ IDE/ Core], [#link("https://github.com/Nadi-System/nadi-plugins-rust")[nadi-plugins-rust]], [Sample Plugins], [#link("https://github.com/Nadi-System/nadi-book")[nadi-book]], [Source for this NADI Book]
 )
 
 
 === Workflow
+
 
 
 A Typical workflow in NADI System consists of the follwing 4 processes:
@@ -435,34 +433,29 @@ A Typical workflow in NADI System consists of the follwing 4 processes:
 5. Post Process
 
 
+
 The figure below shows the order of how the components of the NADI System (blue) is used along side external tools (black).
 
 
+#figure(image("./images/venn-diagram.svg"), caption: [NADI System Workflow])
 
 
-#figure(image("./images/venn-diagram.svg"), caption: [Nadi Workflow])
+Here the numbers in red circles are the order of use for different tools. Here the "Run Tasks" step represents running the NADI DSL Code in the System, so it is further divided into the tasks inside the code. The numbers on the blue circles show a typical use case of the DSL to perform a research work.
 
-
-
-
-Here the numbers in red circles are the order of use for different tools. Here the "Run Tasks" step represents running the Nadi DSL Code in the System, so it is further divided into the tasks inside the code. The numbers on the blue circles show a typical use case of the DSL to perform a research work.
-
-
-
-For exact details on what a typical research workflow involving the Nadi DSL is, refer to the examples.
+For exact details on what a typical research workflow involving the NADI DSL is, refer to the examples.
 
 
 === NADI GIS
 
 
+
 Geographic Information (GIS) Tool for Network Detection. The main purpose of the NADI GIS is to find the network connectivity between a set of points using a stream network (which can be developed from elevation models, or downloaded from national databases).
-
-
 
 NADI GIS can be used as a terminal command or QGIS plugin, refer to #link(<installation:nadi-gis>)[installation] section for how to install it.
 
 
 === NADI Task System
+
 
 
 Task System is a Domain Specific Programming Language (DSL) that is designed for river network analysis. This is the main core of the network analysis. This is included when you install NADI as a library, CLI or GUI.
@@ -471,9 +464,8 @@ Task System is a Domain Specific Programming Language (DSL) that is designed for
 === NADI Plugins
 
 
+
 The functions available to call in the task system comes from plugins. There are many internal plugins with core functions already available, while users can load their own plugins for other functions.
-
-
 
 Refer to the plugins section of the book for more details on how to use plugins, how to write them and what to keep in mind while using them.
 
@@ -481,9 +473,8 @@ Refer to the plugins section of the book for more details on how to use plugins,
 === NADI libraries
 
 
+
 Rust and Python library to use in your programs. Rust library `nadi_core` is available to download/use from `cargo` with the command `cargo add nadi_core`.
-
-
 
 While Python library requires you to clone the repo and build it with `maturin` (for now).
 Future plan for it includes publishing it in pypi.
@@ -492,9 +483,8 @@ Future plan for it includes publishing it in pypi.
 ==== Rust Libraries
 
 
+
 If you are not writing your own rust programs or plugins, you can skip this section.
-
-
 
 There are three rust libraries:
 
@@ -507,10 +497,12 @@ There are three rust libraries:
 
 
 
+
 Everything is loaded by `nadi_core` so you don't need to load them separately.
 
 
 ==== NADI Python
+
 
 
 While using NADI from python library, you only have access to nadi data types (Node, Network, etc), and the plugin functions, which are enough for most cases as python language syntax, variables, loops etc will give you a lot of flexibility on how to do your own analysis. The python module is structured as follows:
@@ -529,6 +521,7 @@ nadi [contains Node, Network, etc]
    | +-- env [contains env functions]
    +-- <next-plugin> and so on ...
 ``````
+
 
 
 The functions are available directly through `functions` submodule, or through each plugin in `plugins` submodule. An example python script looks like this:
@@ -551,9 +544,8 @@ for node in net.nodes:
 ``````
 
 
+
 This code shows how to load a network, how to loop through the nodes, and use python logic, or use nadi functions for the node and assign attributes.
-
-
 
 More detail on how to use NADI from python will be explained in NADI Python chapter.
 
@@ -561,13 +553,10 @@ More detail on how to use NADI from python will be explained in NADI Python chap
 === NADI CLI
 
 
+
 Command Line Interface to run NADI Tasks.
 
-
-
-This can run nadi task files, syntax highlight them for verifying them, generate markdown documentations for the plugins. The documentations included in this book (#link("plugins/index.md")[Function List] and each plugin's page like #link("plugins/attrs.md")[Attributes Plugin `attrs`]) are generated with that. The documentation on each plugin functions comes from their docstrings in the code, please refer to how to write plugins section of the book for details on that.
-
-
+This can run nadi task files, syntax highlight them for verifying them, generate markdown documentations for the plugins. The documentations included in this book (#link("plugins/index.md")[Function List] and each plugin's page like #link("plugins/attributes.md")[Attributes Plugin `attributes`]) are generated with that. The documentation on each plugin functions comes from their docstrings in the code, please refer to how to write plugins section of the book for details on that.
 
 The available options are shown below.
 
@@ -599,9 +588,8 @@ Options:
 === NADI IDE
 
 
+
 NADI Integrated Development Environment (IDE) is a Graphical User Interface (GUI) for the users to write/ run NADI Tasks.
-
-
 
 As seen in the image below, IDE consists of multiple components arranged in a tiling manner. You can drag them to move them around and build your own layout. When you start IDE it suggests you some layouts and what to open. You can use the buttons on the top right of each pane to:
 
@@ -614,9 +602,8 @@ As seen in the image below, IDE consists of multiple components arranged in a ti
 
 
 
+
 #figure(image("./images/ide-screenshot.png"), caption: [Screenshot of NADI IDE])
-
-
 
 
 It has the following components:
@@ -625,22 +612,18 @@ It has the following components:
 ==== Text Editor
 
 
+
 Open text files, edit and save them.
-
-
 
 It comes with syntax highlighting for most languages. And custom highlight for tasks and network files.
 
-
-
 For Tasks file, it can also show you function signatures on top so you can write tasks easily, knowing what arguments the function needs and what the default values are.
-
-
 
 While open inside IDE, it can also run the tasks by sending them to the terminal, or search help documentations on functions. Hover over the buttons on the top row to see which button does what, and the keyboard shortcut to use them as well.
 
 
 ==== Terminal
+
 
 
 Terminal is there so you can run NADI in a interactive session. Read Eval Print Loop (REPL) of NADI here is meant mostly to be used inside the IDE to evaluate the tasks from editor, but you can open it independently as well.
@@ -649,14 +632,14 @@ Terminal is there so you can run NADI in a interactive session. Read Eval Print 
 ==== Function Help
 
 
+
 This is a GUI with the list of all available plugin functions. You can expand the sidebar on left to search and browse functions. You can filter by type of function (node, network, env) with the buttons. When you click a function you can read its documentation on the right side.
-
-
 
 Capabilities of the `iced` GUI libraries are limited right now, so you cannot select or copy text from the help. Please refer to the documentation online to do that. Or generate the documentation locally using `nadi-cli` tool.
 
 
 ==== Network Viewer
+
 
 
 This is a pane where network is visualized, this is a very basic visualization to see the connections and is not optimized for drawing. Please avoid using this pane (making it visible) in case of large networks as it takes a lot of computation to draw this each frame.
@@ -665,10 +648,12 @@ This is a pane where network is visualized, this is a very basic visualization t
 ==== Attribute Browser
 
 
+
 When you click on a node on Network Viewer it will open/update showing the attributes of that node. There is no way to edit the attributes from here, which is intensional design as attributes should be assigned from tasks so that they are reproducible. For temporary assignments use the terminal.
 
 
 ==== SVG Viewer
+
 
 
 This is a basic utility that can open a SVG file from disk and visualize it. You can click the refresh button to re-read the same file. This is intended for a quick way to check the SVG saved/exported from tasks. This is not a full fledge SVG renderer, so open them in image viewers or browsers to see how it looks.
@@ -688,7 +673,8 @@ related analysis.
 == Installation
 
 
-Nadi System is a suite of software packages each have different
+
+NADI System is a suite of software packages each have different
 installation methods. Some of the packages are uploaded to `crates.io`
 (rust) and `pypi` (python).  For others, you can either get the
 compiled binaries from the Releases page of the
@@ -699,8 +685,9 @@ github repo [windows]. Or you can get the source code using `git`, and using
 #table(
   columns: 5,
   table.header([*Program*], [*Linux*], [*Windows*], [*Mac*], [*Android (Termux)*]),
-  [Nadi CLI], [yes], [yes], [yes], [yes], [Nadi IDE], [yes], [yes], [yes], [no], [mdbook nadi], [untested], [yes], [untested], [yes], [Nadi-py], [yes], [yes], [yes], [yes], [QGIS Plugin], [yes], [yes], [untested], [no]
+  [NADI CLI], [yes], [yes], [yes], [yes], [NADI IDE], [yes], [yes], [yes], [no], [mdbook nadi], [untested], [yes], [untested], [yes], [`nadi-py`], [yes], [yes], [yes], [yes], [QGIS Plugin], [yes], [yes], [untested], [no]
 )
+
 
 
 
@@ -710,12 +697,14 @@ Untested means it should work in theory, but I have not tested it.
 === Packages
 
 
+
 For `nadi-py` you can use `pip`:
 
 
 ``````bash
 pip install nadi-py
 ``````
+
 
 
 For `nadi-cli` you can use `cargo`:
@@ -728,6 +717,7 @@ cargo install nadi
 == Downloading Binaries
 
 
+
 Goto the repo of each component and refer to the releases section for binaries of different versions.
 
 
@@ -736,13 +726,10 @@ Goto the repo of each component and refer to the releases section for binaries o
 - #link("https://github.com/Nadi-System/nadi-plugins-rust/releases")[plugins binaries]
 
 
+
 To setup the nadi-systm to load the plugins you have to place them inside the directory included in the `NADI_PLUGIN_DIRS` environmental variable. Refer to your Operating System's documentation on how to set environemental variables.
 
-
-
 The binaries should be able to run directly without needing extra steps. If you get a security warnings because the binaries are not signed, you might have to ignore it.
-
-
 
 For QGIS Plugin, you can install it from Plugins Wizard on QGIS if you turn on experiemental plugins. But the `nadi-gis` binary should be available from PATH (i.e. you can call it from terminal).
 
@@ -750,10 +737,12 @@ For QGIS Plugin, you can install it from Plugins Wizard on QGIS if you turn on e
 == Building from Source
 
 
+
 This is currently the preferred way of installing `nadi-system` (and `nadi-gis` for Linux and MacOS). Although it includes a bit more steps this makes sure the compiled program is compatible with your OS.
 
 
 === Prerequisites
+
 
 
 The prerequisites for building from source are:
@@ -764,17 +753,12 @@ The prerequisites for building from source are:
 - `gdal` [Optional]: Only for `nadi_gis` binary and plugin.
 
 
+
 To install `git` refer to the instructions for your operating system from the #link("https://git-scm.com/downloads")[official page].
-
-
 
 For `cargo` follow the instructions to install rust toolsets for your operating system from the #link("https://www.rust-lang.org/tools/install")[official page]
 
-
-
 Installing `gdal` can be little complicated for windows. For Linux, use your package manager to install `gdal` and/or `gdal-dev` package. Mac users can also install `gdal` using #link("https://brew.sh/")[`homebrew`]. For windows, follow the instructions from #link("https://gdal.org/en/stable/download.html#windows")[official website], after installation you might have to make some changes to environmental variables to let `cargo` know where your `gdal` binaries/header files are for the compilation to be successful. More details will be provided in the NADI GIS section.
-
-
 
 If you use Linux or Mac (with homebrew), then the installation of prerequisites should be easy. But if you do not have the confidence to setup `gdal` for compiling `nadi_gis` use the binaries provided for them from the previous steps.
 
@@ -782,9 +766,8 @@ If you use Linux or Mac (with homebrew), then the installation of prerequisites 
 === NADI System
 
 
+
 It will build the binaries for `nadi`, `nadi-ide`, `nadi-help`, `nadi-editor`, etc. `nadi` is the command line interface to run nadi tasks, parse/validate syntax etc. While `nadi-ide` is the program to graphically develop nadi tasks and run them.
-
-
 
 Assuming you have `git` and `cargo`,
 
@@ -796,9 +779,8 @@ cargo build --release
 ``````
 
 
+
 To run one of the binary from nadi system, use the command `cargo run` with binary name.
-
-
 
 For example, the following will run the `nadi-ide`:
 
@@ -808,13 +790,10 @@ cargo run --release --bin nadi-ide
 ``````
 
 
+
 The compiled binaries will be saved in the `target/release` directory, you can copy them and distribute it. The binaries do not need any other files to run.
 
-
-
 The plugins files if present in the system are automatically loaded from `NADI_PLUGIN_DIRS` environmental variable. Look into installing the plugin section below.
-
-
 
 Note: all programs will compile and run in Windows, Linux, and MacOS, while only `nadi-cli` and `mdbook-nadi` will run in Android (tmux). `nadi-ide` and family need the GUI libraries that are not available for android (tmux) yet.
 
@@ -822,10 +801,12 @@ Note: all programs will compile and run in Windows, Linux, and MacOS, while only
 === NADI GIS <installation:nadi-gis>
 
 
+
 NADI GIS uses `gdal` to read/write GIS files, so it needs to be installed. Please refer to #link("https://gdal.org/en/stable/download.html")[gdal installation documentation] for that.
 
 
 ==== Windows
+
 
 
 First download compiled gdal from here:
@@ -836,6 +817,7 @@ Then download clang from here:
 - https://github.com/llvm/llvm-project/releases
 
 
+
 Extract it into a folder, and then set environmental variables to point to that:
 
 
@@ -844,9 +826,8 @@ Extract it into a folder, and then set environmental variables to point to that:
 - `GDAL_HOME`: Path to the `gdal` that has the subdirectories like `bin`, `lib`, etc.
 
 
+
 You can also follow the errors from the rust compilers as you compile to set the correct variables.
-
-
 
 Finally you can get the source code and compile `nadi-gis` with the following command:
 
@@ -858,10 +839,12 @@ cargo build --release
 ``````
 
 
+
 This will generate the `nadi-gis` binary and `gis.dll` plugin in the `target/release` folder, they need to be run along side the `gdal` shared libraries (`.dll`s). Place the binaries in the same folder as the `dll`s from `gdal` and run it. To use the `gis.dll` plugin from `nadi`, `nadi-ide`, etc. same thing applies there, those binaries should be run with the `gdal`'s `dll`s to be able to load the `gis` plugin.
 
 
 ==== Linux and Mac
+
 
 
 Assuming you have `git`, `cargo`, and `gdal` installed in your system you can build it like this:
@@ -874,9 +857,8 @@ cargo build --release --features bindgen
 ``````
 
 
+
 The `bindgen` feature will link the `nadi-gis` binary with the `gdal` from your system. So that you do not have to distribute `gdal` with the binary for your OS.
-
-
 
 If you do not have `gdal` installed in your system, then you can still build the nadi-gis without the `bindgen` feature. This will still require `gdal` to be available and distributed with the binary.
 
@@ -888,37 +870,30 @@ cargo build --release
 ==== QGIS Plugin
 
 
+
 The `nadi-gis` repo also contains the QGIS plugin that can be installed to run it through QGIS. The plugin will use the `nadi-gis` binary in your `PATH` if available. And it also contains the nadi plugin that can be loaded into the nadi system to import/export GIS files into/from the system.
 
-
-
 You can download the zip file for plugin from releases page, and use the "Install from Zip" option on QGIS plugins tab. Or copy the `nadi` directory inside `qgis` to your python plugin directory for qgis.
-
-
 
 Refer to the #link("https://docs.qgis.org/3.40/en/docs/training_manual/qgis_plugins/fetching_plugins.html")[QGIS plugins page] for more instructions. In future we are planning on publishing the plugin so that you can simply add it from QGIS without downloading from here.
 
 
-==== Nadi GIS Plugin
+==== NADI GIS Plugin
 
 
-The nadi plugin on this repo provides the functions to import attributes, geometries from GIS files, and export them into GIS files.
+
+The NADI plugin on this repo provides the functions to import attributes, geometries from GIS files, and export them into GIS files.
 
 
-=== Nadi Plugins
+=== NADI Plugins
 
 
-Out of the two types of plugins, the executable plugins are just simple commands, they do not need to be installed along side nadi, just make sure the executables that you are using from `nadi` can be found in path. A simple way to verify that is to try to run that from terminal and see if it works.
 
-
+Out of the two types of plugins, the executable plugins are just simple commands, they do not need to be installed along side NADI System, just make sure the executables that you are using from NADI System can be found in path. A simple way to verify that is to try to run that from terminal and see if it works.
 
 The compiled plugins can be loaded by setting the `NADI_PLUGIN_DIRS` environmental variable. The environment variable should be the path to the folder containing the nadi plugins (in `.dll`, `.so`, or `.dylib` formats for windows, linux and mac). You can write your own plugins based on our examples and compile them.
 
-
-
 Officially available plugins are in the `nadi-plugins-rust` directory.
-
-
 
 Assuming you have `git` and `cargo`,
 
@@ -930,17 +905,17 @@ cargo build --release
 ``````
 
 
+
 The plugins will be inside the `target/release` directory. Copy them to the `NADI_PLUGIN_DIRS` directory for nadi to load them.
-
-
 
 You can take any one of the plugins as an example to build your own, or following the plugin development instructions from the plugins chapter.
 
 
 
 #heading(level:1)[Plugins]
-#htmlblock("warning")[Plugins allow users to extend the use case of the Nadi System by adding more functions or scripts. User are expected to only use plugins from trusted sources, or develop it in-house. Although the compiled plugin functions have their code exposed in their documentation for the transparency purposes even if the source code is not available, always make sure the plugin you run are not malicious.
+#htmlblock("warning")[Plugins allow users to extend the use case of the NADI System by adding more functions or scripts. User are expected to only use plugins from trusted sources, or develop it in-house. Although the compiled plugin functions have their code exposed in their documentation for the transparency purposes even if the source code is not available, always make sure the plugin you run are not malicious.
 ]
+
 
 There are two types of nadi plugins.
 Compiled plugins (shared libraries) are loaded dynamically from shared libraries, while executable plugins are called as shell commands. Refer to #link("./intro/plugins.md")[Plugins] section of core concepts for more details.
@@ -949,17 +924,12 @@ Compiled plugins (shared libraries) are loaded dynamically from shared libraries
 == Compiled Plugins
 
 
+
 Compiled plugins are shared libraries (`.so` in linux, `.dll` in windows, and `.dylib` on macOS). They can be generated by compiling the nadi plugin in rust, or you can download the correct plugin for your OS and `nadi_core` version from the plugin repositories. It is recommended to only use plugins from trusted source.
-
-
 
 To setup the nadi-systm to load the compiled plugins you have to place them inside the directory included in the `NADI_PLUGIN_DIRS` environmental variable. Refer to your Operating System's documentation on how to set environemental variables.
 
-
-
 The compiled plugins are loaded when NADI is starting up, there is no way to `hot load` or `reload` the plugins, so you need to reopen the nadi program itself (CLI, IDE, etc) if you want to load new/updated plugin functions.
-
-
 
 Once the plugins are loaded, the functions are directly available from the nadi task system, they'll act similar to the internal plugin functions.
 
@@ -967,13 +937,10 @@ Once the plugins are loaded, the functions are directly available from the nadi 
 == Executable Plugins
 
 
+
 Executable plugins are terminal commands, you set it up as you'd set any other terminal programs, by making sure the program is in `PATH` and can be executed from terminal. Linux and Mac do them mostly by default, while in Windows you might have to check the box saying something along the lines of "include this in path" during installation, or manually edit the `PATH` in "Environment Variables".
 
-
-
 For example, if you want to call python scripts, make sure you can run `python --version` in terminal and get a response.
-
-
 
 You can also check it using the `command` function:
 
@@ -983,6 +950,7 @@ network command("python --version", echo=true)
 network command("Rscript --version", echo=true)
 network command("julia --version", echo=true)
 ``````
+
 
 
 Results:
@@ -1000,9 +968,8 @@ julia version 1.11.6
 ``````
 
 
+
 Here we can see, the commands that ran successfully and returned a version are valid.
-
-
 
 To write scripts and run them from nadi refer to #link("plugin-dev/exe-plugins.md")[Executable Plugins] section on Plugin Developer Guide.
 
@@ -1012,12 +979,13 @@ To write scripts and run them from nadi refer to #link("plugin-dev/exe-plugins.m
 #set page(header:[#h(1fr) Network Detection (GIS)])
 #bookpart()[Network Detection (GIS)]
 
-#heading(level:1)[Nadi GIS]
+#heading(level:1)[NADI GIS]
 
-== Nadi GIS
+== NADI GIS
 
 
-Nadi GIS is available as a CLI tool and QGIS plugin, the CLI tool has the following functions:
+
+NADI GIS is available as a CLI tool and QGIS plugin, the CLI tool has the following functions:
 
 
 ``````
@@ -1038,6 +1006,7 @@ Options:
 ``````
 
 
+
 The important functions are:
 
 
@@ -1045,6 +1014,7 @@ The important functions are:
 - Check stream network for validity of DAG (Directed Acyclic Graph) required for NADI,
 - Stream ordering for visual purposes,
 - Network detection between points of interest using the stream network
+
 
 
 You can use the help command for each one of the subcommand for more help.
@@ -1083,14 +1053,11 @@ Options:
 == NADI QGIS
 
 
+
 The QGIS plugin for nadi has a subset of the CLI functionality. It can be accessed from the Processing Toolbox.
 
 
-
-
 #figure(image("gis/../images/qgis-processing.png"), caption: [QGIS Processing Toolbox])
-
-
 
 
 You can run the tools from there and use the layers in QGIS as inputs. The QGIS plugin will first try to find `nadi-gis` binary on your `PATH` and use it, if not it'll try to use the binary provided with the plugins. It is preferred to have `nadi-gis` available in `PATH` and running without errors.
@@ -1100,9 +1067,8 @@ You can run the tools from there and use the layers in QGIS as inputs. The QGIS 
 #heading(level:1)[Example]
 
 
+
 The examples here will be given using QGIS plugin, and using the CLI tool both. CLI tool is great for quickly running things, and doing things in batch, while QGIS plugin will be better on visualization and manual fixes using other GIS tools.
-
-
 
 If you want a video demostration, #link("https://youtu.be/PIGoVnXb7ck")[there is a Demo Video on YouTube].
 
@@ -1110,63 +1076,40 @@ If you want a video demostration, #link("https://youtu.be/PIGoVnXb7ck")[there is
 == Using QGIS Plugin
 
 
+
 First *downloading the data* is done through the `Download USGS Data` tool. As shown in the screenshot below, input the USGS site ID and the data type you want to download.
-
-
 
 
 #figure(image("gis/../images/qgis-download.png"), caption: [QGIS Download])
 
 
-
-
 You will need, `tributaries` for the upstream tributaries for network, and `nwis-site` will download the USGS NWIS sites upstream of the location. We will use those two for the example. If you have national data from other sources, you can use the basin polygon to crop them.
 
-
-
 *Stream Order* tool is mostly for visual purposes. The figure below shows the results from stream order on right compared to the raw download on left.
-
-
 
 
 #figure(image("gis/../images/qgis-order.png"), caption: [Stream Order Result])
 
 
-
-
 After you have streams (tributaries), you can use the *Check Streams* tool to see if there are any errors. It will give all the nodes and their categories, you can filter them to see if it has branches, or if it has more than one outlet. The figure below shows the branches with red dot. If we zoom in we can see how the bifurcation on the stream is detected, and how stream order calculation is confused there.
-
-
 
 
 #figure(image("gis/../images/qgis-branch.png"), caption: [Check Streams Result])
 
 
-
-
 *Find Connections* tool will find the connection between the points using the stream network. The results below shows the tool being run on the NWIS points.
-
-
 
 
 #figure(image("gis/../images/qgis-network.png"), caption: [Find Connections Result])
 
 
-
-
 If we select *simplify* option, it'll only save the start and end point of the connection instead of the whole stream.
-
-
 
 
 #figure(image("gis/../images/qgis-network2.png"), caption: [Find Connections Result Alt])
 
 
-
-
 Of course you can run *Stream Order* on the results to get a more aesthetically pleasing result.
-
-
 
 
 #figure(image("gis/../images/qgis-network3.png"), caption: [Find Connections Result with Order])
@@ -1176,10 +1119,12 @@ Of course you can run *Stream Order* on the results to get a more aesthetically 
 == Using CLI
 
 
+
 An example of running `nadi-gis` using CLI can be done in the following steps:
 
 
 === Download data
+
 
 
 We'll download the streamlines and the NWIS Sites from USGS for station 03217200 (Ohio River at Portsmouth, OH).
@@ -1190,6 +1135,7 @@ nadi-gis usgs -s 03217200 -d n -d t -o output/
 ``````
 
 
+
 This will download two files:
 
 
@@ -1198,12 +1144,14 @@ output/03217200_nwis-site.json  output/03217200_tributaries.json
 ``````
 
 
+
 Now we can use `check` command to see if there are any problems with the streams.
 
 
 ``````bash
 nadi-gis check output/03217200_tributaries.json
 ``````
+
 
 
 That gives us the following output:
@@ -1218,9 +1166,8 @@ Invalid Streams File: Branches (826)
 ``````
 
 
+
 We can generate a GIS file to locate the branches and see if those are significant. Refer to the `help` for `check` or use the QGIS plugin.
-
-
 
 And to find the connections, we use `network` subcommand like this:
 
@@ -1228,6 +1175,7 @@ And to find the connections, we use `network` subcommand like this:
 ``````bash
 nadi-gis network -i output/03217200_nwis-site.json output/03217200_tributaries.json
 ``````
+
 
 
 Output:
@@ -1249,9 +1197,8 @@ Outlet: 3221 (-82.996916801, 38.727624498) -> None
 ``````
 
 
+
 Since this is not as useful, we can use the flags in the `network` subcommand to use a different id, and save the results to a network file.
-
-
 
 First we can use `layers` subcommand to see the available fields in the file:
 
@@ -1259,6 +1206,7 @@ First we can use `layers` subcommand to see the available fields in the file:
 ``````bash
 nadi-gis layers output/03217200_nwis-site.json -a
 ``````
+
 
 
 which gives us:
@@ -1280,12 +1228,14 @@ which gives us:
 ``````
 
 
+
 Using `comid` as the id for points, and saving the results:
 
 
 ``````bash
 nadi-gis network -i output/03217200_nwis-site.json output/03217200_tributaries.json -p comid -o output/03217200.network
 ``````
+
 
 
 The `output/03217200.network` file will have the connections like:
@@ -1302,6 +1252,7 @@ The `output/03217200.network` file will have the connections like:
 ``````
 
 
+
 Make sure you use a field with unique name, and valid identifier in NADI System.
 
 
@@ -1315,17 +1266,12 @@ Make sure you use a field with unique name, and valid identifier in NADI System.
 == Getting Started
 
 
-This section walks you throuh the process of using Nadi system through the CLI and IDE.
 
-
+This section walks you throuh the process of using NADI system through the CLI and IDE.
 
 Network analysis is done through the Domain Specific Programming Language. This is the main feature of NADI.
 
-
-
 You can run the DSL, called tasks through the CLI, or through the IDE. Refer to the #link("./installation.md")[Installation] for how to install them.
-
-
 
 Recommended way to develop/write nadi tasks is with IDE, while CLI can be used to automate/batch run it once the tasks are finalized.
 
@@ -1333,9 +1279,8 @@ Recommended way to develop/write nadi tasks is with IDE, while CLI can be used t
 === Command Line Interface (CLI)
 
 
+
 NADI CLI is available as `nadi` command when you have it installed. You can run it in interactive mode in a Read Eval Print Loop (REPL), or provide a file to run.
-
-
 
 So assuming you have the following contents in `sample.tasks` file:
 
@@ -1346,12 +1291,14 @@ node array(LEVEL, ORDER)
 ``````
 
 
+
 You run it with:
 
 
 ``````bash
 nadi sample.tasks
 ``````
+
 
 
 You should get the following output:
@@ -1365,9 +1312,8 @@ You should get the following output:
 ``````
 
 
+
 If you run nadi with `--repl` or `-r` flag, then it'll open a REPL. If you have a tasks file provided like before, it'll run the tasks in the file before entering a REPL, otherwise it'll start from empty context.
-
-
 
 For more details on other use of `nadi` command. Refer to the output of `nadi --help`. It has options for,
 
@@ -1381,23 +1327,16 @@ For more details on other use of `nadi` command. Refer to the output of `nadi --
 === Integrated Development Environment (IDE)
 
 
+
 NADI IDE contains multiple components to make it easier to write, edit, and run tasks, as well as visualize the network and browse the function documentation.
-
-
 
 
 #figure(image("./images/ide-screenshot.png"), caption: [IDE])
 
 
-
-
 As you can see, the main UI is divided into multiple panes, which are independent components that you can resize, arrange the way you want.
 
-
-
 First, when you start NADI IDE, you come up with this view:
-
-
 
 
 #figure(image("./images/ide-start.png"), caption: [IDE Greeting])
@@ -1412,22 +1351,15 @@ First, when you start NADI IDE, you come up with this view:
 6. Pane Contents
 
 
+
 The layout of each pane are similar, while each one will have their own contents. For example, "Function Help" contains the help for the plugin functions. We will go over each one in a separate chapter.
 
-
-
 You can choose a singular pane type here, or chose a combination of panes that feels more useful. Some panes like terminal/attribute views also spawn automatically (if not already in view) when you try to run tasks, or click nodes.
-
-
 
 Now, let's choose "Text Editor" for now, then we're greeted with this view:
 
 
-
-
 #figure(image("./images/ide-editor.png"), caption: [IDE Editor])
-
-
 
 
 Now, aside from the global components, we have:
@@ -1441,6 +1373,7 @@ Now, aside from the global components, we have:
 11. Line/Column of Cursor.
 
 
+
 As for the editor tools: you can hover over them to know their names, and shortcuts. We'll explain them shortly below in the left to right order,
 
 
@@ -1452,14 +1385,11 @@ As for the editor tools: you can hover over them to know their names, and shortc
 
 
 
+
 When yo run a line using "Run Line/Selection" it should spawn a terminal pane on the right side
 
 
-
-
 #figure(image("./images/ide-term.png"), caption: [IDE Terminal])
-
-
 
 
 Here we have:
@@ -1472,47 +1402,35 @@ Here we have:
 5. History: Search here for previous commands, clicking them will copy it to the Command Entry
 
 
+
 Upto here will be enough to run tasks. But the advantage of the IDE with a Graphical User Interface (GUI) comes in the form of network visualization. If you open the Network Viewer pane, either through the dropdown to change one of the pane. Or split the panes and open Network Viewer there, you can see the network visualized.
 
-
-
 The figure below shows the network viewer, and the attribute viewer (it spawns when you click on a node in the network) on the bottom right.
-
-
 
 
 #figure(image("./images/ide-screenshot.png"), caption: [IDE])
 
 
-
-
 You can click on the "<" button on the right side of the network viewer to expand the sidebar that has details on how to change the visual attributes of the nodes. You can run the examples in the code for testing them out as well.
-
-
 
 *Extra components of the IDE* includes the Function Help that you can use to browse the plugin functions' documentation, and SVG viewer that you can use to open SVG files. The SVG viewer is very primitive and only meant to be a quick check/update while you're fine tuning an exported SVG file, use dedicated softwares and web browsers for actual viewing.
 
-
-
 The function help looks like below:
-
-
 
 
 #figure(image("./images/ide-help.png"), caption: [IDE Help])
 
 
-
-
 The figure contains,
 
 
-1. Buttons for Reset, and links to Nadi Book and Github,
+1. Buttons for Reset, and links to NADI Book and Github,
 2. Buttons to filter search by function type,
 3. Text Entry to search the function,
 4. List of plugin functions,
 5. Bar to collapse/expand the function search sidebar, and
 6. Plugin function documentation content.
+
 
 
 Currently you cannot copy the code or any contents from the documentation, it is a limitation of the GUI library that might be fixed in the future. If you want to copy the text, refer to the web version of the function help (in NADI Book). Or use the `help [type] <function>` task. For example:
@@ -1521,6 +1439,7 @@ Currently you cannot copy the code or any contents from the documentation, it is
 ``````task
 help node render
 ``````
+
 
 
 Results:
@@ -1545,9 +1464,8 @@ node assert_eq(render("abc {x}"), "abc 13")
 ``````
 
 
+
 You can copy the example code from the output in the terminal.
-
-
 
 That should be enough for you to be able to use the GUI, in the next section we'll talk about the core concepts in NADI system that you need to understand, and then we'll show some examples you can run using what you learned in this chapter.
 
@@ -1556,51 +1474,34 @@ That should be enough for you to be able to use the GUI, in the next section we'
 #heading(level:1)[Core Concepts]
 
 
+
 This section contains a brief explanation of core concepts.
-
-
 
 The main concepts that you need to know are:
 
 
-- 
-
-*Attributes* are values, it can be float, integer, boolean, strings, or list of attributes, or a map of attributes (key=value),
+- *Attributes* are values, it can be float, integer, boolean, strings, or list of attributes, or a map of attributes (key=value),
 
 
-- 
-
-*Nodes* are points in the network, they can have attributes, input nodes and an output node,
+- *Nodes* are points in the network, they can have attributes, input nodes and an output node,
 
 
-- 
-
-*Network* is a collection of nodes, network can also have attributes, Network used in the Nadi system can have only one outlet, so a 'ROOT' node is added if there are multiple outlet. And loading a network that is not a directed tree is undefined behaviour.
+- *Network* is a collection of nodes, network can also have attributes, Network used in the NADI System can have only one outlet, so a 'ROOT' node is added if there are multiple outlet. And loading a network that is not a directed tree is undefined behaviour.
 
 
-- 
-
-*Expression* is something that can be evaluated or executed, it consists of literal values (attributes), variables (node, network, env variables that could hold attributes), function calls, or a mathmatical or logical operation.
+- *Expression* is something that can be evaluated or executed, it consists of literal values (attributes), variables (node, network, env variables that could hold attributes), function calls, or a mathmatical or logical operation.
 
 
-- 
-
-*Functions* in nadi are of 3 types, env functions are normal functions that take values and run, network functions take values and run on the network, while node functions run at each node (they also provide a way to subset which nodes to run it on).
+- *Functions* in nadi are of 3 types, env functions are normal functions that take values and run, network functions take values and run on the network, while node functions run at each node (they also provide a way to subset which nodes to run it on).
 
 
-- 
-
-*Task* is an execution body of the task system. It can be of env, network or node type. It can be conditional (If-Else) or loop (While) consisting of more tasks inside it. Task can assign values to the env/network/node attributes, or call mutable functions on the top level.
+- *Task* is an execution body of the task system. It can be of env, network or node type. It can be conditional (If-Else) or loop (While) consisting of more tasks inside it. Task can assign values to the env/network/node attributes, or call mutable functions on the top level.
 
 
-- 
-
-*String Template*: Some functions take string inputs that are interpreted dynamically to represent different strings based on variables.
+- *String Template*: Some functions take string inputs that are interpreted dynamically to represent different strings based on variables.
 
 
-- 
-
-*Plugins* provide the functions used by the nadi task system. There are internal plugins and external plugins. Internal plugins comes with the installation, while external plugins are loaded from dynamic libraries.
+- *Plugins* provide the functions used by the nadi task system. There are internal plugins and external plugins. Internal plugins comes with the installation, while external plugins are loaded from dynamic libraries.
 
 
 
@@ -1611,6 +1512,7 @@ The main concepts that you need to know are:
   table.header([*Keyword*], [*Description*]),
   [node], [the node task type, function or variable], [network/net], [the network task type, function or variable], [env], [the environment task type, function or variable], [exit], [exit the program], [end], [end the execution of tasks without exiting], [help], [display help for functions], [inputs], [get node variables or function output for input nodes of a node], [output], [get node variable or function output for output node of a node], [nodes], [get node variable or function output for all nodes in the network], [if], [if statement for conditional task/expression], [else], [else statement for conditional task/expression], [while], [while statement for loop task], [in], [binary operator to check if something is in another (list/string)], [match], [binary operator to check patterns on string (regex)]
 )
+
 
 
 
@@ -1625,6 +1527,7 @@ And here are some keywords reserved for future:
 
 
 == Symbols
+
 
 
 Some special symbols and their functions are listed below:
@@ -1642,11 +1545,10 @@ Some special symbols and their functions are listed below:
 - `#` starts a comment,
 
 
+
 There might be more functions of each symbol depending on the context.
 
-
-
-Continue with the chapters for details on each concept. Or skip ahead to #link("/learn-examples.md")[Learn by Examples] if you want to jump into the examples.
+Continue with the chapters for details on each concept. Or skip ahead to #link("../learn-examples.md")[Learn by Examples] if you want to jump into the examples.
 
 
 #heading(level:2)[Task]
@@ -1654,13 +1556,10 @@ Continue with the chapters for details on each concept. Or skip ahead to #link("
 === Task
 
 
+
 Task is an execution body in the task system. There are different types of tasks, specially environment, network and node type tasks, and there can be conditional tasks that only execute based on a condition or loops.
 
-
-
 Some examples of different tasks are given below to show a general overview, but the concepts inside the tasks system will be introduced as we progress through the chapters,
-
-
 
 Environment tasks that can evaluate expressions, assign variables, or call functions:
 
@@ -1673,6 +1572,7 @@ env.x
 ``````
 
 
+
 Results:
 
 
@@ -1683,6 +1583,7 @@ true
 ``````
 
 
+
 network task loading a network, and node task getting node attributes:
 
 
@@ -1690,6 +1591,7 @@ network task loading a network, and node task getting node attributes:
 network load_str("a->b\nb->c")
 node.NAME
 ``````
+
 
 
 Results:
@@ -1702,6 +1604,7 @@ Results:
   a = "a"
 }
 ``````
+
 
 
 Conditional and Loop task
@@ -1718,6 +1621,7 @@ while (val < 5) {
 ``````
 
 
+
 Results:
 
 
@@ -1730,16 +1634,13 @@ Results:
 ``````
 
 
+
 Tasks system acts like a scripting language for nadi system. A
 Task consists of getting/evaluating/setting attributes in environment, network or nodes. The value that can be evaluated are expressions that consists of literal values, variables, or function calls that can either be a environment, node or a network function. Functions are unique based on their names, and can
 have default values if users do not pass all arguments.
 
-
-
 The code examples throughout this book, that are being used to
 generate network diagrams, tables, etc are run using the task system.
-
-
 
 Here is an example contents of a more complex task file, do not concern with what each task does, we will go through them in other chapters.
 
@@ -1797,6 +1698,7 @@ node[WV04112 -> WV04113] render("=(> 2 3)")
 #heading(level:2)[Attributes]
 
 
+
 Attributes are #link("https://toml.io/en/")[TOML] like values. They can be one of the following types:
 
 
@@ -1808,9 +1710,8 @@ Attributes are #link("https://toml.io/en/")[TOML] like values. They can be one o
 
 
 
+
 You can write attributes directly into the task system to assign them, use them in functions. You can also load attributes from a file into the env/node/network.
-
-
 
 If you want to assign a attribute inside the task system, you can do it like this:
 
@@ -1821,12 +1722,14 @@ env.river
 ``````
 
 
+
 Results:
 
 
 ``````output
 "Ohio River"
 ``````
+
 
 
 Example Attribute File that can be loaded:
@@ -1845,6 +1748,7 @@ num_dams_gages = 2348
 ``````
 
 
+
 Here loading the files we can see only ohio has the attributes loaded
 
 
@@ -1853,6 +1757,7 @@ Here loading the files we can see only ohio has the attributes loaded
 node[ohio] load_attrs("./data/attrs/{_NAME}.toml")
 node.outlet
 ``````
+
 
 
 Results:
@@ -1871,6 +1776,7 @@ Results:
 ``````
 
 
+
 With plugins, you can load attributes from different file types.
 
 
@@ -1878,21 +1784,16 @@ With plugins, you can load attributes from different file types.
 #heading(level:2)[Node]
 
 
+
 A Node is a point in network. A Node can have multiple input nodes and
 only one output node. And a Node can also have multiple attributes
 identifiable with their unique name, along with timeseries values also
 identifiable with their names.
 
-
-
 If you understand graph theory, then node in nadi network is the same
 as a node in a graph.
 
-
-
-Nodes in Nadi are identified by their name, that is loaded from the network file. Node names are string values, even if they are integer or float, they are read and internally stored as strings. If the node name contains characters outside of alphanumeric and underscore (`_`), it has to be quoted.
-
-
+Nodes in NADI Network are identified by their name, that is loaded from the network file. Node names are string values, even if they are integer or float, they are read and internally stored as strings. If the node name contains characters outside of alphanumeric and underscore (`_`), it has to be quoted.
 
 i.e. valid names like `123` or `node_1` can appear unquoted or quoted, but names like `node-123` needs to be quoted: `"node-123"`.
 
@@ -1904,6 +1805,7 @@ node_1 -> \"node-123\"
 ")
 node.NAME
 ``````
+
 
 
 Results:
@@ -1919,6 +1821,7 @@ Results:
 #htmlblock("warning")[If the node name `node-123` appearing on the output is unquoted, it's a bug that will be fixed in the next version. It is harmless as long as you don't try to copy the output as a valid attribute value to load back into the system.
 ]
 
+
 If you do not quote the name, you'll get an error:
 
 
@@ -1926,6 +1829,7 @@ If you do not quote the name, you'll get an error:
 network load_str("123 -> node-1")
 node.NAME
 ``````
+
 
 
 \*Error\*:
@@ -1943,6 +1847,7 @@ Error in function load_str: Error: Parse Error at Line 1 Column 8
 === Network
 
 
+
 A Network is a collection of nodes. The network can also have
 attributes associated with it. The connection information is stored
 within the nodes itself. But Network will have nodes ordered based on
@@ -1950,12 +1855,8 @@ their connection information. So that when you loop from node from
 first to last, you will always find output node before its input
 nodes.
 
-
-
 A condition a nadi network is that it can only be a directed graph
 with tree structure.
-
-
 
 Example Network file:
 
@@ -1974,6 +1875,7 @@ red -> "lower-mississippi"
 ``````
 
 
+
 The given network can be loaded and visualized using `svg_save` function.
 
 
@@ -1988,12 +1890,15 @@ network svg_save(
 ``````
 
 
+
 Results:
 
 
 
 
+
 #figure(image("intro/../output/network-mississippi.svg"), caption: [])
+
 
 
 
@@ -2017,7 +1922,9 @@ network svg_save(
 ``````
 
 
+
 Results:
+
 
 
 
@@ -2030,9 +1937,8 @@ Results:
 #heading(level:2)[Expression]
 
 
+
 Expressions are airthmetic or logical operations. They can appear inside the conditional statements, or as input to a task, or nested in other expression or function calls.
-
-
 
 Expressions are defined into the following categories:
 
@@ -2042,6 +1948,7 @@ Expressions are defined into the following categories:
 ``````task
 env [1, true, "no maybe"]
 ``````
+
 
 
 Results:
@@ -2059,12 +1966,14 @@ env.value
 ``````
 
 
+
 Results:
 
 
 ``````output
 [1, true, "no maybe"]
 ``````
+
 
 
 Variables also have a "check" mode, where it returns true if variable exists, false if it does not.
@@ -2077,6 +1986,7 @@ env other_var?
 ``````
 
 
+
 Results:
 
 
@@ -2084,6 +1994,7 @@ Results:
 true
 false
 ``````
+
 
 
 You can also use use varible from node, or network in other context. For example:
@@ -2095,6 +2006,7 @@ network echo(json(env.value))
 ``````
 
 
+
 Results:
 
 
@@ -2103,11 +2015,10 @@ Results:
 ``````
 
 
+
 Special variable types like `nodes`, `inputs`, `output` are available besides `env`, `network` and `node` based on what type of task the expression is on.
 
-
-
-You will learn more about this on #link("/intro/cross-context.md")[Cross Context Functions and Variables] chapter.
+You will learn more about this on #link("cross-context.md")[Cross Context Functions and Variables] chapter.
 
 
 === Unary Operator
@@ -2116,6 +2027,7 @@ You will learn more about this on #link("/intro/cross-context.md")[Cross Context
 env !true
 env - 12.0
 ``````
+
 
 
 Results:
@@ -2136,6 +2048,7 @@ env "my name is" match "^my.*"
 ``````
 
 
+
 Results:
 
 
@@ -2153,6 +2066,7 @@ env if(!true) {"if true"} else {"if false"}
 ``````
 
 
+
 Results:
 
 
@@ -2168,6 +2082,7 @@ env get(value, 2)
 ``````
 
 
+
 Results:
 
 
@@ -2176,12 +2091,14 @@ Results:
 ``````
 
 
+
 Out of all expressions, only the function is not garanteed to return a value. If you are using a function expression and expect a value and it does not return it, it'll be a runtime error.
 
 
 ``````task
 env echo("Hello world!") + 12
 ``````
+
 
 
 \*Error\*:
@@ -2194,21 +2111,19 @@ Function echo did not return a value
 ``````
 
 
+
 Special function types like `nodes`, `inputs`, `output` are available besides `env`, `network` and `node` based on what type of task the expression is on.
 
-
-
-You will learn more about this on #link("/intro/cross-context.md")[Cross Context Functions and Variables] chapter.
+You will learn more about this on #link("cross-context.md")[Cross Context Functions and Variables] chapter.
 
 
 
 #heading(level:2)[String Template]
 
 
+
 String templates are strings with dynamic components that can be
 rendered for each node based on the node attributes.
-
-
 
 A simple template can be like below:
 
@@ -2219,19 +2134,19 @@ I wrote this document on {%A}, exact date: {%Y-%m-%d}.
 ``````
 
 
+
 Results (with:  name=John; address=123 Road, USA):
 
 
 ``````output
 Hi, my name is John, my address is 123 Road, USA.
-I wrote this document on Thursday, exact date: 2025-07-31.
+I wrote this document on Friday, exact date: 2025-08-01.
 ``````
+
 
 
 With more complicated templates, we would be able to generate
 documents with text and images based on the node attributes as well.
-
-
 
 For example the following template can be used to generate a table.
 
@@ -2250,6 +2165,7 @@ network echo(render_template("./data/example.template"))
 ``````
 
 
+
 Results:
 
 
@@ -2258,6 +2174,7 @@ Results:
   table.header([*Name*], [*Index*]),
   [LOWER-MISSISSIPPI], [0], [UPPER-MISSISSIPPI], [1], [MISSOURI], [2], [ARKANSAS], [3], [RED], [4], [OHIO], [5], [TENESSEE], [6]
 )
+
 
 
 
@@ -2271,9 +2188,8 @@ shows how flexible the template system is.
 === Node Function
 
 
+
 Node function runs on each node. It takes arguments and keyword arguments.
-
-
 
 For example following node function takes multiple attribute names and prints them. The signature of the node function is `print_attrs(*args)`.
 
@@ -2282,6 +2198,7 @@ For example following node function takes multiple attribute names and prints th
 network load_file("./data/mississippi.net")
 node print_attrs("INDEX", name=false)
 ``````
+
 
 
 Results:
@@ -2298,15 +2215,15 @@ INDEX = 6
 ``````
 
 
+
 Only the `NAME` is printed as they do not have any other attributes.
 
 
 === Node Function Propagation
 
 
+
 Propagation of the node functions refer to the order and selection of nodes to run the function on.
-
-
 
 By default node function is run at each node. But that might not be the intended use of the function, for example you might want to:
 
@@ -2315,14 +2232,14 @@ By default node function is run at each node. But that might not be the intended
 - run the funciton only on a group of nodes,
 
 
+
 Or you might want to change the order of the node function execution. Like running input nodes before the output node, if your function/analysis needs that.
-
-
 
 These things are done with 3 syntax in the node function:
 
 
 ==== Order
+
 
 
 You can run functions in different orders:
@@ -2338,6 +2255,7 @@ network load_str("a -> b\n b ->d \n c -> d \n d -> e")
 node<seq> array(INDEX, ORDER)
 node<inv> array(INDEX, ORDER)
 ``````
+
 
 
 Results:
@@ -2361,9 +2279,8 @@ Results:
 ``````
 
 
+
 Currently, `inp` and `inv` are equivalent, while `seq` and `out` are also equivalent. But when the parallization is added in the future versions, they will be implemented differently. So for backward compatibility, if you function needs to be run in a certain way, always use that one.
-
-
 
 Here an example showing how to calculate the order of the node.
 
@@ -2373,6 +2290,7 @@ network load_str("a -> b\n b ->d \n c -> d \n d -> e")
 node<inp>.val = sum(inputs.val) + 1;
 node array(val, ORDER)
 ``````
+
 
 
 Results:
@@ -2389,6 +2307,7 @@ Results:
 ``````
 
 
+
 If you do not use the `inputsfirst` propagation here, you get an error because the `val` attribute doesn't exist in `inputs`, and if you did have that variable already, it would be old data instead of the recent results from your expression.
 
 
@@ -2399,6 +2318,7 @@ node array(val, ORDER)
 ``````
 
 
+
 \*Error\*:
 
 
@@ -2407,17 +2327,18 @@ Attribute not found
 ``````
 
 
+
 NOTE: I need to work on better error messaging. It is in TODO list for the next major release.
 
 
 ==== Node List/Path
 
 
+
 You can selectively run only a few nodes based on a list, or a path.
 
-
-
 Given this network:
+
 
 
 
@@ -2429,6 +2350,7 @@ Given this network:
 ===== List of Nodes
 
 
+
 List of node contains a separated list of node names or quoted string if the name is not valid identifier/number inside `[]`.
 
 
@@ -2436,6 +2358,7 @@ List of node contains a separated list of node names or quoted string if the nam
 network load_file("./data/mississippi.net")
 node[tenessee,"lower-mississippi"] print_attrs("NAME")
 ``````
+
 
 
 Results:
@@ -2449,6 +2372,7 @@ NAME = "tenessee"
 ===== Path of Nodes
 
 
+
 Path of node has the same syntax as a path used in the network file. It has starting node and end node. Instead of it representing a single edge like in network file, it represents all the nodes that are between those two (inclusive).
 
 
@@ -2456,6 +2380,7 @@ Path of node has the same syntax as a path used in the network file. It has star
 network load_file("./data/mississippi.net")
 node[tenessee -> "lower-mississippi"] print_attrs("NAME")
 ``````
+
 
 
 Results:
@@ -2468,11 +2393,13 @@ NAME = "lower-mississippi"
 ``````
 
 
+
 As we can see in the diagram, the path from tenessee to lower
 mississippi includes the ohio node.
 
 
 ==== Logical Condition
+
 
 
 Logical condition is used by putting an expression that evaluates to a boolean value inside the `()`.
@@ -2482,6 +2409,7 @@ Logical condition is used by putting an expression that evaluates to a boolean v
 network load_file("./data/mississippi.net")
 node("mississippi" in NAME) print_attrs("NAME")
 ``````
+
 
 
 Results:
@@ -2495,9 +2423,8 @@ NAME = "upper-mississippi"
 ==== Combination
 
 
+
 You can combine the three different types of propagations in a single task using the syntax `node<...>[...](...)`, they must come in that sequence as the order is decided first, then the list/path is taken, and finally the condition is evaluated to boolean before selecting the nodes.
-
-
 
 For example:
 
@@ -2508,6 +2435,7 @@ node[tenessee -> "lower-mississippi"]("mississippi" in NAME) INDEX
 node<inv>[tenessee -> "lower-mississippi"] INDEX
 node<inv>[tenessee -> "lower-mississippi"](ORDER > 1) INDEX
 ``````
+
 
 
 Results:
@@ -2532,6 +2460,7 @@ Results:
 #heading(level:2)[Network Function]
 
 
+
 Network function runs on the network as a whole. It takes arguments and keyword arguments. Few network functions we have been using throughout the examples are `load_file`, `load_str` and `svg_save`:
 
 
@@ -2546,7 +2475,9 @@ network svg_save(
 ``````
 
 
+
 Results:
+
 
 
 
@@ -2554,8 +2485,9 @@ Results:
 #figure(image("intro/../output/network-mississippi-sdf.svg"), caption: [])
 
 
-#htmlblock("warning")[The examples below use the graphviz plugin. Make sure you have it loaded. Refer to the plugins section to learn how to load the plugins in to the Nadi System.
+#htmlblock("warning")[The examples below use the graphviz plugin. Make sure you have it loaded. Refer to the plugins section to learn how to load the plugins in to the NADI System.
 ]
+
 
 For example following network function takes file path as input to save the network in graphviz format:
 
@@ -2571,9 +2503,8 @@ save_graphviz(
 ``````
 
 
+
 Note that, if the arguments have default values, or are optional, then you do not need to provide them.
-
-
 
 For example, you can simply call the above function like this.
 
@@ -2585,6 +2516,7 @@ network clip()
 # the path link are relative to /src
 network echo("./output/test.gv")
 ``````
+
 
 
 Results:
@@ -2603,6 +2535,7 @@ digraph network {
 ``````
 
 
+
 With extra commands you can also convert it into an image
 
 
@@ -2616,7 +2549,9 @@ network echo("../output/test.svg")
 ``````
 
 
+
 Results:
+
 
 
 
@@ -2629,21 +2564,19 @@ Results:
 #heading(level:2)[Cross Context Functions and Variables]
 
 
+
 You can access variable and call functions based on their default context (e.g. node variable/function in a node task). Additionally, you can also access the variables or call functions in select few other context.
-
-
 
 By default, if a function is not available, node/network task calls the environment function of the same name.
 
-
-
-For example, here the `sum` and `array` functions are environment functions, while the `count` is a network function. When you use Nadi IDE, it'll show you which function is actually being called at the top of the editor.
+For example, here the `sum` and `array` functions are environment functions, while the `count` is a network function. When you use NADI IDE, it'll show you which function is actually being called at the top of the editor.
 
 
 ``````task
 network load_str("a->b")
 network sum(array(count(), 1))
 ``````
+
 
 
 Results:
@@ -2654,10 +2587,12 @@ Results:
 ``````
 
 
+
 Besides this, you can manually call cross context variable/functions in the following ways:
 
 
 === Env and Network Variables/Functions
+
 
 
 You can use `env` and `network` variables anywhere in the task system with the dot syntax.
@@ -2674,6 +2609,7 @@ node array(network.sth, env.var, node.NAME)
 ``````
 
 
+
 Results:
 
 
@@ -2687,9 +2623,8 @@ Results:
 ``````
 
 
+
 Similary, env and network functions can be called anywhere. These functions cannot be mutable functions (change network internally).
-
-
 
 Taking the previous example, if we use env function `count`, we get an error as the function arguments are different.
 
@@ -2699,6 +2634,7 @@ network load_str("a->b")
 node network.count()
 network sum(array(env.count(), 1))
 ``````
+
 
 
 \*Error\*:
@@ -2715,6 +2651,7 @@ Error in function count: Argument 1 (vars [& [bool]]) is required
 === Node Variables/Functions
 
 
+
 You can use `node`, `inputs`, `output` and `nodes` keywords to access node variables and functions from different contexts. `nodes` is valid in all tasks, while the other 3 are only valid in a node task and refer to the current node, input nodes and output node respectively.
 
 
@@ -2723,6 +2660,7 @@ network load_file("./data/mississippi.net")
 env count(nodes._)
 node inputs.NAME
 ``````
+
 
 
 Results:
@@ -2742,9 +2680,8 @@ Results:
 ``````
 
 
+
 You can call node functions not just for the node in the context, but also for input nodes, and output node:
-
-
 
 Please note that the root node (outlet) of the network doesn't have output node, so we need to skip that, which can be done through the `output._?` which is checking for the dummy variable `_` in `output`, which is true if the node has an output.
 
@@ -2754,6 +2691,7 @@ network load_file("./data/mississippi.net")
 node[tenessee -> "lower-mississippi"] inputs.render("{_NAME}")
 node[tenessee -> "lower-mississippi"](output._?) output.render("{_NAME}")
 ``````
+
 
 
 Results:
@@ -2772,6 +2710,7 @@ Results:
 ``````
 
 
+
 You can also use `nodes` keyword to call the function on each node, it can be used anywhere, but is useful for env and network tasks.
 
 
@@ -2780,6 +2719,7 @@ network load_file("./data/mississippi.net")
 
 env nodes.render("Node [{INDEX}] {_NAME}")
 ``````
+
 
 
 Results:
@@ -2795,6 +2735,7 @@ Results:
 === Plugins
 
 
+
 Plugins are the main source of functions in the task system. There are two types of plugins,
 
 
@@ -2802,9 +2743,8 @@ Plugins are the main source of functions in the task system. There are two types
 - external plugins: you can install them using shared libraries.
 
 
+
 The functions available from the internal plugins are available in any format. You can access the functions with their name, or with `plugin.name` syntax.
-
-
 
 External plugins are loaded from the directory in `NADI_PLUGIN_DIRS` environmental variable. If the shared library in that directory does not match the specification of NADI plugin, is compiled using different version, or compiled with different internal data structures, it will print warning and skip that file.
 
@@ -2812,23 +2752,19 @@ External plugins are loaded from the directory in `NADI_PLUGIN_DIRS` environment
 === Security
 
 
+
 *Plugins can run arbitrary code*, so users are expected to be careful while loading plugins by making sure it is not malicious.
-
-
 
 Rust plugins give option to look at the code used to build the function, but it is only intended to be helpful, a malicious actor can still obfuscate, omit, or show different code than the actual function.
 
-
-
 Furthermore, plugins can also replace functions if they have same name, look out for the warnings while running nadi.
-
-
 
 Expect these Changes in the Future Versions to make the plugins system more secure in terms of function replacement problem:
 
 
 - internal plugin names will be uppercase, and external lowercase, so that external plugins are not mistaken as internal ones, and no overwriting functions,
 - external plugin functions always need to be accessed with dot syntax (`plugin.function(...)`). And so that external functions are not called accidently.
+
 
 
 This still will not solve the first problem, so always be vigilant using plugins. It is recommended to only use plugins developed in house, or those that you have source code of and can compile it yourself.
@@ -2840,12 +2776,14 @@ This still will not solve the first problem, so always be vigilant using plugins
 === Further Reading
 
 
+
 If you need help on any functions. Use the `help` as a `task`. You can use `help node` or `help network` for specific help. You can also browse through the function help window in the `nadi-ide` for help related to each functions.
 
 
 ``````task
 help node render
 ``````
+
 
 
 Results:
@@ -2870,15 +2808,12 @@ node assert_eq(render("abc {x}"), "abc 13")
 ``````
 
 
+
 Or you can use `nadi --fnhelp <function>` using the `nadi-cli`.
-
-
 
 Now that you have the overview of the nadi system's data
 structures. We'll jump into the software structure and how to setup
 and use the system.
-
-
 
 If you want more details on any of the data structures refer the
 Developer's references, or the library documentation.
@@ -2889,9 +2824,8 @@ Developer's references, or the library documentation.
 #heading(level:1)[Learn by Examples]
 
 
-This section teaches you the basics of the Nadi's syntax with small examples. If you want a higher level example that focuses on the actual research problem instead of syntax then refer to the Slightly Complex Examples Section.
 
-
+This section teaches you the basics of the NADI Task System's syntax with small examples. If you want a higher level example that focuses on the actual research problem instead of syntax then refer to the "Example Research Problems" Section on the sidebar.
 
 For example data download the #link("./data.zip")[zip file here]
 
@@ -2908,9 +2842,8 @@ For example data download the #link("./data.zip")[zip file here]
 === Attributes
 
 
+
 There are 3 kind of attributes in nadi. Environment, Network and Node attributes. as their name suggests environment attributes are general attributes available in the current context. Network attributes are associated with the currenly loaded network. and node attributes are associated with each nodes.
-
-
 
 nadi has special syntax where you can get/set attributes for multiple nodes at once.
 
@@ -2931,6 +2864,7 @@ node.someattr
 ``````
 
 
+
 Results:
 
 
@@ -2946,9 +2880,8 @@ true
 ``````
 
 
+
 like you saw with the array function, variables used are inferred as the attributes of the current env/network/node task.
-
-
 
 you can use attributes from outside of current task type in some cases like:
 
@@ -2973,6 +2906,7 @@ network nodes.NAME
 ``````
 
 
+
 Results:
 
 
@@ -2980,6 +2914,7 @@ Results:
 [true, 1998-12-21]
 ["d", "c", "b", "a"]
 ``````
+
 
 
 Similarly inputs:
@@ -2990,6 +2925,7 @@ network load_str("a -> b\n b -> d\n c -> d\n");
 
 node inputs.NAME
 ``````
+
 
 
 Results:
@@ -3005,6 +2941,7 @@ Results:
 ``````
 
 
+
 Refer to the network diagram below to verify the output are correct:
 
 
@@ -3014,7 +2951,9 @@ network svg_save("./output/attrs-simp.svg")
 ``````
 
 
+
 Results:
+
 
 
 
@@ -3027,10 +2966,12 @@ Results:
 #heading(level:2)[Control Flow]
 
 
+
 Task has some basic control flow required to write programs. They are if-else branches and while loops.
 
 
 === Conditional (If-Else) Blocks
+
 
 
 There are two kind of if-else branches. One is on an expression level. which means there has to be if and else branch both as it expects a return value. The following example shows the expression with if-else block.
@@ -3042,12 +2983,14 @@ env.newvar
 ``````
 
 
+
 Results:
 
 
 ``````output
 "no"
 ``````
+
 
 
 Trying to do it without else block will result in an parse error as the program will error with a syntax error, for example the code below is invalid
@@ -3059,9 +3002,8 @@ env.newvar
 ``````
 
 
+
 That's when you can use the if-else block on the task level. This can be only if block as the execution blocks are tasks instead of expressions.
-
-
 
 Here, since the condition is negative the task inside the block is never executed, hence `env.newvar` is empty.
 
@@ -3074,6 +3016,7 @@ env.newvar
 ``````
 
 
+
 \*Error\*:
 
 
@@ -3082,6 +3025,7 @@ EvalError: Attribute not found
 ``````
 
 === While Loop
+
 
 
 While loop runs the tasks inside the block repeatedly while the condition is satisfied. There is an iteration limit of 1,000,000 for now just in case people write infinite loop. This is arbritary.
@@ -3094,6 +3038,7 @@ while (somevar < 10) {
 	env.somevar = env.somevar + 1;
 }
 ``````
+
 
 
 Results:
@@ -3112,6 +3057,7 @@ Results:
 ``````
 
 
+
 This can be used to repeat a set of tasks for a various reasons.
 
 #htmlblock("warning")[If your tasks take a long time to run, note that, the while loop needs to be completely run before the output can be processed and displayed, so that even if your output is not printed, it is being run. This will be fixed in the future version of the program.
@@ -3120,10 +3066,12 @@ This can be used to repeat a set of tasks for a various reasons.
 #heading(level:2)[Connections]
 
 
+
 Connections between the nodes is the most important part of nadi. you can load networks by loading a file or string. The network is a simple multiline text with one edge (`input -> output`) in each line. comments starting with `#` are supported.
 
 
 === Default is Empty Network
+
 
 
 Tasks are run by default with an empty network. So you might still be able to work with network attributes, but the nodes will be empty. also note that when you load network it replaces the old one including the attributes.
@@ -3135,12 +3083,14 @@ network.someattr
 ``````
 
 
+
 Results:
 
 
 ``````output
 1234
 ``````
+
 
 
 But we can see the nodes are not there,
@@ -3152,6 +3102,7 @@ network nodes.NAME
 ``````
 
 
+
 Results:
 
 
@@ -3159,6 +3110,7 @@ Results:
 0
 []
 ``````
+
 
 
 Trying to run node functions on the empty network means nothing is run
@@ -3169,6 +3121,7 @@ node render("{NAME}")
 ``````
 
 
+
 Results:
 
 
@@ -3177,6 +3130,7 @@ Results:
 ``````
 
 === Loading Network from String
+
 
 
 Here assume we have a network consisting of nodes of dams and gages like the following where dam nodes start with d and gages with g:
@@ -3198,7 +3152,9 @@ network svg_save(
 ``````
 
 
+
 Results:
+
 
 
 
@@ -3208,6 +3164,7 @@ Results:
 
 
 === Loading Network from a File
+
 
 
 we can load a network from a file:
@@ -3222,7 +3179,9 @@ network svg_save(
 ``````
 
 
+
 Results:
+
 
 
 
@@ -3232,6 +3191,7 @@ Results:
 
 
 === Modifying the network
+
 
 
 You can modify the network after loading it as well. The example below extracts just the nodes that are dams. Compare this with the previous network to see how the connections are retained during the subsets.
@@ -3255,7 +3215,9 @@ network svg_save(
 ``````
 
 
+
 Results:
+
 
 
 
@@ -3265,11 +3227,13 @@ Results:
 
 
 
+
 This can be useful when you want to remove nodes that do not satisfy some selection criteria for your analysis without having to redo the network detection part.
 
 
 
 #heading(level:2)[Counting Nodes]
+
 
 
 Here assume we have a network consisting of nodes of dams and gages like the following where dam nodes start with d and gages with g:
@@ -3291,12 +3255,15 @@ network svg_save(
 ``````
 
 
+
 Results:
 
 
 
 
+
 #figure(image("learn-examples/../output/simple-count.svg"), caption: [])
+
 
 
 
@@ -3320,6 +3287,7 @@ network count(nodes.g_node) / count()
 ``````
 
 
+
 Results:
 
 
@@ -3328,6 +3296,7 @@ Results:
 3
 0.42857142857142855
 ``````
+
 
 
 when you call a network function, you get one output, while a node function will give you the output for each node like here:
@@ -3347,6 +3316,7 @@ node.g_node
 ``````
 
 
+
 Results:
 
 
@@ -3363,9 +3333,8 @@ Results:
 ``````
 
 
+
 Always be careful that node function is run for all the nodes separately, if you are running them without any variables from the node, then you can use network function, or environment function to get the results.
-
-
 
 Counting the number of nodes upstream of each node gives us the order of the nodes.
 
@@ -3387,12 +3356,15 @@ network svg_save(
 ``````
 
 
+
 Results:
 
 
 
 
+
 #figure(image("learn-examples/../output/simple-count-1.svg"), caption: [])
+
 
 
 
@@ -3418,12 +3390,15 @@ network svg_save(
 ``````
 
 
+
 Results:
 
 
 
 
+
 #figure(image("learn-examples/../output/simple-count-2.svg"), caption: [])
+
 
 
 
@@ -3453,7 +3428,9 @@ network svg_save(
 ``````
 
 
+
 Results:
+
 
 
 
@@ -3463,11 +3440,13 @@ Results:
 
 
 
+
 Here the condition `(output._?)` checks if there is output on the node or not by checking for the dummy variable `_` which is present in all nodes/network.
 
 
 
 #heading(level:2)[Cumulative Sum]
+
 
 
 Here we can use the stream ordering formula to calculate the stream order for each node:
@@ -3490,7 +3469,9 @@ network svg_save(
 ``````
 
 
+
 Results:
+
 
 
 
@@ -3500,13 +3481,10 @@ Results:
 
 
 
+
 The first part takes the maximum order of the input nodes, then the second part `int(count(inputs._?) > 1)` checks if there are more than one input, adding one to the order when multiple streams combine into one. You can use the funciton `inputs_count()` instead of `count(inputs._?)` to do the same thing.
 
-
-
 That is the core of the NADI Task System, you can write functions that have their own logic and then load them into the system. You can then use the syntax and network based analysis methods of NADI using those functions.
-
-
 
 And of course, we can visualize the different order of streams for easier understanding.
 
@@ -3532,7 +3510,9 @@ network svg_save(
 ``````
 
 
+
 Results:
+
 
 
 
@@ -3547,9 +3527,8 @@ Results:
 === Import Export Files
 
 
+
 Similar to how you can load network files, you can load attributes from files as well. Direct load of TOML format is supported from the internal plugins, while you might need external plugins for other formats.
-
-
 
 `load_attrs` function takes a template, and reads a different files for each node to load the attributes from.
 
@@ -3566,12 +3545,15 @@ network svg_save(
 ``````
 
 
+
 Results:
 
 
 
 
+
 #figure(image("learn-examples/../output/ohio-import-export.svg"), caption: [])
+
 
 
 
@@ -3583,6 +3565,7 @@ You can use the render function to see if the files being loaded are correct. He
 network load_file("data/ohio.network")
 node(INDEX<4) render("data/attrs/{_NAME}.toml")
 ``````
+
 
 
 Results:
@@ -3598,6 +3581,7 @@ Results:
 ``````
 
 
+
 You can also read a attributes from string, so you can combine that with `files.from_file` and load it.
 
 
@@ -3611,6 +3595,7 @@ env.somevalue.length
 ``````
 
 
+
 Results:
 
 
@@ -3618,6 +3603,7 @@ Results:
 371802.16
 1675.95
 ``````
+
 
 
 You can export csv files
@@ -3629,6 +3615,7 @@ node attributes.load_attrs("data/attrs/{_NAME}.toml")
 network table.save_csv("output/ohio-export.csv", ["NAME", "basin_area", "length"])
 network command("cat output/ohio-export.csv | head", echo=true)
 ``````
+
 
 
 Results:
@@ -3651,6 +3638,7 @@ NAME,basin_area,length
 ==== GIS Files
 #htmlblock("warning")[The examples below require the `gis` external plugin from `nadi-gis` repository to work. Make sure you have the plugin file in the directory in your `NADI_PLUGIN_DIRS` environmental variable.
 ]
+
 
 First we make a GIS file by exporting. The image below shows the resulting points (red) from the shapefile and connections (black) from the Geopackage file when we visualize this on QGIS (with background of Terrain and Ohio River tributaries).
 
@@ -3676,7 +3664,9 @@ network gis.gis_save_connections(
 ``````
 
 
+
 Results:
+
 
 
 
@@ -3686,7 +3676,9 @@ Results:
 
 
 
+
 The geometry attributes should be #link("https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry")[WKT String].
+
 
 
 
@@ -3706,12 +3698,15 @@ network svg_save(
 ``````
 
 
+
 Results:
 
 
 
 
+
 #figure(image("learn-examples/../output/ohio-from-gis.svg"), caption: [])
+
 
 
 
@@ -3724,10 +3719,11 @@ As we can see the plugins make it easier to interoperate with a lot of different
 
 
 
-#heading(level:1)[Nadi Extension Capabilities]
+#heading(level:1)[NADI Extension Capabilities]
 
 
-Nadi System can be extended for custom use cases with the following ways:
+
+NADI System can be extended for custom use cases with the following ways:
 
 
 - #link(<string_templates:advanced-string-template-with-lisp>)[LISP on String Template]
@@ -3738,6 +3734,7 @@ Nadi System can be extended for custom use cases with the following ways:
 
 
 #heading(level:1)[List of All Functions]
+
 
 
 All the functions available on this instance of nadi, are listed here.
@@ -3778,13 +3775,10 @@ All the functions available on this instance of nadi, are listed here.
 #heading(level:1)[Effects of Dams]
 
 
+
 Ohio River is one of the largest river basin in the USA. The development of the basin and its river system started early, so we have a problem where many streamgages never recorded the river in their natural state. In these examples, we'll try to load a network, validate the network based on metadata, count the dams/gages, and get the year of earliest constructed dam upstream for further analysis.
 
-
-
 The examples in this chapter loads the data for the dams from National Inventory of Dams (NID), and USGS gages from Gages.shp (EPA and USGS), and uses the network developed using the NHDPlus streamlines above the Ohio River at Smithland Streamgage.
-
-
 
 The files used in this demo are follows:
 
@@ -3797,9 +3791,8 @@ The files used in this demo are follows:
 
 
 
+
 Except NID data (due to large size), the others are also in the `src/data/ohio-river` directory on #link("https://github.com/Nadi-System/nadi-book")[the repository of this book]. Place the nid data into it before running the examples from this chapter. If you're using the repository, you also have to unzip the `gages-II.gpkg.zip` into `gages-II.gpkg`.
-
-
 
 The Gage Drainage data is scrapped manually for some basins from the USGS website to increase the amount of gage we know the drainage area of, you can skip that in loading and still be able to do your analysis.
 
@@ -3808,10 +3801,12 @@ The Gage Drainage data is scrapped manually for some basins from the USGS websit
 #htmlblock("warning")[In this example we will use `nadi-gis` plugin to load and write GIS files, while using QGIS to generate the map visualization. The plugin is external, refer to the installation page to install it into the NADI System.
 
 
+
 Different from other chapters, the code in this chapters are run in the order they are given, meaning each task code blocks are not independent.
 
 ]
 === Load Network and Attributes
+
 
 
 We'll use the same network from the Dams count example.
@@ -3829,6 +3824,7 @@ network count(nodes.is_dam)
 ``````
 
 
+
 Results:
 
 
@@ -3838,6 +3834,7 @@ Results:
 1806
 4181
 ``````
+
 
 
 Then we load the node attributes from the gis files, we can see some of the variables are loaded from NID website.
@@ -3853,6 +3850,7 @@ node[03399800].SiteNumber # only USGS gages have it
 node(INDEX < 5).yearCompleted # only NID dams have it
 node(INDEX < 5).GEOM # all nodes have it although from different sources
 ``````
+
 
 
 Results:
@@ -3879,10 +3877,12 @@ Results:
 ``````
 
 
+
 Also note that, while loading GIS files it also loads the geometry into "GEOM" attribute (you can change it through `change` function argument).
 
 
 === Process Attributes
+
 
 
 Since we need a quick and easy way to identify USGS gage and NID dam, we use regex to categorize them.
@@ -3896,6 +3896,7 @@ network count(nodes.is_dam)
 ``````
 
 
+
 Results:
 
 
@@ -3903,6 +3904,7 @@ Results:
 1806
 4181
 ``````
+
 
 
 The basin area is stored as different variable in each dataset, we want to combine them into a single one.
@@ -3914,6 +3916,7 @@ network count(nodes.ba?) / count()
 ``````
 
 
+
 Results:
 
 
@@ -3922,9 +3925,8 @@ Results:
 ``````
 
 
+
 Even then we only have 75% of the nodes with basin area. Since the `DrainageArea` is in sqmiles
-
-
 
 If we look at some examples here on two sources of basin area of USGS gages, we can see the problems:
 
@@ -3932,6 +3934,7 @@ If we look at some examples here on two sources of basin area of USGS gages, we 
 ``````task
 node(is_usgs & Drainage? & DRAIN_SQKM? & INDEX < 100) array(Drainage, DRAIN_SQKM)
 ``````
+
 
 
 Results:
@@ -3949,6 +3952,7 @@ Results:
 2. The units are different (confirmed from metadata of datasets).
 
 
+
 So we reconcile that,
 
 
@@ -3956,6 +3960,7 @@ So we reconcile that,
 node(Drainage?).basin_area = float(Drainage);
 node(DRAIN_SQKM?).basin_area = DRAIN_SQKM * 0.38610216;
 ``````
+
 
 
 \*Error\*:
@@ -3966,9 +3971,8 @@ Error in function float: cannot parse float from empty string
 ``````
 
 
+
 We got an error, seems like `Drainage` contains empty strings as well. That and the `String` part comes from loading a CSV without data types (`.csvt` file).
-
-
 
 Let's fix the code for that, and also let's get the `basin_area` for dams.
 
@@ -3981,6 +3985,7 @@ node(drainageArea?).basin_area = float(drainageArea);
 node(INDEX < 10).basin_area
 network count(nodes.basin_area?) / count()
 ``````
+
 
 
 Results:
@@ -4005,6 +4010,7 @@ Results:
 === Check for Incorrect Basin Areas
 
 
+
 Now we have all the different variables combined into a single one with same data type and unit. Let's do a quick analysis to see if there are points in the network where nodes have larger area than input nodes.
 
 
@@ -4014,12 +4020,14 @@ network count(nodes.incorrect)
 ``````
 
 
+
 \*Error\*:
 
 
 ``````error
 Attribute not found
 ``````
+
 
 
 The error here comes from the fact that not all nodes contain `basin_area` attribute. Since `basin_area?` will only check for the current node, we use a default value when the values are not available into a temporary variable.
@@ -4033,6 +4041,7 @@ network count(nodes.incorrect) / count()
 ``````
 
 
+
 Results:
 
 
@@ -4042,9 +4051,8 @@ Results:
 ``````
 
 
+
 That's around 10% error rate.
-
-
 
 Looking at the actual values, few of them seem to be due to minor errors in values, while most of them seem to be from large input area.
 
@@ -4052,6 +4060,7 @@ Looking at the actual values, few of them seem to be due to minor errors in valu
 ``````task
 node(incorrect & INDEX < 400) array(basin_area, sum(inputs.temp_ba))
 ``````
+
 
 
 Results:
@@ -4092,9 +4101,8 @@ Results:
 ``````
 
 
+
 This could be due to the error in snapping to the streamlines. It is also possible that some basin area that are missing are contributing to the unaccounted area.
-
-
 
 Let's try to fix them, or avoid points without data.
 
@@ -4109,6 +4117,7 @@ network count(nodes.incorrect) / count()
 ``````
 
 
+
 Results:
 
 
@@ -4116,6 +4125,7 @@ Results:
 451
 0.07532988140972106
 ``````
+
 
 
 Looks like 7.5% of the errors are reasonable errors from network detection.
@@ -4127,6 +4137,7 @@ network count(nodes.incorrect & nodes.is_dam)
 ``````
 
 
+
 Results:
 
 
@@ -4136,10 +4147,12 @@ Results:
 ``````
 
 
+
 This shows that the majority of the errors come from the NID dams, which makes sense given the `GageLoc.shp` data has points indexed to the NHDPlus streamlines, while the NID Dams are not indexed to it. Furthermore, looking at the attributes in QGIS shows, many dams are in locations without streamlines, and even then sometimes they have unusually large basin area values for their location.
 
 
 === Export to GIS for visualization
+
 
 
 We can export this result to a GIS file and look into individual cases in QGIS.
@@ -4159,6 +4172,7 @@ network gis_save_nodes(
 ``````
 
 
+
 Results:
 
 
@@ -4167,9 +4181,8 @@ Results:
 ``````
 
 
+
 We also need connection information to cross reference, let's make them through some string manipulation. NADI GIS plugin uses WKT format for geometries, which are string values, so we can manipulate them using string functions.
-
-
 
 Note: we should probably add a function for this in future. A WKT plugin to work with geometries.
 
@@ -4191,6 +4204,7 @@ network gis_save_connections("output/ohio-conn-all.gpkg", "conn_geom")
 ``````
 
 
+
 Results:
 
 
@@ -4209,14 +4223,11 @@ Results:
 ``````
 
 
+
 When we visualize the output in QGIS, we can see the nodes where the `basin_area` are not correct based on the network information.
 
 
-
-
 #figure(image("example/../images/ohio-correctness-qgis.png"), caption: [Correctness in QGIS])
-
-
 
 
 The zoomed in images at the bottom shows some of the reasons:
@@ -4227,6 +4238,7 @@ The zoomed in images at the bottom shows some of the reasons:
 - Nearest river detection algorithm problem from not considering river width.
 
 
+
 The example for the last problem can be seen in the #link("https://youtu.be/PIGoVnXb7ck?t=770")[Video demostration for NADI QGIS Plugin].
 
 
@@ -4234,13 +4246,10 @@ The example for the last problem can be seen in the #link("https://youtu.be/PIGo
 #heading(level:2)[Counting Ohio Dams]
 
 
+
 In the previous example we validated the network using basin_area. You can also use other properties like river mile to validate the network connection. Or to validate the metadata.
 
-
-
 In this example, we'll be assuming there are some errors and continue with our analysis. Because the errors are mostly in the placement of dams, the count of dam upstream of a gage is still the same. For example:
-
-
 
 If our network is:
 
@@ -4249,6 +4258,7 @@ If our network is:
 gage1 -> dam1
 dam1 -> gage2
 ``````
+
 
 
 instead of:
@@ -4260,10 +4270,12 @@ dam1 -> gage2
 ``````
 
 
+
 For both gage, number of dams upstream (or the first dam construction year upstead) is still the same, even though there is error on the same calculation in the dam.
 
 
 === Load Network and Attributes
+
 
 
 First load the network
@@ -4274,6 +4286,7 @@ network load_file("data/ohio-river/ohio.network")
 network count()
 network outlet()
 ``````
+
 
 
 Results:
@@ -4287,6 +4300,7 @@ Results:
 === Identify Dams and Gages
 
 
+
 Since we need a quick and easy way to identify USGS gage and NID dam, we use regex to categorize them.
 
 
@@ -4296,6 +4310,7 @@ node.is_dam = !is_usgs;
 network count(nodes.is_usgs)
 network count(nodes.is_dam)
 ``````
+
 
 
 Results:
@@ -4309,6 +4324,7 @@ Results:
 === Count Dams/Gages Upstream
 
 
+
 Now we simply count the number of dams and gages upstream recursively. We run it inputs first, so that the count begins with leaf nodes where we get 1 for the category we're counting and 0 otherwise, then we propagate that value downstream.
 
 
@@ -4318,6 +4334,7 @@ node<inp>.ndam = int(!is_usgs) + sum(inputs.ndam);
 
 node(INDEX < 10) array(ngage, ndam)
 ``````
+
 
 
 Results:
@@ -4339,14 +4356,14 @@ Results:
 ``````
 
 
+
 If we run this code without the `inputsfirst`/`inp` propagation, we get an error because the node's `inputs` will not have `ngage` and `ndam` values.
-
-
 
 The counting is done, super simple right? NADI's ability to work with networks mean that some things are super simple compared to other languages.
 
 
 === GIS Visualization
+
 
 
 Again, if we use `nadi-gis` plugin, then we can export this result and visualize it in QGIS.
@@ -4366,9 +4383,8 @@ network gis_save_nodes(
 ``````
 
 
+
 After applying some filters and styles in QGIS, we can look at the numbers visually,
-
-
 
 
 #figure(image("example/../images/counts-combined.png"), caption: [Gage/Dam Count])
@@ -4378,11 +4394,13 @@ After applying some filters and styles in QGIS, we can look at the numbers visua
 === Extra: Counting Large Dams
 
 
+
 The definition of large dam: https://www.icold-cigb.org/GB/dams/definition_of_a_large_dam.asp
 
 
 - height of more than 15 meters,
 - height between 5m and 15m impounding more than 3 million cubic meters.
+
 
 
 Converting them to imperial units we get:
@@ -4393,6 +4411,7 @@ Converting them to imperial units we get:
   table.header([*Metric*], [*Imperial*]),
   [15m], [49.21ft], [5m], [16.40ft], [3 x 10⁶ m³], [810.71 acre feet]
 )
+
 
 
 
@@ -4408,6 +4427,7 @@ network count(nodes.is_dam)
 network count(nodes.dam_height? & nodes.dam_storage?)
 node(is_dam & (INDEX < 10)) array(dam_height, dam_storage)
 ``````
+
 
 
 Results:
@@ -4427,9 +4447,8 @@ Results:
 ``````
 
 
+
 Lot's of basins do not have basin area.
-
-
 
 First, using the previous requirements for large dams:
 
@@ -4441,6 +4460,7 @@ network count(nodes.large_dam) / count(nodes.is_dam)
 ``````
 
 
+
 Results:
 
 
@@ -4450,6 +4470,7 @@ Results:
 ``````
 
 
+
 This will allow us to run the same counting as before:
 
 
@@ -4457,6 +4478,7 @@ This will allow us to run the same counting as before:
 node<inp>.nldam = int(large_dam) + sum(inputs.nldam);
 node(INDEX < 10) array(ndam, nldam)
 ``````
+
 
 
 Results:
@@ -4478,9 +4500,8 @@ Results:
 ``````
 
 
+
 Although not obivious, the numbers were quite large, so when I inspected the NID data, some dams seem to have very high height values that do not match.
-
-
 
 Let's load basin area and flag any locations with more than 50ft of dam height, and less than 10 square miles of basin area.
 
@@ -4494,6 +4515,7 @@ node.flag = large_dam & ((dam_height > 50) & (basin_area < 10));
 network count(nodes.flag)
 node(flag & (INDEX < 1000)) array(dam_height, dam_storage, basin_area)
 ``````
+
 
 
 Results:
@@ -4526,6 +4548,7 @@ Results:
 ``````
 
 
+
 We don't have all basin areas, but from this we flagged around 300 dams. Looking at the values, `IL50678` basically says it has a dam with height of 110, but basin area of 0.1, which seems very unreasonable. To remove these from our identification process, let's add another category.
 
 
@@ -4534,6 +4557,7 @@ node.large_dam = is_dam & (((dam_height > 49) | ((dam_height > 16) & (dam_storag
 network count(nodes.large_dam)
 network count(nodes.large_dam) / count(nodes.is_dam)
 ``````
+
 
 
 Results:
@@ -4545,10 +4569,12 @@ Results:
 ``````
 
 
+
 The number of dams that are now categorized as large dams have been reduced significantly.
 
 
 === Extra: Looking at Main Stem of the River
+
 
 
 Let's look at the values along the main stem. `LEVEL == 0` means the mainstem of the network.
@@ -4557,6 +4583,7 @@ Let's look at the values along the main stem. `LEVEL == 0` means the mainstem of
 ``````task
 node(LEVEL==0) array(ngage, ndam, nldam)
 ``````
+
 
 
 Results:
@@ -4688,11 +4715,13 @@ Results:
 ``````
 
 
+
 If you want to be more accurate, we can load the `SiteName` from GIS file and match the node with "Ohio River" in its name with the lowest order to find the first Ohio River Node.
 
 
 
 #heading(level:2)[Earliest Dam Year]
+
 
 
 First load the network, and attributes
@@ -4709,6 +4738,7 @@ network count(nodes.is_dam)
 ``````
 
 
+
 Results:
 
 
@@ -4716,6 +4746,7 @@ Results:
 1806
 4181
 ``````
+
 
 
 Counting the upstream dams again,
@@ -4729,6 +4760,7 @@ network count(nodes.no_dam_us & nodes.is_usgs) / count(nodes.is_usgs)
 ``````
 
 
+
 Results:
 
 
@@ -4738,9 +4770,8 @@ Results:
 ``````
 
 
+
 We can see 33% of the USGS gages do not have dams upstream.
-
-
 
 And for those that do, let's look at the construction year,
 
@@ -4758,6 +4789,7 @@ network count(nodes.dam_affected & nodes.is_usgs) / count(!nodes.no_dam_us & nod
 ``````
 
 
+
 Results:
 
 
@@ -4768,12 +4800,14 @@ Results:
 ``````
 
 
+
 This shows we have the construction year for 95% of the USGS gages that were constructed after at least one upstream dams.
 
 
 
 
 #heading(level:1)[LaTeX Table]
+
 
 
 This example runs a task to generate latex table with tikz graphics. Similar method can be used to do generative programming (where you write code to write code for another program).
@@ -4796,6 +4830,7 @@ env echo("\\end{tabular}
 node(output._?).edge = echo(render("\\\\path[->] ({INDEX}) edge ({out});"))
 env echo("}")
 ``````
+
 
 
 Results:
@@ -4822,6 +4857,7 @@ Connections & Node & Area & Name \\[2mm]
 ``````
 
 
+
 The latex file contains the `Node` command as follows:
 
 
@@ -4836,23 +4872,16 @@ The latex file contains the `Node` command as follows:
 ``````
 
 
+
 The result of the compilation will result in the following table:
-
-
 
 
 #figure(image("example/../images/latex-table.png"), caption: [LaTeX Table])
 
 
-
-
 This is just an example, you can use this method to generate, markdown, latex, typst, html, and other markups as well. The syntax is a bit hard for LaTeX due to its use of `\` and `{`, both of which are special syntax of template system and need to be escaped. but for others it should be simpler.
 
-
-
 This should become easier after the introduction of user defined functions.
-
-
 
 The full latex source code is shown below:
 
@@ -4892,14 +4921,13 @@ Connections & Node & Area & Name \\[2mm]
 #set page(header:[#h(1fr) Python Library])
 #bookpart()[Python Library]
 
-#heading(level:1)[Nadi Py]
+#heading(level:1)[NADI Python (nadi-py)]
 
-== Nadi Python Library
+== NADI Python Library
+
 
 
 This can be installed from `pypi` with `pip install nadi-py` command.
-
-
 
 Then you can simply import and use it:
 
@@ -4910,6 +4938,7 @@ import nadi
 net = nadi.Network.from_str("a -> b")
 print([n.NAME for n in net.nodes])
 ``````
+
 
 
 The functions are available inside the `nadi.functions` submodule.
@@ -4926,9 +4955,8 @@ fn.network.svg_save(net, "test.svg")
 == Combining the power of python and Task System
 
 
-You can combine the power of python with task system using the `command` function from Nadi. Basically, you write your logic that cannot be written in nadi in python, you can use `nadi-py` if you need to parse network files, load attributes or call any other nadi functions. And you can pass the results of the python script at the end by simply printing it to the standard output.
 
-
+You can combine the power of python with task system using the `command` function from NADI Task System. Basically, you write your logic that cannot be written in nadi in python, you can use `nadi-py` if you need to parse network files, load attributes or call any other nadi functions. And you can pass the results of the python script at the end by simply printing it to the standard output.
 
 Future work is under consideration to have a tight couple between the python and nadi system.
 
@@ -4937,13 +4965,10 @@ Future work is under consideration to have a tight couple between the python and
 #heading(level:1)[Differences with Task System]
 
 
+
 The difference from Task system is that now we use python syntax and the python functions. The environment from task system is no longer available, and the node functions are not automatically run in a loop.
 
-
-
 We lose the advantages brought by the Domain Specific Programming Language, while gaining the flexibility and the well developed libraries of the python language.
-
-
 
 Some examples showing how you'd have to write python codes from equivalent examples in the book are shown below.
 
@@ -4956,6 +4981,7 @@ node(output._?) echo(env.render("{i} -> {o}", i=node.INDEX, o=output.INDEX))
 ``````
 
 
+
 Results:
 
 
@@ -4963,6 +4989,7 @@ Results:
 1 -> 0
 2 -> 0
 ``````
+
 
 
 Equivalent Python:
@@ -4980,10 +5007,12 @@ for node in net.nodes:
 ``````
 
 
-Here the code for python is longer because it is general purpose and doesn't have the syntax tailored for network analysis like with Nadi Task System.
+
+Here the code for python is longer because it is general purpose and doesn't have the syntax tailored for network analysis like with NADI Task System.
 
 
 == Example 2: Skip execution when variable is absent
+
 
 
 If we had to check for an attribute, then it becomes even more complicated.
@@ -5006,6 +5035,7 @@ for node in net.nodes():
 ``````
 
 
+
 In case of multiple variables being used, the `AttributeError` might catch all of them, further fine tuning in python could make the code far longer than in nadi.
 
 
@@ -5015,14 +5045,14 @@ In case of multiple variables being used, the `AttributeError` might catch all o
 == Plugins
 
 
+
 Not only can you use `nadi-py` to write network based algorithms in python, you can also use it to write executable plugins that you can use to run analysis in python and feed it back to nadi system.
-
-
 
 First thing to say about that is, you don't need `nadi-py` for writing python plugins, as they are run as a normal python scripts.
 
 
 === Example without using nadi-py
+
 
 
 Here is an example task that calls python using the `command` function:
@@ -5040,9 +5070,8 @@ network print_attr_csv("INDEX", "area", "streamflow")
 ``````
 
 
+
 Here the `command` function takes a string template, renders it and runs it as a shell command for each node.
-
-
 
 Our python script should have a way to read that node's name that we passed to the python command.
 
@@ -5073,15 +5102,15 @@ for year, flow in annual.items():
 ``````
 
 
+
 Here the line `sys.argv[1]` reads the argument from command line (node's name in this case). And reads the data for that node. The ouput is printed with prefix `nadi:var:` which tells nadi to load as `key=val` pair for that node.
 
 
 === Example using nadi-py
 
 
+
 The same example can be written using `nadi-py` so that the execution is very short (as it is being run as a network function instead of node function; `command` is a slow function as a new shell instance has to be created every time it is invoked).
-
-
 
 Here we use the `command` network function and pass the network file as input. If your network has changed you can use `save_file` `network` function to save the network as a text file and then pass that instead.
 
@@ -5096,6 +5125,7 @@ network command("python area-and-streamflow.py scioto.network")
 # this just prints the attributes in csv format.
 network print_attr_csv("INDEX", "area", "streamflow")
 ``````
+
 
 
 The corresponding python script now will look like this:
@@ -5130,15 +5160,15 @@ for node in nadi.Network(network).nodes():
 ``````
 
 
+
 Here we load the network using `nadi-py`, and then loop through the node, and pass the variables back to nadi through stdout. We have to pass the node names with the `nadi:var:` as this is being run for the whole network. Without the node name, it'll take the `key=val` pair as network attribute.
-
-
 
 This should allow users to have a lot of flexibility in using python to do complex analysis and get the results back into nadi directly. You can also save the results of the python script into a file, and check if the file exists before running the command from nadi to save the redundant computations.
 
 
 
 #heading(level:1)[Examples]
+
 
 
 TODO: add examples from papers' case studies.
@@ -5152,25 +5182,16 @@ TODO: add examples from papers' case studies.
 #heading(level:1)[Executable Plugins]
 
 
+
 Executable plugins are programs that can be called from terminal. The #link(<command:node.command>)[node `command` function], #link(<command:network.command>)[network `command` function] and their families in the #link("../plugins/command.md")[`command` plugin] have the capacity to run external programs through the command line.
-
-
 
 The inputs to the program is given through the command line arguments, while the output of the programs are read through the standard output of the program. This can be used to call different/same commands for nodes with arguments dependent on their attributes.
 
-
-
-And the output from the programs are taken by reading their stdout (standard output). Any lines starting from `nadi:var:` (prefix) is considered a communication attempt with Nadi. Currently, you can set attribute values by providing `key=val` pairs after the prefix. The node function will set it for current node, and network function will set it for the network. Furthermore, in network function, you can add one more section after prefix to set node attributes. For example, `nadi:var:node1:value=12` will set the `value` attribute to `12` in the node named `node1` in the current network.
-
-
+And the output from the programs are taken by reading their stdout (standard output). Any lines starting from `nadi:var:` (prefix) is considered a communication attempt with NADI Task System. Currently, you can set attribute values by providing `key=val` pairs after the prefix. The node function will set it for current node, and network function will set it for the network. Furthermore, in network function, you can add one more section after prefix to set node attributes. For example, `nadi:var:node1:value=12` will set the `value` attribute to `12` in the node named `node1` in the current network.
 
 The executable plugin or commands are language agnostic, as long as the command is available to run from the parent shell they will be run.
 
-
-
 To learn how to write code in your language to parse command line arguments refer to the #link("https://en.wikipedia.org/wiki/Command-line_argument_parsing")[Wikipedia page on Command Line Arguments]
-
-
 
 The following section shows example programs written in python and R that can interact with nadi in this way.
 
@@ -5178,9 +5199,8 @@ The following section shows example programs written in python and R that can in
 == Python
 
 
+
 Here is an example python script that can be called from nadi for each node. This script just reads a CSV file and passes the attributes to nadi, but more complicated programs can be written by the users.
-
-
 
 First part is importing libraries and getting the arguments from nadi. The code below reads one string as a commandline argument and saves that into `station` variable.
 
@@ -5195,6 +5215,7 @@ except IndexError:
     print("Give station")
     exit(1)
 ``````
+
 
 
 Then we can use any python logic with any libraries to do what we want. Here it reads the CSV and extracts values based on the station name. This is just an example, but you can load different csv files for each station and do a lot of analysis before sending those variables to nadi.
@@ -5215,6 +5236,7 @@ sf = df.iloc[:, 4]
 sf.index = pd.to_datetime(df.iloc[:, 2])
 sf = sf.resample('1d').mean()
 ``````
+
 
 
 Once we have our variables from analysis, we can simply print them with `nadi:var:` prefix so that nadi knows they are the variables it should read and load into each node.
@@ -5241,6 +5263,7 @@ for year, flow in sf.groupby(sf.index.year).mean().items():
 ``````
 
 
+
 Now we can call this script from inside the nadi tasks system like the following, assuming the python file is saved as `streamflow.py`.
 
 
@@ -5249,15 +5272,15 @@ node command("python streamflow.py {_NAME}")
 ``````
 
 
+
 If you want to know what the template will be rendered as, use `render` function, and if you want to check whether it exists or not, you can use `exists` function.
 
 
 == RScript
 
 
+
 Similar to most programming languages R can also read command line arguments when ran with `RScript` command instead of `R`.
-
-
 
 For example if you run the following script in a file called `test.r` and ran it with command `Rscript test.r some args 2`, you get the output of `[1] "some" "args" "2"`
 
@@ -5266,6 +5289,7 @@ For example if you run the following script in a file called `test.r` and ran it
 args <- commandArgs(trailingOnly = TRUE)
 print(args)
 ``````
+
 
 
 So you can use the same method like in python to pass arguments, do analysis and pass it back using the `cat` function in r as shown below. `cat` function avoids printing the `[1]` type indices to the stdout.
@@ -5279,11 +5303,10 @@ cat(sprintf("nadi:var:this_val=%d\n", 1200))
 #heading(level:1)[Compiled Plugins]
 
 
+
 As it is not possible to forsee all the use cases in advance, the nadi
 software can be easily extended (easy being an relative term) to
 account for different use cases.
-
-
 
 The program can load compiled shared libraries (`.dll` in windows,
 `.so` in linux, and `.dylib` on mac). Since they are shared libraries
@@ -5292,29 +5315,22 @@ generate those. So far, the `nadi_core` library is available for
 `Rust` only. Using that, plugins can be written and those functions
 can be made available from the system.
 
-
-
-Nadi core automatically loads:
+NADI core library automatically loads:
 
 
 - internal plugins if feature `functions` is used in `nadi_core` to compile it,
 - external plugins in the directories inside the `NADI_PLUGIN_DIRS` environmental variables. The plugins must be compiled using the same `nadi_core` version and must have the same internal ABI for data types.
 
 
+
 The syntax for functions in plugins are same for internal and external
 plugins. While the way to register the plugin differ slightly.
 
-
-
 The difference between the internal and external plugins are that, internal plugins are compiled with the `nadi_core` and come with the program, while external plugins are separately compiled and loaded through dynamic libraries.
-
-
 
 The methods for writing the plugins are the same, except at the top level: to export plugins, you have to use [`nadi_core::nadi_plugin::nadi_plugin`] macro
 for external plugins while
 [`nadi_core::nadi_plugin::nadi_internal_plugin`] for internal ones.
-
-
 
 In the next sections we will go in detail about how to write plugins and load them in nadi.
 
@@ -5322,13 +5338,10 @@ In the next sections we will go in detail about how to write plugins and load th
 #heading(level:2)[Internal Plugins]
 
 
-Internal plugins come with the nadi system. They are only modified between the different versions of Nadi.
 
-
+Internal plugins come with the nadi system. They are only modified between the different versions of NADI.
 
 The internal plugins provide core functionality of the Task system like data conversion, parsing network/attribute files, logical operations, template rendering, etc.
-
-
 
 Future planned internal plugin functions can be found in #link("https://github.com/Nadi-System/nadi-futures")[nadi-futures] repository. Which in itself is an external plugin.
 
@@ -5339,22 +5352,18 @@ Future planned internal plugin functions can be found in #link("https://github.c
 === External Plugins
 
 
+
 External plugins are plugins that are their own separate programs that compile to a shared library. The shared library has information about the name of the plugin, the functions that are available, as well as the bytecode required to run the functions.
-
-
 
 You have to use the `nadi_core` library and the macros available there to make the plugins. Although it might be possible to write it without the macros (an example is provided), it is strongly discouraged. The example only serves as a way to demonstrate the inner working of the external plugins.
 
-
-
 Some examples of external plugins are given in the #link("https://github.com/Nadi-System/nadi-plugins-rust")[`nadi-plugins-rust` repository].
-
-
 
 An example of a complex external plugin can be found in the `gis` plugin from #link("https://github.com/Nadi-System/nadi-gis")[`nadi-gis` repository].
 
 
 ==== Steps to create a Plugin
+
 
 
 `nadi` CLI tool has a function that can generate a plugin template. Simply run the `nadi` command with `--new-plugin` flag.
@@ -5365,13 +5374,10 @@ nadi --new-plugin <plugin-name>
 ``````
 
 
+
 This will create a directory with plugin's name with `Cargo.toml` and `src/lib.rs` with some sample codes for plugin functions. You can then edit them as per your need.
 
-
-
 The generated files using `nadi --new-plugin sample` look something like this:
-
-
 
 Cargo.toml:
 
@@ -5390,6 +5396,7 @@ crate-type = ["cdylib"]
 abi_stable = "0.11.3"
 nadi_core = "0.7.0"
 ``````
+
 
 
 src/lib.rs:
@@ -5448,6 +5455,7 @@ mod sample {
 ``````
 
 
+
 The plugin can be compiled with the `cargo build` or `cargo build --release` command, it'll generate the shared library in the `target/debug` or `target/release` folder. You can simply copy it to directory in `NADI_PLUGIN_DIRS` for it to be loaded.
 
 
@@ -5455,10 +5463,12 @@ The plugin can be compiled with the `cargo build` or `cargo build --release` com
 #heading(level:2)[Functions]
 
 
+
 Plugin functions are very close to normal rust functions, with extra syntax for the function arguments, and limited function argument and return types.
 
 
 === Function Types
+
 
 
 There are 3 function types:
@@ -5469,14 +5479,14 @@ There are 3 function types:
 - network
 
 
+
 the macro used for each function type are availabel from `nadi_core::nadi_plugin`. All the macro take optional list of `key = value` pairs that can act like default arguments to the functions while called from the task system.
-
-
 
 These macro will read the rust function and generate the necessary plugin code, function signature, documentation, and will even save the original code so that users can browse it through the `nadi-help`.
 
 
 === Function Arguments
+
 
 
 There are 5 types of function arugments, that are denoted by the following attributes
@@ -5490,13 +5500,10 @@ There are 5 types of function arugments, that are denoted by the following attri
 
 
 
+
 Users can not provide the argument `Node`/`Network` for node/network function as it is automatically provided based on the context.
 
-
-
 Furthermore, there are required and optional arguments. And users can optionally omit the arguments that are of type `Option<T>`, or have default value in the macro (e.g. `safe = false` in the codes below).
-
-
 
 For now, the function arguments except the `Node` or `Network` cannot be `mut`. But they can be reference of `T` if `T` satisfies the trait constraints, for example, instead of `Vec<String>`, it can be `&[String]`. But because the function context is evaluated for each node/network, there is no optimization by using the references.
 
@@ -5504,18 +5511,16 @@ For now, the function arguments except the `Node` or `Network` cannot be `mut`. 
 === Return Types
 
 
+
 Function Return can be empty, an attribute value, or an error. When a function returns an error, the execution is halted. When it doesn't return a value and an assignment is performed, it will error as well.
 
-
-
 The return type of the function should implement `Into<FunctinRet>`, refer to the documentation for #link("https://docs.rs/nadi_core/latest/nadi_core/functions/enum.FunctionRet.html")[`nadi_core::functions::FunctionRet`] to see what types implement it. You can also implement that for your own types.
-
-
 
 You can simply use any type that satisfy the trait requirement mentioned above as a function return and the nadi macros will convert them automatically for you.
 
 
 === Verbosity
+
 
 
 In future versions the functions will also get a flag that will let them know how verbose the functions can be. This will also come with a way to pass progress and other information while the function is still running.
@@ -5524,9 +5529,8 @@ In future versions the functions will also get a flag that will let them know ho
 === Examples
 
 
+
 Refer to the nadi_core, and other plugin repositories for sample codes for plugin functions as they are always up to date with the current version.
-
-
 
 Here is an example containing render function that is available on all function types.
 
@@ -5602,13 +5606,10 @@ Here is an example containing render function that is available on all function 
 #heading(level:3)[Environment Functions]
 
 
-Environment functions are like any normal function on programming languages that take arguments and run code. In Nadi environment functions can be called from any scope. For example, if a node function and environement function share the same name, then in a node task node function is called, but in network task env function is called.
 
-
+Environment functions are like any normal function on programming languages that take arguments and run code. In NADI environment functions can be called from any scope. For example, if a node function and environement function share the same name, then in a node task node function is called, but in network task env function is called.
 
 Environment functions are denoted in the plugins with `#[env_func]` macro. All the arguments this function takes need to be provided by user or through default values.
-
-
 
 Here is an example of a environment function `and` in plugin `logic`.
 
@@ -5630,6 +5631,7 @@ Here is an example of a environment function `and` in plugin `logic`.
 ``````
 
 
+
 This function can be called inside the task system in different context like follows:
 
 
@@ -5640,6 +5642,7 @@ env and(something, true) == (something & true)
 
 network and(what?, and(true, true))
 ``````
+
 
 
 Results:
@@ -5655,15 +5658,15 @@ false
 #heading(level:3)[Node Functions]
 
 
+
 Node functions are run for each node in the network (or a selected group of nodes). Hence, it takes the first argument as `& NodeInner` or `& mut NodeInner` depending on the purpose of the function. Immutable functions can be called from any place, while mutable functions can only be called once on the outermost layer on the task.
-
-
 
 Other arguments and the return types for node functions are the same as the environement functions.
 
 
 
 #heading(level:3)[Network Functions]
+
 
 
 Network functions, like node functions take `&Network` or `& mut Network` as the first argument. It has the same restrictions as the env/node functions for the arguments and the return types.
@@ -5681,10 +5684,9 @@ Network functions, like node functions take `&Network` or `& mut Network` as the
 == Internal Plugins
 
 
+
 There are some plugins that are provided with the `nadi_core`
 library. They are part of the library, so users can directly use them.
-
-
 
 For example in the following tasks file, the functions that are
 highlighted are functions available from the core plugins. Other
@@ -5761,6 +5763,7 @@ env attributes.strmap(
 - `default: 'Option < Attribute >'` => Default value if key not found in `attrmap`
 
 
+
 map values from the attribute based on the given table
 
 
@@ -5780,6 +5783,7 @@ env attributes.parse_attr(toml: '& str')
 ===== Arguments
 
 - `toml: '& str'` => String to parse into attribute
+
 
 
 Parse attribute from string
@@ -5802,6 +5806,7 @@ env attributes.parse_attrmap(toml: 'String')
 ===== Arguments
 
 - `toml: 'String'` => String to parse into attribute
+
 
 
 Parse attribute map from string
@@ -5832,6 +5837,7 @@ env attributes.get(
 - `default: 'Option < Attribute >'` => Default value if the index is not present
 
 
+
 get the choosen attribute from Array or AttrMap
 
 
@@ -5856,6 +5862,7 @@ env attributes.powi(value: 'f64', power: 'i64')
 - `power: 'i64'` =>
 
 
+
 Integer power
 
 
@@ -5873,6 +5880,7 @@ env attributes.powf(value: 'f64', power: 'f64')
 
 - `value: 'f64'` => base value
 - `power: 'f64'` =>
+
 
 
 Float power
@@ -5893,6 +5901,7 @@ env attributes.exp(value: 'f64')
 - `value: 'f64'` =>
 
 
+
 Exponential
 
 
@@ -5909,6 +5918,7 @@ env attributes.sqrt(value: 'f64')
 ===== Arguments
 
 - `value: 'f64'` =>
+
 
 
 Square Root
@@ -5928,6 +5938,7 @@ env attributes.log(value: 'f64', base: 'Option < f64 >')
 
 - `value: 'f64'` =>
 - `base: 'Option < f64 >'` =>
+
 
 
 Logarithm of a value, natural if base not given
@@ -5950,6 +5961,7 @@ env attributes.float_div(value1: 'f64', value2: 'f64')
 - `value2: 'f64'` => denominator
 
 
+
 Float Division (same as / operator)
 
 
@@ -5967,6 +5979,7 @@ env attributes.float_mult(value1: 'f64', value2: 'f64')
 
 - `value1: 'f64'` => numerator
 - `value2: 'f64'` => denominator
+
 
 
 Float Multiplication (same as \* operator)
@@ -5989,6 +6002,7 @@ node attributes.load_attrs(filename: 'PathBuf')
 - `filename: 'PathBuf'` => Template for the filename to load node attributes from
 
 
+
 Loads attrs from file for all nodes based on the given template
 
 
@@ -5998,11 +6012,13 @@ Loads attrs from file for all nodes based on the given template
 - `verbose`: print verbose message
 
 
+
 The template will be rendered for each node, and that filename from the
 rendered template will be used to load the attributes.
 
 
 ===== Errors
+
 
 
 The function will error out in following conditions:
@@ -6021,9 +6037,8 @@ node attributes.print_all_attrs()
 ===== Arguments
 
 
+
 Print all attrs in a node
-
-
 
 No arguments and no errors, it'll just print all the attributes in a node with
 `node::attr=val` format, where,
@@ -6045,6 +6060,7 @@ node attributes.print_attrs(*attrs, name: 'bool' = false)
 - `name: 'bool' = false` =>
 
 
+
 Print the given node attributes if present
 
 
@@ -6056,11 +6072,13 @@ Print the given node attributes if present
 ===== Error
 
 
+
 The function will error if
 
 
 - list of arguments are not `String`
 - the `name` argument is not Boolean
+
 
 
 The attributes will be printed in `key=val` format.
@@ -6077,9 +6095,8 @@ node attributes.set_attrs(**attrs)
 - `**attrs` => Key value pairs of the attributes to set
 
 
+
 Set node attributes
-
-
 
 Use this function to set the node attributes of all nodes, or
 a select few nodes using the node selection methods (path or
@@ -6089,10 +6106,12 @@ list of nodes)
 ===== Error
 
 
+
 The function should not error.
 
 
 ===== Example
+
 
 
 Following will set the attribute `a2d` to `true` for all nodes
@@ -6103,6 +6122,7 @@ from `A` to `D`
 network load_str("A -> B\n B -> D");
 node[A -> D] set_attrs(a2d = true)
 ``````
+
 
 
 This is equivalent to the following:
@@ -6124,6 +6144,7 @@ node attributes.get_attr(attr: '& str', default: 'Option < Attribute >')
 - `default: 'Option < Attribute >'` => Default value if the attribute is not found
 
 
+
 Retrive attribute
 
 
@@ -6141,6 +6162,7 @@ node attributes.has_attr(attr: '& str')
 ===== Arguments
 
 - `attr: '& str'` => Name of the attribute to check
+
 
 
 Check if the attribute is present
@@ -6165,9 +6187,8 @@ node attributes.first_attr(attrs: '& [String]', default: 'Option < Attribute >')
 - `default: 'Option < Attribute >'` => Default value if not found
 
 
+
 Return the first Attribute that exists
-
-
 
 This is useful when you have a bunch of attributes that might
 be equivalent but are using different names. Normally due to
@@ -6193,6 +6214,7 @@ node attributes.set_attrs_ifelse(cond: 'bool', **values)
 - `**values` => key = [val1, val2] where key is set as first if `cond` is true else second
 
 
+
 if else condition with multiple attributes
 
 
@@ -6209,6 +6231,7 @@ env assert_eq(nodes.val2, ["a", "a"])
 ``````
 
 
+
 This is equivalent to using the if-else expression directly,
 
 
@@ -6216,6 +6239,7 @@ This is equivalent to using the if-else expression directly,
 node.val1 = if (env.some_condition) {1} else {2};
 env assert_eq(nodes.val1, [1, 1])
 ``````
+
 
 
 Furthermore if-else expression will give a lot more
@@ -6234,9 +6258,8 @@ node attributes.set_attrs_render(**kwargs)
 - `**kwargs` => key value pair of attribute to set and the Template to render
 
 
+
 Set node attributes based on string templates
-
-
 
 This renders the template for each node, then it sets the
 values from the rendered results.
@@ -6260,16 +6283,13 @@ node attributes.load_toml_render(toml: '& Template', echo: 'bool' = false)
 - `echo: 'bool' = false` => Print the rendered toml or not
 
 
+
 Set node attributes by loading a toml from rendered template
-
-
 
 This function will render a string, and loads it as a toml
 string. This is useful when you need to make attributes based
 on some other variables that you can combine using the string
 template system.
-
-
 
 In most cases it is better to use the string manipulation
 functions and other environmental functions to get new
@@ -6295,6 +6315,7 @@ network attributes.set_attrs(**attrs)
 - `**attrs` => key value pair of attributes to set
 
 
+
 Set network attributes
 
 
@@ -6318,9 +6339,8 @@ network attributes.set_attrs_render(**kwargs)
 - `**kwargs` => Kwargs of attr = String template to render
 
 
+
 Set network attributes based on string templates
-
-
 
 It will set the attribute as a String
 
@@ -6353,16 +6373,13 @@ node command.command(
 - `echo: 'bool' = false` => Echo the stdout from the command
 
 
+
 Run the given template as a shell command.
-
-
 
 Run any command in the shell. The standard output of the command
 will be consumed and if there are lines starting with `nadi:var:`
 and followed by `key=val` pairs, it'll be read as new attributes
 to that node.
-
-
 
 For example if a command writes `nadi:var:name="Joe"` to stdout,
 then the for the current node the command is being run for, `name`
@@ -6370,13 +6387,12 @@ attribute will be set to `Joe`. This way, you can write your
 scripts in any language and pass the values back to the NADI
 system.
 
-
-
 It will also print out the new values or changes from old values,
 if `verbose` is true.
 
 
 ===== Errors
+
 
 
 The function will error if,
@@ -6413,9 +6429,8 @@ node command.run(
 - `echo: 'bool' = false` => Show the output of the command
 
 
+
 Run the node as if it's a command if inputs are changed
-
-
 
 This function will not run a command node if all outputs are older
 than all inputs. This is useful to networks where each nodes are
@@ -6443,9 +6458,8 @@ network command.parallel(
 - `echo: 'bool' = false` => Show the output of the command
 
 
+
 Run the given template as a shell command for each nodes in the network in parallel.
-
-
 
 Other than parallel execution this is same as the `node` function `command`
 
@@ -6473,9 +6487,8 @@ network command.command(
 - `echo: 'bool' = false` => Show the output of the command
 
 
+
 Run the given template as a shell command.
-
-
 
 Run any command in the shell. The standard output of the command
 will be consumed and if there are lines starting with `nadi:var:`
@@ -6483,12 +6496,8 @@ and followed by `key=val` pairs, it'll be read as new attributes
 to the network. If you want to pass node attributes add node name
 with `nadi:var:name:` as the prefix for `key=val`.
 
-
-
 See `node command.command` for more details as they have
 the same implementation
-
-
 
 The examples below run `echo` command to set the variables, you
 can use any command that are scripting languages (python, R,
@@ -6517,6 +6526,7 @@ env connections.root_node()
 ===== Arguments
 
 
+
 default name used for ROOT node of the network
 
 
@@ -6534,9 +6544,8 @@ network connections.load_file(file: 'PathBuf', append: 'bool' = false)
 - `append: 'bool' = false` => Append the connections in the current network
 
 
+
 Load the given file into the network
-
-
 
 This replaces the current network with the one loaded from the
 file.
@@ -6554,9 +6563,8 @@ network connections.load_str(contents: '& str', append: 'bool' = false)
 - `append: 'bool' = false` => Append the connections in the current network
 
 
+
 Load network from the given string
-
-
 
 This replaces the current network with the one loaded from the
 string.
@@ -6579,9 +6587,8 @@ network connections.load_edges(edges: '& [(String, String)]', append: 'bool' = f
 - `append: 'bool' = false` => Append the connections in the current network
 
 
+
 Load the given edges as a network
-
-
 
 This replaces the current network with the one loaded from the
 file.
@@ -6602,6 +6609,7 @@ network connections.subset(filter: '& [bool]', keep: 'bool' = true)
 
 - `filter: '& [bool]'` =>
 - `keep: 'bool' = true` => Keep the selected nodes (false = removes the selected)
+
 
 
 Take a subset of network by only including the selected nodes
@@ -6632,9 +6640,8 @@ network connections.save_file(
 - `graphviz: 'bool' = false` => wrap the network into a valid graphviz file
 
 
+
 Save the network into the given file
-
-
 
 For more control on graphviz file writing, use
 `save_graphviz` from `graphviz` plugin instead.
@@ -6649,6 +6656,7 @@ network connections.subset_from(node: '& str')
 ===== Arguments
 
 - `node: '& str'` =>
+
 
 
 Take a subset of network by taking the given node as new outlet
@@ -6671,9 +6679,8 @@ network connections.subset_largest(node: '& str' = "*ROOT*")
 - `node: '& str' = "*ROOT*"` =>
 
 
+
 Take a subset of network by only including the largest blob of connected nodes
-
-
 
 When you load a network that have disconnected nodes, nadi
 includes a ROOT note by default and collects all the outlets
@@ -6681,8 +6688,6 @@ as inputs to that node. This function allows you to filter out
 all the nodes except the one belonging to the largest
 connected network (number of nodes). Alternatively, you can
 also use ORDER and other logic in the task system to do that.
-
-
 
 If your network doesn't have a root node, then it'll just keep
 the network as it is.
@@ -6710,6 +6715,7 @@ env core.count(vars: '& [bool]')
 - `vars: '& [bool]'` =>
 
 
+
 Count the number of true values in the array
 
 
@@ -6727,6 +6733,7 @@ env core.type_name(value: 'Attribute', recursive: 'bool' = false)
 
 - `value: 'Attribute'` => Argument to get type
 - `recursive: 'bool' = false` => Recursively check types for array and table
+
 
 
 Type name of the arguments
@@ -6750,6 +6757,7 @@ env core.isna(val: 'f64')
 - `val: 'f64'` =>
 
 
+
 check if a float is nan
 
 
@@ -6766,6 +6774,7 @@ env core.isinf(val: 'f64')
 ===== Arguments
 
 - `val: 'f64'` =>
+
 
 
 check if a float is +/- infinity
@@ -6787,6 +6796,7 @@ env core.float(value: 'Attribute', parse: 'bool' = true)
 - `parse: 'bool' = true` => parse string to float
 
 
+
 make a float from value
 
 
@@ -6805,6 +6815,7 @@ env core.str(value: 'Attribute', quote: 'bool' = false)
 
 - `value: 'Attribute'` => Argument to convert to float
 - `quote: 'bool' = false` => quote it if it's literal string
+
 
 
 make a string from value
@@ -6837,6 +6848,7 @@ env core.int(
 - `strfloat: 'bool' = false` => parse string first as float before converting to int
 
 
+
 make an int from the value
 
 
@@ -6858,6 +6870,7 @@ env core.array(*attributes)
 - `*attributes` => List of attributes
 
 
+
 make an array from the arguments
 
 
@@ -6876,6 +6889,7 @@ env core.attrmap(**attributes)
 - `**attributes` => name and values of attributes
 
 
+
 make an attrmap from the arguments
 
 
@@ -6892,6 +6906,7 @@ env core.json(value: 'Attribute')
 ===== Arguments
 
 - `value: 'Attribute'` => attribute to format
+
 
 
 format the attribute as a json string
@@ -6915,6 +6930,7 @@ env core.append(array: 'Vec < Attribute >', value: 'Attribute')
 - `value: 'Attribute'` =>
 
 
+
 append a value to an array
 
 
@@ -6931,6 +6947,7 @@ env core.length(value: '& Attribute')
 ===== Arguments
 
 - `value: '& Attribute'` => Array or a HashMap
+
 
 
 length of an array or hashmap
@@ -6950,6 +6967,7 @@ env core.year(value: 'Attribute')
 ===== Arguments
 
 - `value: 'Attribute'` => Date or DateTime
+
 
 
 year from date/datetime
@@ -6972,6 +6990,7 @@ env core.month(value: 'Attribute')
 - `value: 'Attribute'` => Date or DateTime
 
 
+
 month from date/datetime
 
 
@@ -6989,6 +7008,7 @@ env core.day(value: 'Attribute')
 ===== Arguments
 
 - `value: 'Attribute'` => Date or DateTime
+
 
 
 day from date/datetime
@@ -7009,6 +7029,7 @@ env core.min_num(vars: 'Vec < Attribute >', start: 'Attribute' = Float(inf))
 
 - `vars: 'Vec < Attribute >'` =>
 - `start: 'Attribute' = Float(inf)` =>
+
 
 
 Minimum of the variables
@@ -7032,6 +7053,7 @@ env core.max_num(vars: 'Vec < Attribute >', start: 'Attribute' = Float(-inf))
 - `start: 'Attribute' = Float(-inf)` =>
 
 
+
 Minimum of the variables
 
 
@@ -7051,6 +7073,7 @@ env core.min(vars: 'Vec < Attribute >', start: 'Attribute')
 
 - `vars: 'Vec < Attribute >'` =>
 - `start: 'Attribute'` =>
+
 
 
 Minimum of the variables
@@ -7075,6 +7098,7 @@ env core.max(vars: 'Vec < Attribute >', start: 'Attribute')
 - `start: 'Attribute'` =>
 
 
+
 Maximum of the variables
 
 
@@ -7097,9 +7121,8 @@ env core.sum(vars: 'Vec < Attribute >', start: 'Attribute' = Integer(0))
 - `start: 'Attribute' = Integer(0)` =>
 
 
+
 Sum of the variables
-
-
 
 This function is for numeric attributes. You need to give the
 start attribute so that data type is valid.
@@ -7122,9 +7145,8 @@ env core.prod(vars: 'Vec < Attribute >', start: 'Attribute' = Integer(1))
 - `start: 'Attribute' = Integer(1)` =>
 
 
+
 Product of the variables
-
-
 
 This function is for numerical values/attributes
 
@@ -7145,9 +7167,8 @@ env core.unique_str(vars: 'Vec < String >')
 - `vars: 'Vec < String >'` =>
 
 
+
 Get a list of unique string values
-
-
 
 The order of the strings returned is not guaranteed
 
@@ -7166,6 +7187,7 @@ env core.count_str(vars: 'Vec < String >')
 ===== Arguments
 
 - `vars: 'Vec < String >'` =>
+
 
 
 Get a count of unique string values
@@ -7190,6 +7212,7 @@ env core.concat(*vars, join: '& str' = "")
 - `join: '& str' = ""` =>
 
 
+
 Concat the strings
 
 
@@ -7207,6 +7230,7 @@ env core.range(start: 'i64', end: 'i64')
 
 - `start: 'i64'` =>
 - `end: 'i64'` =>
+
 
 
 Generate integer array, end is not included
@@ -7228,9 +7252,8 @@ env core.assert(condition: 'bool', note: 'String' = "Condition False")
 - `note: 'String' = "Condition False"` =>
 
 
+
 Assert the condition is true
-
-
 
 Use `assert_eq`/`assert_neq` if you are testing equality for
 better error message.
@@ -7252,9 +7275,8 @@ env core.assert_eq(left: 'Attribute', right: 'Attribute')
 - `right: 'Attribute'` =>
 
 
+
 Assert the two values are equal
-
-
 
 This function is for testing the code, as well as for
 terminating the execution when certain values are not equal
@@ -7278,9 +7300,8 @@ env core.assert_neq(left: 'Attribute', right: 'Attribute')
 - `right: 'Attribute'` =>
 
 
+
 Assert the two values are not equal
-
-
 
 This function is for testing the code, as well as for
 terminating the execution when certain values are not equal
@@ -7303,6 +7324,7 @@ node core.inputs_count()
 ===== Arguments
 
 
+
 Count the number of input nodes in the node
 
 
@@ -7322,9 +7344,8 @@ node core.inputs_attr(attr: 'String' = "NAME")
 - `attr: 'String' = "NAME"` => Attribute to get from inputs
 
 
+
 Get attributes of the input nodes
-
-
 
 This is equivalent to using the `inputs` keyword
 
@@ -7343,9 +7364,8 @@ node core.has_outlet()
 ===== Arguments
 
 
+
 Node has an outlet or not
-
-
 
 This is equivalent to using `output._?`, as `_` is a dummy
 variable that will always be present in all cases, it being
@@ -7368,9 +7388,8 @@ node core.output_attr(attr: 'String' = "NAME")
 - `attr: 'String' = "NAME"` => Attribute to get from inputs
 
 
+
 Get attributes of the output node
-
-
 
 This is equivalent to using the `output` keyword
 
@@ -7393,6 +7412,7 @@ network core.count(vars: 'Option < Vec < bool > >')
 - `vars: 'Option < Vec < bool > >'` =>
 
 
+
 Count the number of nodes in the network
 
 
@@ -7413,6 +7433,7 @@ network core.outlet()
 ===== Arguments
 
 
+
 Get the name of the outlet node
 
 
@@ -7431,6 +7452,7 @@ network core.node_attr(name: 'String', attribute: 'String' = "_")
 
 - `name: 'String'` => name of the node
 - `attribute: 'String' = "_"` => attribute to get
+
 
 
 Get the attr of the provided node
@@ -7455,6 +7477,7 @@ env debug.sleep(time: 'u64' = 1000)
 - `time: 'u64' = 1000` =>
 
 
+
 sleep for given number of milliseconds
 
 
@@ -7470,9 +7493,8 @@ env debug.debug(*args, **kwargs)
 - `**kwargs` => Function Keyword arguments
 
 
+
 Print the args and kwargs on this function
-
-
 
 This function will just print out the args and kwargs the
 function is called with. This is for debugging purposes to see
@@ -7498,16 +7520,13 @@ env debug.echo(
 - `newline: 'bool' = true` => print newline at the end
 
 
+
 Echo the string to stdout or stderr
-
-
 
 This simply echoes anything given to it. This can be used in
 combination with nadi tasks that create files (image, text,
 etc). The `echo` function can be called to get the link to
 those files back to the stdout.
-
-
 
 Also useful for nadi preprocessor.
 
@@ -7523,16 +7542,13 @@ env debug.clip(error: 'bool' = false)
 - `error: 'bool' = false` => print in stderr instead of in stdout
 
 
+
 Echo the `----8<----` line for clipping syntax
-
-
 
 This function is a utility function for the generation of nadi
 book. This prints out the `----8<----` line when called, so
 that `mdbook` preprocessor for `nadi` knows where to clip the
 output for displaying it in the book.
-
-
 
 This makes it easier to only show the relevant parts of the
 output in the documentation instead of having the user see
@@ -7541,6 +7557,7 @@ generating the results.
 
 
 ==== Example
+
 
 
 Given the following tasks file:
@@ -7552,6 +7569,7 @@ net load_attrs("...")
 net clip()
 net render("{_NAME} {attr1}")
 ``````
+
 
 
 The clip function's output will let the preprocessor know that
@@ -7577,6 +7595,7 @@ env files.exists(path: 'PathBuf', min_lines: 'Option < usize >')
 - `min_lines: 'Option < usize >'` => Minimum number of lines the file should have
 
 
+
 Checks if the given path exists
 
 
@@ -7590,6 +7609,7 @@ env files.from_file(path: 'PathBuf', default: 'Option < String >')
 
 - `path: 'PathBuf'` => File Path to load the contents from
 - `default: 'Option < String >'` => default value
+
 
 
 Reads the file contents as string
@@ -7614,6 +7634,7 @@ env files.to_file(
 - `end: 'String' = "\n"` => End the write with this
 
 
+
 Writes the string to the file
 
 
@@ -7629,6 +7650,7 @@ node files.exists(path: 'Template', min_lines: 'Option < usize >')
 
 - `path: 'Template'` => Path to check
 - `min_lines: 'Option < usize >'` => Minimum number of lines the file should have
+
 
 
 Checks if the given path exists when rendering the template
@@ -7654,9 +7676,8 @@ env logic.ifelse(
 - `iffalse: 'Attribute'` => Output if `cond` is false
 
 
+
 Simple if else condition
-
-
 
 This is similar to using the `if-else` expression, the
 difference being the condition is relaxed. For example, for
@@ -7684,6 +7705,7 @@ env logic.gt(a: '& Attribute', b: '& Attribute')
 - `b: '& Attribute'` => second attribute
 
 
+
 Greater than check
 
 
@@ -7702,6 +7724,7 @@ env logic.lt(a: '& Attribute', b: '& Attribute')
 
 - `a: '& Attribute'` => first attribute
 - `b: '& Attribute'` => second attribute
+
 
 
 Less than check
@@ -7724,6 +7747,7 @@ env logic.eq(a: '& Attribute', b: '& Attribute')
 - `b: '& Attribute'` => second attribute
 
 
+
 Equality than check
 
 
@@ -7744,9 +7768,8 @@ env logic.and(*conds)
 - `*conds` => List of attributes that can be cast to bool
 
 
+
 Boolean and
-
-
 
 Similar to the operator `&` but the values are cast to boolean
 
@@ -7768,9 +7791,8 @@ env logic.or(*conds)
 - `*conds` => List of attributes that can be cast to bool
 
 
+
 boolean or
-
-
 
 Similar to the operator `|` but the values are cast to boolean
 
@@ -7792,9 +7814,8 @@ env logic.not(cond: 'bool')
 - `cond: 'bool'` => attribute that can be cast to bool
 
 
+
 boolean not
-
-
 
 Similar to the operator `!` but the values are cast to boolean
 
@@ -7817,6 +7838,7 @@ env logic.all(vars: '& [bool]')
 - `vars: '& [bool]'` =>
 
 
+
 check if all of the bool are true
 
 
@@ -7836,6 +7858,7 @@ env logic.any(vars: '& [bool]')
 ==== Arguments
 
 - `vars: '& [bool]'` =>
+
 
 
 check if any of the bool are true
@@ -7863,6 +7886,7 @@ env regex.str_filter(attrs: 'Vec < String >', pattern: 'Regex')
 - `pattern: 'Regex'` => Regex pattern to match
 
 
+
 Filter from the string list with only the values matching pattern
 
 
@@ -7882,9 +7906,8 @@ env regex.str_match(attr: '& str', pattern: 'Regex')
 - `pattern: 'Regex'` => Regex pattern to match
 
 
+
 Check if the given pattern matches the value or not
-
-
 
 You can also use match operator for this
 
@@ -7911,6 +7934,7 @@ env regex.str_replace(
 - `rep: '& str'` => replacement string
 
 
+
 Replace the occurances of the given match
 
 
@@ -7929,6 +7953,7 @@ env regex.str_find(attr: '& str', pattern: 'Regex')
 
 - `attr: '& str'` => attribute to check for pattern
 - `pattern: 'Regex'` => Regex pattern to match
+
 
 
 Find the given pattern in the value
@@ -7950,6 +7975,7 @@ env regex.str_find_all(attr: '& str', pattern: 'Regex')
 - `pattern: 'Regex'` => Regex pattern to match
 
 
+
 Find all the matches of the given pattern in the value
 
 
@@ -7967,6 +7993,7 @@ env regex.str_count(attr: '& str', pattern: 'Regex')
 
 - `attr: '& str'` => attribute to check for pattern
 - `pattern: 'Regex'` => Regex pattern to match
+
 
 
 Count the number of matches of given pattern in the string
@@ -7991,6 +8018,7 @@ env regex.str_split(
 - `attr: '& str'` => String to split
 - `pattern: 'Regex'` => Regex pattern to split with
 - `limit: 'Option < usize >'` => Limit the split to maximum number
+
 
 
 Split the string with the given pattern
@@ -8022,9 +8050,8 @@ env render.render(
 - `**keyval` =>
 
 
+
 Render the template based on the node attributes
-
-
 
 For more details on the template system. Refer to the String
 Template section of the NADI book.
@@ -8034,6 +8061,7 @@ Template section of the NADI book.
 env assert_eq(render("abc {_x}", x="ab"), "abc ab")
 env assert_eq(render("abc {x}", x=23), "abc 23")
 ``````
+
 
 
 If safe parameter is true, then it doesn't error out even if
@@ -8060,9 +8088,8 @@ node render.render(template: '& Template', safe: 'bool' = false)
 - `safe: 'bool' = false` => if render fails keep it as it is instead of exiting
 
 
+
 Render the template based on the node attributes
-
-
 
 For more details on the template system. Refer to the String
 Template section of the NADI book.
@@ -8086,6 +8113,7 @@ network render.render(template: '& Template', safe: 'bool' = false)
 
 - `template: '& Template'` => Path to the template file
 - `safe: 'bool' = false` => if render fails keep it as it is instead of exiting
+
 
 
 Render from network attributes
@@ -8113,6 +8141,7 @@ network render.render_nodes(
 - `join: '& str' = "\n"` => String to join the render results
 
 
+
 Render each node of the network and combine to same variable
 
 
@@ -8133,9 +8162,8 @@ network render.render_template(template: 'PathBuf')
 - `template: 'PathBuf'` => Path to the template file
 
 
+
 Render a File template for the nodes in the whole network
-
-
 
 Write the file with templates for input variables in the same
 way you write string templates. It's useful for markdown
@@ -8144,15 +8172,11 @@ else that way. Do be careful about that. And the program will
 replace those templates with their values when you run it with
 inputs.
 
-
-
 It'll repeat the same template for each node and render them.
 If you want only a portion of the file repeated for nodes
 inclose them with lines with `---8<---` on both start and the
 end. The lines containing the clip syntax will be ignored,
 ideally you can put them in comments.
-
-
 
 You can also use `---include:<filename>[::line_range]` syntax to
 include a file, the line_range syntax, if present, should be
@@ -8178,6 +8202,7 @@ node series.sr_count()
 ==== Arguments
 
 
+
 Number of series in the node
 
 
@@ -8188,6 +8213,7 @@ node series.sr_list()
 ``````
 
 ==== Arguments
+
 
 
 List all series in the node
@@ -8205,6 +8231,7 @@ node series.sr_dtype(name: '& str', safe: 'bool' = false)
 - `safe: 'bool' = false` => Do not error if series does't exist
 
 
+
 Type name of the series
 
 
@@ -8218,6 +8245,7 @@ node series.sr_len(name: '& str', safe: 'bool' = false)
 
 - `name: '& str'` => Name of the series
 - `safe: 'bool' = false` => Do not error if series does't exist
+
 
 
 Length of the series
@@ -8234,6 +8262,7 @@ node series.sr_mean(name: '& str')
 - `name: '& str'` => Name of the series
 
 
+
 Type name of the series
 
 
@@ -8246,6 +8275,7 @@ node series.sr_sum(name: '& str')
 ==== Arguments
 
 - `name: '& str'` => Name of the series
+
 
 
 Sum of the series
@@ -8268,6 +8298,7 @@ node series.set_series(
 - `dtype: '& str'` => type
 
 
+
 set the following series to the node
 
 
@@ -8281,6 +8312,7 @@ node series.sr_to_array(name: '& str', safe: 'bool' = false)
 
 - `name: '& str'` => Name of the series
 - `safe: 'bool' = false` => Do not error if series does't exist
+
 
 
 Make an array from the series
@@ -8306,6 +8338,7 @@ network table.save_csv(
 - `filter: 'Option < Vec < bool > >'` =>
 
 
+
 Save CSV
 
 
@@ -8328,10 +8361,12 @@ network table.table_to_markdown(
 - `connections: 'Option < String >'` => Show connections column or not
 
 
+
 Render the Table as a rendered markdown
 
 
 ==== Error
+
 
 
 The function will error out if,
@@ -8358,6 +8393,7 @@ node timeseries.ts_count()
 ===== Arguments
 
 
+
 Number of timeseries in the node
 
 
@@ -8368,6 +8404,7 @@ node timeseries.ts_list()
 ``````
 
 ===== Arguments
+
 
 
 List all timeseries in the node
@@ -8385,6 +8422,7 @@ node timeseries.ts_dtype(name: '& str', safe: 'bool' = false)
 - `safe: 'bool' = false` => Do not error if timeseries does't exist
 
 
+
 Type name of the timeseries
 
 
@@ -8398,6 +8436,7 @@ node timeseries.ts_len(name: '& str', safe: 'bool' = false)
 
 - `name: '& str'` => Name of the timeseries
 - `safe: 'bool' = false` => Do not error if timeseries does't exist
+
 
 
 Length of the timeseries
@@ -8418,6 +8457,7 @@ node timeseries.ts_print(
 - `name: '& String'` => name of the timeseries
 - `header: 'bool' = true` => show header
 - `head: 'Option < i64 >'` => number of head rows to show (all by default)
+
 
 
 Print the given timeseries values in csv format
@@ -8446,9 +8486,8 @@ network timeseries.ts_print_csv(
 - `nodes: 'Option < HashSet < String > >'` => Include only these nodes (all by default)
 
 
+
 Save timeseries from all nodes into a single csv file
-
-
 
 TODO: error/not on unqual length
 TODO: error/not on no timeseries, etc...
@@ -8474,6 +8513,7 @@ network timeseries.series_csv(
 - `series: 'Vec < String >'` => list of series to write
 
 
+
 Write the given nodes to csv with given attributes and series
 
 
@@ -8495,6 +8535,7 @@ network visuals.set_nodesize_attrs(
 - `attrs: '& [f64]'` => Attribute values to use for size scaling
 - `minsize: 'f64' = 4.0` => minimum size of the node
 - `maxsize: 'f64' = 12.0` => maximum size of the node
+
 
 
 Set the node size of the nodes based on the attribute value
@@ -8528,6 +8569,7 @@ network visuals.svg_save(
 - `twidth: 'f64' = 9.0` => in average how many units each text character takes
 
 
+
 For auto calculating width of the page since we don't have Cairo
 
 
@@ -8538,6 +8580,7 @@ For auto calculating width of the page since we don't have Cairo
 - `page_height: 'Option < u64 >'` =>
 
 
+
 Exports the network as a svg
 
 
@@ -8546,10 +8589,9 @@ Exports the network as a svg
 #heading(level:1)[External Plugins]
 
 
+
 This section showcases the functions from external plugins developed
 along side the NADI project due to various reasons.
-
-
 
 The plugins listed here can be installed with following steps:
 
@@ -8572,6 +8614,7 @@ node dams.count_node_if(count_attr: '& str', cond: 'bool')
 - `cond: 'bool'` =>
 
 
+
 Count the number of nodes upstream at each point that satisfies a certain condition
 
 
@@ -8585,6 +8628,7 @@ node dams.min_year(yearattr: '& str', write_var: '& str' = "MIN_YEAR")
 
 - `yearattr: '& str'` =>
 - `write_var: '& str' = "MIN_YEAR"` =>
+
 
 
 Propagate the minimum year downstream
@@ -8662,6 +8706,7 @@ network datafill.save_experiments_csv(
 - `filter: 'Option < Vec < bool > >'` =>
 
 
+
 Write the given nodes to csv with given attributes and experiment results
 
 
@@ -8680,9 +8725,8 @@ env dss.list_catalog(dssfile: 'String', paths: 'String' = "/*/*/*/*/*/*/")
 - `paths: 'String' = "/*/*/*/*/*/*/"` =>
 
 
+
 List the catalog of the dss file
-
-
 
 env list_catalog("/home/gaurav/work/nadi-project/codes/nadi-dss/dsslib/routed-main-stem.dss")
 
@@ -8709,9 +8753,8 @@ node errors.calc_ts_error(
 - `error: '& str' = "rmse"` => Error type, one of rmse/nrmse/abserr/nse
 
 
+
 Calculate Error from two timeseries values in the node
-
-
 
 It calculates the error between two timeseries values from the node
 
@@ -8733,9 +8776,8 @@ node errors.calc_ts_errors(
 - `errors: '& [String]'` => Error types to calculate, one of rmse/nrmse/abserr/nse
 
 
+
 Calculate Error from two timeseries values in the node
-
-
 
 It calculates the error between two timeseries values from the node.
 
@@ -8759,9 +8801,8 @@ network errors.calc_attr_error(
 - `error: 'String' = "rmse"` => Error type, one of rmse/nrmse/abserr/nse
 
 
+
 Calculate Error from two attribute values in the network
-
-
 
 It calculates the error using two attribute values from all the nodes.
 
@@ -8776,6 +8817,7 @@ network fancy_print.fancy_print()
 ``````
 
 ==== Arguments
+
 
 
 Fancy print a network
@@ -8807,6 +8849,7 @@ network gnuplot.plot_timeseries(
 - `timefmt: '& str' = "%Y-%m-%d"` =>
 - `config: '& GnuplotConfig' = GnuplotConfig { outfile: None, terminal: None, csv: false, preamble: "" }` =>
 - `skip_missing: 'bool' = false` =>
+
 
 
 Generate a gnuplot file that plots the timeseries data in the network
@@ -8841,6 +8884,7 @@ node graphics.attr_fraction_svg(
 - `margin: 'f64' = 10.0` =>
 
 
+
 Create a SVG file with the given network structure
 
 
@@ -8865,6 +8909,7 @@ network graphics.csv_load_ts(
 - `date_col: 'String' = "date"` =>
 - `timefmt: 'String' = "%Y-%m-%d"` =>
 - `data_type: 'String' = "Floats"` =>
+
 
 
 Count the number of na values in CSV file for each nodes in a network
@@ -8898,6 +8943,7 @@ network graphics.csv_count_na(
 - `sort: 'bool' = false` =>
 - `skip_zero: 'bool' = false` =>
 - `head: 'Option < i64 >'` =>
+
 
 
 Count the number of na values in CSV file for each nodes in a network
@@ -8936,6 +8982,7 @@ network graphics.csv_data_blocks_svg(
 - `fit: 'bool' = false` =>
 
 
+
 Draw the data blocks with arrows in timeline
 
 
@@ -8958,6 +9005,7 @@ network graphics.export_svg(
 - `fit: 'bool' = false` =>
 - `label: 'Option < Template >'` =>
 - `highlight: '& [usize]' = []` =>
+
 
 
 Create a SVG file with the given network structure
@@ -8986,6 +9034,7 @@ network graphics.table_to_svg(
 - `highlight: '& [String]' = []` =>
 
 
+
 Create a SVG file with the given network structure
 
 
@@ -9011,6 +9060,7 @@ network graphviz.save_graphviz(
 - `global_attrs: '& str' = ""` =>
 - `node_attr: 'Option < & Template >'` =>
 - `edge_attr: 'Option < & Template >'` =>
+
 
 
 Save the network as a graphviz file
@@ -9045,6 +9095,7 @@ network html.export_map(
 - `connections: 'bool' = true` =>
 
 
+
 Exports the network as a HTML map
 
 
@@ -9075,9 +9126,8 @@ network gis.gis_load_network(
 - `ignore_null: 'bool' = false` => Ignore feature if it has fields with null value
 
 
+
 Load network from a GIS file
-
-
 
 Loads the network from a gis file containing the edges in fields
 
@@ -9107,9 +9157,8 @@ network gis.gis_load_attrs(
 - `err_no_node: 'bool' = false` => Error if all nodes are not found in the GIS file
 
 
+
 Load node attributes from a GIS file
-
-
 
 The function reads a GIS file in any format (CSV, GPKG, SHP,
 JSON, etc) and loads their fields as attributes to the nodes.
@@ -9134,6 +9183,7 @@ network gis.gis_save_connections(
 - `driver: 'Option < String >'` =>
 - `layer: 'String' = "network"` =>
 - `filter: 'Option < Vec < bool > >'` =>
+
 
 
 Save GIS file of the connections
@@ -9162,6 +9212,7 @@ network gis.gis_save_nodes(
 - `filter: 'Option < Vec < bool > >'` =>
 
 
+
 Save GIS file of the nodes
 
 
@@ -9179,6 +9230,7 @@ node print_node.print_node()
 ===== Arguments
 
 
+
 Print the node with its inputs and outputs
 
 
@@ -9193,6 +9245,7 @@ network print_node.print_attr_csv(*args)
 ===== Arguments
 
 - `*args` =>
+
 
 
 Print the given attributes in csv format with first column with node name
@@ -9212,11 +9265,12 @@ node streamflow.check_negative(ts_name: '& str')
 - `ts_name: '& str'` => Name of the timeseries with streamflow data
 
 
+
 Check the given streamflow timeseries for negative values
 
 
 
-#heading(level:2)[Nadi PDF]
+#heading(level:2)[NADI PDF]
 
 === Env Functions
 
@@ -9230,6 +9284,7 @@ env nadi_pdf.typst_compile(content: 'String', outfile: 'PathBuf')
 
 - `content: 'String'` =>
 - `outfile: 'PathBuf'` =>
+
 
 
 convert the typst content into pdf/svg/png
@@ -9248,6 +9303,7 @@ network nadi_pdf.typst_table(table: 'Table')
 - `table: 'Table'` =>
 
 
+
 Generate Typst code for given Table
 
 
@@ -9260,9 +9316,8 @@ Generate Typst code for given Table
 #heading(level:1)[Data Structure]
 
 
+
 This section will describe the data structures associated with NADI system in brief.
-
-
 
 For more accurate and upto date details on the data structures and their available methods. Look at the API reference of #link("https://docs.rs/nadi_core/latest/nadi_core/")[`nadi_core` on docs.rs].
 
@@ -9270,25 +9325,20 @@ For more accurate and upto date details on the data structures and their availab
 #heading(level:2)[Node]
 
 
+
 Points with attributes and timeseries. These can be any point as long
 as they'll be on the network and connection to each other.
-
-
 
 The attributes can be any format. There is a special type of attribute
 timeseries to deal with timeseries data that has been provided by the
 system. But users are free to make their own attributes and plugins +
 functions that can work with those attributes.
 
-
-
 Since attributes are loaded using TOML file, simple attributes can be
 stored and parsed from strings, moderately complex ones can be saved
 as a combination of array and tables, and more complex ones can be
 saved in different files and their path can be stored as node
 attributes.
-
-
 
 Here is an example node attribute file. Here we have string, float, int and boolean values, as well as a example csv timeseries
 
@@ -9309,11 +9359,10 @@ streamflow = {path="data/smithland.csv", datetime="date", data="flow"}
 === Network
 
 
+
 Collection of Nodes, with Connection information. The connection
 information is saved in the nodes itself (=inputs= and =output=
 variables), but they are assigned from the network.
-
-
 
 The nadi system (lit, river system), is designed for the connections
 between points along a river. Out of different types of river networks
@@ -9325,15 +9374,11 @@ they converse before the next point of interests. There cannot be node
 points that have more than one path to reach another node in the
 representative system.
 
-
-
 Network file are simple text files with each edge on one line. Node
 names can be words with alphanumeric characters with the additional
 character `_`, similar to how rust identifiers work. The Node names
 can also be quoted strings, in those cases any characters are
 supported inside the quotes.
-
-
 
 Here is an example network file,
 
@@ -9348,6 +9393,7 @@ evansville -> "jt-myers"
 markland -> mcalpine
 golconda -> smithland
 ``````
+
 
 
 Drawing it out:
@@ -9365,7 +9411,9 @@ network echo("../output/mississippi.svg")
 ``````
 
 
+
 Results:
+
 
 
 
@@ -9375,16 +9423,13 @@ Results:
 
 
 
+
 The program also plans to support the connection import from the #link("https://graphviz.org/doc/info/lang.html")[DOT
 format (graphviz package)].
-
-
 
 Network file without any connection format can
 be written as a node per line, but those network can only call
 sequential functions, and not input dependent ones.
-
-
 
 Depending on the use cases, it can probably be applied to other
 systems that are similar to a river system. Or even without the
@@ -9396,10 +9441,9 @@ other can be run in sequential order.
 #heading(level:2)[Timeseries]
 
 
+
 Timeseries of values, at regular interval. Can support integers,
 floats, booleans, strings, Arrays and Tables.
-
-
 
 For timeseries that are not in a format that NADI can understand. The
 path to the timeseries can be provided as a node attribute and plugin
@@ -9413,11 +9457,10 @@ the node.
 === String Templates
 
 
+
 The templating system will be used by an external library developed by
 me. The library can be modified if there are specific needs for this
 project.
-
-
 
 The template system is feature rich, allowing for formatting, simple
 string transformations, and airthmatic calculations based on the
@@ -9425,23 +9468,18 @@ variables (node attributes in this case). This can be used to generate
 file paths, and similar strings based on node attributes, as well as
 to format the cell values for exported table, figures, etc.
 
-
-
 The template library is also available for `Rust`, `C` and `C++`, but
 all the interactions with the templates will be done through the
 `nadi` interface, so that is not required.
 
-
-
 Documentations on the template system, can be redirected to
 #link("https://docs.rs/string-template-plus/latest/string_template_plus/")[the `string_template_plus` library page].
-
-
 
 Brief explanation on the template system is given below.
 
 
 ==== Template Parts
+
 
 
 Templates have variables, time formats, expressions, and commands (disabled by default);
@@ -9453,15 +9491,17 @@ Current time is {%H} hour  {%M} minutes.
 ``````
 
 
+
 Results (with:  name=John; address=123 Road, USA):
 
 
 ``````output
 Hi, my name is John, my address is 123 Road, USA.
-Current time is 00 hour  36 minutes.
+Current time is 06 hour  57 minutes.
 ``````
 
 ==== Optional Variables
+
 
 
 Variables can be chained in an optional way, so the first one that's
@@ -9474,6 +9514,7 @@ Hi, I am {nickname?name}, my address is {address?"N/A"}.
 ``````
 
 
+
 Results (with:  name=John; nickname=J; address=123 Road, USA):
 
 
@@ -9482,6 +9523,7 @@ Hi, I am J, my address is 123 Road, USA.
 ``````
 
 ==== String Literal
+
 
 
 Variables when replaced with literal strings (quoted strings), they
@@ -9494,6 +9536,7 @@ Hi, I am {nickname?name}, my address is {address?"N/A"}.
 ``````
 
 
+
 Results (with:  name=John):
 
 
@@ -9502,6 +9545,7 @@ Hi, I am John, my address is N/A.
 ``````
 
 ==== Transformers
+
 
 
 Variables can have optional transformers which transform the string
@@ -9514,6 +9558,7 @@ Hi, I am {nickname?name:case(up)}, my address is {address?"N/A"}.
 ``````
 
 
+
 Results (with:  name=Joe):
 
 
@@ -9522,6 +9567,7 @@ Hi, I am JOE, my address is N/A.
 ``````
 
 ==== Time formats
+
 
 
 time formats are formatted current time (e.g. `{%Y}` will become
@@ -9533,14 +9579,16 @@ Today is {%B %d} of the year {%Y}.
 ``````
 
 
+
 Results (with:  name=John):
 
 
 ``````output
-Today is July 31 of the year 2025.
+Today is August 01 of the year 2025.
 ``````
 
 ==== Lisp Expressions
+
 
 
 expressions are lisp expressions that will be evaluated and the
@@ -9554,6 +9602,7 @@ guess my age(x) if: (x + 21) * 4 = =(* (+ (st+num 'age) 21) 4).
 ``````
 
 
+
 Results (with:  age=20):
 
 
@@ -9564,6 +9613,7 @@ guess my age(x) if: (x + 21) * 4 = 164.
 ==== NADI Specific options
 
 
+
 Besides the above points, specific to nadi system, any node template
 will have all the variables from node attributes available as strings
 for template. For string variables, their name can be used to access
@@ -9572,14 +9622,10 @@ unquoted raw string. (e.g. if we have attribute `name="smithland"`,
 then `{name}` will render to `"smithland"`, while `{_name}` will
 render to `smithland`).
 
-
-
-Nadi system uses templates in a variety of place, and plugin functions
+NADI system uses templates in a variety of place, and plugin functions
 also sometimes take templates for file path, or strings, and such
 things. Look at the help string of the function to see if it takes
 `String` or `Template` type.
-
-
 
 For example `render` is a function that takes a template and prints it
 after rendering it for each node.
@@ -9595,6 +9641,7 @@ node[ohio,red] render(
 ``````
 
 
+
 Results:
 
 
@@ -9606,12 +9653,11 @@ Results:
 ``````
 
 
+
 As seen in above example, you can render variables, transform them, use basic calculations.
 
-
-
 Or you can use `lisp` syntax to do more complex calculations. Refer to
-#link("../system/extensions.md")[Nadi Extension Capabilities] section for more
+#link("../system/extensions.md")[NADI Extension Capabilities] section for more
 info on how to use `lisp` on string template.
 
 
@@ -9623,6 +9669,7 @@ node[ohio] render(
 	from lisp = {=(/ (st+num 'streamflow) 1000):f(2)} x 10^3 cfs"
 )
 ``````
+
 
 
 Results:
@@ -9637,12 +9684,14 @@ Results:
 ==== Some Complex Examples
 
 
+
 Optional variables and a command; note that commands can have variables inside them:
 
 
 ``````stp
 hi there, this {is?a?"test"} for $(echo a simple case {that?} {might} be "possible")
 ``````
+
 
 
 Results (with:  might=may):
@@ -9653,6 +9702,7 @@ hi there, this test for $(echo a simple case  may be possible)
 ``````
 
 
+
 Optional variables with transformers inside command.
 
 
@@ -9661,12 +9711,14 @@ Hi {like?a?"test"} for $(this does {work:case(up)} now) (yay)
 ``````
 
 
+
 Results (with:  work=Fantastic Job):
 
 
 ``````output
 Hi test for $(this does FANTASTIC JOB now) (yay)
 ``````
+
 
 
 If you need to use `{` and `}` in a template, you can escape them. Following template shows how LaTeX commands can be generated from templates.
@@ -9678,13 +9730,15 @@ more {formatting?} options on {%F} and
 ``````
 
 
+
 Results (with:  command=Error;variable=Var):
 
 
 ``````output
-more  options on 2025-07-31 and
+more  options on 2025-08-01 and
 \latex{command}{with Var}, should work.
 ``````
+
 
 
 This just combined a lot of different things from above:
@@ -9700,12 +9754,14 @@ see $(some-command --flag "and the value" {problem})
 ``````
 
 
+
 \*Error\*:
 
 
 ``````error
 None of the variables ["might", "be", "not", "found"] found
 ``````
+
 
 
 This shows the error for the first template part that errors out, even
@@ -9716,17 +9772,14 @@ string templates, you might have to give it multiple tries.
 ==== Advanced String Template with LISP <string_templates:advanced-string-template-with-lisp>
 
 
-Nadi Template string is useful when you want to represent node
+
+NADI String Template is useful when you want to represent node
 specific string, or file path in a network. This is not as advanced as
 the formatted strings in python. But it can be used for complex
 situations based on the current functionality.
 
-
-
 The most important extension capability of the string template is the
 embedded lisp system.
-
-
 
 As we know, templates can render variables, and have some capacity of transforming them:
 
@@ -9734,6 +9787,7 @@ As we know, templates can render variables, and have some capacity of transformi
 ``````stp
 {name:case(title):repl(-, )} River Streamflow = {streamflow} cfs
 ``````
+
 
 
 Results (with:  name=Ohio; streamflow=12000):
@@ -9744,9 +9798,8 @@ Ohio River Streamflow = 12000 cfs
 ``````
 
 
+
 But for numerical operation, the transformers capabilities are limited as they are made for strings.
-
-
 
 With lisp, we can add more logic to our templates.
 
@@ -9759,6 +9812,7 @@ With lisp, we can add more logic to our templates.
 ``````
 
 
+
 Results (with:  name=Ohio; streamflow=12000):
 
 
@@ -9767,11 +9821,13 @@ Ohio River Streamflow is Higher than the threshold of 10^5 cfs.
 ``````
 
 
+
 The available lisp functions are also limited, but the syntax itself
 gives us better airthmetic and logical calculations.
 
 
 === Note
+
 
 
 As the template string can get complicated, and the parsing is done
@@ -9784,6 +9840,7 @@ repo.
 === Commands
 
 
+
 Note that running commands within the templates is disabled for
 now.
 
@@ -9793,12 +9850,14 @@ echo today=$(date +%Y-%m-%d) {%Y-%m-%d}
 ``````
 
 
+
 Results (with: ):
 
 
 ``````output
-echo today=$(date +%Y-%m-%d) 2025-07-31
+echo today=$(date +%Y-%m-%d) 2025-08-01
 ``````
+
 
 
 But if you are writing a command template to run in bash, then
@@ -9810,12 +9869,14 @@ network command("echo today=$(date +%Y-%m-%d) {%Y-%m-%d}")
 ``````
 
 
+
 Results:
 
 
 ``````output
-$ echo today=$(date +%Y-%m-%d) 2025-07-31
+$ echo today=$(date +%Y-%m-%d) 2025-08-01
 ``````
+
 
 
 Here although the `$(date +%Y-%m-%d)` portion was not rendered on template rendering process, the command was still valid, and was executed.
@@ -9827,13 +9888,12 @@ Here although the `$(date +%Y-%m-%d)` portion was not rendered on template rende
 === Tables
 
 
+
 Tables are data types with headers and the value template. Tables can
 be rendered/exported into CSV, JSON, and LaTeX format. Other formats
 can be added later. Although tables are not exposed to the plugin
 system, functions to export different table formats can be written as
 a network function.
-
-
 
 A sample Table file showing two columns, left aligned name for station
 in title case, and right aligned columns for latitude and longitude
@@ -9851,6 +9911,7 @@ network load_file("./data/mississippi.net")
 ``````
 
 
+
 Results:
 
 
@@ -9862,7 +9923,9 @@ Results:
 
 
 
+
 Here the part before `=>` is the column header and the part after is the template. Presence of `<` or `>` in the beginning of the line makes the column left or right aligned, with center aligned (`^`) by default.
+
 
 
 
@@ -9880,12 +9943,14 @@ network echo("../output/example-table2.svg")
 ``````
 
 
+
 \*Error\*:
 
 
 ``````error
 network function: "table_to_svg" not found
 ``````
+
 
 
 A SVG Table can also be generated using the table file, using the task system like this:
@@ -9906,6 +9971,7 @@ network echo("../output/example-table.svg")
 ``````
 
 
+
 \*Error\*:
 
 
@@ -9917,13 +9983,10 @@ network function: "table_to_svg" not found
 #heading(level:2)[File Templates]
 
 
+
 File templates are templates that use string templates, but they are a whole file that can be used to generate rendered text files.
 
-
-
 File templates also have sections which can be repeated for different nodes, with corresponding syntax.
-
-
 
 Following template will render a markdown table with headers and all the name and index of the nodes.
 
@@ -9940,6 +10003,7 @@ Following template will render a markdown table with headers and all the name an
 #heading(level:2)[Tasks]
 
 
+
 Task is a function call that the system performs. The function call
 can be a node function or a network function. The function can have
 arguments and keyword arguments that can determine its
@@ -9947,13 +10011,9 @@ functionality. Node functions will be called on a node at a time,
 while the network function will be called with the whole network at
 once.
 
-
-
 Currently tasks are performed one after another. The functions that
 any task can use can be internal functions provided by the library or
 the external functions provided by the plugins.
-
-
 
 A sample tasks file is shown below:
 
@@ -9972,6 +10032,7 @@ node render("Node {NAME} at index {INDEX}")
 ``````
 
 
+
 Here each line corresponds to one task. And if it's a node task, then
 it'll be called for each node (in sequential order by default). The
 last line `node.inputsfirst` will call that function in input node
@@ -9979,6 +10040,7 @@ before the current node. Those functions can only be called for
 network with an output node.
 
 #htmlblock("warning")[
+
 
 Please note that although the string in the examples are highlighted
 as if they are string templates for readability. Those are just normal
@@ -9991,17 +10053,14 @@ help to see if they take `Template` type or `String` type.
 #heading(level:2)[Node Functions]
 
 
+
 Node functions are functions that take a node, and the function
 context to do some operations on it. They take mutable reference to
 the node, hence can read all node attributes, inputs, outputs, their
 attributes and timeseries.
 
-
-
 Node functions can be run from the system for all the nodes in the
 network in different orders.
-
-
 
 Currently the task system only supports running node functions for all
 nodes in the following 6 ways,
@@ -10015,6 +10074,7 @@ nodes in the following 6 ways,
 - Run on a path between two nodes (inclusive).
 
 
+
 Depending on the way the function works, it might be required to be
 run in a particular order. For example, a function that counts the
 number of dams upstream of each point, might have to be run inputs
@@ -10025,10 +10085,9 @@ first, so that you can cumulate the number as you move downstream.
 #heading(level:2)[Network Functions]
 
 
+
 Network functions are functions that take the network as a mutable
 reference and run on it.
-
-
 
 Some examples of network functions:
 
@@ -10049,16 +10108,13 @@ Some examples of network functions:
 #heading(level:1)[Developer Notes]
 
 
+
 This section contains my notes as I develop the NADI system. Kind of
 like a dev blog.
-
-
 
 The software package will consists of multiple components. It is
 planned to be designed in such a way that users can add their
 functionality and extend it with ease.
-
-
 
 Along with the Free and Open Source Software (FOSS) principles, the
 plugin system will make extension of the software functionality and
@@ -10069,18 +10125,15 @@ functionality for niche use cases.
 #heading(level:2)[Motivation]
 
 
+
 As Hydrologist, we often deal with the data related to the points in
 the river. Since most of the analysis requires doing the same things
 in multiple points, the initial phase of data cleaning process can be
 automated.
 
-
-
 We spend a beginning phases of all projects preparing the data for
 analysis. And combining the time spent on visualizing the data, it's a
 significant chunk of our time.
-
-
 
 Data visualization influences the decision making from the
 stakeholders. And can save time by making any problems obvious from
@@ -10088,8 +10141,6 @@ the very beginning. For examples, things like showing the quality of
 data (continuity for time series), interactive plots to compare data
 in different locations/formats, etc can help people understand their
 data better.
-
-
 
 Besides plot, the example below shows how simply adding a column with
 connection visual can immediately make it easier to understand the
@@ -10099,11 +10150,7 @@ location, or consult a different image/map to understand the
 relationship.
 
 
-
-
 #figure(image("notes/../images/ohio-low.svg"), caption: [Table with Connection Information])
-
-
 
 
 The inspiration on making this software package comes from many years
@@ -10116,9 +10163,8 @@ can be used for plethora of projects in the future.
 #heading(level:2)[Why Rust?]
 
 
+
 Rust is an open source programming language that claims to be fast and memory efficient to power performance critical services. Rust is also able to integrate with other programming languages.
-
-
 
 Rust provides a memory safe way to do modern programming. The White
 House has a recent press
@@ -10134,6 +10180,7 @@ has the three requisite properties above, but has not yet been proven
 in space systems.
 ]
 
+
 The results of the survey from
 stackoverflow
 shows Rust has been a top choice for developers who want to use a new
@@ -10142,7 +10189,9 @@ language that generates for desire to use it once you get to know.
 
 
 
+
 https://www.rust-lang.org/
+
 
 
 
@@ -10150,7 +10199,9 @@ https://www.whitehouse.gov/oncd/briefing-room/2024/02/26/press-release-technical
 
 
 
+
 https://www.whitehouse.gov/wp-content/uploads/2024/02/Final-ONCD-Technical-Report.pdf
+
 
 
 
@@ -10172,22 +10223,20 @@ https://survey.stackoverflow.co/2023/\#technology-admired-and-desired
 === Writing this Book
 
 
+
 I'm used to `emacs`'s `org-mode`, where you can evaluate code and show
 output and all those things. Like `markdown` in steroids.
-
-
 
 `mdbook` seems to have some of those functionality in it as
 well. Though I think `emacs`'s extension through `elisp` is lot more
 flexible and easier to extend. `mdbook` supporting custom
 preprocessors and renderer means we can extend it as well.
 
-
-
 In the process of writing this book. I made the following things.
 
 
 ==== Syntax Highlight for NADI specific syntax
+
 
 
 `mdbook` uses `highlight.js` to syntax highlight the code blocks in
@@ -10197,14 +10246,10 @@ syntax highlight for those things. Although the attribute files are
 subset of `TOML` format, so we have syntax highlight for
 it. Everything else needed a custom code.
 
-
-
 Following the comments in this #link("https://github.com/rust-lang/mdBook/issues/657")[github
 issue] led me to find
 a workaround for the custom syntax hightlight. I don't know for how
 long it will work, but this works well for now.
-
-
 
 Basically I am using the custom JS feature of `mdbook` like:
 
@@ -10213,6 +10258,7 @@ Basically I am using the custom JS feature of `mdbook` like:
 [output.html]
 additional-js = ["theme/syntax-highlight.js"]
 ``````
+
 
 
 To insert custom highlight syntax. For example adding the syntax
@@ -10237,11 +10283,10 @@ hljs.registerLanguage("network", (hljs) => ({
 ``````
 
 
+
 The syntax for network is really simple, for others (`task`, `table`,
 `string-template`, etc) refer to the `theme/syntax-highlight.js` file
 in the repository for this book.  
-
-
 
 After registering all the languages, you re-initialize the `highlight.js`:
 
@@ -10253,13 +10298,12 @@ hljs.initHighlightingOnLoad();
 ==== `mdbook-nadi` preprocessor
 
 
+
 Instead of just showing the syntax of how to use the task system, I
 wanted to also show the output of the examples for readers. So I
 started this with writing some `elisp` code to run the text in
 selection and then copying the output to clipboard that I could paste
 in output block. It was really easy in emacs.
-
-
 
 Following code takes the selection, saves them in temporary tasks file, runs them and then puts the output in the clipboard that I can paste manually.
 
@@ -10276,15 +10320,12 @@ Following code takes the selection, saves them in temporary tasks file, runs the
 ``````
 
 
+
 But this is manual process with a bit of automation. So I wanted a
 better solution, and that's where the `mdbook` preprocessor comes in.
 
-
-
 With the `mdbook-nadi` preprocessor, I can extract the code blocks,
 run it, and insert the contents just below the code block as output.
-
-
 
 Once I had a working prototype for this, I also started adding support
 for rendering string templates, and generating tables along with the
@@ -10292,6 +10333,7 @@ task system.
 
 
 ===== String templates
+
 
 
 For string templates, write the templates in `stp` blocks like below that will have the syntax hightlight.
@@ -10302,9 +10344,8 @@ Hi my name is {name}.
 ``````
 
 
+
 If you add `run` into it, it'll run the template with any `key=val` pairs provided after run.
-
-
 
 Basically writing the following in the `mdbook` markdown:
 
@@ -10316,12 +10357,14 @@ Hi my name is {name}.
 ``````
 
 
+
 Will become:
 
 
 ``````stp
 Hi my name is {name}.
 ``````
+
 
 
 Results (with:  name=John):
@@ -10332,6 +10375,7 @@ Hi my name is John.
 ``````
 
 ===== Tasks
+
 
 
 For tasks, similary write a block with `task` as language. You can use
@@ -10353,6 +10397,7 @@ node render("Node {NAME}")
 ``````
 
 
+
 Results:
 
 
@@ -10371,13 +10416,10 @@ Results:
 ===== Tables
 
 
+
 The implementation for tables are little weird right now, but it works. Since we need to be able to load network, and perform actions before showing a table.
 
-
-
 So the current implementation takes the hidden lines using `!`and runs them as task system, with additional task of rendering the table at the end.
-
-
 
 Example:
 
@@ -10392,6 +10434,7 @@ network load_file("./data/mississippi.net")
 ``````
 
 
+
 Becomes:
 
 
@@ -10401,6 +10444,7 @@ network load_file("./data/mississippi.net")
 ^Ind => =(+ (st+num 'INDEX) 1)
 >Order => {ORDER}
 ``````
+
 
 
 Results:
@@ -10414,14 +10458,11 @@ Results:
 
 
 
+
 I'd like to refine this further.
-
-
 
 Task can be used to generate markdown in the same way as the tables
 can:
-
-
 
 For example `task run` of this:
 
@@ -10434,6 +10475,7 @@ network table_to_markdown(template="
 >Order => {ORDER}
 ")
 ``````
+
 
 
 Results:
@@ -10452,6 +10494,7 @@ Results:
 ``````
 
 
+
 If you do `task run markdown` then:
 
 
@@ -10465,6 +10508,7 @@ network table_to_markdown(template="
 ``````
 
 
+
 Results:
 
 
@@ -10473,6 +10517,7 @@ Results:
   table.header([*Name*], [*Ind*], [*Order*]),
   [Lower Mississippi], [1], [7], [Upper Mississippi], [2], [1], [Missouri], [3], [1], [Arkansas], [4], [1], [Red], [5], [1], [Ohio], [6], [2], [Tenessee], [7], [1]
 )
+
 
 
 
@@ -10488,44 +10533,32 @@ network echo(render_nodes("
 ``````
 
 
+
 Results:
 
 *Details about the Nodes:*
 
 
-1. 
-
-Lower Mississippi River
+1. Lower Mississippi River
 
 
-2. 
-
-Upper Mississippi River
+2. Upper Mississippi River
 
 
-3. 
-
-Missouri River
+3. Missouri River
 
 
-4. 
-
-Arkansas River
+4. Arkansas River
 
 
-5. 
-
-Red River
+5. Red River
 
 
-6. 
-
-Ohio River
+6. Ohio River
 
 
-7. 
+7. Tenessee River
 
-Tenessee River
 
 
 
@@ -10541,7 +10574,9 @@ network echo("../images/ohio-low.svg")
 ``````
 
 
+
 Results:
+
 
 
 
@@ -10559,23 +10594,18 @@ Results:
 === Optimization Algorithms
 
 
+
 We can have input variables to change, and output variables to
 optimize, but how do we take what function to run to calculate the
 output variable...
-
-
 
 One simple idea can be to take a command template to run. So we will
 change the input variables, run the command for each node or network,
 and then that command will update the output variable that we can
 optimize for.
 
-
-
 We might require an option to call other functions in
 this case. Then maybe we can just pass the name of the function.
-
-
 
 Complex idea could be to add the support for loop syntax in task system.
 
@@ -10583,15 +10613,15 @@ Complex idea could be to add the support for loop syntax in task system.
 === While loop
 
 
+
 Visiting this page was fun because I ended up implementing a while loop and the if-else statement.
-
-
 
 Now, as long as you have functions to calculate error metrics from your variables/network you should be able to run optimization using the brute-force method.
 
 
 
 #heading(level:2)[Interactive Plots]
+
 
 
 An experiment using the `cairo` graphics library shows that a PDF can
@@ -10602,11 +10632,7 @@ function for now. Further functionality related to this idea can be
 embedding network information in simple plots, or generate the whole
 plot along side the network information.
 
-
-
 It might be a good idea to make several functions that can export the interactive plots in LaTeX, PDF, PNG, SVG, HTML, etc. separately instead of single format.
-
-
 
 LaTeX and HTML will be easier due to text nature, for others I might have to spend time with some more experimentation on cairo.
 
