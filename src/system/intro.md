@@ -58,4 +58,4 @@ Some special symbols and their functions are listed below:
 There might be more functions of each symbol depending on the context.
 
 
-Continue with the chapters for details on each concept. Or skip ahead to [Learn by Examples](/learn-examples.md) if you want to jump into the examples.
+Continue with the chapters for details on each concept. Or skip ahead to [Learn by Examples](../learn-examples.md) if you want to jump into the examples.

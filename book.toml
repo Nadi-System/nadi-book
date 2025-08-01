@@ -23,6 +23,10 @@ enable = true
 runnable = false
 line-numbers = true
 
+[output.linkcheck]
+# this has performace impact, so turn it on occassionally while commiting
+follow-web-links = false
+
 [output.typst]
 # [output.typst.output]
 # format = "pdf"

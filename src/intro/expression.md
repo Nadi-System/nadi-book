@@ -28,7 +28,7 @@ network echo(json(env.value))
 ```
 Special variable types like `nodes`, `inputs`, `output` are available besides `env`, `network` and `node` based on what type of task the expression is on.
 
-You will learn more about this on [Cross Context Functions and Variables](/intro/cross-context.md) chapter.
+You will learn more about this on [Cross Context Functions and Variables](cross-context.md) chapter.
 
 ## Unary Operator
 ```task run
@@ -66,4 +66,4 @@ env echo("Hello world!") + 12
 
 Special function types like `nodes`, `inputs`, `output` are available besides `env`, `network` and `node` based on what type of task the expression is on.
 
-You will learn more about this on [Cross Context Functions and Variables](/intro/cross-context.md) chapter.
+You will learn more about this on [Cross Context Functions and Variables](cross-context.md) chapter.

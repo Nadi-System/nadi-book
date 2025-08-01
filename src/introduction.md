@@ -112,7 +112,7 @@ More detail on how to use NADI from python will be explained in NADI Python chap
 ## NADI CLI
 Command Line Interface to run NADI Tasks.
 
-This can run nadi task files, syntax highlight them for verifying them, generate markdown documentations for the plugins. The documentations included in this book ([Function List](plugins/index.md) and each plugin's page like [Attributes Plugin `attrs`](plugins/attrs.md)) are generated with that. The documentation on each plugin functions comes from their docstrings in the code, please refer to how to write plugins section of the book for details on that.
+This can run nadi task files, syntax highlight them for verifying them, generate markdown documentations for the plugins. The documentations included in this book ([Function List](plugins/index.md) and each plugin's page like [Attributes Plugin `attributes`](plugins/attributes.md)) are generated with that. The documentation on each plugin functions comes from their docstrings in the code, please refer to how to write plugins section of the book for details on that.
 
 The available options are shown below.
 
