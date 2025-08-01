@@ -4,7 +4,7 @@ Executable plugins are programs that can be called from terminal. The [node `com
 
 The inputs to the program is given through the command line arguments, while the output of the programs are read through the standard output of the program. This can be used to call different/same commands for nodes with arguments dependent on their attributes.
 
-And the output from the programs are taken by reading their stdout (standard output). Any lines starting from `nadi:var:` (prefix) is considered a communication attempt with Nadi. Currently, you can set attribute values by providing `key=val` pairs after the prefix. The node function will set it for current node, and network function will set it for the network. Furthermore, in network function, you can add one more section after prefix to set node attributes. For example, `nadi:var:node1:value=12` will set the `value` attribute to `12` in the node named `node1` in the current network.
+And the output from the programs are taken by reading their stdout (standard output). Any lines starting from `nadi:var:` (prefix) is considered a communication attempt with NADI Task System. Currently, you can set attribute values by providing `key=val` pairs after the prefix. The node function will set it for current node, and network function will set it for the network. Furthermore, in network function, you can add one more section after prefix to set node attributes. For example, `nadi:var:node1:value=12` will set the `value` attribute to `12` in the node named `node1` in the current network.
 
 The executable plugin or commands are language agnostic, as long as the command is available to run from the parent shell they will be run.
 

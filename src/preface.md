@@ -16,4 +16,4 @@ the scope of the program.
 
 [The PDF version of this book (Experimental)](./data/nadi-book.pdf)
 
-The PDF Book is generated using automated script, so it might have some problems, please refer to the web version of the Nadi Book if there are problematic/incomplete contents.
+The PDF Book is generated using automated script, so it might have some problems, please refer to the web version of the NADI Book if there are problematic/incomplete contents.

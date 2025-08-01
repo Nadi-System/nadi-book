@@ -1,6 +1,6 @@
 # Internal Plugins
 
-Internal plugins come with the nadi system. They are only modified between the different versions of Nadi. 
+Internal plugins come with the nadi system. They are only modified between the different versions of NADI. 
 
 The internal plugins provide core functionality of the Task system like data conversion, parsing network/attribute files, logical operations, template rendering, etc.
 

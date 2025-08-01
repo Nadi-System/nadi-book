@@ -1,6 +1,6 @@
-# Nadi GIS
+# NADI GIS
 
-Nadi GIS is available as a CLI tool and QGIS plugin, the CLI tool has the following functions:
+NADI GIS is available as a CLI tool and QGIS plugin, the CLI tool has the following functions:
 
     Usage: nadi-gis [OPTIONS] <COMMAND>
     

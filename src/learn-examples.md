@@ -1,5 +1,5 @@
 # Learn by Examples
-This section teaches you the basics of the Nadi's syntax with small examples. If you want a higher level example that focuses on the actual research problem instead of syntax then refer to the "Example Research Problems" Section on the sidebar.
+This section teaches you the basics of the NADI Task System's syntax with small examples. If you want a higher level example that focuses on the actual research problem instead of syntax then refer to the "Example Research Problems" Section on the sidebar.
 
 For example data download the [zip file here](./data.zip)
 

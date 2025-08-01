@@ -13,7 +13,7 @@ network svg_save(
 ```
 
 <div class="warning">
-The examples below use the graphviz plugin. Make sure you have it loaded. Refer to the plugins section to learn how to load the plugins in to the Nadi System.
+The examples below use the graphviz plugin. Make sure you have it loaded. Refer to the plugins section to learn how to load the plugins in to the NADI System.
 </div>
 
 For example following network function takes file path as input to save the network in graphviz format:

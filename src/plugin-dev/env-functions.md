@@ -1,6 +1,6 @@
 # Environment Functions
 
-Environment functions are like any normal function on programming languages that take arguments and run code. In Nadi environment functions can be called from any scope. For example, if a node function and environement function share the same name, then in a node task node function is called, but in network task env function is called.
+Environment functions are like any normal function on programming languages that take arguments and run code. In NADI environment functions can be called from any scope. For example, if a node function and environement function share the same name, then in a node task node function is called, but in network task env function is called.
 
 Environment functions are denoted in the plugins with `#[env_func]` macro. All the arguments this function takes need to be provided by user or through default values.
 

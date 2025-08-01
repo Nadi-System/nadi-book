@@ -1,6 +1,6 @@
 # Installation
 
-Nadi System is a suite of software packages each have different
+NADI System is a suite of software packages each have different
 installation methods. Some of the packages are uploaded to `crates.io`
 (rust) and `pypi` (python).  For others, you can either get the
 compiled binaries from the Releases page of the
@@ -9,10 +9,10 @@ github repo [windows]. Or you can get the source code using `git`, and using
 
 | Program     | Linux    | Windows | Mac      | Android (Termux) |
 |-------------|----------|---------|----------|------------------|
-| Nadi CLI    | yes      | yes     | yes      | yes              |
-| Nadi IDE    | yes      | yes     | yes      | no               |
+| NADI CLI    | yes      | yes     | yes      | yes              |
+| NADI IDE    | yes      | yes     | yes      | no               |
 | mdbook nadi | untested | yes     | untested | yes              |
-| Nadi-py     | yes      | yes     | yes      | yes              |
+| `nadi-py`   | yes      | yes     | yes      | yes              |
 | QGIS Plugin | yes      | yes     | untested | no               |
 
 Untested means it should work in theory, but I have not tested it.
@@ -128,11 +128,11 @@ You can download the zip file for plugin from releases page, and use the "Instal
 
 Refer to the [QGIS plugins page](https://docs.qgis.org/3.40/en/docs/training_manual/qgis_plugins/fetching_plugins.html) for more instructions. In future we are planning on publishing the plugin so that you can simply add it from QGIS without downloading from here.
 
-### Nadi GIS Plugin
-The nadi plugin on this repo provides the functions to import attributes, geometries from GIS files, and export them into GIS files.
+### NADI GIS Plugin
+The NADI plugin on this repo provides the functions to import attributes, geometries from GIS files, and export them into GIS files.
 
-## Nadi Plugins
-Out of the two types of plugins, the executable plugins are just simple commands, they do not need to be installed along side nadi, just make sure the executables that you are using from `nadi` can be found in path. A simple way to verify that is to try to run that from terminal and see if it works.
+## NADI Plugins
+Out of the two types of plugins, the executable plugins are just simple commands, they do not need to be installed along side NADI System, just make sure the executables that you are using from NADI System can be found in path. A simple way to verify that is to try to run that from terminal and see if it works.
 
 The compiled plugins can be loaded by setting the `NADI_PLUGIN_DIRS` environmental variable. The environment variable should be the path to the folder containing the nadi plugins (in `.dll`, `.so`, or `.dylib` formats for windows, linux and mac). You can write your own plugins based on our examples and compile them.
 

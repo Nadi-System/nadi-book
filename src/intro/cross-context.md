@@ -4,7 +4,7 @@ You can access variable and call functions based on their default context (e.g. 
 
 By default, if a function is not available, node/network task calls the environment function of the same name.
 
-For example, here the `sum` and `array` functions are environment functions, while the `count` is a network function. When you use Nadi IDE, it'll show you which function is actually being called at the top of the editor.
+For example, here the `sum` and `array` functions are environment functions, while the `count` is a network function. When you use NADI IDE, it'll show you which function is actually being called at the top of the editor.
 ```task run
 network load_str("a->b")
 network sum(array(count(), 1))

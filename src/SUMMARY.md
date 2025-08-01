@@ -5,13 +5,13 @@
 - [Who this book is for](./who-book.md)
 - [How to use this book](./how-to.md)
 - [How to Cite](./citation.md)
-# Nadi System Setup
+# NADI System Setup
 - [Introduction](./introduction.md)
 - [Installation](./installation.md)
 - [Plugins](./plugins.md)
 
 # Network Detection (GIS)
-- [Nadi GIS](./gis/intro.md)
+- [NADI GIS](./gis/intro.md)
 - [Example](./gis/example.md)
 
 # Network Analysis (DSL)
@@ -36,7 +36,7 @@
   - [Cumulative Sum](./learn-examples/cumulative.md)
   - [Import Export Files](./learn-examples/import-export.md)
   - [String Templates](./learn-examples/str-templates.md)
-- [Nadi Extension Capabilities](./system/extensions.md)
+- [NADI Extension Capabilities](./system/extensions.md)
 - [List of All Functions](plugins/index.md)
 
 # Example Research Problems
@@ -53,7 +53,7 @@
 <!-- 	- [Visualizing Data Gaps](./example/data-gap-vis.md) -->
 
 # Python Library
-- [Nadi Py](python.md)
+- [NADI Python (`nadi-py`)](python.md)
 - [Differences with Task System](python/difference.md)
 - [Plugins](python/plugins.md)
 - [Examples](python/examples.md)
@@ -96,7 +96,7 @@
   - [GIS](plugins/gis.md)
   - [Print Node](plugins/print_node.md)
   - [Streamflow](plugins/streamflow.md)
-  - [Nadi PDF](plugins/nadi_pdf.md)
+  - [NADI PDF](plugins/nadi_pdf.md)
 
 # Developer Reference
 - [Data Structure](./devref/data-structures.md)

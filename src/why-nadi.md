@@ -4,7 +4,7 @@ Network Analysis amd Data Integration (NADI) System is a system of programs made
 
 It consists of multiple tools, that perform two important functions, network detection and network analysis. First part is done throuh the **Geographic Information (GIS) Tool**, while the second part is done using a **Domain Specific Programming Language (DSPL)** called NADI Task system.
 
-![Nadi Workflow](./images/nadi-workflow-simple.svg)
+![NADI System Workflow](./images/nadi-workflow-simple.svg)
 
 # Why use NADI System?
 Hydrologic modeling involves the integration of diverse data to

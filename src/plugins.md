@@ -1,6 +1,6 @@
 # Plugins
 <div class="warning">
-Plugins allow users to extend the use case of the Nadi System by adding more functions or scripts. User are expected to only use plugins from trusted sources, or develop it in-house. Although the compiled plugin functions have their code exposed in their documentation for the transparency purposes even if the source code is not available, always make sure the plugin you run are not malicious.
+Plugins allow users to extend the use case of the NADI System by adding more functions or scripts. User are expected to only use plugins from trusted sources, or develop it in-house. Although the compiled plugin functions have their code exposed in their documentation for the transparency purposes even if the source code is not available, always make sure the plugin you run are not malicious.
 </div>
 
 

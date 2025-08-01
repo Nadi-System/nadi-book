@@ -1,6 +1,6 @@
-# Nadi Extension Capabilities
+# NADI Extension Capabilities
 
-Nadi System can be extended for custom use cases with the following ways:
+NADI System can be extended for custom use cases with the following ways:
 
 - [LISP on String Template](../devref/string_templates.md#advanced-string-template-with-lisp)
 - Task System

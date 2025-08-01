@@ -24,7 +24,7 @@ for node in net.nodes:
     print(f"{node.INDEX} -> {out.INDEX}")
 ```
 
-Here the code for python is longer because it is general purpose and doesn't have the syntax tailored for network analysis like with Nadi Task System.
+Here the code for python is longer because it is general purpose and doesn't have the syntax tailored for network analysis like with NADI Task System.
 
 ## Example 2: Skip execution when variable is absent
 If we had to check for an attribute, then it becomes even more complicated.

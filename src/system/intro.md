@@ -5,7 +5,7 @@ The main concepts that you need to know are:
 
 - **Attributes** are values, it can be float, integer, boolean, strings, or list of attributes, or a map of attributes (key=value),
 - **Nodes** are points in the network, they can have attributes, input nodes and an output node,
-- **Network** is a collection of nodes, network can also have attributes, Network used in the Nadi system can have only one outlet, so a 'ROOT' node is added if there are multiple outlet. And loading a network that is not a directed tree is undefined behaviour.
+- **Network** is a collection of nodes, network can also have attributes, Network used in the NADI System can have only one outlet, so a 'ROOT' node is added if there are multiple outlet. And loading a network that is not a directed tree is undefined behaviour.
 - **Expression** is something that can be evaluated or executed, it consists of literal values (attributes), variables (node, network, env variables that could hold attributes), function calls, or a mathmatical or logical operation.
 - **Functions** in nadi are of 3 types, env functions are normal functions that take values and run, network functions take values and run on the network, while node functions run at each node (they also provide a way to subset which nodes to run it on).
 - **Task** is an execution body of the task system. It can be of env, network or node type. It can be conditional (If-Else) or loop (While) consisting of more tasks inside it. Task can assign values to the env/network/node attributes, or call mutable functions on the top level.

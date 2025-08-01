@@ -11,7 +11,7 @@ generate those. So far, the `nadi_core` library is available for
 `Rust` only. Using that, plugins can be written and those functions
 can be made available from the system.
 
-Nadi core automatically loads:
+NADI core library automatically loads:
 - internal plugins if feature `functions` is used in `nadi_core` to compile it,
 - external plugins in the directories inside the `NADI_PLUGIN_DIRS` environmental variables. The plugins must be compiled using the same `nadi_core` version and must have the same internal ABI for data types.
 

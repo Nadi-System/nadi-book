@@ -17,7 +17,7 @@ Atreya, G. 2025. “Network Analysis and Data Integration (NADI).” Accessed Ma
       urldate = {2025-05-02}
     }
 
-# Works using Nadi System
+# Works using NADI System
 
 Atreya, G., G. Mandavya, and P. Ray. 2024. “Which came first? Streamgages or Dams: Diving into the History of Unaltered River Flow Data with a Novel Analytical tool.” H51L-0865.
 

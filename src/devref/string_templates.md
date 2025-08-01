@@ -74,7 +74,7 @@ unquoted raw string. (e.g. if we have attribute `name="smithland"`,
 then `{name}` will render to `"smithland"`, while `{_name}` will
 render to `smithland`).
 
-Nadi system uses templates in a variety of place, and plugin functions
+NADI system uses templates in a variety of place, and plugin functions
 also sometimes take templates for file path, or strings, and such
 things. Look at the help string of the function to see if it takes
 `String` or `Template` type.
@@ -93,7 +93,7 @@ node[ohio,red] render(
 As seen in above example, you can render variables, transform them, use basic calculations.
 
 Or you can use `lisp` syntax to do more complex calculations. Refer to
-[Nadi Extension Capabilities](../system/extensions.md) section for more
+[NADI Extension Capabilities](../system/extensions.md) section for more
 info on how to use `lisp` on string template.
 
 ```task run
@@ -139,7 +139,7 @@ string templates, you might have to give it multiple tries.
 
 ## Advanced String Template with LISP {#advanced-string-template-with-lisp}
 
-Nadi Template string is useful when you want to represent node
+NADI String Template is useful when you want to represent node
 specific string, or file path in a network. This is not as advanced as
 the formatted strings in python. But it can be used for complex
 situations based on the current functionality.

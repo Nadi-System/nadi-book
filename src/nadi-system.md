@@ -1,2 +1,2 @@
-# Nadi System
+# NADI System
 

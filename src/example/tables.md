@@ -11,7 +11,7 @@
 >Longitude => {lon:f(4)}
 ```
 
-Nadi style table with network information:
+NADI Table with network information:
 ```table run svg outfile="./output/ohio-table.svg"
 !network load_file("./data/ohio.network")
 !node load_attrs("./data/attrs/{_NAME}.toml")

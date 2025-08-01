@@ -8,7 +8,7 @@ identifiable with their names.
 If you understand graph theory, then node in nadi network is the same
 as a node in a graph.
 
-Nodes in Nadi are identified by their name, that is loaded from the network file. Node names are string values, even if they are integer or float, they are read and internally stored as strings. If the node name contains characters outside of alphanumeric and underscore (`_`), it has to be quoted.
+Nodes in NADI Network are identified by their name, that is loaded from the network file. Node names are string values, even if they are integer or float, they are read and internally stored as strings. If the node name contains characters outside of alphanumeric and underscore (`_`), it has to be quoted.
 
 i.e. valid names like `123` or `node_1` can appear unquoted or quoted, but names like `node-123` needs to be quoted: `"node-123"`.
 

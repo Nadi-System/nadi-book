@@ -1,4 +1,4 @@
-# Nadi Python Library
+# NADI Python Library
 
 This can be installed from `pypi` with `pip install nadi-py` command.
 
@@ -23,6 +23,6 @@ fn.network.svg_save(net, "test.svg")
 
 
 # Combining the power of python and Task System
-You can combine the power of python with task system using the `command` function from Nadi. Basically, you write your logic that cannot be written in nadi in python, you can use `nadi-py` if you need to parse network files, load attributes or call any other nadi functions. And you can pass the results of the python script at the end by simply printing it to the standard output.
+You can combine the power of python with task system using the `command` function from NADI Task System. Basically, you write your logic that cannot be written in nadi in python, you can use `nadi-py` if you need to parse network files, load attributes or call any other nadi functions. And you can pass the results of the python script at the end by simply printing it to the standard output.
 
 Future work is under consideration to have a tight couple between the python and nadi system.

@@ -1,6 +1,6 @@
 # Getting Started
 
-This section walks you throuh the process of using Nadi system through the CLI and IDE.
+This section walks you throuh the process of using NADI system through the CLI and IDE.
 
 Network analysis is done through the Domain Specific Programming Language. This is the main feature of NADI.
 
@@ -118,7 +118,7 @@ The function help looks like below:
 ![IDE Help](./images/ide-help.png)
 
 The figure contains,
-1. Buttons for Reset, and links to Nadi Book and Github,
+1. Buttons for Reset, and links to NADI Book and Github,
 2. Buttons to filter search by function type,
 3. Text Entry to search the function,
 4. List of plugin functions,

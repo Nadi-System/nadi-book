@@ -20,7 +20,7 @@ The github repositories consisting of source codes:
 | [nadi-gis](https://github.com/Nadi-System/nadi-gis)                   | Nadi GIS                  |
 | [nadi-system](https://github.com/Nadi-System/nadi-system)             | Nadi CLI/ IDE/ Core       |
 | [nadi-plugins-rust](https://github.com/Nadi-System/nadi-plugins-rust) | Sample Plugins            |
-| [nadi-book](https://github.com/Nadi-System/nadi-book)                 | Source for this Nadi Book |
+| [nadi-book](https://github.com/Nadi-System/nadi-book)                 | Source for this NADI Book |
 
 ## Workflow
 A Typical workflow in NADI System consists of the follwing 4 processes:
@@ -32,11 +32,11 @@ A Typical workflow in NADI System consists of the follwing 4 processes:
 
 The figure below shows the order of how the components of the NADI System (blue) is used along side external tools (black).
 
-![Nadi Workflow](./images/venn-diagram.svg)
+![NADI System Workflow](./images/venn-diagram.svg)
 
-Here the numbers in red circles are the order of use for different tools. Here the "Run Tasks" step represents running the Nadi DSL Code in the System, so it is further divided into the tasks inside the code. The numbers on the blue circles show a typical use case of the DSL to perform a research work.
+Here the numbers in red circles are the order of use for different tools. Here the "Run Tasks" step represents running the NADI DSL Code in the System, so it is further divided into the tasks inside the code. The numbers on the blue circles show a typical use case of the DSL to perform a research work.
 
-For exact details on what a typical research workflow involving the Nadi DSL is, refer to the examples.
+For exact details on what a typical research workflow involving the NADI DSL is, refer to the examples.
 
 ## NADI GIS
 Geographic Information (GIS) Tool for Network Detection. The main purpose of the NADI GIS is to find the network connectivity between a set of points using a stream network (which can be developed from elevation models, or downloaded from national databases).
