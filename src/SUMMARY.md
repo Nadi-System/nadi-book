@@ -99,6 +99,7 @@
   - [NADI PDF](plugins/nadi_pdf.md)
 
 # Developer Reference
+- [Software Architect](./devref/architecture.md)
 - [Data Structure](./devref/data-structures.md)
   - [Node](./devref/node.md)
   - [Network](./devref/network.md)
