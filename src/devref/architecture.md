@@ -33,7 +33,7 @@ The NADI DSL also called the Task System consists of components that are related
 
 The figure below shows the internal data structure and components that support the NADI DSL execution.
 
-![Tasks Architecture](images/task-architecture.svg)
+![Tasks Architecture](../images/task-architecture.svg)
 
 The task context is the main runtime environment for the DSL. The Context contains a Network (starts as empty network), functions loaded from the plugins, and the environmental variables. As the DSL is executed Task by Task, the context is modified with mutable functions or assignment operator. For example running a `network load_file(...)` will load a network from file and save that in the context. When a user runs a `node` task, the expression/function is run on each node of the network in the current context.
 
@@ -43,6 +43,8 @@ Because of this `nadi-py` should provide data types from NADI, as well as the fu
 NADI DSL can also load `nadi_gis` plugin that provides the functions to read/write GIS files.
 
 [The NADI DSL repository](https://github.com/Nadi-System/nadi-system) contains the following components:
+
+![Architecture](../images/architecture.svg)
 
 ### `nadi_plugin`
 This is crate for proc-macros that `nadi_core` uses, and can be used to make plugin development easier. This contains the codes for the macros `nadi_plugin`, `env_func`, `node_func`, and `network_func`. This is re-exported by `nadi_core` so that it is not used directly by the users.
