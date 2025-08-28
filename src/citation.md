@@ -1,11 +1,27 @@
 # How to Cite
 The sections below show you a bibliography entry in ASCE format, and BibTeX format that you can copy.
 
-## Journal Papers: TODO
-The papers are currently still being worked on, and will be added here when they are published.
+## Journal Papers
+
+Atreya, G., T. Steissberg, and P. A. Ray. 2025. “NADI – Network Analysis and Data Integration with a Domain Specific Language.” JOSS, 10 (112): 8655. https://doi.org/10.21105/joss.08655.
+
+    @article{Atreya2025,
+	  doi = {10.21105/joss.08655},
+	  url = {https://doi.org/10.21105/joss.08655},
+	  year = {2025},
+	  publisher = {The Open Journal},
+	  volume = {10},
+	  number = {112},
+	  pages = {8655},
+	  author = {Atreya, Gaurav and Steissberg, Todd and Ray, Patrick A.},
+	  title = {NADI -- Network Analysis and Data Integration with a Domain Specific Language},
+	  journal = {Journal of Open Source Software}
+	} 
+
+Some papers are currently still being worked on, and will be added here when they are published.
 
 ## This book
-You can cite the link to this book as follows Make sure to replace Accessed Data by today's date.
+You can cite the link to this book as follow. Make sure to replace Accessed Data by today's date.
 
 Atreya, G. 2025. “Network Analysis and Data Integration (NADI).” Accessed May 1, 2025. https://nadi-system.github.io/.
 
@@ -19,6 +35,7 @@ Atreya, G. 2025. “Network Analysis and Data Integration (NADI).” Accessed Ma
 
 # Works using NADI System
 
+## Conference Presentation
 Atreya, G., G. Mandavya, and P. Ray. 2024. “Which came first? Streamgages or Dams: Diving into the History of Unaltered River Flow Data with a Novel Analytical tool.” H51L-0865.
 
     @inproceedings{atreyaWhichCameFirst2024,
