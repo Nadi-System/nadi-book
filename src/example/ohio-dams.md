@@ -14,7 +14,7 @@ instead of:
 gage1 -> gage2
 dam1 -> gage2
 ```
-For both gage, number of dams upstream (or the first dam construction year upstead) is still the same, even though there is error on the same calculation in the dam.
+For both gage, number of dams upstream (or the first dam construction year upsteam) is still the same, even though there is error on the same calculation in the dam.
 
 ## Load Network and Attributes
 First load the network

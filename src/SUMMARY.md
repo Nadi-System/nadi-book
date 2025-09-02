@@ -45,6 +45,7 @@
   - [Counting Ohio Dams](./example/ohio-dams.md)
   - [Earliest Dam Year](./example/ohio-dam-years.md)
 - [LaTeX Table](./example/latex-table.md)
+- [Timeseries Gap Identification](./example/timeseries-gap.md)
 <!-- - [Ohio River Routing](./example-usage.md) -->
 <!--   - [Making Tables](./example/tables.md) -->
 <!--   - [Generating Reports](./example/gen-report.md) -->
