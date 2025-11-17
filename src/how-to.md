@@ -29,7 +29,7 @@ execution.
 For example:
 ```task run
 !network load_file("./data/mississippi.net")
-node[ohio] render("{_NAME:case(title)} River")
+node[ohio] render("{NAME} river")
 ```
 
 Task and Rust code block might also include lines that are needed to
@@ -39,17 +39,9 @@ side of the code blocks to make them visible. Similarly use the copy
 icon to copy the visible code into clipboard.
 
 ## String Template Syntax Highlight
-The syntax highlight here in this book makes it so that any unknown
-transformers will be marked for easy detection to mistakes.
+The syntax highlight can help you detect the variables
+part (within `{}`). But remember, even if they are highlighted, it could be used as a normal string if they are passed to a function taking "String" instead of "Template"
 
 ```stp
-This shows var = {var:unknown()}, {_var:case(title)}
+This shows var = {var:.2}, and more
 ```
-
-Besides this, the syntax highlight can help you detect the variables
-part (within `{}`), lisp expression (within `=()`), or commands
-(within `$()`) in the template.
-
-Note: commands are disabled, so they won't run during template
-rendering process. But if you are rendering a template to run as a
-command, then they will be executed during that process.

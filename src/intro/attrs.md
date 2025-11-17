@@ -31,7 +31,7 @@ Example Attribute File that can be loaded:
 Here loading the files we can see only ohio has the attributes loaded
 ```task run
 ! network load_file("./data/mississippi.net")
-node[ohio] load_attrs("./data/attrs/{_NAME}.toml")
+node[ohio] load_attrs("./data/attrs/{NAME}.toml")
 node.outlet
 ```
 

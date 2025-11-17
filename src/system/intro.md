@@ -15,31 +15,38 @@ The main concepts that you need to know are:
 
 ## Keywords
 
-| Keyword     | Description                                                       |
-|-------------|-------------------------------------------------------------------|
-| node        | the node task type, function or variable                          |
-| network/net | the network task type, function or variable                       |
-| env         | the environment task type, function or variable                   |
-| exit        | exit the program                                                  |
-| end         | end the execution of tasks without exiting                        |
-| help        | display help for functions                                        |
-| inputs      | get node variables or function output for input nodes of a node   |
-| output      | get node variable or function output for output node of a node    |
-| nodes       | get node variable or function output for all nodes in the network |
-| if          | if statement for conditional task/expression                      |
-| else        | else statement for conditional task/expression                    |
-| while       | while statement for loop task                                     |
-| in          | binary operator to check if something is in another (list/string) |
-| match       | binary operator to check patterns on string (regex)               |
+| Keyword       | Description                                                       |
+|---------------|-------------------------------------------------------------------|
+| node          | the node task type, function or variable                          |
+| network/net   | the network task type, function or variable                       |
+| env           | the environment task type, function or variable                   |
+| exit          | exit the program                                                  |
+| end           | end the execution of tasks without exiting                        |
+| help          | display help for functions                                        |
+| inputs        | get node variables or function output for input nodes of a node   |
+| output        | get node variable or function output for output node of a node    |
+| nodes         | get node variable or function output for all nodes in the network |
+| Root          | root node of the network                                          |
+| if            | if statement for conditional task/expression                      |
+| else          | else statement for conditional task/expression                    |
+| while         | while statement for loop task                                     |
+| Try           | try statement to contain tasks                                    |
+| Catch         | catch statement when error occurs on try block                    |
+| in            | binary operator to check if something is in another (list/string) |
+| match         | binary operator to check patterns on string (regex)               |
+| Hook          | hook tasks to run at each execution                               |
+| Local         | Local; similar to environment but within current locale           |
+| function/func | user defined functions                                            |
+| Error         | raises an error while evaluating                                  |
 
 And here are some keywords reserved for future:
-| Keyword       | Description                                     |
-|---------------|-------------------------------------------------|
-| function/func | user defined functions                          |
-| map           | map values in an array/attrmap to a function    |
-| attrs         | attributes of the env/node/network              |
-| loop          | loop task                                       |
-| for           | for loop task for looping through array/attrmap |
+| Keyword | Description                                     |
+|---------|-------------------------------------------------|
+| map     | map values in an array/attrmap to a function    |
+| attrs   | attributes of the env/node/network              |
+| loop    | loop task                                       |
+| for     | for loop task for looping through array/attrmap |
+| Return  | return statement inside function                |
 
 
 ## Symbols
@@ -54,6 +61,10 @@ Some special symbols and their functions are listed below:
 - `->` path operator (only used in node propagation, or network),
 - `=` is assignment operator,
 - `#` starts a comment,
+
+Some reserved Symbols for future:
+- `$` for series/timeseries access,
+- `@` for Function pointers
 
 There might be more functions of each symbol depending on the context.
 

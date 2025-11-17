@@ -16,13 +16,14 @@ Example Network file:
 ```
 
 The given network can be loaded and visualized using `svg_save` function.
-
+<!-- TODO: SVG looks weird. check what changed -->
 ```task run image ../output/network-mississippi.svg
 network load_file("./data/mississippi.net")
 !network command("mkdir -p output")
+node.title = str_replace(NAME, "-", " ");
 network svg_save(
    "./output/network-mississippi.svg",
-	label="[{INDEX}] {_NAME:repl(-, ):case(title)}",
+	label="[{INDEX}] {title}",
 	bgcolor="gray"
 )
 ```
@@ -37,9 +38,10 @@ node[ohio].visual.linewidth = 3;
 node["upper-mississippi", red].visual.nodesize = 8;
 node[red].visual.nodeshape = "triangle";
 node["upper-mississippi"].visual.nodeshape = "ellipse:0.5";
+node.title = str_replace(NAME, "-", " ");
 network svg_save(
    "./output/network-mississippi-colors.svg",
-   label="[{INDEX}] {_NAME:repl(-, ):case(title)}",
+   label="[{INDEX}] {title}",
 	bgcolor="gray"
 )
 ```

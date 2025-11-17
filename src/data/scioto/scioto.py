@@ -15,3 +15,4 @@ df = pd.DataFrame({n: read_node(n) for n in nodes})
 df.index.name = "date"
 
 df.to_csv("~/work/nadi-project/codes/nadi-system/nadi-ide/examples/scioto.csv")
+df.loc[df.index.year > 2000, :].to_csv("~/work/nadi-project/codes/nadi-system/nadi-ide/examples/scioto-2000+.csv")

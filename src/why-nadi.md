@@ -74,3 +74,4 @@ Which doesn't make sure input nodes are run before output in this case, and can 
 
 ## Extensibility
 NADI has two types of plugin systems, which means users can write their own analysis in any programming language and have it interact with NADI through attributes, or they can write it in rust and have even more direct interaction.
+

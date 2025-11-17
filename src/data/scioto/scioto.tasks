@@ -1,14 +1,25 @@
 # load network
 network load_file("scioto.network")
 
-network csv.load_timeseries("scioto.csv", "date", "streamflow");
+network csv.load_timeseries("scioto-2000+.csv", "date", "streamflow");
 node ts_complete("streamflow")
-node.good = (ts_len("streamflow", valid=true) / ts_len("streamflow")) > 0.75
+node.coverage = ts_len("streamflow", valid=true) / ts_len("streamflow");
+node.good = coverage > 0.99;
 node.visual.nodeshape = "circle";
-node(good).visual.nodecolor = "darkgreen";
-node(good).visual.textcolor = "darkgreen";
-network svg.ts_blocks("/tmp/test.svg", "{NAME}", "streamflow", 1000, 820)
+node.visual.nodesize = 4.0;
+node(good).visual.nodecolor = "blue";
+node(good).visual.textcolor = "blue";
+network html.plot_timeseries("/tmp/test.html", "streamflow", nodetitle="Node {NAME} (Data Coverage = {coverage:.2})");
+
+# network html.export_map("/tmp/test.html", "This is a test for node {NAME}.");
+
 exit
+
+network svg.ts_blocks("test.svg", "{NAME}", "streamflow", 600.0, 820.0)
+network typst.svg2pdf("test.svg", "test.pdf")
+exit
+
+
 # simple loop
 env.count = 1;
 while (count < 5) {
@@ -20,7 +31,7 @@ while (count < 5) {
 node output.INDEX?
 node(output.INDEX?) output.INDEX == (node.INDEX - 1)
 # load average streamflow from the csv file containing timeseries using python
-node command("python area-and-streamflow.py {_NAME}")
+node command("python area-and-streamflow.py {NAME}")
 
 env.nodesize = 5
 node.visual.nodesize = env.nodesize

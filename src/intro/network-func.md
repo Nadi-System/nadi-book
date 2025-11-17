@@ -5,9 +5,10 @@ Network function runs on the network as a whole. It takes arguments and keyword 
 ```task run image ../output/network-mississippi-sdf.svg
 network load_file("./data/mississippi.net")
 !network command("mkdir -p output")
+node.title = str_replace(NAME, "-", " ");
 network svg_save(
    "./output/network-mississippi-sdf.svg",
-	label="[{INDEX}] {_NAME:repl(-, ):case(title)}",
+	label="[{INDEX}] {title}",
 	bgcolor="gray"
 )
 ```

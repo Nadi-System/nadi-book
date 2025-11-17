@@ -5,8 +5,7 @@ rendered for each node based on the node attributes.
 
 A simple template can be like below:
 ```stp run name=John; address=123 Road, USA
-Hi, my name is {name}, my address is {address?"N/A"}.
-I wrote this document on {%A}, exact date: {%Y-%m-%d}.
+Hi, my name is {name}, my address is {address}.
 ```
 
 With more complicated templates, we would be able to generate
@@ -25,3 +24,17 @@ network echo(render_template("./data/example.template"))
 
 Of course, there are better ways to generate table than this, but this
 shows how flexible the template system is.
+
+
+If you want to use a rendered template anywhere on the document use `r` before the string.
+
+That is:
+
+```task run
+env.x = 12;
+# normal string
+"Some {x}"
+# rendered template string
+r"Some {x}"
+
+```

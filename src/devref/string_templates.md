@@ -82,7 +82,7 @@ things. Look at the help string of the function to see if it takes
 For example `render` is a function that takes a template and prints it
 after rendering it for each node.
 
-```task run
+```task todo
 !network load_file("./data/mississippi.net")
 !node[ohio] set_attrs(river="the Ohio River", streamflow=45334.12424343)
 node[ohio,red] render(
@@ -96,7 +96,7 @@ Or you can use `lisp` syntax to do more complex calculations. Refer to
 [NADI Extension Capabilities](../system/extensions.md) section for more
 info on how to use `lisp` on string template.
 
-```task run
+```task todo
 !network load_file("./data/mississippi.net")
 !node[ohio] set_attrs(river="the Ohio River", streamflow=45334.12424343)
 node[ohio] render(

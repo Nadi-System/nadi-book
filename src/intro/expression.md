@@ -5,7 +5,8 @@ Expressions are airthmetic or logical operations. They can appear inside the con
 Expressions are defined into the following categories:
 ## Literal Values
 ```task run
-env [1, true, "no maybe"]
+[1, true, "no maybe"]
+12.2
 ```
 ## Variable
 ```task run

@@ -89,8 +89,28 @@ Once I had a working prototype for this, I also started adding support
 for rendering string templates, and generating tables along with the
 task system.
 
+
+### Tasks
+For tasks, similary write a block with `task` as language. You can use
+`!` character at the start of the line to hide it in the view. Use
+them for essential code that are needed for results but are not the
+current focus. And when you add `run` it'll run and show the output.
+
+    ```task run
+    !network load_file("data/mississippi.net")
+    node render("Node {NAME}")
+    ```
+
+
+---
+```task run
+!network load_file("data/mississippi.net")
+node render("Node {NAME}")
+```
+---
 ### String templates
-For string templates, write the templates in `stp` blocks like below that will have the syntax hightlight.
+For string templates, you can utilize shorter syntax to set environemtal variables and render templates
+<!-- TODO: just use variables and r"{x} y" syntax for these -->
 
 ```stp
 Hi my name is {name}.
@@ -112,25 +132,6 @@ Will become:
 Hi my name is {name}.
 ```
 
----
-
-### Tasks
-For tasks, similary write a block with `task` as language. You can use
-`!` character at the start of the line to hide it in the view. Use
-them for essential code that are needed for results but are not the
-current focus. And when you add `run` it'll run and show the output.
-
-    ```task run
-    !network load_file("data/mississippi.net")
-    node render("Node {NAME}")
-    ```
-
-
----
-```task run
-!network load_file("data/mississippi.net")
-node render("Node {NAME}")
-```
 ---
 
 ### Tables

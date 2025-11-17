@@ -10,6 +10,9 @@
 - [Installation](./installation.md)
 - [Plugins](./plugins.md)
 
+# Changes
+- [Changes from Version 0.7](changelog.md)
+
 # Network Detection (GIS)
 - [NADI GIS](./gis/intro.md)
 - [Example](./gis/example.md)
@@ -22,6 +25,7 @@
   - [Node](./intro/node.md)
   - [Network](./intro/network.md)
   - [Expression](./intro/expression.md)
+  - [User Defined Functions](./intro/udf.md)
   - [String Template](./intro/template.md)
   - [Node Function](./intro/node-func.md)
   - [Network Function](./intro/network-func.md)

@@ -49,7 +49,7 @@ hljs.registerLanguage("task", (hljs) => ({
 	hljs.C_NUMBER_MODE,
 	NODE_LIST_OR_PATH,
 	{
-	    begin: '\\b(node|network|env|exit|end|help|inputs|output|nodes|if|else|while|in|match|function|map|attrs|loop|for|inf|nan)\\b',
+	    begin: '\\b(node|network|env|exit|end|help|inputs|output|nodes|root|if|else|while|in|match|function|map|attrs|loop|for|inf|nan|func|return|error|try|catch)\\b',
 	    className: "deletion",
 	},
 	{
