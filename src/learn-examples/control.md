@@ -33,14 +33,20 @@ While loop runs the tasks inside the block repeatedly while the condition is sat
 ```task run
 env.somevar = 1;
 while (somevar < 10) {
-	env.somevar
+	env echo(str(somevar));
 	env.somevar = env.somevar + 1;
 }
 ```
 
 This can be used to repeat a set of tasks for a various reasons.
 
+## Error Handling
 
-<div class="warning">
-If your tasks take a long time to run, note that, the while loop needs to be completely run before the output can be processed and displayed, so that even if your output is not printed, it is being run. This will be fixed in the future version of the program.
-</div>
+`try-catch` blocks are similar to `if-else` where the `try` block contains the happy path (code to run if no errors are encountered), while any error will result in the code in the `catch` block being executed instead.
+
+Currently you can only use `try-catch` inside an expression. Future versions will include the ability to use it with tasks as well.
+
+```task run
+env try { 1 + 12 } catch { 2 }
+env try { 1 + "s" } catch { 2 }
+```

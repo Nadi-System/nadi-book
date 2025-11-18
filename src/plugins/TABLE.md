@@ -1,14 +1,14 @@
 # Network Functions
 ## save_csv {#network.save_csv}
 ```sig
-network table.save_csv(
+network TABLE.save_csv(
     path: '& Path',
     fields: '& [String]',
     filter: 'Option < Vec < bool > >'
 )
 ```
 
-### Arguments
+**Arguments:**
 - `path: '& Path'` => 
 - `fields: '& [String]'` => 
 - `filter: 'Option < Vec < bool > >'` => 
@@ -16,7 +16,7 @@ network table.save_csv(
 Save CSV
 ## table_to_markdown {#network.table_to_markdown}
 ```sig
-network table.table_to_markdown(
+network TABLE.table_to_markdown(
     table: 'Option < PathBuf >',
     template: 'Option < String >',
     outfile: 'Option < PathBuf >',
@@ -24,7 +24,7 @@ network table.table_to_markdown(
 )
 ```
 
-### Arguments
+**Arguments:**
 - `table: 'Option < PathBuf >'` => Path to the table file
 - `template: 'Option < String >'` => String template for table
 - `outfile: 'Option < PathBuf >'` => Path to the output file

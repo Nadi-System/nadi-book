@@ -21,7 +21,15 @@ env.value = [1, true, "no maybe"];
 env value?
 env other_var?
 ```
-You can also use use varible from node, or network in other context. For example:
+
+If you use variable that does not exist, then it will throw an error. You can use `try-catch` block to catch that error. This is computationally better than checking if a variable exists. But the checking is useful in case of filtering the node functions (explained later).
+
+```task run
+env.value = [1, true, "no maybe"];
+env try { other_var } catch { value }
+```
+
+You can also use varible from node, or network in other context. For example:
 
 ```task run
 env.value = [1, true, "no maybe"];

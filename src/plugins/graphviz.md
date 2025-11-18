@@ -1,7 +1,7 @@
 # Network Functions
-## save_graphviz {#network.save_graphviz}
+## save {#network.save}
 ```sig
-network graphviz.save_graphviz(
+network graphviz.save(
     outfile: '& Path',
     name: '& str' = "network",
     global_attrs: '& str' = "",
@@ -10,7 +10,7 @@ network graphviz.save_graphviz(
 )
 ```
 
-### Arguments
+**Arguments:**
 - `outfile: '& Path'` => 
 - `name: '& str' = "network"` => 
 - `global_attrs: '& str' = ""` => 

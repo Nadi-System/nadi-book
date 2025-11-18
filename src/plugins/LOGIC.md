@@ -1,14 +1,14 @@
 # Env Functions
 ## ifelse {#env.ifelse}
 ```sig
-env logic.ifelse(
+env LOGIC.ifelse(
     cond: 'bool',
     iftrue: 'Attribute',
     iffalse: 'Attribute'
 )
 ```
 
-### Arguments
+**Arguments:**
 - `cond: 'bool'` => Attribute that can be cast to bool value
 - `iftrue: 'Attribute'` => Output if `cond` is true
 - `iffalse: 'Attribute'` => Output if `cond` is false
@@ -27,12 +27,26 @@ env assert_eq(ifelse(false, 1, 2), 2)
 env assert_eq(ifelse(100.0, 1, 2), 1)
 env assert_eq(ifelse(true, 1, 2), if (true) {1} else {2})
 ```
+
+There is a special syntax on the task system to do if-else
+conditions, which should be preferred over this function for
+easier readability.
+
+```task
+if (true) {
+env.somevar = 12;
+} else {
+env.someothervar = 12;
+}
+env assert_eq(somevar, 12)
+env assert_eq(someothervar?, false)
+```
 ## gt {#env.gt}
 ```sig
-env logic.gt(a: '& Attribute', b: '& Attribute')
+env LOGIC.gt(a: '& Attribute', b: '& Attribute')
 ```
 
-### Arguments
+**Arguments:**
 - `a: '& Attribute'` => first attribute
 - `b: '& Attribute'` => second attribute
 
@@ -44,10 +58,10 @@ env assert_eq(gt(1.0, 20), 1.0 > 20)
 ```
 ## lt {#env.lt}
 ```sig
-env logic.lt(a: '& Attribute', b: '& Attribute')
+env LOGIC.lt(a: '& Attribute', b: '& Attribute')
 ```
 
-### Arguments
+**Arguments:**
 - `a: '& Attribute'` => first attribute
 - `b: '& Attribute'` => second attribute
 
@@ -59,10 +73,10 @@ env assert_eq(lt(1.0, 20), 1.0 < 20)
 ```
 ## eq {#env.eq}
 ```sig
-env logic.eq(a: '& Attribute', b: '& Attribute')
+env LOGIC.eq(a: '& Attribute', b: '& Attribute')
 ```
 
-### Arguments
+**Arguments:**
 - `a: '& Attribute'` => first attribute
 - `b: '& Attribute'` => second attribute
 
@@ -75,10 +89,10 @@ env assert_eq(eq(2.0, 2), 2.0 == 2)
 ```
 ## and {#env.and}
 ```sig
-env logic.and(*conds)
+env LOGIC.and(*conds)
 ```
 
-### Arguments
+**Arguments:**
 - `*conds` => List of attributes that can be cast to bool
 
 Boolean and
@@ -92,10 +106,10 @@ env assert_eq(and(true, false), false & true)
 ```
 ## or {#env.or}
 ```sig
-env logic.or(*conds)
+env LOGIC.or(*conds)
 ```
 
-### Arguments
+**Arguments:**
 - `*conds` => List of attributes that can be cast to bool
 
 boolean or
@@ -109,10 +123,10 @@ env assert_eq(or(true, false), false | true)
 ```
 ## not {#env.not}
 ```sig
-env logic.not(cond: 'bool')
+env LOGIC.not(cond: 'bool')
 ```
 
-### Arguments
+**Arguments:**
 - `cond: 'bool'` => attribute that can be cast to bool
 
 boolean not
@@ -126,10 +140,10 @@ env assert_eq(not(false), !false)
 ```
 ## all {#env.all}
 ```sig
-env logic.all(vars: '& [bool]')
+env LOGIC.all(vars: '& [bool]')
 ```
 
-### Arguments
+**Arguments:**
 - `vars: '& [bool]'` => 
 
 check if all of the bool are true
@@ -142,10 +156,10 @@ env assert_eq(all([false]), false)
 ```
 ## any {#env.any}
 ```sig
-env logic.any(vars: '& [bool]')
+env LOGIC.any(vars: '& [bool]')
 ```
 
-### Arguments
+**Arguments:**
 - `vars: '& [bool]'` => 
 
 check if any of the bool are true

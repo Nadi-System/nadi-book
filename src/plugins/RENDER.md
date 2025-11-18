@@ -1,26 +1,29 @@
 # Env Functions
 ## render {#env.render}
 ```sig
-env render.render(
+env RENDER.render(
     template: '& Template',
     safe: 'bool' = false,
     **keyval
 )
 ```
 
-### Arguments
+**Arguments:**
 - `template: '& Template'` => String template to render
 - `safe: 'bool' = false` => if render fails keep it as it is instead of exiting
 - `**keyval` => 
 
 Render the template based on the node attributes
 
-For more details on the template system. Refer to the String
-Template section of the NADI book.
+If you have the safe=true, then if the rendering fails, it
+returns the original string template. For more details on the
+template system. Refer to the String Template section of the
+NADI book.
 
 ```task
-env assert_eq(render("abc {_x}", x="ab"), "abc ab")
+env assert_eq(render("abc {x}", x="ab"), "abc ab")
 env assert_eq(render("abc {x}", x=23), "abc 23")
+env assert_eq(render("abc {x} {a}", safe=true), "abc {x} {a}")
 ```
 
 If safe parameter is true, then it doesn't error out even if
@@ -34,10 +37,10 @@ env assert_eq(render("abc {x}", safe=true), "abc {x}")
 # Node Functions
 ## render {#node.render}
 ```sig
-node render.render(template: '& Template', safe: 'bool' = false)
+node RENDER.render(template: '& Template', safe: 'bool' = false)
 ```
 
-### Arguments
+**Arguments:**
 - `template: '& Template'` => String template to render
 - `safe: 'bool' = false` => if render fails keep it as it is instead of exiting
 
@@ -50,14 +53,15 @@ Template section of the NADI book.
 network load_str("a -> b")
 node.x = 13
 node assert_eq(render("abc {x}"), "abc 13")
+node assert_eq(render("abc {x} {a}", safe=true), "abc {x} {a}")
 ```
 # Network Functions
 ## render {#network.render}
 ```sig
-network render.render(template: '& Template', safe: 'bool' = false)
+network RENDER.render(template: '& Template', safe: 'bool' = false)
 ```
 
-### Arguments
+**Arguments:**
 - `template: '& Template'` => Path to the template file
 - `safe: 'bool' = false` => if render fails keep it as it is instead of exiting
 
@@ -66,17 +70,18 @@ Render from network attributes
 ```task
 network.x = 13
 network assert_eq(render("abc {x}"), "abc 13")
+network assert_eq(render("abc {x} {a}", safe=true), "abc {x} {a}")
 ```
 ## render_nodes {#network.render_nodes}
 ```sig
-network render.render_nodes(
+network RENDER.render_nodes(
     template: '& Template',
     safe: 'bool' = false,
     join: '& str' = "\n"
 )
 ```
 
-### Arguments
+**Arguments:**
 - `template: '& Template'` => Path to the template file
 - `safe: 'bool' = false` => if render fails keep it as it is instead of exiting
 - `join: '& str' = "\n"` => String to join the render results
@@ -90,10 +95,10 @@ network assert_eq(render_nodes("abc {x}"), "abc 1\nabc 2")
 ```
 ## render_template {#network.render_template}
 ```sig
-network render.render_template(template: 'PathBuf')
+network RENDER.render_template(template: 'PathBuf')
 ```
 
-### Arguments
+**Arguments:**
 - `template: 'PathBuf'` => Path to the template file
 
 Render a File template for the nodes in the whole network

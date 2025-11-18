@@ -1,14 +1,14 @@
 # Env Functions
 ## strmap {#env.strmap}
 ```sig
-env attributes.strmap(
+env ATTRS.strmap(
     attr: '& str',
     attrmap: '& AttrMap',
     default: 'Option < Attribute >'
 )
 ```
 
-### Arguments
+**Arguments:**
 - `attr: '& str'` => Value to transform the attribute
 - `attrmap: '& AttrMap'` => Dictionary of key=value to map the data to
 - `default: 'Option < Attribute >'` => Default value if key not found in `attrmap`
@@ -23,10 +23,10 @@ env assert_eq(val2, 12)
 ```
 ## parse_attr {#env.parse_attr}
 ```sig
-env attributes.parse_attr(toml: '& str')
+env ATTRS.parse_attr(toml: '& str')
 ```
 
-### Arguments
+**Arguments:**
 - `toml: '& str'` => String to parse into attribute
 
 Parse attribute from string
@@ -40,10 +40,10 @@ env assert_eq(parse_attr("1234-12-12"), 1234-12-12)
 ```
 ## parse_attrmap {#env.parse_attrmap}
 ```sig
-env attributes.parse_attrmap(toml: 'String')
+env ATTRS.parse_attrmap(toml: 'String')
 ```
 
-### Arguments
+**Arguments:**
 - `toml: 'String'` => String to parse into attribute
 
 Parse attribute map from string
@@ -55,16 +55,25 @@ env assert_eq(parse_attrmap(
 {x = [1234-12-12, true]}
 )
 ```
+## keys {#env.keys}
+```sig
+env ATTRS.keys(attrmap: 'AttrMap')
+```
+
+**Arguments:**
+- `attrmap: 'AttrMap'` => 
+
+
 ## get {#env.get}
 ```sig
-env attributes.get(
+env ATTRS.get(
     parent: 'Attribute',
     index: 'Attribute',
     default: 'Option < Attribute >'
 )
 ```
 
-### Arguments
+**Arguments:**
 - `parent: 'Attribute'` => Array or AttrMap Attribute to index
 - `index: 'Attribute'` => Index value (Integer for Array, String for AttrMap)
 - `default: 'Option < Attribute >'` => Default value if the index is not present
@@ -79,80 +88,12 @@ env assert_eq(get(some_ar, 2), true)
 env assert_eq(get(some_am, "x"), "this")
 env assert_eq(get(some_am, "y"), [12, true])
 ```
-## powi {#env.powi}
-```sig
-env attributes.powi(value: 'f64', power: 'i64')
-```
-
-### Arguments
-- `value: 'f64'` => base value
-- `power: 'i64'` => 
-
-Integer power
-
-```task
-env assert_eq(powi(10.0, 2), 100.0)
-```
-## powf {#env.powf}
-```sig
-env attributes.powf(value: 'f64', power: 'f64')
-```
-
-### Arguments
-- `value: 'f64'` => base value
-- `power: 'f64'` => 
-
-Float power
-
-```task
-env assert_eq(powf(100.0, 0.5), 10.0)
-```
-## exp {#env.exp}
-```sig
-env attributes.exp(value: 'f64')
-```
-
-### Arguments
-- `value: 'f64'` => 
-
-Exponential
-
-```task
-env assert_eq(log(exp(5.0)), 5.0)
-```
-## sqrt {#env.sqrt}
-```sig
-env attributes.sqrt(value: 'f64')
-```
-
-### Arguments
-- `value: 'f64'` => 
-
-Square Root
-```task
-env assert_eq(sqrt(25.0), 5.0)
-```
-## log {#env.log}
-```sig
-env attributes.log(value: 'f64', base: 'Option < f64 >')
-```
-
-### Arguments
-- `value: 'f64'` => 
-- `base: 'Option < f64 >'` => 
-
-Logarithm of a value, natural if base not given
-
-```task
-env assert_eq(log(exp(2.0)), 2.0)
-env assert_eq(log(2.0, 2.0), 1.0)
-```
 ## float_div {#env.float_div}
 ```sig
-env attributes.float_div(value1: 'f64', value2: 'f64')
+env ATTRS.float_div(value1: 'f64', value2: 'f64')
 ```
 
-### Arguments
+**Arguments:**
 - `value1: 'f64'` => numerator
 - `value2: 'f64'` => denominator
 
@@ -163,10 +104,10 @@ env assert_eq(float_div(10.0, 2), 10.0 / 2)
 ```
 ## float_mult {#env.float_mult}
 ```sig
-env attributes.float_mult(value1: 'f64', value2: 'f64')
+env ATTRS.float_mult(value1: 'f64', value2: 'f64')
 ```
 
-### Arguments
+**Arguments:**
 - `value1: 'f64'` => numerator
 - `value2: 'f64'` => denominator
 
@@ -178,10 +119,10 @@ env assert_eq(float_mult(5.0, 2), 5.0 * 2)
 # Node Functions
 ## load_attrs {#node.load_attrs}
 ```sig
-node attributes.load_attrs(filename: 'PathBuf')
+node ATTRS.load_attrs(filename: 'PathBuf')
 ```
 
-### Arguments
+**Arguments:**
 - `filename: 'PathBuf'` => Template for the filename to load node attributes from
 
 Loads attrs from file for all nodes based on the given template
@@ -201,10 +142,10 @@ The function will error out in following conditions:
 
 ## print_all_attrs {#node.print_all_attrs}
 ```sig
-node attributes.print_all_attrs()
+node ATTRS.print_all_attrs()
 ```
 
-### Arguments
+**Arguments:**
 
 
 Print all attrs in a node
@@ -217,10 +158,10 @@ No arguments and no errors, it'll just print all the attributes in a node with
 
 ## print_attrs {#node.print_attrs}
 ```sig
-node attributes.print_attrs(*attrs, name: 'bool' = false)
+node ATTRS.print_attrs(*attrs, name: 'bool' = false)
 ```
 
-### Arguments
+**Arguments:**
 - `*attrs` => 
 - `name: 'bool' = false` => 
 
@@ -238,10 +179,10 @@ The function will error if
 The attributes will be printed in `key=val` format.
 ## set_attrs {#node.set_attrs}
 ```sig
-node attributes.set_attrs(**attrs)
+node ATTRS.set_attrs(**attrs)
 ```
 
-### Arguments
+**Arguments:**
 - `**attrs` => Key value pairs of the attributes to set
 
 Set node attributes
@@ -265,12 +206,29 @@ This is equivalent to the following:
 ```task
 node[A->D].a2d = true;
 ```
-## get_attr {#node.get_attr}
+## del_attrs {#node.del_attrs}
 ```sig
-node attributes.get_attr(attr: '& str', default: 'Option < Attribute >')
+node ATTRS.del_attrs(delete: 'Vec < String >')
 ```
 
-### Arguments
+**Arguments:**
+- `delete: 'Vec < String >'` => the attributes to delete
+
+Delete attributes from the given node
+
+```task
+network load_str("a -> b");
+node set_attrs(val = true);
+node[a] del_attrs(["val"]);
+node[a] assert_eq(val?, false)
+node[b] assert_eq(val?, true)
+```
+## get_attr {#node.get_attr}
+```sig
+node ATTRS.get_attr(attr: '& str', default: 'Option < Attribute >')
+```
+
+**Arguments:**
 - `attr: '& str'` => Name of the attribute to get
 - `default: 'Option < Attribute >'` => Default value if the attribute is not found
 
@@ -282,10 +240,10 @@ node assert_eq(get_attr("NAME"), NAME);
 ```
 ## has_attr {#node.has_attr}
 ```sig
-node attributes.has_attr(attr: '& str')
+node ATTRS.has_attr(attr: '& str')
 ```
 
-### Arguments
+**Arguments:**
 - `attr: '& str'` => Name of the attribute to check
 
 Check if the attribute is present
@@ -298,10 +256,10 @@ node assert(!has_attr("y"))
 ```
 ## first_attr {#node.first_attr}
 ```sig
-node attributes.first_attr(attrs: '& [String]', default: 'Option < Attribute >')
+node ATTRS.first_attr(attrs: '& [String]', default: 'Option < Attribute >')
 ```
 
-### Arguments
+**Arguments:**
 - `attrs: '& [String]'` => attribute names
 - `default: 'Option < Attribute >'` => Default value if not found
 
@@ -319,10 +277,10 @@ node assert_eq(first_attr(["x", "NAME"]), 90)
 ```
 ## set_attrs_ifelse {#node.set_attrs_ifelse}
 ```sig
-node attributes.set_attrs_ifelse(cond: 'bool', **values)
+node ATTRS.set_attrs_ifelse(cond: 'bool', **values)
 ```
 
-### Arguments
+**Arguments:**
 - `cond: 'bool'` => Condition to check
 - `**values` => key = [val1, val2] where key is set as first if `cond` is true else second
 
@@ -351,10 +309,10 @@ flexibility than this function in normal use cases. But this
 function is useful when you have to do something in a batch.
 ## set_attrs_render {#node.set_attrs_render}
 ```sig
-node attributes.set_attrs_render(**kwargs)
+node ATTRS.set_attrs_render(**kwargs)
 ```
 
-### Arguments
+**Arguments:**
 - `**kwargs` => key value pair of attribute to set and the Template to render
 
 Set node attributes based on string templates
@@ -364,15 +322,15 @@ values from the rendered results.
 
 ```task
 network load_str("a -> b");
-node set_attrs_render(val1 = "Node: {_NAME}");
+node set_attrs_render(val1 = "Node: {NAME}");
 node[a] assert_eq(val1, "Node: a")
 ```
 ## load_toml_render {#node.load_toml_render}
 ```sig
-node attributes.load_toml_render(toml: '& Template', echo: 'bool' = false)
+node ATTRS.load_toml_render(toml: '& Template', echo: 'bool' = false)
 ```
 
-### Arguments
+**Arguments:**
 - `toml: '& Template'` => String template to render and load as toml string
 - `echo: 'bool' = false` => Print the rendered toml or not
 
@@ -389,16 +347,16 @@ attribute values to set.
 
 ```task
 network load_str("a -> b");
-node load_toml_render("label = \\\"Node: {_NAME}\\\"")
-node assert_eq(label, render("Node: {_NAME}"))
+node load_toml_render("label = \"Node: {NAME}\"")
+node assert_eq(label, render("Node: {NAME}"))
 ```
 # Network Functions
 ## set_attrs {#network.set_attrs}
 ```sig
-network attributes.set_attrs(**attrs)
+network ATTRS.set_attrs(**attrs)
 ```
 
-### Arguments
+**Arguments:**
 - `**attrs` => key value pair of attributes to set
 
 Set network attributes
@@ -410,12 +368,27 @@ Set network attributes
 network set_attrs(val = 23.4)
 network assert_eq(val, 23.4)
 ```
-## set_attrs_render {#network.set_attrs_render}
+## set_node_attrs {#network.set_node_attrs}
 ```sig
-network attributes.set_attrs_render(**kwargs)
+network ATTRS.set_node_attrs(attr_name: '& str', node_map: 'AttrMap')
 ```
 
-### Arguments
+**Arguments:**
+- `attr_name: '& str'` => Name of the attribute to set,
+- `node_map: 'AttrMap'` => key value pair of attributes to set (key = node name)
+
+Set node attributes in a network using a attrmap
+
+```task
+network set_attrs(val = 23.4)
+network assert_eq(val, 23.4)
+```
+## set_attrs_render {#network.set_attrs_render}
+```sig
+network ATTRS.set_attrs_render(**kwargs)
+```
+
+**Arguments:**
 - `**kwargs` => Kwargs of attr = String template to render
 
 Set network attributes based on string templates

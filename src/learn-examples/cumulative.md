@@ -12,9 +12,12 @@ Here we can use the stream ordering formula to calculate the stream order for ea
 !d4 -> g3
 !");
 node<inputsfirst>.stream_ord = max(inputs.stream_ord, 1) + int(count(inputs._?) > 1);
+!import utils
 !network svg_save(
 !   "./output/cumulative-1.svg",
-!	label="{_NAME} = {stream_ord}"
+!	label="{NAME} = {stream_ord}",
+!   bgcolor="gray",
+!	settings=utils.settings(right=120)
 !)
 ```
 
@@ -38,8 +41,11 @@ node.visual.linewidth = stream_ord / 2;
 node(stream_ord == 1).visual.linecolor = "green";
 node(stream_ord == 2).visual.linecolor = "blue";
 node(stream_ord == 3).visual.linecolor = "red";
+!import utils
 !network svg_save(
 !   "./output/cumulative-2.svg",
-!	label="{_NAME} = {stream_ord}"
+!	label="{NAME} = {stream_ord}",
+!   bgcolor="gray",
+!	settings=utils.settings(right=120)
 !)
 ```

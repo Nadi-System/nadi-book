@@ -1,20 +1,20 @@
 # Env Functions
 ## root_node {#env.root_node}
 ```sig
-env connections.root_node()
+env CONN.root_node()
 ```
 
-### Arguments
+**Arguments:**
 
 
 default name used for ROOT node of the network
 # Network Functions
 ## load_file {#network.load_file}
 ```sig
-network connections.load_file(file: 'PathBuf', append: 'bool' = false)
+network CONN.load_file(file: 'PathBuf', append: 'bool' = false)
 ```
 
-### Arguments
+**Arguments:**
 - `file: 'PathBuf'` => File to load the network connections from
 - `append: 'bool' = false` => Append the connections in the current network
 
@@ -24,10 +24,10 @@ This replaces the current network with the one loaded from the
 file.
 ## load_str {#network.load_str}
 ```sig
-network connections.load_str(contents: '& str', append: 'bool' = false)
+network CONN.load_str(contents: '& str', append: 'bool' = false)
 ```
 
-### Arguments
+**Arguments:**
 - `contents: '& str'` => String containing Network connections
 - `append: 'bool' = false` => Append the connections in the current network
 
@@ -42,10 +42,10 @@ env assert_eq(nodes.NAME, ["b", "a"])
 ```
 ## load_edges {#network.load_edges}
 ```sig
-network connections.load_edges(edges: '& [(String, String)]', append: 'bool' = false)
+network CONN.load_edges(edges: '& [(String, String)]', append: 'bool' = false)
 ```
 
-### Arguments
+**Arguments:**
 - `edges: '& [(String, String)]'` => String containing Network connections
 - `append: 'bool' = false` => Append the connections in the current network
 
@@ -60,10 +60,10 @@ env assert_eq(nodes.NAME, ["c", "b", "a"])
 ```
 ## subset {#network.subset}
 ```sig
-network connections.subset(filter: '& [bool]', keep: 'bool' = true)
+network CONN.subset(filter: '& [bool]', keep: 'bool' = true)
 ```
 
-### Arguments
+**Arguments:**
 - `filter: '& [bool]'` => 
 - `keep: 'bool' = true` => Keep the selected nodes (false = removes the selected)
 
@@ -77,14 +77,14 @@ env assert_eq(nodes.NAME, ["b", "a"])
 ```
 ## save_file {#network.save_file}
 ```sig
-network connections.save_file(
+network CONN.save_file(
     file: 'PathBuf',
     quote_all: 'bool' = true,
     graphviz: 'bool' = false
 )
 ```
 
-### Arguments
+**Arguments:**
 - `file: 'PathBuf'` => Path to the output file
 - `quote_all: 'bool' = true` => quote all node names; if false, doesn't quote valid identifier names
 - `graphviz: 'bool' = false` => wrap the network into a valid graphviz file
@@ -95,11 +95,11 @@ For more control on graphviz file writing, use
 `save_graphviz` from `graphviz` plugin instead.
 ## subset_from {#network.subset_from}
 ```sig
-network connections.subset_from(node: '& str')
+network CONN.subset_from(new_outlet: '& str')
 ```
 
-### Arguments
-- `node: '& str'` => 
+**Arguments:**
+- `new_outlet: '& str'` => 
 
 Take a subset of network by taking the given node as new outlet
 
@@ -110,11 +110,11 @@ env assert_eq(nodes.NAME, ["b", "a"])
 ```
 ## subset_largest {#network.subset_largest}
 ```sig
-network connections.subset_largest(node: '& str' = "*ROOT*")
+network CONN.subset_largest(parent: '& str' = "*ROOT*")
 ```
 
-### Arguments
-- `node: '& str' = "*ROOT*"` => 
+**Arguments:**
+- `parent: '& str' = "*ROOT*"` => 
 
 Take a subset of network by only including the largest blob of connected nodes
 

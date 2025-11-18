@@ -1,11 +1,63 @@
-<div class="warning">
-This plugin uses gdal to read/write GIS files, it can be compiled easily in Linux and Mac by installing gdal as a prerequisite, but on windows that step might be complicated. Please refer to the documentation of gdal to know how to install it in windows. Or use the provided dlls from the plugin repo.
-</div>
-
-# Network Functions
-## gis_load_network {#network.gis_load_network}
+# Env Functions
+## layers {#env.layers}
 ```sig
-network gis.gis_load_network(
+env gis.layers(file: 'PathBuf')
+```
+
+**Arguments:**
+- `file: 'PathBuf'` => Path to the GIS file
+
+Show the layers of the GIS file as a list
+## fields {#env.fields}
+```sig
+env gis.fields(file: 'PathBuf', layer: 'Option < String >')
+```
+
+**Arguments:**
+- `file: 'PathBuf'` => Path to the GIS file
+- `layer: 'Option < String >'` => Layer of the file, if not given defaults to the first layer
+
+Show the fields in the GIS file layer as a list
+## features_count {#env.features_count}
+```sig
+env gis.features_count(file: 'PathBuf', layer: 'Option < String >')
+```
+
+**Arguments:**
+- `file: 'PathBuf'` => Path to the GIS file
+- `layer: 'Option < String >'` => Layer of the file, if not given defaults to the first layer
+
+Show the fields in the GIS file layer as a list
+## values {#env.values}
+```sig
+env gis.values(
+    file: 'PathBuf',
+    layer: 'Option < String >',
+    feature: 'u64' = 0,
+    sanitize: 'bool' = false
+)
+```
+
+**Arguments:**
+- `file: 'PathBuf'` => Path to the GIS file
+- `layer: 'Option < String >'` => Layer of the file, if not given defaults to the first layer
+- `feature: 'u64' = 0` => Feature to get the attribute values from
+- `sanitize: 'bool' = false` => Sanitize the key
+
+Returns the values from a feature in a GIS file from its index
+## line {#env.line}
+```sig
+env gis.line(*points)
+```
+
+**Arguments:**
+- `*points` => list of points/geometries to join (takes first point only)
+
+Show the layers of the GIS file as a list
+# Network Functions
+## load_network {#network.load_network}
+```sig
+network gis.load_network(
     file: 'PathBuf',
     source: 'String',
     destination: 'String',
@@ -14,7 +66,7 @@ network gis.gis_load_network(
 )
 ```
 
-### Arguments
+**Arguments:**
 - `file: 'PathBuf'` => GIS file to load (can be any format GDAL can understand)
 - `source: 'String'` => Field in the GIS file corresponding to the input node name
 - `destination: 'String'` => layer of the GIS file corresponding to the output node name
@@ -24,9 +76,9 @@ network gis.gis_load_network(
 Load network from a GIS file
 
 Loads the network from a gis file containing the edges in fields
-## gis_load_attrs {#network.gis_load_attrs}
+## load_attrs {#network.load_attrs}
 ```sig
-network gis.gis_load_attrs(
+network gis.load_attrs(
     file: 'PathBuf',
     node: 'String',
     layer: 'Option < String >',
@@ -37,7 +89,7 @@ network gis.gis_load_attrs(
 )
 ```
 
-### Arguments
+**Arguments:**
 - `file: 'PathBuf'` => GIS file to load (can be any format GDAL can understand)
 - `node: 'String'` => Field in the GIS file corresponding to node name
 - `layer: 'Option < String >'` => layer of the GIS file, first one picked by default
@@ -50,9 +102,9 @@ Load node attributes from a GIS file
 
 The function reads a GIS file in any format (CSV, GPKG, SHP,
 JSON, etc) and loads their fields as attributes to the nodes.
-## gis_save_connections {#network.gis_save_connections}
+## save_connections {#network.save_connections}
 ```sig
-network gis.gis_save_connections(
+network gis.save_connections(
     file: 'PathBuf',
     geometry: 'String',
     driver: 'Option < String >',
@@ -61,7 +113,7 @@ network gis.gis_save_connections(
 )
 ```
 
-### Arguments
+**Arguments:**
 - `file: 'PathBuf'` => 
 - `geometry: 'String'` => 
 - `driver: 'Option < String >'` => 
@@ -69,22 +121,22 @@ network gis.gis_save_connections(
 - `filter: 'Option < Vec < bool > >'` => 
 
 Save GIS file of the connections
-## gis_save_nodes {#network.gis_save_nodes}
+## save_nodes {#network.save_nodes}
 ```sig
-network gis.gis_save_nodes(
+network gis.save_nodes(
     file: 'PathBuf',
     geometry: 'String',
-    attrs: 'HashMap < String, String >' = {},
+    fields: 'HashMap < String, String >' = {},
     driver: 'Option < String >',
     layer: 'String' = "nodes",
     filter: 'Option < Vec < bool > >'
 )
 ```
 
-### Arguments
+**Arguments:**
 - `file: 'PathBuf'` => 
 - `geometry: 'String'` => 
-- `attrs: 'HashMap < String, String >' = {}` => 
+- `fields: 'HashMap < String, String >' = {}` => 
 - `driver: 'Option < String >'` => 
 - `layer: 'String' = "nodes"` => 
 - `filter: 'Option < Vec < bool > >'` => 

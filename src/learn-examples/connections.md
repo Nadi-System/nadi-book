@@ -26,7 +26,7 @@ node render("{NAME}")
 ## Loading Network from String
 Here assume we have a network consisting of nodes of dams and gages like the following where dam nodes start with d and gages with g:
 
-```task run image ../output/simple-count.svg
+```task run image ../output/load-str.svg
 network load_str("
 d1 -> d2
 d3 -> g2
@@ -35,9 +35,12 @@ g1 -> d4
 g2 -> d4
 d4 -> g3
 ");
+!import utils
 !network svg_save(
-!   "./output/simple-count.svg",
-!	label="[{INDEX}] {_NAME}"
+!   "./output/load-str.svg",
+!	label="[{INDEX}] {NAME}",
+!   bgcolor="gray",
+!	settings=utils.settings(right=50)
 !)
 ```
 
@@ -46,9 +49,12 @@ we can load a network from a file:
 
 ```task run image ../output/ex-network-conn.svg
 network load_file("./data/mississippi.net");
+!import utils
 !network svg_save(
 !   "./output/ex-network-conn.svg",
-!	label="[{INDEX}] {_NAME}"
+!	label="[{INDEX}] {NAME}",
+!   bgcolor="gray",
+!	settings=utils.settings(right=120)
 !)
 ```
 
@@ -66,9 +72,12 @@ You can modify the network after loading it as well. The example below extracts 
 !");
 node.is_dam = NAME match "^d[0-9]+";
 network subset(nodes.is_dam);
+!import utils
 !network svg_save(
 !   "./output/simple-count-subset.svg",
-!	label="[{INDEX}] {_NAME}"
+!	label="[{INDEX}] {NAME}",
+!   bgcolor="gray",
+!	settings=utils.settings(right=50)
 !)
 ```
 

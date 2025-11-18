@@ -1,19 +1,19 @@
 # Env Functions
 ## sleep {#env.sleep}
 ```sig
-env debug.sleep(time: 'u64' = 1000)
+env DEBUG.sleep(time: 'u64' = 1000)
 ```
 
-### Arguments
+**Arguments:**
 - `time: 'u64' = 1000` => 
 
 sleep for given number of milliseconds
 ## debug {#env.debug}
 ```sig
-env debug.debug(*args, **kwargs)
+env DEBUG.debug(*args, **kwargs)
 ```
 
-### Arguments
+**Arguments:**
 - `*args` => Function arguments
 - `**kwargs` => Function Keyword arguments
 
@@ -26,14 +26,14 @@ used to see how the nadi system takes the input from the
 function call.
 ## echo {#env.echo}
 ```sig
-env debug.echo(
+env DEBUG.echo(
     line: 'String',
     error: 'bool' = false,
     newline: 'bool' = true
 )
 ```
 
-### Arguments
+**Arguments:**
 - `line: 'String'` => line to print
 - `error: 'bool' = false` => print to stderr instead of stdout
 - `newline: 'bool' = true` => print newline at the end
@@ -48,10 +48,10 @@ those files back to the stdout.
 Also useful for nadi preprocessor.
 ## clip {#env.clip}
 ```sig
-env debug.clip(error: 'bool' = false)
+env DEBUG.clip(error: 'bool' = false)
 ```
 
-### Arguments
+**Arguments:**
 - `error: 'bool' = false` => print in stderr instead of in stdout
 
 Echo the `----8<----` line for clipping syntax

@@ -16,13 +16,24 @@ Attributes are [TOML](https://toml.io/en/) like values. They can be one of the f
 
 You can write attributes directly into the task system to assign them, use them in functions. You can also load attributes from a file into the env/node/network.
 
-If you want to assign a attribute inside the task system, you can do it like this:
+
+Following are some example values that are evaluated as literal values (themselves).
+```task run
+true
+2024-12-21
+"string value"
+12.21
+```
+
+You can assign attribute values to variable names. We will discuss nodes and network later, but let's assign environmental values:
+
 
 ```task run
 env.river = "Ohio River"
-env.river
+river
 ```
 
+Besides writing them in the code directly, you can also load attributes from a file.
 Example Attribute File that can be loaded:
 ```toml
 {{#include ../data/attrs/ohio.toml}}

@@ -49,13 +49,13 @@ Please note that the root node (outlet) of the network doesn't have output node,
 
 ```task run
 !network load_file("./data/mississippi.net")
-node[tenessee -> "lower-mississippi"] inputs.render("{_NAME}")
-node[tenessee -> "lower-mississippi"](output._?) output.render("{_NAME}")
+node[tenessee -> "lower-mississippi"] inputs.render("{NAME}")
+node[tenessee -> "lower-mississippi"](output._?) output.render("{NAME}")
 ```
 
 You can also use `nodes` keyword to call the function on each node, it can be used anywhere, but is useful for env and network tasks.
 ```task run
 !network load_file("./data/mississippi.net")
 
-env nodes.render("Node [{INDEX}] {_NAME}")
+env nodes.render("Node [{INDEX}] {NAME}")
 ```
