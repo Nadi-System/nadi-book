@@ -35,14 +35,11 @@ golconda -> smithland
 
 Drawing it out:
 ```task run image ../output/mississippi.svg
-!network load_file("./data/mississippi.net")
-network svg_save(
-   "./output/mississippi.svg",
-	label="[{INDEX}] {_NAME:repl(-, ):case(title)}"
+network load_file("./data/mississippi.net")
+
+network typst.compile(typst.table("Index => {INDEX}\nName => {NAME}\n"),
+   "./output/mississippi.svg"
 )
-!network clip()
-!# the link path needs to be relative to this file
-!network echo("../output/mississippi.svg")
 ```
 
 

@@ -35,13 +35,8 @@ g1 -> d4
 g2 -> d4
 d4 -> g3
 ");
-!import utils
-!network svg_save(
-!   "./output/load-str.svg",
-!	label="[{INDEX}] {NAME}",
-!   bgcolor="gray",
-!	settings=utils.settings(right=50)
-!)
+
+!network typst.compile(typst.table("Index => {INDEX}\nName => {NAME}\n"), "./output/load-str.svg")
 ```
 
 ## Loading Network from a File
@@ -49,13 +44,8 @@ we can load a network from a file:
 
 ```task run image ../output/ex-network-conn.svg
 network load_file("./data/mississippi.net");
-!import utils
-!network svg_save(
-!   "./output/ex-network-conn.svg",
-!	label="[{INDEX}] {NAME}",
-!   bgcolor="gray",
-!	settings=utils.settings(right=120)
-!)
+
+!network typst.compile(typst.table("Index => {INDEX}\nName => {NAME}\n"), "./output/ex-network-conn.svg")
 ```
 
 ## Modifying the network
@@ -73,12 +63,8 @@ You can modify the network after loading it as well. The example below extracts 
 node.is_dam = NAME match "^d[0-9]+";
 network subset(nodes.is_dam);
 !import utils
-!network svg_save(
-!   "./output/simple-count-subset.svg",
-!	label="[{INDEX}] {NAME}",
-!   bgcolor="gray",
-!	settings=utils.settings(right=50)
-!)
+
+!network typst.compile(typst.table("Index => {INDEX}\nName => {NAME}\n"), "./output/simple-count-subset.svg")
 ```
 
 This can be useful when you want to remove nodes that do not satisfy some selection criteria for your analysis without having to redo the network detection part.

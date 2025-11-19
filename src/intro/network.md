@@ -15,19 +15,15 @@ Example Network file:
 {{#include ../data/mississippi.net}}
 ```
 
-The given network can be loaded and visualized using `svg_save` function.
-<!-- TODO: SVG looks weird. check what changed -->
+The given network can be loaded and visualized using functions from `typst` plugin.
 ```task run image ../output/network-mississippi.svg
 network load_file("./data/mississippi.net")
 !network command("mkdir -p output")
 
-import utils
 node.title = str_replace(NAME, "-", " ");
-network svg_save(
-   "./output/network-mississippi.svg",
-	label="[{INDEX}] {title}",
-	bgcolor="gray",
-	settings=utils.settings(right=120)
+
+network typst.compile(typst.table("Index => {INDEX}\nName => {title}\n"),
+   "./output/network-mississippi.svg"
 )
 ```
 
@@ -36,18 +32,11 @@ You can assign different graphical properties through node properties.
 ```task run image ../output/network-mississippi-colors.svg
 !network load_file("./data/mississippi.net")
 node[red].visual.nodecolor = "red";
-node[ohio].visual.linecolor = "blue";
-node[ohio].visual.linewidth = 3;
 node["upper-mississippi", red].visual.nodesize = 8;
-node[red].visual.nodeshape = "triangle";
-node["upper-mississippi"].visual.nodeshape = "ellipse:0.5";
 node.title = str_replace(NAME, "-", " ");
-import utils
-network svg_save(
-   "./output/network-mississippi-colors.svg",
-   label="[{INDEX}] {title}",
-	bgcolor="gray",
-	settings=utils.settings(right=120)
+
+network typst.compile(typst.table("Index => {INDEX}\n<Name => {title}\n"),
+   "./output/network-mississippi-colors.svg"
 )
 ```
 

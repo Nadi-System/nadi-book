@@ -11,13 +11,8 @@ g1 -> d4
 g2 -> d4
 d4 -> g3
 !");
-!import utils
-!network svg_save(
-!   "./output/simple-count.svg",
-!	label="[{INDEX}] {NAME}",
-!   bgcolor="gray",
-!	settings=utils.settings(right=120)
-!)
+
+!network typst.compile(typst.table("Index => {INDEX}\n Name => {NAME}"), "./output/simple-count.svg")
 ```
 
 Simply counting number of nodes, or certain types of nodes in a network is done through `count` function.
@@ -50,7 +45,6 @@ node.g_node
 ```
 Always be careful that node function is run for all the nodes separately, if you are running them without any variables from the node, then you can use network function, or environment function to get the results.
 
-
 Counting the number of nodes upstream of each node gives us the order of the nodes.
 ```task run image ../output/simple-count-1.svg
 !network load_str("
@@ -62,13 +56,8 @@ Counting the number of nodes upstream of each node gives us the order of the nod
 !d4 -> g3
 !");
 node<inputsfirst>.nodes_us = 1 + sum(inputs.nodes_us);
-!import utils
-!network svg_save(
-!   "./output/simple-count-1.svg",
-!	label="{NAME} = {nodes_us}",
-!   bgcolor="gray",
-!	settings=utils.settings(right=120)
-!)
+
+!network typst.compile(typst.table("Index => {INDEX}\n Name => {NAME}\nNodes U/S => {nodes_us}"), "./output/simple-count-1.svg")
 ```
 
 We can add a condition and count the nodes that satisfy that condition only. Like counting the number of dams upstream of each node (including the node).
@@ -83,14 +72,10 @@ We can add a condition and count the nodes that satisfy that condition only. Lik
 !d4 -> g3
 !");
 node.is_dam = NAME match "^d[0-9]+";
+node(is_dam).visual.nodecolor = "red";
 node<inputsfirst>.dams_us = int(is_dam) + sum(inputs.dams_us);
-!import utils
-!network svg_save(
-!   "./output/simple-count-2.svg",
-!	label="{NAME} = {dams_us}",
-!   bgcolor="gray",
-!	settings=utils.settings(right=120)
-!)
+
+!network typst.compile(typst.table("Index => {INDEX}\n Name => {NAME}\nDams U/S => {dams_us}"), "./output/simple-count-2.svg")
 ```
 
 You can similarly count the number of gages downstream. Here we need a conditional unlike in previous cases as not all nodes have output. In case of inputs, a leaf node would have no inputs but `sum([])` would still be a valid output of `0`. But for node without output nodes, the variable type `output` fails with `NoOutputNode` error, so we add a conditional check to avoid that.
@@ -105,18 +90,14 @@ You can similarly count the number of gages downstream. Here we need a condition
 !d4 -> g3
 !");
 node.is_gage = NAME match "^g[0-9]+";
+node(is_gage).visual.nodecolor = "red";
 node<outputfirst>.gages_ds = int(is_gage) + if (output._?) {
 	output.gages_ds
 	} else {
 	0
 };
-!import utils
-!network svg_save(
-!   "./output/simple-count-3.svg",
-!	label="{NAME} = {gages_ds}",
-!   bgcolor="gray",
-!	settings=utils.settings(right=120)
-!)
+
+!network typst.compile(typst.table("Index => {INDEX}\n Name => {NAME}\nGages D/S => {gages_ds}"), "./output/simple-count-3.svg")
 ```
 
 Here the condition `(output._?)` checks if there is output on the node or not by checking for the dummy variable `_` which is present in all nodes/network.

@@ -7,11 +7,10 @@ Different from other chapters, the code in this chapters are run in the order th
 </div>
 
 Load the network
-```task run
+```task run image ../output/scioto-net.svg
 network load_file("data/scioto/scioto.network")
 
-network count()
-root.NAME
+!network typst.compile(typst.table("Name => {NAME}"), "output/scioto-net.svg")
 ```
 
 Load timeseries data from CSV, and convert any timeseries without gaps into a complete one.

@@ -6,12 +6,11 @@ Similar to how you can load network files, you can load attributes from files as
 ```task run image ../output/ohio-import-export.svg
 network load_file("data/ohio.network")
 node load_attrs("data/attrs/{NAME}.toml")
-network svg_save(
-!  "output/ohio-import-export.svg",
-  label="{NAME} (A = {basin_area?:.2})",
-!  height=400.0, width=400.0,
-  bgcolor="gray"
-)
+
+network typst.compile(typst.table("
+<Name => {NAME}
+>Area => {basin_area?:.2}
+"), "./output/ohio-import-export.svg")
 ```
 
 You can use the render function to see if the files being loaded are correct. Here we can see the examples for the first 4 nodes:
@@ -77,13 +76,13 @@ Now we are using the generated GIS files to load the network and the attributes:
 network gis.load_network("output/ohio-connections.gpkg", "start", "end")
 network gis.load_attrs("output/ohio-nodes.shp", "NAME")
 
-network svg_save(
-!  "output/ohio-from-gis.svg",
-  label="{NAME} (A = {basin_area?:.2}; L = {length:.1})",
-!  height=450.0, width=300.0,
-  bgcolor="gray"
+
+network typst.compile(typst.table("
+<Name => {NAME}
+>Area => {basin_area?:.2}
+>Length => {length:.1}
+"), "output/ohio-from-gis.svg"
 )
 ```
-TODO: FIX SVG 
 
 As we can see the plugins make it easier to interoperate with a lot of different data formats. Here GIS plugin will support any file types supported by `gdal`. Similarly, other formats can be supported by writing plugins.

@@ -1,17 +1,15 @@
 # Network Function
 
-Network function runs on the network as a whole. It takes arguments and keyword arguments. Few network functions we have been using throughout the examples are `load_file`, `load_str` and `svg_save`:
+Network function runs on the network as a whole. It takes arguments and keyword arguments. Few network functions we have been using throughout the examples are `load_file`, `load_str` and `typst.table`:
 
 ```task run image ../output/network-mississippi-sdf.svg
 network load_file("./data/mississippi.net")
 !network command("mkdir -p output")
 node.title = str_replace(NAME, "-", " ");
-import utils
-network svg_save(
-   "./output/network-mississippi-sdf.svg",
-	label="[{INDEX}] {title}",
-	bgcolor="gray",
-	settings=utils.settings(right=120)
+
+network typst.compile(typst.table(
+   "Index => {INDEX}\n<Name => {NAME}\n"),
+   "./output/network-mississippi-sdf.svg"
 )
 ```
 
