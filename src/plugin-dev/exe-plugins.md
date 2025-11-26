@@ -1,6 +1,6 @@
 # Executable Plugins
 
-Executable plugins are programs that can be called from terminal. The [node `command` function](../plugins/command.md#node.command), [network `command` function](../plugins/command.md#network.command) and their families in the [`command` plugin](../plugins/command.md) have the capacity to run external programs through the command line.
+Executable plugins are programs that can be called from terminal. The [node `command` function](../plugins/COMMAND.md#node.command), [network `command` function](../plugins/COMMAND.md#network.command) and their families in the [`command` plugin](../plugins/COMMAND.md) have the capacity to run external programs through the command line.
 
 The inputs to the program is given through the command line arguments, while the output of the programs are read through the standard output of the program. This can be used to call different/same commands for nodes with arguments dependent on their attributes.
 

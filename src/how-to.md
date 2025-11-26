@@ -10,7 +10,7 @@ section you are interested in.
 - If you want to learn about the Domain Specific Programming Language (DSL), refer to the "Network Analysis (DSL)" section.
   - [Learn by Example](./learn-examples.md) contains some simple examples you can follow to learn the basic syntax of the Task System.
   - If you want more detailed examples of the use of Task System, refer to the chapters in "Example Research Problems" section on the sidebar.
-- If you want reference for functions used in Task System goto "Plugin Functions", the [Internal Plugins](./plugins/intro.md) section contains details on the functions that are available with nadi system, while the external plugins are plugins that were loaded while this book was compiled.
+- If you want reference for functions used in Task System goto "Plugin Functions", the [Internal Plugins](./plugins-in.md) section contains details on the functions that are available with nadi system, while the external plugins are plugins that were loaded while this book was compiled.
 
 If you have suggestions on the formatting, or arrangement of chapters in this book, please make an issue on [the GitHub repository for this book](https://github.com/Nadi-System/nadi-book).
 

@@ -1,7 +1,6 @@
 [book]
 authors = ["Gaurav Atreya"]
 language = "en"
-multilingual = false
 src = "src"
 title = "Network Analysis and Data Integration (NADI)"
 
@@ -23,11 +22,11 @@ enable = true
 runnable = false
 line-numbers = true
 
-[output.linkcheck]
+[output.linkcheck2]
 # this has performace impact, so turn it on occassionally while commiting
 follow-web-links = false
 
-[output.typst]
+# [output.typst]
 # [output.typst.output]
 # format = "pdf"
 
