@@ -12,7 +12,7 @@ Here we can use the stream ordering formula to calculate the stream order for ea
 !d4 -> g3
 !");
 node<inputsfirst>.stream_ord = max(inputs.stream_ord, 1) + int(count(inputs._?) > 1);
-!network typst.compile(typst.table("Name => {NAME}\nstream_ord => {stream_ord}"), "./output/cumulative-1.svg")
+!network cairo.table("Name => {NAME}\nstream_ord => {stream_ord}", "./output/cumulative-1.svg")
 ```
 
 The first part takes the maximum order of the input nodes, then the second part `int(count(inputs._?) > 1)` checks if there are more than one input, adding one to the order when multiple streams combine into one. You can use the funciton `inputs_count()` instead of `count(inputs._?)` to do the same thing.
@@ -31,10 +31,11 @@ And of course, we can visualize the different order of streams for easier unders
 !d4 -> g3
 !");
 !node<inputsfirst>.stream_ord = max(inputs.stream_ord, 1) + int(count(inputs._?) > 1);
-node.visual.nodesize = 2 + stream_ord;
-node(stream_ord == 1).visual.nodecolor = "green";
-node(stream_ord == 2).visual.nodecolor = "blue";
-node(stream_ord == 3).visual.nodecolor = "red";
+node.visual.linewidth = stream_ord;
+node.visual.nodecolor = "white";
+node(stream_ord == 1).visual.linecolor = "green";
+node(stream_ord == 2).visual.linecolor = "blue";
+node(stream_ord == 3).visual.linecolor = "red";
 
-!network typst.compile(typst.table("Name => {NAME}\nstream_ord => {stream_ord}"), "./output/cumulative-2.svg")
+!network cairo.table("Name => {NAME}\nstream_ord => {stream_ord}", "./output/cumulative-2.svg")
 ```

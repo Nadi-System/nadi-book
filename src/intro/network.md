@@ -22,7 +22,7 @@ network load_file("./data/mississippi.net")
 
 node.title = str_replace(NAME, "-", " ");
 
-network typst.compile(typst.table("Index => {INDEX}\nName => {title}\n"),
+network cairo.table("Index => {INDEX}\n<Name => {title}\n",
    "./output/network-mississippi.svg"
 )
 ```
@@ -35,7 +35,7 @@ node[red].visual.nodecolor = "red";
 node["upper-mississippi", red].visual.nodesize = 8;
 node.title = str_replace(NAME, "-", " ");
 
-network typst.compile(typst.table("Index => {INDEX}\n<Name => {title}\n"),
+network cairo.table("Index => {INDEX}\n<Name => {title}\n",
    "./output/network-mississippi-colors.svg"
 )
 ```

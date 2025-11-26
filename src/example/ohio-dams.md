@@ -51,7 +51,7 @@ The counting is done, super simple right? NADI's ability to work with networks m
 Again, if we use `nadi-gis` plugin, then we can export this result and visualize it in QGIS.
 
 ```task
-network gis_save_nodes(
+network gis.save_nodes(
 	"output/ohio-gages-count.gpkg",
 	"GEOM",
 	{
@@ -85,7 +85,7 @@ Now, we need to load the dam attributes from NID database.
 <!-- And extract the dam height, the database has different dam heights, and not all of them have everything available, so let's try our best by prioritizing different variables. -->
 
 ```task run continue
-network gis_load_attrs("data/ohio-river/nid-uniq.gpkg", "nidId")
+network gis.load_attrs("data/ohio-river/nid-uniq.gpkg", "nidId")
 node(is_dam).dam_height = float(nidHeight);
 node(is_dam).dam_storage = float(nidStorage);
 

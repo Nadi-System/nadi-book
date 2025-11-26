@@ -55,5 +55,5 @@ Refer to the network diagram below to verify the output are correct:
 ```task run image ../output/attrs-simp.svg
 network load_str("a -> b\n b -> d\n c -> d\n");
 
-!network typst.compile(typst.table("Index => {INDEX}\nName => {NAME}\n"), "./output/attrs-simp.svg")
+!network cairo.table("Index => {INDEX}\nName => {NAME}\n", "./output/attrs-simp.svg")
 ```

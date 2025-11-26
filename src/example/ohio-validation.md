@@ -22,10 +22,10 @@ network count(nodes.is_dam)
 
 Then we load the node attributes from the gis files, we can see some of the variables are loaded from NID website.
 ```task run continue
-network gis_load_attrs("data/ohio-river/nid-uniq.gpkg", "nidId")
-network gis_load_attrs("data/ohio-river/GageLoc.shp.zip", "SOURCE_FEA")
-network gis_load_attrs("data/ohio-river/gages-II.gpkg", "STAID")
-network gis_load_attrs("data/ohio-river/usgs-drainage.csv", "SiteNumber")
+network gis.load_attrs("data/ohio-river/nid-uniq.gpkg", "nidId")
+network gis.load_attrs("data/ohio-river/GageLoc.shp.zip", "SOURCE_FEA")
+network gis.load_attrs("data/ohio-river/gages-II.gpkg", "STAID")
+network gis.load_attrs("data/ohio-river/usgs-drainage.csv", "SiteNumber")
 
 node[03399800].SiteNumber # only USGS gages have it
 node(INDEX < 5).yearCompleted # only NID dams have it
@@ -129,7 +129,7 @@ This shows that the majority of the errors come from the NID dams, which makes s
 We can export this result to a GIS file and look into individual cases in QGIS.
 
 ```task run continue
-network gis_save_nodes(
+network gis.save_nodes(
     "output/ohio-gages-check.gpkg",
 	"GEOM",
 	{
@@ -156,7 +156,7 @@ node(output._?).conn_geom = env.render(
 )
 node(output._? & (INDEX < 10)).conn_geom
 
-network gis_save_connections("output/ohio-conn-all.gpkg", "conn_geom")
+network gis.save_connections("output/ohio-conn-all.gpkg", "conn_geom")
 ```
 
 When we visualize the output in QGIS, we can see the nodes where the `basin_area` are not correct based on the network information.

@@ -4,7 +4,7 @@
 First load the network, and attributes
 ```task run
 network load_file("data/ohio-river/ohio.network")
-network gis_load_attrs("data/ohio-river/nid-uniq.gpkg", "nidId")
+network gis.load_attrs("data/ohio-river/nid-uniq.gpkg", "nidId")
 
 node.is_usgs = NAME match "^[0-9]+";
 node.is_dam = !is_usgs;

@@ -10,7 +10,7 @@ Load the network
 ```task run image ../output/scioto-net.svg
 network load_file("data/scioto/scioto.network")
 
-!network typst.compile(typst.table("Name => {NAME}"), "output/scioto-net.svg")
+!network cairo.table("<Name => {NAME}", "output/scioto-net.svg")
 ```
 
 Load timeseries data from CSV, and convert any timeseries without gaps into a complete one.

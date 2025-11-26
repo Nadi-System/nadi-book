@@ -37,7 +37,7 @@ Drawing it out:
 ```task run image ../output/mississippi.svg
 network load_file("./data/mississippi.net")
 
-network typst.compile(typst.table("Index => {INDEX}\nName => {NAME}\n"),
+network cairo.table("Index => {INDEX}\nName => {NAME}\n",
    "./output/mississippi.svg"
 )
 ```

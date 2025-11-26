@@ -5,5 +5,5 @@ The Network for the flow routing is as follows:
 ```task run svg ../output/ohio.svg
 !network load_file("./data/ohio.network")
 
-!network typst.compile(typst.table("Index => {INDEX}\nName => {NAME}\n"), "./output/ohio.svg")
+!network cairo.table("Index => {INDEX}\nName => {NAME}\n", "./output/ohio.svg")
 ```

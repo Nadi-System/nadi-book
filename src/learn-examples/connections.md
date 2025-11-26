@@ -36,7 +36,7 @@ g2 -> d4
 d4 -> g3
 ");
 
-!network typst.compile(typst.table("Index => {INDEX}\nName => {NAME}\n"), "./output/load-str.svg")
+!network cairo.table("Index => {INDEX}\nName => {NAME}\n", "./output/load-str.svg")
 ```
 
 ## Loading Network from a File
@@ -45,7 +45,7 @@ we can load a network from a file:
 ```task run image ../output/ex-network-conn.svg
 network load_file("./data/mississippi.net");
 
-!network typst.compile(typst.table("Index => {INDEX}\nName => {NAME}\n"), "./output/ex-network-conn.svg")
+!network cairo.table("Index => {INDEX}\nName => {NAME}\n", "./output/ex-network-conn.svg")
 ```
 
 ## Modifying the network
@@ -64,7 +64,7 @@ node.is_dam = NAME match "^d[0-9]+";
 network subset(nodes.is_dam);
 !import utils
 
-!network typst.compile(typst.table("Index => {INDEX}\nName => {NAME}\n"), "./output/simple-count-subset.svg")
+!network cairo.table("Index => {INDEX}\n<Name => {NAME}\n", "./output/simple-count-subset.svg")
 ```
 
 This can be useful when you want to remove nodes that do not satisfy some selection criteria for your analysis without having to redo the network detection part.

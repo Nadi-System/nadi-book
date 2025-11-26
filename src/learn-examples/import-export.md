@@ -7,10 +7,10 @@ Similar to how you can load network files, you can load attributes from files as
 network load_file("data/ohio.network")
 node load_attrs("data/attrs/{NAME}.toml")
 
-network typst.compile(typst.table("
+network cairo.table("
 <Name => {NAME}
 >Area => {basin_area?:.2}
-"), "./output/ohio-import-export.svg")
+", "./output/ohio-import-export.svg")
 ```
 
 You can use the render function to see if the files being loaded are correct. Here we can see the examples for the first 4 nodes:
@@ -77,11 +77,11 @@ network gis.load_network("output/ohio-connections.gpkg", "start", "end")
 network gis.load_attrs("output/ohio-nodes.shp", "NAME")
 
 
-network typst.compile(typst.table("
+network cairo.table("
 <Name => {NAME}
 >Area => {basin_area?:.2}
 >Length => {length:.1}
-"), "output/ohio-from-gis.svg"
+", "output/ohio-from-gis.svg"
 )
 ```
 
