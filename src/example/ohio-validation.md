@@ -148,7 +148,7 @@ node.xy_coords = str_find_all(node.GEOM, "-?[0-9]+[.][0-9]+");
 node(output._?).out_coords = str_find_all(output.GEOM, "-?[0-9]+[.][0-9]+");
 node(! output._?).conn_geom = GEOM
 node(output._?).conn_geom = env.render(
-	"LINESTRING ({_x1} {_y1}, {_x2} {_y2})",
+	"LINESTRING ({x1} {y1}, {x2} {y2})",
 	x1=get(node.xy_coords, 0),
 	y1=get(node.xy_coords, 1),
 	x2=get(node.out_coords, 0),
