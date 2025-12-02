@@ -22,11 +22,12 @@ enable = true
 runnable = false
 line-numbers = true
 
-[output.linkcheck2]
-# this has performace impact, so turn it on occassionally while commiting
-follow-web-links = false
+# [output.linkcheck2]
+# # this has performace impact, so turn it on occassionally while commiting
+# follow-web-links = false
 
-# [output.typst]
+[output.typst]
+prelude = "prelude.typ"
 # [output.typst.output]
 # format = "pdf"
 

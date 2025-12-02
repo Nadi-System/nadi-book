@@ -19,9 +19,18 @@ add_numbers(1)
 add_numbers(1, 2)
 ```
 
-Although the variables are local to the function, you can not assign any variable values inside the body of the functions.
+You can assign variables locally and use them in the final expression that is returned from the function. If you need to prematurely return a value, you can use a return statement. The semicolons at the end of the expressions have no significance inside the function body. The local variables are useful to save temporary results so that they don't need to be recalculated.
 
-But, you can assign the function arguments dynamic values based on previous arguments, or environement/network context.
+```task run
+func cakc(val) {
+ x = if (val > 10) {return 24} else {val + 2};
+ 2 * x
+}
+
+for x in range(1, 20) {cakc(x)}
+```
+
+In addition to that, you can also assign the function arguments dynamic values based on previous arguments, or environement/network context. These are similar to the local variables inside the function body, but they can be overridden with other values by the users.
 
 ```task run
 func last(vals, offset=1) { get(vals, length(vals) - offset) }
@@ -30,7 +39,8 @@ last(["a", "b", "c", "d", "e"])
 last(["a", "b", "c", "d", "e"], 2)
 ```
 
-while you can use `env`, `network` and `nodes` variables here as well, the expression is run in immutable context, so nothing can be changed.
+While you can use `env`, `network` and `nodes` variables here as well, the expression is run in immutable context, so nothing can be changed. 
+The variables are local to the function, hence, any assignment of the variable values inside the body of the functions does not affect the outside.
 
 ```task run
 func test(val=env.somevar) {
@@ -63,9 +73,9 @@ sum_vals([1, 3.5])
 sum_vals([1,2,3, 4, 5, 6])
 ```
 
-Do be careful of exit condition while working with recursion. This could lead into infinite loop. NADI will crash with stack overflow if that happens. This can also happen if there is too much recursion.
+Be careful of exit condition while working with recursion. This could lead into infinite loop. NADI will crash with stack overflow if that happens. This can also happen if there is too much recursion.
 
-We will provide iteration through for loop in future so that these things can be avoided. This is the first iteration of the user defined functions.
+Iteration through for loop can be used to generate arrays, but currently there is no syntax for reducing the iteration to single value like required in the sum case. In future, we plan to provide `reduce` system so that these things can be avoided. This is the first iteration of the user defined functions.
 
 
 ## Default Values
