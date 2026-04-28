@@ -1,7 +1,7 @@
 # Who this book is for
 
 <div class="warning">
-If you are a developer and want an API documentation for the data types used in the NADI Rust library refer to the <a href="https://docs.rs/nadi_core/latest/nadi_core/">docs.rs `nadi_core` page</a>. But if you want to understand the core concepts, use cases, and examples then proceed.
+If you are a developer and want an API documentation for the data types used in the NADI Rust library refer to the docs.rs `nadi_core` page (https://docs.rs/nadi_core/latest/nadi_core/). But if you want to understand the core concepts, use cases, and examples then proceed.
 </div>
 
 This book has sections explaining the concepts of the NADI system, its developmental notes, user guide and developer guide.
