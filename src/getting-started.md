@@ -14,9 +14,9 @@ NADI CLI is available as `nadi` command when you have it installed. You can run 
 
 So assuming you have the following contents in `sample.tasks` file:
 
-```task
+```task run
 network load_str("a -> b")
-node array(LEVEL, ORDER)
+nodesmap array(LEVEL, ORDER)
 ```
 
 You run it with:

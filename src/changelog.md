@@ -7,20 +7,32 @@ There are new algorithms to deal with larger than RAM datasets. These algorithms
 User are directed to only use them for larger than RAM datasets.
 
 
+## NADI IDE
+The GUI backend `iced` has been upgrated to `0.14`. This comes with a lot of optimization and improvements from iced.
+
+For example, the network diagram now looks a lot less pixelated while using circular node shapes. It also takes less resources to redraw the diagrams for each frame with better caching.
+
+[Screenshot Comparing Network Diagrams after Iced Update](images/iced-update.svg)
+
+
+
 ## NADI Task System
 
-First the there are the following new keywords in the task system:
+Most important change: the tasks that run functions in multiple nodes now need `nodes` or `nodesmap` keyword instead of `node` keyword. `node` keyword now always refers to a single node in a given context. This is to make the keywords consistent with everything else (and English). You need to replace the keywords in your `.tasks` files.
+
+First, there are many new keywords added to the DSL, some of them are listed below:
 
 | New Keyword   | Description                                             |
 |---------------|---------------------------------------------------------|
-| root          | root node of the network                                |
 | try           | try statement to contain tasks                          |
 | catch         | catch statement when error occurs on try block          |
 | local         | Local; similar to environment but within current locale |
 | function/func | user defined functions                                  |
 | error         | raises an error while evaluating                        |
+| return        | early return from a function                            |
+| break         | break from a loop                                       |
 
-While `return` is now a reserved keyword for future use.
+Many other keywords like, `nodesmap`, `rootsmap`, `leavesmap`, `inputsmap`, `leaves`, etc are added as variable types, while the keywords like `loop`, `break`, `error`, `try`, `catch`, `continue`, etc are about control flow.
 
 As some of you probably can guess from the keywords, we now have support for error handling and user defined functions.
 
@@ -30,6 +42,38 @@ Now the plugin functions are on their own namespace. Which means, to be able to 
 
 We plan to add an alias system where you can choose to import all functions from a plugin to the global namespace so you don't have to use the dot syntax.
 
+### Expression Context
+The DSL now supports expression with context. This is similar to how previously you could use different variable types to get different attributes, function calls, etc. And how you had different task types like `node`, `env`, and `network`. Now all of that is combined with expression context. And it can be nested, giving an endless possible combinations.
+
+Previous tasks that start with keyword and then an expression is now equivalent to an expression context with the same keyword.
+
+For example:
+```task run
+env.x = 1
+env {x = 1}
+env.x
+
+network.y = 1
+network y + 1
+network {
+	net.y = 1;
+    y + 1
+}
+```
+
+But because it is an expression context now, instead of just 3 task type, we can do a lot more:
+
+Here we are assigning incide an expression context, and then reassigning the leaf nodes' values later
+```task run
+net.load_str("a -> b\n c -> b")
+# the block below is equivalent to: nodes<inp>.x = sum(inputs.x) + 1
+nodes<inp> do {
+   node.x = sum(inputs.x) + 1;
+}
+leaves.x = 0;
+nodesmap.x
+```
+
 ### Expression Evaluation
 
 Now normal expressions can be evaluated without the need for `env` keyword at the beginning.
@@ -38,10 +82,11 @@ For example the two lines below are equivalent
 
 ```task run
 env 1 + 2
+
 1 + 2
 ```
 
-This does not give any significant benefit to the language except for the fact that users do not have to type redundant `env` keyword for simple calculations or evaluations to use the REPL as a calculator/debugger.
+Not only does this mean that users do not have to type redundant `env` keyword for simple calculations or evaluations to use the REPL as a calculator/debugger. This also means now users can nest expressions within themselves to create more complex expressions.
 
 ### String Template
 We have a new string template system now that is natively implemented inside the NADI system. Which means it is now not as powerful as the last one, but it is fast and more similar to template systems from other languages.
@@ -54,18 +99,18 @@ The main changes from the previous string templates in terms of implementation:
 Furthermore, we have a syntax suger for rendering a template directly.
 
 ```task run
-env r"Hi there {name}"
+r"Hi there {name}"
 ```
 
 
 ```task run
-env.name = "Joe"
-env r"Hi there {name}"
+name = "Joe"
+r"Hi there {name}"
 ```
 This is equivalent to:
 
 ```task run
-env render("Hi there {name}", name="Joe")
+render("Hi there {name}", name="Joe")
 ```
 
 This allows the user to use template strings even when the function is not asking for a template. This helps the developers focus on writing environment functions taking a single string that can be called from any situation.
@@ -76,7 +121,7 @@ Instead of a `exists` function that takes a `Template`, and render it for each n
 
 ```task run
 !network load_str("a -> b")
-node exists("{NAME}.txt")
+nm exists("{NAME}.txt")
 help node exists
 ```
 
@@ -92,6 +137,8 @@ The panic is still a problem as it crashes the whole program, we will try to fix
 
 For example if a variable is not found
 ```task run
+somevar = 10
+somevar
 env.somevar
 ```
 

@@ -14,9 +14,9 @@ env array(someattr, other)
 network.someattr = true;
 network.someattr
 # node attributes
-node.someattr = "string val";
+nodes.someattr = "string val";
 
-node.someattr
+nm.someattr
 ```
 
 
@@ -47,7 +47,7 @@ Similarly inputs:
 ```task run
 network load_str("a -> b\n b -> d\n c -> d\n");
 
-node inputs.NAME
+nm inputs.NAME
 ```
 
 Refer to the network diagram below to verify the output are correct:

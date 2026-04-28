@@ -12,10 +12,10 @@ We'll use the same network from the Dams count example.
 ```task run
 network load_file("data/ohio-river/ohio.network")
 network count()
-network outlet()
+roots.NAME
 
-node.is_usgs = NAME match "^[0-9]+";
-node.is_dam = !is_usgs;
+nodes.is_usgs = NAME match "^[0-9]+";
+nodes.is_dam = !is_usgs;
 network count(nodes.is_usgs)
 network count(nodes.is_dam)
 ```
@@ -27,9 +27,8 @@ network gis.load_attrs("data/ohio-river/GageLoc.shp.zip", "SOURCE_FEA")
 network gis.load_attrs("data/ohio-river/gages-II.gpkg", "STAID")
 network gis.load_attrs("data/ohio-river/usgs-drainage.csv", "SiteNumber")
 
-node[03399800].SiteNumber # only USGS gages have it
-node(INDEX < 5).yearCompleted # only NID dams have it
-node(INDEX < 5).GEOM # all nodes have it although from different sources
+nm(INDEX < 5).yearCompleted # only NID dams have it
+nm(INDEX < 5).GEOM # all nodes have it although from different sources
 ```
 Also note that, while loading GIS files it also loads the geometry into "GEOM" attribute (you can change it through `change` function argument).
 
@@ -44,8 +43,8 @@ Also note that, while loading GIS files it also loads the geometry into "GEOM" a
 Since we need a quick and easy way to identify USGS gage and NID dam, we use regex to categorize them.
 
 ```task run continue
-node.is_usgs = NAME match "^[0-9]+";
-node.is_dam = !is_usgs;
+nodes.is_usgs = NAME match "^[0-9]+";
+nodes.is_dam = !is_usgs;
 network count(nodes.is_usgs)
 network count(nodes.is_dam)
 ```
@@ -53,22 +52,26 @@ network count(nodes.is_dam)
 The basin area is stored as different variable in each dataset, we want to combine them into a single one.
 
 ```task run continue
-node.ba = first_attr(["drainageArea", "DRAIN_SQKM", "Drainage"])
-network count(nodes.ba?) / count()
+nodes do {
+  try {
+	  node.ba = first_attr(["drainageArea", "DRAIN_SQKM", "Drainage"])
+	} catch {}
+  }
+network count(nodes {ba?}) / count()
 ```
 Even then we only have 75% of the nodes with basin area. Since the `DrainageArea` is in sqmiles
 
 If we look at some examples here on two sources of basin area of USGS gages, we can see the problems:
 ```task run continue
-node(is_usgs & Drainage? & DRAIN_SQKM? & INDEX < 100) array(Drainage, DRAIN_SQKM)
+nm(is_usgs & Drainage? & DRAIN_SQKM? & INDEX < 100) [Drainage, DRAIN_SQKM]
 ```
 1. The `Drainage` value are `String`,
 2. The units are different (confirmed from metadata of datasets).
 
 So we reconcile that,
 ```task run continue
-node(Drainage?).basin_area = float(Drainage);
-node(DRAIN_SQKM?).basin_area = DRAIN_SQKM * 0.38610216;
+nodes(Drainage?).basin_area = float(Drainage);
+nodes(DRAIN_SQKM?).basin_area = DRAIN_SQKM * 0.38610216
 ```
 We got an error, seems like `Drainage` contains empty strings as well. That and the `String` part comes from loading a CSV without data types (`.csvt` file).
 
@@ -76,27 +79,27 @@ Let's fix the code for that, and also let's get the `basin_area` for dams.
 
 
 ```task run continue
-node(Drainage? & Drainage match "[0-9]+(.[0-9]+)?").basin_area = float(Drainage);
-node(DRAIN_SQKM?).basin_area = DRAIN_SQKM * 0.38610216;
-node(drainageArea?).basin_area = float(drainageArea);
+nodes(Drainage? & Drainage match "[0-9]+(.[0-9]+)?").basin_area = float(Drainage);
+nodes(DRAIN_SQKM?).basin_area = DRAIN_SQKM * 0.38610216;
+nodes(drainageArea?).basin_area = float(drainageArea);
 
-node(INDEX < 10).basin_area
-network count(nodes.basin_area?) / count()
+nm(INDEX < 10).basin_area
+network count(nodes {basin_area?}) / count()
 ```
 
 ## Check for Incorrect Basin Areas
 Now we have all the different variables combined into a single one with same data type and unit. Let's do a quick analysis to see if there are points in the network where nodes have larger area than input nodes.
 
 ```task run continue
-node.incorrect = basin_area < sum(inputs.basin_area);
+nodes.incorrect = basin_area < sum(inputs.basin_area);
 network count(nodes.incorrect)
 ```
 The error here comes from the fact that not all nodes contain `basin_area` attribute. Since `basin_area?` will only check for the current node, we use a default value when the values are not available into a temporary variable.
 
 
 ```task run continue
-node.temp_ba = basin_area ? 0.0;
-node.incorrect = basin_area? & (basin_area < sum(inputs.temp_ba));
+nodes.temp_ba = basin_area ? 0.0;
+nodes.incorrect = basin_area? & (basin_area < sum(inputs.temp_ba));
 network count(nodes.incorrect)
 network count(nodes.incorrect) / count()
 ```
@@ -104,14 +107,14 @@ That's around 10% error rate.
 
 Looking at the actual values, few of them seem to be due to minor errors in values, while most of them seem to be from large input area.
 ```task run continue
-node(incorrect & INDEX < 400) array(basin_area, sum(inputs.temp_ba))
+nm(incorrect) [basin_area, sum(inputs.temp_ba)]
 ```
 This could be due to the error in snapping to the streamlines. It is also possible that some basin area that are missing are contributing to the unaccounted area.
  
 Let's try to fix them, or avoid points without data.
 ```task run continue
-node.all_inputs_ba = all(inputs.basin_area?);
-node.incorrect = basin_area? & all_inputs_ba & (
+nodes.all_inputs_ba = all(inputs {basin_area?});
+nodes.incorrect = basin_area? & all_inputs_ba & (
 	basin_area < (0.975 * sum(inputs.basin_area))
 );
 network count(nodes.incorrect)
@@ -120,8 +123,8 @@ network count(nodes.incorrect) / count()
 Looks like 7.5% of the errors are reasonable errors from network detection.
 
 ```task run continue
-network count(nodes.incorrect & nodes.is_usgs)
-network count(nodes.incorrect & nodes.is_dam)
+network count(nodes {incorrect & is_usgs})
+network count(nodes {incorrect & is_dam})
 ```
 This shows that the majority of the errors come from the NID dams, which makes sense given the `GageLoc.shp` data has points indexed to the NHDPlus streamlines, while the NID Dams are not indexed to it. Furthermore, looking at the attributes in QGIS shows, many dams are in locations without streamlines, and even then sometimes they have unusually large basin area values for their location.
 
@@ -144,17 +147,17 @@ We also need connection information to cross reference, let's make them through 
 
 Note: we should probably add a function for this in future. A WKT plugin to work with geometries.
 ```task run continue
-node.xy_coords = str_find_all(node.GEOM, "-?[0-9]+[.][0-9]+");
-node(output._?).out_coords = str_find_all(output.GEOM, "-?[0-9]+[.][0-9]+");
-node(! output._?).conn_geom = GEOM
-node(output._?).conn_geom = env.render(
+nodes.xy_coords = str_find_all(node.GEOM, "-?[0-9]+[.][0-9]+");
+nodes(output._?).out_coords = str_find_all(output.GEOM, "-?[0-9]+[.][0-9]+");
+nodes(! output._?).conn_geom = GEOM
+nodes(output._?).conn_geom = env.render(
 	"LINESTRING ({x1} {y1}, {x2} {y2})",
 	x1=get(node.xy_coords, 0),
 	y1=get(node.xy_coords, 1),
 	x2=get(node.out_coords, 0),
 	y2=get(node.out_coords, 1)
 )
-node(output._? & (INDEX < 10)).conn_geom
+nodes(output._? & (INDEX < 10)).conn_geom
 
 network gis.save_connections("output/ohio-conn-all.gpkg", "conn_geom")
 ```

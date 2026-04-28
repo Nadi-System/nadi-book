@@ -11,7 +11,7 @@ Here we can use the stream ordering formula to calculate the stream order for ea
 !g2 -> d4
 !d4 -> g3
 !");
-node<inputsfirst>.stream_ord = max(inputs.stream_ord, 1) + int(count(inputs._?) > 1);
+nodes<inputsfirst>.stream_ord = max(inputs.stream_ord, 1) + int(count(inputs._) > 1);
 !network cairo.table("Name => {NAME}\nstream_ord => {stream_ord}", "./output/cumulative-1.svg")
 ```
 
@@ -30,12 +30,13 @@ And of course, we can visualize the different order of streams for easier unders
 !g2 -> d4
 !d4 -> g3
 !");
-!node<inputsfirst>.stream_ord = max(inputs.stream_ord, 1) + int(count(inputs._?) > 1);
-node.visual.linewidth = stream_ord;
-node.visual.nodecolor = "white";
-node(stream_ord == 1).visual.linecolor = "green";
-node(stream_ord == 2).visual.linecolor = "blue";
-node(stream_ord == 3).visual.linecolor = "red";
+!nodes<inputsfirst>.stream_ord = max(inputs.stream_ord, 1) + int(count(inputs._) > 1);
+nodes.visual = {};
+nodes.visual.linewidth = stream_ord;
+nodes.visual.nodecolor = "white";
+nodes(stream_ord == 1).visual.linecolor = "green";
+nodes(stream_ord == 2).visual.linecolor = "blue";
+nodes(stream_ord == 3).visual.linecolor = "red";
 
 !network cairo.table("Name => {NAME}\nstream_ord => {stream_ord}", "./output/cumulative-2.svg")
 ```

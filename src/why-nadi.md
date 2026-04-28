@@ -28,12 +28,24 @@ Some example functionality of NADI system includes:
 ## Network Based Data Analysis
 If you have data that are network based, like in case of data related to points in a river. NADI provides a text representation of the network that can be manually created with any text editor, or through NADI GIS tool. 
 
-Some domains where the data are network based (directed tree graph) are:
-- River networks,
-- File/Directory structures,
-- Human Resources in a Company,
-- Decision Tree / Policy Tree,
-- Modeling work with dependencies to component models,
+Directed networks are a good representation for any system that have flow, sequential, causual, or preceedance relationships.
+
+Some domains where the data are network based (directed graph) are:
+- river networks, road networks,
+- file/directory structures,
+- flow networks,
+- control flow/signal flow graphs,
+- social networks, computer networks,
+- project management (Grantt chart),
+- compilers, git history,
+- any kind of dependencies map (modeling, project, files),
+- human resources in a company,
+- trade routes/ trade networks,
+- decision tree / policy tree,
+- reaction mechanics for compound sysnthesis,
+- neural signals,
+- gene-regulatory networks,
+- modeling work with dependencies to component models, etc
 
 
 <!-- TODO -->
@@ -50,7 +62,7 @@ The Domain Specific Programming Language (DSPL) developed for network analysis i
 For example, implementing "cumulative sum of streamflow" in nadi:
 
 ```task
-node<inputsfirst>.cum_sf = node.streamflow + sum(inputs.streamflow);
+nodes<inputsfirst>.cum_sf = node.streamflow + sum(inputs.streamflow);
 ```
 
 The trying to do this in Python while making sure input nodes are run before the output. So you might have to write a recursive algorithm like this:

@@ -48,8 +48,8 @@ The returned AttrMap contains any key=value pair that were
 output from the command if they are prefixed with `nadi:var:`
 
 ```task
-env.outputs = command("echo nadi:var:test=12");
-env assert_eq(outputs.test, 12)
+env.outputs2 = command("echo nadi:var:test=12");
+env assert_eq(outputs2.test, 12)
 ```
 # Node Functions
 ## command {#node.command}
@@ -90,8 +90,8 @@ The function will error if,
 
 ```task
 network load_str("a -> b");
-node command("echo 'nadi:var:sth=\"{NAME}\"'");
-node assert_eq(sth, NAME)
+nodes command("echo 'nadi:var:sth=\"{NAME}\"'");
+nodes assert_eq(sth, NAME)
 ```
 
 ## run {#node.run}
@@ -141,7 +141,7 @@ Other than parallel execution this is same as the `node` function `command`
 ```task
 network load_str("a -> b");
 network parallel("echo 'nadi:var:sth=\"{NAME}\"'");
-node assert_eq(sth, NAME)
+nodes assert_eq(sth, NAME)
 ```
 
 ## command {#network.command}

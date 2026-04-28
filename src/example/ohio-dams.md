@@ -21,15 +21,15 @@ First load the network
 ```task run
 network load_file("data/ohio-river/ohio.network")
 network count()
-network outlet()
+roots.NAME
 ```
 
 ## Identify Dams and Gages
 Since we need a quick and easy way to identify USGS gage and NID dam, we use regex to categorize them.
 
 ```task run continue
-node.is_usgs = NAME match "^[0-9]+";
-node.is_dam = !is_usgs;
+nodes.is_usgs = NAME match "^[0-9]+";
+nodes.is_dam = !is_usgs;
 network count(nodes.is_usgs)
 network count(nodes.is_dam)
 ```
@@ -38,10 +38,10 @@ network count(nodes.is_dam)
 Now we simply count the number of dams and gages upstream recursively. We run it inputs first, so that the count begins with leaf nodes where we get 1 for the category we're counting and 0 otherwise, then we propagate that value downstream.
 
 ```task run continue
-node<inp>.ngage = int(is_usgs) + sum(inputs.ngage);
-node<inp>.ndam = int(!is_usgs) + sum(inputs.ndam);
+nodes<inp>.ngage = int(is_usgs) + sum(inputs.ngage);
+nodes<inp>.ndam = int(!is_usgs) + sum(inputs.ndam);
 
-node(INDEX < 10) array(ngage, ndam)
+nm(INDEX < 10) array(ngage, ndam)
 ```
 If we run this code without the `inputsfirst`/`inp` propagation, we get an error because the node's `inputs` will not have `ngage` and `ndam` values.
 
@@ -86,19 +86,19 @@ Now, we need to load the dam attributes from NID database.
 
 ```task run continue
 network gis.load_attrs("data/ohio-river/nid-uniq.gpkg", "nidId")
-node(is_dam).dam_height = float(nidHeight);
-node(is_dam).dam_storage = float(nidStorage);
+nodes(is_dam).dam_height = float(nidHeight);
+nodes(is_dam).dam_storage = float(nidStorage);
 
 network count(nodes.is_dam)
-network count(nodes.dam_height? & nodes.dam_storage?)
-node(is_dam & (INDEX < 10)) array(dam_height, dam_storage)
+network count(nodes {dam_height? & dam_storage?})
+nm(is_dam & (INDEX < 10)) array(dam_height, dam_storage)
 ```
 Lot's of basins do not have basin area.
 
 First, using the previous requirements for large dams:
 
 ```task run continue
-node.large_dam = is_dam & ((dam_height > 49) | ((dam_height > 16) & (dam_storage > 811)));
+nodes.large_dam = is_dam & ((dam_height > 49) | ((dam_height > 16) & (dam_storage > 811)));
 network count(nodes.large_dam)
 network count(nodes.large_dam) / count(nodes.is_dam)
 ```
@@ -106,8 +106,8 @@ network count(nodes.large_dam) / count(nodes.is_dam)
 This will allow us to run the same counting as before:
 
 ```task run continue
-node<inp>.nldam = int(large_dam) + sum(inputs.nldam);
-node(INDEX < 10) array(ndam, nldam)
+nodes<inp>.nldam = int(large_dam) + sum(inputs.nldam);
+nm(INDEX < 10) array(ndam, nldam)
 ```
 
 Although not obivious, the numbers were quite large, so when I inspected the NID data, some dams seem to have very high height values that do not match.
@@ -115,19 +115,19 @@ Although not obivious, the numbers were quite large, so when I inspected the NID
 Let's load basin area and flag any locations with more than 50ft of dam height, and less than 10 square miles of basin area.
 
 ```task run continue
-node(is_dam & drainageArea?).basin_area = float(drainageArea);
-network count(nodes.basin_area?)
-node(! basin_area?).basin_area = nan;
+nodes(is_dam & drainageArea?).basin_area = float(drainageArea);
+network count(nodes {basin_area?})
+nodes(! basin_area?).basin_area = nan;
 
-node.flag = large_dam & ((dam_height > 50) & (basin_area < 10));
+nodes.flag = large_dam & ((dam_height > 50) & (basin_area < 10));
 network count(nodes.flag)
-node(flag & (INDEX < 1000)) array(dam_height, dam_storage, basin_area)
+nm(flag & (INDEX < 1000)) array(dam_height, dam_storage, basin_area)
 ```
 
 We don't have all basin areas, but from this we flagged around 300 dams. Looking at the values, `IL50678` basically says it has a dam with height of 110, but basin area of 0.1, which seems very unreasonable. To remove these from our identification process, let's add another category.
 
 ```task run continue
-node.large_dam = is_dam & (((dam_height > 49) | ((dam_height > 16) & (dam_storage > 811))) & (basin_area > 10));
+nodes.large_dam = is_dam & (((dam_height > 49) | ((dam_height > 16) & (dam_storage > 811))) & (basin_area > 10));
 network count(nodes.large_dam)
 network count(nodes.large_dam) / count(nodes.is_dam)
 ```
@@ -139,7 +139,7 @@ The number of dams that are now categorized as large dams have been reduced sign
 Let's look at the values along the main stem. `LEVEL == 0` means the mainstem of the network.
 
 ```task run continue
-node(LEVEL==0) array(ngage, ndam, nldam)
+nm(LEVEL==0) array(ngage, ndam, nldam)
 ```
 
 If you want to be more accurate, we can load the `SiteName` from GIS file and match the node with "Ohio River" in its name with the lowest order to find the first Ohio River Node.

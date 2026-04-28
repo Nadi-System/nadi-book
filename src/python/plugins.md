@@ -12,7 +12,7 @@ network load_file("scioto.network")
 
 # load average streamflow from the csv file
 # containing timeseries using python
-node command("python area-and-streamflow.py {_NAME}")
+nodes do command("python area-and-streamflow.py {_NAME}")
 
 # this just prints the attributes in csv format.
 network print_attr_csv("INDEX", "area", "streamflow")

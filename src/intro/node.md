@@ -17,7 +17,7 @@ network load_str("
 123 -> node_1
 node_1 -> \"node-123\"
 ")
-node.NAME
+nodes.NAME
 ```
 
 <div class="warning">
@@ -27,5 +27,5 @@ If the node name `node-123` appearing on the output is unquoted, it's a bug that
 If you do not quote the name, you'll get an error:
 ```task run
 network load_str("123 -> node-1")
-node.NAME
+nodes.NAME
 ```

@@ -5,14 +5,16 @@ NADI is group of software packages that facilitate network analysis and do data 
 
 NADI System consists of:
 
-| Tool             | Description                                                 |
-|------------------|-------------------------------------------------------------|
-| NADI GIS         | Geographic Information (GIS) Tool for Network Detection     |
-| NADI Task System | Domain Specific Programming Language                        |
-| NADI Plugins     | Plugins that provide the functions in Task System           |
-| NADI library     | Rust and Python library to use in your programs             |
-| NADI CLI         | Command Line Interface to run NADI Tasks                    |
-| NADI IDE         | Integrated Development Environment to write/ run NADI Tasks |
+| Tool             | Description                                                    |
+|------------------|----------------------------------------------------------------|
+| NADI Task System | Domain Specific Programming Language (used through CLI & IDE)  |
+| NADI CLI         | Command Line Interface to run NADI Tasks                       |
+| NADI IDE         | Integrated Development Environment to write/ run NADI Tasks    |
+| NADI GIS         | Geographic Information (GIS) Tool for Network Detection        |
+| NADI Plugins     | Plugins that provide the functions in Task System              |
+| NADI library     | Rust and Python library to use in your programs                |
+| NADI Serve       | NADI binary to open a server that can run NADI DSL as requests |
+| NADI Kernel      | Jupyter Notebook Kernel to work with NADI DSL                  |
 
 The github repositories consisting of source codes:
 | Repo                                                                  | Tool                      |
@@ -22,11 +24,16 @@ The github repositories consisting of source codes:
 | [nadi-plugins-rust](https://github.com/Nadi-System/nadi-plugins-rust) | Sample Plugins            |
 | [nadi-book](https://github.com/Nadi-System/nadi-book)                 | Source for this NADI Book |
 
-## Workflow
-A Typical workflow in NADI System consists of the follwing 4 processes:
+
+As seen in the figure below: as a user you only need to interact with a subset of the NADI architecture.
+
+![Architecture](../images/architecture.svg)
+
+## Workflow for Rivers
+A Typical workflow in NADI System for river network related analysis consists of the follwing 4 processes:
 1. Download Data
 2. Pre-Process Data
-3. Network Detection (using NADI GIS)
+3. Network Detection/Construction (you can automate it using NADI GIS)
 4. Network Analysis (Using NADI System's DSL, and Plugins)
 5. Post Process
 
@@ -39,7 +46,7 @@ Here the numbers in red circles are the order of use for different tools. Here t
 For exact details on what a typical research workflow involving the NADI DSL is, refer to the examples.
 
 ## NADI GIS
-Geographic Information (GIS) Tool for Network Detection. The main purpose of the NADI GIS is to find the network connectivity between a set of points using a stream network (which can be developed from elevation models, or downloaded from national databases).
+Geographic Information (GIS) Tool for Network Detection in river systems. The main purpose of the NADI GIS is to find the network connectivity between a set of points using a stream network (which can be developed from elevation models, or downloaded from national databases).
 
 NADI GIS can be used as a terminal command or QGIS plugin, refer to [installation](installation.md#nadi-gis) section for how to install it.
 

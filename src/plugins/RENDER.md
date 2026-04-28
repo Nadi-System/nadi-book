@@ -51,9 +51,9 @@ Template section of the NADI book.
 
 ```task
 network load_str("a -> b")
-node.x = 13
-node assert_eq(render("abc {x}"), "abc 13")
-node assert_eq(render("abc {x} {a}", safe=true), "abc {x} {a}")
+nodes.x = 13
+nodes assert_eq(render("abc {x}"), "abc 13")
+nodes assert_eq(render("abc {x} {a}", safe=true), "abc {x} {a}")
 ```
 # Network Functions
 ## render {#network.render}
@@ -90,7 +90,7 @@ Render each node of the network and combine to same variable
 
 ```task
 network load_str("a -> b")
-node.x = INDEX + 1
+nodes.x = INDEX + 1
 network assert_eq(render_nodes("abc {x}"), "abc 1\nabc 2")
 ```
 ## render_template {#network.render_template}

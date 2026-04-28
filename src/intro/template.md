@@ -26,15 +26,17 @@ Of course, there are better ways to generate table than this, but this
 shows how flexible the template system is.
 
 
-If you want to use a rendered template anywhere on the document use `r` before the string.
+If you want to use a rendered template anywhere on the document use `r` before the string. This will render in local context, if you need to render in different context, use the context blocks. `render` function gives you even more flexibility in terms of rendering templates with complex arguments.
 
 That is:
 
 ```task run
-env.x = 12;
+x = 12;
 # normal string
 "Some {x}"
 # rendered template string
 r"Some {x}"
 
+network.y = 10
+network {r"Network y = {y}"}
 ```

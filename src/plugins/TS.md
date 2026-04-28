@@ -65,7 +65,8 @@ Convert the timeseries to complete if it doesn't have gaps
 node TS.ts_print(
     name: '& String',
     header: 'bool' = true,
-    head: 'Option < i64 >'
+    head: 'Option < i64 >',
+    missing: 'String' = ""
 )
 ```
 
@@ -73,6 +74,7 @@ node TS.ts_print(
 - `name: '& String'` => name of the timeseries
 - `header: 'bool' = true` => show header
 - `head: 'Option < i64 >'` => number of head rows to show (all by default)
+- `missing: 'String' = ""` => Show missing values as this string
 
 Print the given timeseries values in csv format
 ### TODO
@@ -83,7 +85,8 @@ Print the given timeseries values in csv format
 network TS.ts_print_csv(
     name: 'String',
     head: 'Option < usize >',
-    nodes: 'Option < HashSet < String > >'
+    nodes: 'Option < HashSet < String > >',
+    missing: 'String' = ""
 )
 ```
 
@@ -91,6 +94,7 @@ network TS.ts_print_csv(
 - `name: 'String'` => Name of the timeseries to save
 - `head: 'Option < usize >'` => number of head rows to show (all by default)
 - `nodes: 'Option < HashSet < String > >'` => Include only these nodes (all by default)
+- `missing: 'String' = ""` => Show missing values as this string
 
 Save timeseries from all nodes into a single csv file
 
@@ -103,7 +107,8 @@ network TS.series_csv(
     filter: 'Vec < bool >',
     outfile: 'PathBuf',
     attrs: 'Vec < String >',
-    series: 'Vec < String >'
+    series: 'Vec < String >',
+    missing: 'String' = ""
 )
 ```
 
@@ -112,5 +117,6 @@ network TS.series_csv(
 - `outfile: 'PathBuf'` => Path to the output csv
 - `attrs: 'Vec < String >'` => list of attributes to write
 - `series: 'Vec < String >'` => list of series to write
+- `missing: 'String' = ""` => Show missing values as this string
 
 Write the given nodes to csv with given attributes and series

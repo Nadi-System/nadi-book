@@ -8,16 +8,18 @@ tenesse -> ohio
 ohio -> mississippi
 red -> mississippi
 ")
-node.area = (1 + ORDER) * 100.0
+nodes.area = (1 + ORDER) * 100.0
 
-env echo("\\begin{tabular}{llll}")
-env echo("Connections & Node & Area & Name \\\\[2mm]")
-node(output._?).out = output.INDEX
-node echo(render("\\\\Node[{LEVEL}]\\{{INDEX}\\}\\{{INDEX}\\} & $N_{INDEX}$ & {area:f(2)} & {_NAME:case(title)} \\\\\\\\[2mm]"))
-env echo("\\end{tabular}
-\\tikz[overlay, remember picture]{")
-node(output._?).edge = echo(render("\\\\path[->] ({INDEX}) edge ({out});"))
-env echo("}")
+nodes(output._?).out = output.INDEX
+nds = nodes {r"\\\\Node[{LEVEL}]\\{{INDEX}\\}\\{{INDEX}\\} & $N_{INDEX}$ & {area:.2} & {NAME} \\\\\\\\[2mm]"}
+eds = nodes(output._?) {r"\\\\path[->] ({INDEX}) edge ({out});"}
+
+echo("\\begin{tabular}{llll}")
+echo("Connections & Node & Area & Name \\\\[2mm]")
+echo(str_join(nds, "\n"))
+echo("\\end{tabular}\n\\tikz[overlay, remember picture]{")
+echo(str_join(eds, "\n"))
+echo("}")
 ```
 
 The latex file contains the `Node` command as follows:

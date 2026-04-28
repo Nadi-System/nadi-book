@@ -15,12 +15,14 @@ Example Network file:
 {{#include ../data/mississippi.net}}
 ```
 
-The given network can be loaded and visualized using functions from `typst` plugin.
+The given network can be loaded and visualized using functions from `typst`, `cairo` or `svg` plugins.
+
+We will discuss further on how to call functions, and set attributes later.
 ```task run image ../output/network-mississippi.svg
 network load_file("./data/mississippi.net")
 !network command("mkdir -p output")
 
-node.title = str_replace(NAME, "-", " ");
+nodes.title = str_replace(NAME, "-", " ");
 
 network cairo.table("Index => {INDEX}\n<Name => {title}\n",
    "./output/network-mississippi.svg"
@@ -31,10 +33,10 @@ You can assign different graphical properties through node properties.
 
 ```task run image ../output/network-mississippi-colors.svg
 !network load_file("./data/mississippi.net")
+nodes.visual = {};
 node[red].visual.nodecolor = "red";
-node["upper-mississippi", red].visual.nodesize = 8;
-node.title = str_replace(NAME, "-", " ");
-
+nodes["upper-mississippi", red].visual.nodesize = 8;
+nodes.title = str_replace(NAME, "-", " ");
 network cairo.table("Index => {INDEX}\n<Name => {title}\n",
    "./output/network-mississippi-colors.svg"
 )

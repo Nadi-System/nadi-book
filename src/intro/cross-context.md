@@ -21,7 +21,7 @@ network.sth = true;
 
 env render("this is {x}", x = network.sth)
 network str(env.var)
-node array(network.sth, env.var, node.NAME)
+nodes array(network.sth, env.var, node.NAME)
 ```
 
 
@@ -30,7 +30,7 @@ Similary, env and network functions can be called anywhere. These functions cann
 Taking the previous example, if we use env function `count`, we get an error as the function arguments are different.
 ```task run
 network load_str("a->b")
-node network.count()
+nodesmap network.count()
 network sum(array(env.count(), 1))
 ```
 
@@ -40,7 +40,7 @@ You can use `node`, `inputs`, `output` and `nodes` keywords to access node varia
 ```task run
 !network load_file("./data/mississippi.net")
 env count(nodes._)
-node inputs.NAME
+nodesmap inputs.NAME
 ```
 
 You can call node functions not just for the node in the context, but also for input nodes, and output node:
@@ -49,13 +49,13 @@ Please note that the root node (outlet) of the network doesn't have output node,
 
 ```task run
 !network load_file("./data/mississippi.net")
-node[tenessee -> "lower-mississippi"] inputs.render("{NAME}")
-node[tenessee -> "lower-mississippi"](output._?) output.render("{NAME}")
+nm[tenessee -> "lower-mississippi"] inputs.render("{NAME}")
+nm[tenessee -> "lower-mississippi"](output._?) output.render("{NAME}")
 ```
 
-You can also use `nodes` keyword to call the function on each node, it can be used anywhere, but is useful for env and network tasks.
+You can also use `nodes` and `nodesmap`/`nm` keyword to call the function on each node, it can be used anywhere, but is useful for env and network context.
 ```task run
 !network load_file("./data/mississippi.net")
 
-env nodes.render("Node [{INDEX}] {NAME}")
+network nm.render("Node [{INDEX}] {NAME}")
 ```

@@ -24,9 +24,9 @@ For example, if you want to call python scripts, make sure you can run `python -
 You can also check it using the `command` function:
 
 ```task run
-network command("python --version", echo=true)
-network command("Rscript --version", echo=true)
-network command("julia --version", echo=true)
+command("python --version", echo=true);
+command("Rscript --version", echo=true);
+command("julia --version", echo=true);
 ```
 Here we can see, the commands that ran successfully and returned a version are valid.
 

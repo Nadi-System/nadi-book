@@ -36,7 +36,7 @@ env assert_eq(parse_attr("true"), true)
 env assert_eq(parse_attr("123"), 123)
 env assert_eq(parse_attr("12.34"), 12.34)
 env assert_eq(parse_attr("\"my value\""), "my value")
-env assert_eq(parse_attr("1234-12-12"), 1234-12-12)
+env assert_eq(parse_attr("1234-12-12 00:00"), 1234-12-12T00:00)
 ```
 ## parse_attrmap {#env.parse_attrmap}
 ```sig
@@ -51,8 +51,8 @@ Parse attribute map from string
 ```task
 env assert_eq(parse_attrmap("y = true"), {y = true})
 env assert_eq(parse_attrmap(
-"x = [1234-12-12, true]"),
-{x = [1234-12-12, true]}
+"x = [1234, true]"),
+{x = [1234, true]}
 )
 ```
 ## keys {#env.keys}
@@ -63,7 +63,16 @@ env ATTRS.keys(attrmap: 'AttrMap')
 **Arguments:**
 - `attrmap: 'AttrMap'` => 
 
+keys of the attribute map
+## values {#env.values}
+```sig
+env ATTRS.values(attrmap: 'AttrMap')
+```
 
+**Arguments:**
+- `attrmap: 'AttrMap'` => 
+
+values of the attribute map
 ## get {#env.get}
 ```sig
 env ATTRS.get(
@@ -200,11 +209,11 @@ from `A` to `D`
 
 ```task
 network load_str("A -> B\n B -> D");
-node[A -> D] set_attrs(a2d = true)
+nodes[A -> D] set_attrs(a2d = true)
 ```
 This is equivalent to the following:
 ```task
-node[A->D].a2d = true;
+nodes[A->D].a2d = true;
 ```
 ## del_attrs {#node.del_attrs}
 ```sig
@@ -218,7 +227,7 @@ Delete attributes from the given node
 
 ```task
 network load_str("a -> b");
-node set_attrs(val = true);
+nodes set_attrs(val = true);
 node[a] del_attrs(["val"]);
 node[a] assert_eq(val?, false)
 node[b] assert_eq(val?, true)
@@ -236,7 +245,22 @@ Retrive attribute
 
 ```task
 network load_str("A -> B\n B -> D");
-node assert_eq(get_attr("NAME"), NAME);
+nodes assert_eq(get_attr("NAME"), NAME);
+```
+## get_attrs {#node.get_attrs}
+```sig
+node ATTRS.get_attrs(*attr_names)
+```
+
+**Arguments:**
+- `*attr_names` => Name of the attribute to get
+
+Retrive multiple attributes
+
+```task
+network load_str("A -> B\n B -> D");
+nodes assert_eq(get_attrs("NAME"), array(NAME));
+nodes assert_eq(get_attrs("NAME", "ORDER"), array(NAME, ORDER));
 ```
 ## has_attr {#node.has_attr}
 ```sig
@@ -250,9 +274,9 @@ Check if the attribute is present
 
 ```task
 network load_str("A -> B\n B -> D");
-node.x = 90;
-node assert(has_attr("x"))
-node assert(!has_attr("y"))
+nodes.x = 90;
+nodes assert(has_attr("x"))
+nodes assert(!has_attr("y"))
 ```
 ## first_attr {#node.first_attr}
 ```sig
@@ -271,9 +295,9 @@ them being combined from different datasets.
 
 ```task
 network load_str("A -> B\n B -> D");
-node.x = 90;
-node assert_eq(first_attr(["y", "x"]), 90)
-node assert_eq(first_attr(["x", "NAME"]), 90)
+nodes.x = 90;
+nodes assert_eq(first_attr(["y", "x"]), 90)
+nodes assert_eq(first_attr(["x", "NAME"]), 90)
 ```
 ## set_attrs_ifelse {#node.set_attrs_ifelse}
 ```sig
@@ -289,7 +313,7 @@ if else condition with multiple attributes
 ```task
 network load_str("a -> b");
 env.some_condition = true;
-node set_attrs_ifelse(
+nodes set_attrs_ifelse(
 env.some_condition,
 val1 = [1, 2],
 val2 = ["a", "b"]
@@ -300,7 +324,7 @@ env assert_eq(nodes.val2, ["a", "a"])
 This is equivalent to using the if-else expression directly,
 
 ```task
-node.val1 = if (env.some_condition) {1} else {2};
+nodes.val1 = if (env.some_condition) {1} else {2};
 env assert_eq(nodes.val1, [1, 1])
 ```
 
@@ -322,7 +346,7 @@ values from the rendered results.
 
 ```task
 network load_str("a -> b");
-node set_attrs_render(val1 = "Node: {NAME}");
+nodes set_attrs_render(val1 = "Node: {NAME}");
 node[a] assert_eq(val1, "Node: a")
 ```
 ## load_toml_render {#node.load_toml_render}
@@ -347,8 +371,8 @@ attribute values to set.
 
 ```task
 network load_str("a -> b");
-node load_toml_render("label = \"Node: {NAME}\"")
-node assert_eq(label, render("Node: {NAME}"))
+nodes load_toml_render("label = \"Node: {NAME}\"")
+nodes assert_eq(label, render("Node: {NAME}"))
 ```
 # Network Functions
 ## set_attrs {#network.set_attrs}
@@ -370,18 +394,24 @@ network assert_eq(val, 23.4)
 ```
 ## set_node_attrs {#network.set_node_attrs}
 ```sig
-network ATTRS.set_node_attrs(attr_name: '& str', node_map: 'AttrMap')
+network ATTRS.set_node_attrs(attr_name: '& str', node_values: 'TableOrArray')
 ```
 
 **Arguments:**
 - `attr_name: '& str'` => Name of the attribute to set,
-- `node_map: 'AttrMap'` => key value pair of attributes to set (key = node name)
+- `node_values: 'TableOrArray'` => array or a key value pair of attributes to set (key = node name)
 
-Set node attributes in a network using a attrmap
+Set node attributes in a network using a attrmap or array
+
+Currenly you can only set all nodes using array, if you want
+to set a subset of the nodes, use the attrmap option.
 
 ```task
-network set_attrs(val = 23.4)
-network assert_eq(val, 23.4)
+network load_str("a -> b")
+network set_node_attrs("val", {a = 23.4})
+network assert_eq(node[a].val, 23.4)
+network set_node_attrs("val", [2, 4])
+network assert_eq(nodes.val, [2, 4])
 ```
 ## set_attrs_render {#network.set_attrs_render}
 ```sig
@@ -400,3 +430,18 @@ network.val = 23.4
 network set_attrs_render(val2 = "{val}05")
 network assert_eq(val2, "23.405")
 ```
+## nodemap {#network.nodemap}
+```sig
+network ATTRS.nodemap(
+    attr: 'String',
+    filter: 'Option < Vec < bool > >',
+    safe: 'bool' = false
+)
+```
+
+**Arguments:**
+- `attr: 'String'` => attribute to be the value of the attrmap
+- `filter: 'Option < Vec < bool > >'` => Only include these nodes
+- `safe: 'bool' = false` => Exclude nodes if they do not have the attribute
+
+Generate attribute map for the given attribute for the nodes

@@ -130,3 +130,21 @@ node SERIES.sr_fill(
 - `newname: 'Option < String >'` => New name for the series, adds `_filled` by default; ignored for inplace
 
 Fill the series with a value
+## sr_max {#node.sr_max}
+```sig
+node SERIES.sr_max(name: '& str')
+```
+
+**Arguments:**
+- `name: '& str'` => Name of the series
+
+Get maximum value of the series
+## sr_min {#node.sr_min}
+```sig
+node SERIES.sr_min(name: '& str')
+```
+
+**Arguments:**
+- `name: '& str'` => Name of the series
+
+Get minimum value of the series

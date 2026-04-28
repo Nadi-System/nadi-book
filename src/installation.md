@@ -145,6 +145,6 @@ cd nadi-gis
 cargo build --release
 ```
 
-The plugins will be inside the `target/release` directory. Copy them to the `NADI_PLUGIN_DIRS` directory for nadi to load them.
+The plugins will be inside the `target/release` directory. You can use `nadi -i <path>` to install the plugin, the `<path>` is the path to the `.dll`, `.so` or `.dynlib` of the plugin. You can also manually copy them to the `NADI_PLUGIN_DIRS/0.8.0` directory for nadi to load them, that is what `nadi -i` does.
 
 You can take any one of the plugins as an example to build your own, or following the plugin development instructions from the plugins chapter.

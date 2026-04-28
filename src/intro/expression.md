@@ -10,30 +10,30 @@ Expressions are defined into the following categories:
 ```
 ## Variable
 ```task run
-env.value = [1, true, "no maybe"];
-env.value
+value = [1, true, "no maybe"];
+value
 ```
 
 Variables also have a "check" mode, where it returns true if variable exists, false if it does not.
 
 ```task run
-env.value = [1, true, "no maybe"];
-env value?
-env other_var?
+value = [1, true, "no maybe"];
+value?
+other_var?
 ```
 
 If you use variable that does not exist, then it will throw an error. You can use `try-catch` block to catch that error. This is computationally better than checking if a variable exists. But the checking is useful in case of filtering the node functions (explained later).
 
 ```task run
-env.value = [1, true, "no maybe"];
-env try { other_var } catch { value }
+value = [1, true, "no maybe"];
+try { other_var } catch { value }
 ```
 
 You can also use varible from node, or network in other context. For example:
 
 ```task run
-env.value = [1, true, "no maybe"];
-network echo(json(env.value))
+value = [1, true, "no maybe"];
+network echo(json(value))
 ```
 Special variable types like `nodes`, `inputs`, `output` are available besides `env`, `network` and `node` based on what type of task the expression is on.
 
@@ -42,35 +42,35 @@ You will learn more about this on [Cross Context Functions and Variables](cross-
 ## Unary Operator
 ```task run
 env !true
-env - 12.0
+- 12.0
 ```
 
 ## Binary Operator
 ```task run
-env (12 > 34) & true
-env "x" in "xyz"
-env 12 in [123, true]
-env "my name is" match "^my.*"
+(12 > 34) & true
+"x" in "xyz"
+12 in [123, true]
+"my name is" match "^my.*"
 ```
 
 ## If Else
 
 ```task run
-env if(!true) {"if true"} else {"if false"}
+if(!true) {"if true"} else {"if false"}
 ```
 
 
 ## Function
 ```task run
-env.value = [1, true, "no maybe"];
-env get(value, 2)
+value = [1, true, "no maybe"];
+get(value, 2)
 ```
 
-Out of all expressions, only the function is not garanteed to return a value. If you are using a function expression and expect a value and it does not return it, it'll be a runtime error.
+All expressions are not garanteed to return a value. If you are using a function expression and expect a value and it does not return it, it'll be a runtime error. Similar case for `if` block without `else` if condition is false, and so on.
 
 
 ```task run
-env echo("Hello world!") + 12
+echo("Hello world!") + 12
 ```
 
 Special function types like `nodes`, `inputs`, `output` are available besides `env`, `network` and `node` based on what type of task the expression is on.

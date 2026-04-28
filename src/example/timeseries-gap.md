@@ -19,17 +19,18 @@ We can see the number of valid data and number of total data to see that the tim
 ```task run continue
 network csv.load_timeseries("data/scioto/scioto.csv", "date", "streamflow");
 # in future version csv.load_timeseries should do this while loading
-node ts_complete("streamflow")
+nodes do ts_complete("streamflow")
 
-node array(ts_len("streamflow", valid=true), ts_len("streamflow"))
+nodesmap array(ts_len("streamflow", valid=true), ts_len("streamflow"))
 ```
 
 None of the timeseries are complete. We can visualize the gaps using the 
 ```task run continue
-node.good = (ts_len("streamflow", valid=true) / ts_len("streamflow")) > 0.75
-node.visual.nodeshape = "circle";
-node(good).visual.nodecolor = "darkgreen";
-node(good).visual.textcolor = "darkgreen";
+nodes.good = (ts_len("streamflow", valid=true) / ts_len("streamflow")) > 0.75
+nodes.visual = {};
+nodes.visual.nodeshape = "circle";
+nodes(good).visual.nodecolor = "darkgreen";
+nodes(good).visual.textcolor = "darkgreen";
 network svg_ts_blocks("output/scioto-ts-gap-id.svg", "{NAME}", "streamflow", 620.0, 820.0, arr_width=500.0, bgcolor="#ffffff33")
 ```
 

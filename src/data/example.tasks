@@ -1,39 +1,39 @@
 # sample .tasks file which is like a script with functions
-node<inputsfirst> print_attrs("uniqueID")
-node show_node()
+nodes<inputsfirst> print_attrs("uniqueID")
+nodes show_node()
 network save_graphviz("/tmp/test.gv")
-node<inputsfirst>.cum_val = node.val + sum(inputs.cum_val);
+nodes<inputsfirst>.cum_val = node.val + sum(inputs.cum_val);
 
-node[WV04113,WV04112,WV04112] print_attr_toml("testattr2")
-node render("{NAME} {uniqueID} {Dam_Height_(Ft)}")
-node list_attr("; ")
+nodes[WV04113,WV04112,WV04112] print_attr_toml("testattr2")
+nodesmap render("{NAME} {uniqueID} {Dam_Height_(Ft)}")
+nodes list_attr("; ")
 # some functions can take variable number of inputs
 network calc_attr_errors(
     "Dam_Height_(Ft)",
     "Hydraulic_Height_(Ft)",
     "rmse", "nse", "abserr"
 )
-node sum_safe("Latitude")
-node<inputsfirst> render("Hi {SUM_ATTR}")
+nodes sum_safe("Latitude")
+nodesmap<inputsfirst> render("Hi {SUM_ATTR}")
 # multiple line for function arguments
 network save_table(
 	"test.table",
 	"/tmp/test.tex",
 	true,
 	radius=0.2,
-	start = 2012-19-20,
-	end = 2012-19-23 12:04
+	start = "2012-19-20",
+	end = 2012-19-23 12:04:00
 	)
-node.testattr = 2
-node set_attrs_render(testattr2 = "{testattr:2.2}")
-node[WV04112] render("{testattr} {testattr2}")
+nodes.testattr = 2
+nodes set_attrs_render(testattr2 = "{testattr:2.2}")
+nodesmap[WV04112] render("{testattr} {testattr2}")
 
 
 # selecting a list of nodes to run a function
-node[
+nodes[
 	# comment here?
     WV04113,
     WV04112
 ] print_attr_toml("testattr2")
 # selecting a path
-node[WV04112 -> WV04113] render("{NAME}")
+nodesmap[WV04112 -> WV04113] render("{NAME}")

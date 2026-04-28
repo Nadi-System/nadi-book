@@ -1,4 +1,13 @@
 # Env Functions
+## image {#env.image}
+```sig
+env VISUALS.image(path: 'RString')
+```
+
+**Arguments:**
+- `path: 'RString'` => 
+
+
 ## svg_settings {#env.svg_settings}
 ```sig
 env VISUALS.svg_settings(
@@ -22,7 +31,54 @@ env VISUALS.svg_settings(
 - `fontsize: 'f64' = 8.0` => 
 
 Generate the margins for the SVGs
+## svg_open {#env.svg_open}
+```sig
+env VISUALS.svg_open(path: 'RString')
+```
+
+**Arguments:**
+- `path: 'RString'` => 
+
+
+## svg_open_multi {#env.svg_open_multi}
+```sig
+env VISUALS.svg_open_multi(paths: 'RVec < RString >')
+```
+
+**Arguments:**
+- `paths: 'RVec < RString >'` => 
+
+
+# Node Functions
+## set_xy {#node.set_xy}
+```sig
+node VISUALS.set_xy(x: 'f64', y: 'f64')
+```
+
+**Arguments:**
+- `x: 'f64'` => 
+- `y: 'f64'` => 
+
+
+## get_xy {#node.get_xy}
+```sig
+node VISUALS.get_xy()
+```
+
+**Arguments:**
+
+
+
 # Network Functions
+## flatten {#network.flatten}
+```sig
+network VISUALS.flatten()
+```
+
+**Arguments:**
+
+
+
 ## set_nodesize_attrs {#network.set_nodesize_attrs}
 ```sig
 network VISUALS.set_nodesize_attrs(

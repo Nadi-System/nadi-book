@@ -6,18 +6,18 @@ First load the network, and attributes
 network load_file("data/ohio-river/ohio.network")
 network gis.load_attrs("data/ohio-river/nid-uniq.gpkg", "nidId")
 
-node.is_usgs = NAME match "^[0-9]+";
-node.is_dam = !is_usgs;
+nodes.is_usgs = NAME match "^[0-9]+";
+nodes.is_dam = !is_usgs;
 network count(nodes.is_usgs)
 network count(nodes.is_dam)
 ```
 
 Counting the upstream dams again,
 ```task run continue
-node<inp>.ndam = int(is_dam) + sum(inputs.ndam);
-node.no_dam_us = ndam == 0;
-network count(nodes.no_dam_us & nodes.is_usgs)
-network count(nodes.no_dam_us & nodes.is_usgs) / count(nodes.is_usgs)
+nodes<inp>.ndam = int(is_dam) + sum(inputs.ndam);
+nodes.no_dam_us = ndam == 0;
+network count(nodes {no_dam_us & is_usgs})
+network count(nodes {no_dam_us & is_usgs}) / count(nodes.is_usgs)
 ```
 
 We can see 33% of the USGS gages do not have dams upstream.
@@ -25,10 +25,10 @@ We can see 33% of the USGS gages do not have dams upstream.
 And for those that do, let's look at the construction year,
 ```task run continue
 env.max_year = 9999; # todo test it with nan
-node.dam_year = int(get_attr("yearCompleted", env.max_year));
+nodes.dam_year = int(get_attr("yearCompleted", env.max_year));
 
-node<inp>.dam_aff_yr = min_num(inputs.dam_aff_yr, dam_year);
-node<inp>.dam_affected = dam_aff_yr < env.max_year;
+nodes<inp>.dam_aff_yr = min_num(inputs.dam_aff_yr, dam_year);
+nodes<inp>.dam_affected = dam_aff_yr < env.max_year;
 
 network count(nodes.dam_affected & nodes.is_usgs)
 network count(!nodes.no_dam_us & nodes.is_usgs)

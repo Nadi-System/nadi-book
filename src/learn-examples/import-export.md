@@ -5,7 +5,7 @@ Similar to how you can load network files, you can load attributes from files as
 `load_attrs` function takes a template, and reads a different files for each node to load the attributes from.
 ```task run image ../output/ohio-import-export.svg
 network load_file("data/ohio.network")
-node load_attrs("data/attrs/{NAME}.toml")
+nodes do load_attrs("data/attrs/{NAME}.toml")
 
 network cairo.table("
 <Name => {NAME}
@@ -16,24 +16,24 @@ network cairo.table("
 You can use the render function to see if the files being loaded are correct. Here we can see the examples for the first 4 nodes:
 ```task run
 !network load_file("data/ohio.network")
-node(INDEX<4) render("data/attrs/{NAME}.toml")
+nodes(INDEX<4) r"data/attrs/{NAME}.toml"
 ```
 
 You can also read a attributes from string, so you can combine that with `FILES.from_file` and load it.
 
 ```task run
 network load_file("data/ohio.network")
-env.somevalue = ATTRS.parse_attrmap(
+somevalue = ATTRS.parse_attrmap(
 	FILES.from_file("data/attrs/smithland.toml")
 );
-env.somevalue.basin_area
-env.somevalue.length
+somevalue.basin_area
+somevalue.length
 ```
 
 You can export csv files
 ```task run
 network load_file("data/ohio.network")
-node ATTRS.load_attrs("data/attrs/{NAME}.toml")
+nodes do ATTRS.load_attrs("data/attrs/{NAME}.toml")
 network TABLE.save_csv("output/ohio-export.csv", ["NAME", "basin_area", "length"])
 network command("cat output/ohio-export.csv | head", echo=true)
 ```
@@ -47,8 +47,8 @@ First we make a GIS file by exporting. The image below shows the resulting point
 
 ```task run image ../images/ohio-nodes.png
 network load_file("data/ohio.network")
-node ATTRS.load_attrs("data/attrs/{NAME}.toml")
-node.geometry = render("POINT ({lon} {lat})");
+nodes do ATTRS.load_attrs("data/attrs/{NAME}.toml")
+nodes.geometry = r"POINT ({lon} {lat})";
 network gis.save_nodes(
   "output/ohio-nodes.shp",
   "geometry",
@@ -79,7 +79,7 @@ network gis.load_attrs("output/ohio-nodes.shp", "NAME")
 
 network cairo.table("
 <Name => {NAME}
->Area => {basin_area?:.2}
+>Area => {basin_area?:.1}
 >Length => {length:.1}
 ", "output/ohio-from-gis.svg"
 )

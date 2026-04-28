@@ -28,14 +28,14 @@ function call.
 ```sig
 env DEBUG.echo(
     line: 'String',
-    error: 'bool' = false,
+    stderr: 'bool' = false,
     newline: 'bool' = true
 )
 ```
 
 **Arguments:**
 - `line: 'String'` => line to print
-- `error: 'bool' = false` => print to stderr instead of stdout
+- `stderr: 'bool' = false` => print to stderr instead of stdout
 - `newline: 'bool' = true` => print newline at the end
 
 Echo the string to stdout or stderr
@@ -48,11 +48,11 @@ those files back to the stdout.
 Also useful for nadi preprocessor.
 ## clip {#env.clip}
 ```sig
-env DEBUG.clip(error: 'bool' = false)
+env DEBUG.clip(stderr: 'bool' = false)
 ```
 
 **Arguments:**
-- `error: 'bool' = false` => print in stderr instead of in stdout
+- `stderr: 'bool' = false` => print in stderr instead of in stdout
 
 Echo the `----8<----` line for clipping syntax
 

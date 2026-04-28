@@ -20,9 +20,15 @@ You can write attributes directly into the task system to assign them, use them 
 Following are some example values that are evaluated as literal values (themselves).
 ```task run
 true
-2024-12-21
 "string value"
 12.21
+```
+
+Please note that, the date and time by themselves are not valid in a tasks file. While they are valid attributes in a ".toml" file or while parsing attributes, in a task file they are interpreted as integer expression and integer range.
+```task run
+2024-12-21
+12:24
+12:04:24
 ```
 
 You can assign attribute values to variable names. We will discuss nodes and network later, but let's assign environmental values:
@@ -30,7 +36,7 @@ You can assign attribute values to variable names. We will discuss nodes and net
 
 ```task run
 env.river = "Ohio River"
-river
+env.river
 ```
 
 Besides writing them in the code directly, you can also load attributes from a file.
@@ -43,7 +49,7 @@ Here loading the files we can see only ohio has the attributes loaded
 ```task run
 ! network load_file("./data/mississippi.net")
 node[ohio] load_attrs("./data/attrs/{NAME}.toml")
-node.outlet
+nodesmap.outlet
 ```
 
 With plugins, you can load attributes from different file types.

@@ -46,7 +46,7 @@ Insert a key and value to a attrmap
 
 ```task
 env.x = attrmap(a=1, b=2)
-node assert_eq(insert(x, c, 3), attrmap(a=1, b=2, c=3))
+nodes assert_eq(insert(x, c, 3), attrmap(a=1, b=2, c=3))
 ```
 ## type_name {#env.type_name}
 ```sig
@@ -161,6 +161,20 @@ make an array from the arguments
 ```task
 env assert_eq(array(5, true), [5, true])
 ```
+## zip {#env.zip}
+```sig
+env CORE.zip(*attributes, err_diff_len: 'bool' = true)
+```
+
+**Arguments:**
+- `*attributes` => List of attributes
+- `err_diff_len: 'bool' = true` => error if different lengths
+
+make an array combining the arrays from arguments
+
+```task
+env assert_eq(array(5, true), [5, true])
+```
 ## attrmap {#env.attrmap}
 ```sig
 env CORE.attrmap(**attributes)
@@ -173,6 +187,19 @@ make an attrmap from the arguments
 
 ```task
 env assert_eq(attrmap(val=5), {val=5})
+```
+## to_attrmap {#env.to_attrmap}
+```sig
+env CORE.to_attrmap(key_val: 'Vec < (RString, Attribute) >')
+```
+
+**Arguments:**
+- `key_val: 'Vec < (RString, Attribute) >'` => name and values of attributes
+
+make an attrmap from a list of (k, v)
+
+```task
+env assert_eq(to_attrmap([["val", 5]]), {val=5})
 ```
 ## json {#env.json}
 ```sig
@@ -246,6 +273,90 @@ length of an array or hashmap
 env assert_eq(length([4, 5]), 2)
 env assert_eq(length({x=4, y=5}), 2)
 ```
+## timediff {#env.timediff}
+```sig
+env CORE.timediff(start: 'DateTime', end: 'DateTime')
+```
+
+**Arguments:**
+- `start: 'DateTime'` => 
+- `end: 'DateTime'` => 
+
+get the current date time
+## now {#env.now}
+```sig
+env CORE.now()
+```
+
+**Arguments:**
+
+
+get the current date time
+## today {#env.today}
+```sig
+env CORE.today()
+```
+
+**Arguments:**
+
+
+get the current date
+## hour {#env.hour}
+```sig
+env CORE.hour(value: 'Attribute')
+```
+
+**Arguments:**
+- `value: 'Attribute'` => Time or DateTime
+
+hour from time/datetime
+
+```task
+env assert_eq(hour(parse_attr("12:14")), 12)
+env assert_eq(hour(parse_attr("1223-12-14T15:19")), 15)
+```
+## minute {#env.minute}
+```sig
+env CORE.minute(value: 'Attribute')
+```
+
+**Arguments:**
+- `value: 'Attribute'` => Time or DateTime
+
+minute from time/datetime
+
+```task
+env assert_eq(minute(parse_attr("12:14")), 14)
+env assert_eq(minute(parse_attr("1223-12-14T15:19")), 19)
+```
+## second {#env.second}
+```sig
+env CORE.second(value: 'Attribute')
+```
+
+**Arguments:**
+- `value: 'Attribute'` => Time or DateTime
+
+second from time/datetime
+
+```task
+env assert_eq(second(parse_attr("12:14")), 0)
+env assert_eq(second(parse_attr("1223-12-14T15:19:12")), 12)
+```
+## nanosecond {#env.nanosecond}
+```sig
+env CORE.nanosecond(value: 'Attribute')
+```
+
+**Arguments:**
+- `value: 'Attribute'` => Time or DateTime
+
+nanosecond from time/datetime
+
+```task
+env assert_eq(nanosecond(parse_attr("12:14")), 0)
+env assert_eq(nanosecond(parse_attr("1223-12-14T15:19")), 0)
+```
 ## year {#env.year}
 ```sig
 env CORE.year(value: 'Attribute')
@@ -257,9 +368,9 @@ env CORE.year(value: 'Attribute')
 year from date/datetime
 
 ```task
-env assert_eq(year(1223-12-12), 1223)
-env assert_eq(year(1223-12-12T12:12), 1223)
-env assert_eq(year(1223-12-12 12:12:08), 1223)
+env assert_eq(year(parse_attr("1223-12-12")), 1223)
+env assert_eq(year(parse_attr("1223-12-12T12:12")), 1223)
+env assert_eq(year(parse_attr("1223-12-12 12:12:08")), 1223)
 ```
 ## month {#env.month}
 ```sig
@@ -272,8 +383,8 @@ env CORE.month(value: 'Attribute')
 month from date/datetime
 
 ```task
-env assert_eq(month(1223-12-14), 12)
-env assert_eq(month(1223-12-14T15:19), 12)
+env assert_eq(month(parse_attr("1223-12-14")), 12)
+env assert_eq(month(parse_attr("1223-12-14T15:19")), 12)
 ```
 ## day {#env.day}
 ```sig
@@ -286,8 +397,8 @@ env CORE.day(value: 'Attribute')
 day from date/datetime
 
 ```task
-env assert_eq(day(1223-12-14), 14)
-env assert_eq(day(1223-12-14T15:19), 14)
+env assert_eq(day(parse_attr("1223-12-14")), 14)
+env assert_eq(day(parse_attr("1223-12-14T15:19")), 14)
 ```
 ## min_num {#env.min_num}
 ```sig
@@ -518,7 +629,7 @@ Count the number of input nodes in the node
 
 ```task
 network load_str("a -> b\n b -> d\n c -> d")
-node assert_eq(inputs_count(), length(inputs._))
+nodes assert_eq(inputs_count(), length(inputs._))
 ```
 ## inputs_attr {#node.inputs_attr}
 ```sig
@@ -533,25 +644,39 @@ Get attributes of the input nodes
 This is equivalent to using the `inputs` keyword
 ```task
 network load_str("a -> b\n b -> d\n c -> d")
-node assert_eq(inputs_attr("NAME"), inputs.NAME)
+nodes assert_eq(inputs_attr("NAME"), inputs.NAME)
 ```
-## has_outlet {#node.has_outlet}
+## inputs_map {#node.inputs_map}
 ```sig
-node CORE.has_outlet()
+node CORE.inputs_map(attr: 'String' = "NAME")
+```
+
+**Arguments:**
+- `attr: 'String' = "NAME"` => Attribute to get from inputs
+
+Get attributes of the input nodes in map format
+
+```task
+network load_str("a -> b\n b -> d\n c -> d")
+nodes assert_eq(node[b].inputs_map("NAME"), {a="a"})
+```
+## has_output {#node.has_output}
+```sig
+node CORE.has_output()
 ```
 
 **Arguments:**
 
 
-Node has an outlet or not
+Node has an output or not
 
 This is equivalent to using `output._?`, as `_` is a dummy
 variable that will always be present in all cases, it being
-absent is because there is no output/outlet of that node.
+absent is because there is no output node of that node.
 
 ```task
 network load_str("a -> b\n b -> d\n c -> d")
-node assert_eq(has_outlet(), output._?)
+nodes assert_eq(has_output(), output._?)
 ```
 ## output_attr {#node.output_attr}
 ```sig
@@ -566,7 +691,7 @@ Get attributes of the output node
 This is equivalent to using the `output` keyword
 ```task
 network load_str("a -> b\n b -> d\n c -> d")
-node(output._?) assert_eq(output_attr("NAME"), output.NAME)
+nodes(output._?) assert_eq(output_attr("NAME"), output.NAME)
 ```
 # Network Functions
 ## count {#network.count}
@@ -583,22 +708,36 @@ Count the number of nodes in the network
 network assert_eq(count(), 0)
 network load_str("a -> b")
 network assert_eq(count(), 2)
-node.sel = INDEX < 1
+nodes.sel = INDEX < 1
 network assert_eq(count(nodes.sel), 1)
 ```
-## outlet {#network.outlet}
+## net_roots {#network.net_roots}
 ```sig
-network CORE.outlet()
+network CORE.net_roots()
 ```
 
 **Arguments:**
 
 
-Get the name of the outlet node
+Get the name of the outlet nodes
 
 ```task
 network load_str("a -> b")
-network assert_eq(outlet(), "b")
+network assert_eq(net_roots(), ["b"])
+```
+## net_leaves {#network.net_leaves}
+```sig
+network CORE.net_leaves()
+```
+
+**Arguments:**
+
+
+Get the name of the leaf nodes
+
+```task
+network load_str("a -> b")
+network assert_eq(net_leaves(), ["a"])
 ```
 ## node_attr {#network.node_attr}
 ```sig

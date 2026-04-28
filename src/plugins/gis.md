@@ -62,7 +62,8 @@ network gis.load_network(
     source: 'String',
     destination: 'String',
     layer: 'Option < String >',
-    ignore_null: 'bool' = false
+    ignore_null: 'bool' = false,
+    force: 'bool' = false
 )
 ```
 
@@ -72,6 +73,7 @@ network gis.load_network(
 - `destination: 'String'` => layer of the GIS file corresponding to the output node name
 - `layer: 'Option < String >'` => layer of the GIS file, first one picked by default
 - `ignore_null: 'bool' = false` => Ignore feature if it has fields with null value
+- `force: 'bool' = false` => Force overwrite the output if already present
 
 Load network from a GIS file
 

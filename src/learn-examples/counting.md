@@ -25,7 +25,7 @@ Simply counting number of nodes, or certain types of nodes in a network is done 
 !g2 -> d4
 !d4 -> g3
 !");
-node.g_node = NAME match "^g[0-9]+";
+nodes.g_node = NAME match "^g[0-9]+";
 network count()
 network count(nodes.g_node)
 network count(nodes.g_node) / count()
@@ -40,8 +40,8 @@ when you call a network function, you get one output, while a node function will
 !g2 -> d4
 !d4 -> g3
 !");
-node.g_node = NAME match "^g[0-9]+";
-node.g_node
+nodes.g_node = NAME match "^g[0-9]+";
+nm.g_node
 ```
 Always be careful that node function is run for all the nodes separately, if you are running them without any variables from the node, then you can use network function, or environment function to get the results.
 
@@ -55,7 +55,7 @@ Counting the number of nodes upstream of each node gives us the order of the nod
 !g2 -> d4
 !d4 -> g3
 !");
-node<inputsfirst>.nodes_us = 1 + sum(inputs.nodes_us);
+nodes<inputsfirst>.nodes_us = 1 + sum(inputs.nodes_us);
 
 !network cairo.table("Index => {INDEX}\n <Name => {NAME}\nNodes U/S => {nodes_us}", "./output/simple-count-1.svg")
 ```
@@ -71,9 +71,9 @@ We can add a condition and count the nodes that satisfy that condition only. Lik
 !g2 -> d4
 !d4 -> g3
 !");
-node.is_dam = NAME match "^d[0-9]+";
-node(is_dam).visual.nodecolor = "red";
-node<inputsfirst>.dams_us = int(is_dam) + sum(inputs.dams_us);
+nodes.is_dam = NAME match "^d[0-9]+";
+nodes(is_dam).visual = {nodecolor = "red"}
+nodes<inputsfirst>.dams_us = int(is_dam) + sum(inputs.dams_us);
 
 !network cairo.table("Index => {INDEX}\n Name => {NAME}\nDams U/S => {dams_us}", "./output/simple-count-2.svg")
 ```
@@ -89,13 +89,9 @@ You can similarly count the number of gages downstream. Here we need a condition
 !g2 -> d4
 !d4 -> g3
 !");
-node.is_gage = NAME match "^g[0-9]+";
-node(is_gage).visual.nodecolor = "red";
-node<outputfirst>.gages_ds = int(is_gage) + if (output._?) {
-	output.gages_ds
-	} else {
-	0
-};
+nodes.is_gage = NAME match "^g[0-9]+";
+nodes(is_gage).visual = {nodecolor = "red"};
+nodes<out>.gages_ds = int(is_gage) + sum(outputs.gages_ds);
 
 !network cairo.table("Index => {INDEX}\n Name => {NAME}\nGages D/S => {gages_ds}", "./output/simple-count-3.svg")
 ```

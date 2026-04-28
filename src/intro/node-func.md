@@ -5,16 +5,36 @@ For example following node function takes multiple attribute names and prints th
 
 ```task run
 !network load_file("./data/mississippi.net")
-node print_attrs("INDEX", name=false)
+nodes print_attrs("INDEX", name=false)
 ```
 
-Only the `NAME` is printed as they do not have any other attributes.
+Only the `INDEX` is printed here. But node that the return value of nodes is an array, and as the `print_attrs` function does not return a value, it lists a values of `<None>`. When you want to do things for each node, but not return a value, you can either silence the return through `;`, or use a `do` keyword to idicate it's a task not a return value.
+
+```task run
+!network load_file("./data/mississippi.net")
+nodes print_attrs("INDEX", name=false);
+
+nodes do print_attrs("NAME", name=false)
+```
+
+The keywords `nodes` and `nodesmap` always return an array or a map, if not silenced or used with the `do` keyword.
 
 # Node Function Propagation
-
 Propagation of the node functions refer to the order and selection of nodes to run the function on.
 
-By default node function is run at each node. But that might not be the intended use of the function, for example you might want to:
+As we have seen above, when you run node functions, you can run it for all the nodes. If you want to run it for one node, or a selective nodes, you need to select them using propagation. 
+
+For single node, the way of selecting the node is similar to propagation, i.e. use `node` keyword with node name inside `[]`:
+
+```task run
+!network.load_str("a -> b");
+node[a].NAME
+node[b] {[NAME, ORDER]}
+```
+
+But this does not allow more than one node, and returns a value instead of a list, or a map that `nodes` or `nodesmap` keywords do.
+
+For multiple nodes, for example, you might want to:
 - run the function only on nodes that satisfy a condition,
 - run the funciton only on a group of nodes,
 
@@ -32,8 +52,8 @@ You can run functions in different orders:
 
 ```task run
 network load_str("a -> b\n b ->d \n c -> d \n d -> e")
-node<seq> array(INDEX, ORDER)
-node<inv> array(INDEX, ORDER)
+nodesmap<seq> array(INDEX, ORDER)
+nodes<inv> array(INDEX, ORDER)
 ```
 
 Currently, `inp` and `inv` are equivalent, while `seq` and `out` are also equivalent. But when the parallization is added in the future versions, they will be implemented differently. So for backward compatibility, if you function needs to be run in a certain way, always use that one.
@@ -41,15 +61,27 @@ Currently, `inp` and `inv` are equivalent, while `seq` and `out` are also equiva
 Here an example showing how to calculate the order of the node.
 ```task run
 network load_str("a -> b\n b ->d \n c -> d \n d -> e")
-node<inp>.val = sum(inputs.val) + 1;
-node array(val, ORDER)
+nodes<inp>.val = sum(inputs.val) + 1;
+nm [val, ORDER]
 ```
 
 If you do not use the `inputsfirst` propagation here, you get an error because the `val` attribute doesn't exist in `inputs`, and if you did have that variable already, it would be old data instead of the recent results from your expression.
 ```task run
 network load_str("a -> b\n b ->d \n c -> d \n d -> e")
-node.val = sum(inputs.val) + 1;
-node array(val, ORDER)
+nodes.val = sum(inputs.val) + 1;
+nm [val, ORDER]
+```
+
+Here the `[e]` after the Error shows which node the error is from. If we look at the values, we can see that all values are empty, and the expressions errors out on the first node `e`, because the input `d` doesn't have `val`.
+
+```task run continue
+nm [val, inputs.NAME]
+```
+
+If we ran it for node `a` for example then we wouldn't get an error.
+```task run continue
+node[a].val = sum(inputs.val) + 1;
+nm [val, ORDER]
 ```
 
 NOTE: I need to work on better error messaging. It is in TODO list for the next major release.
@@ -71,16 +103,16 @@ List of node contains a separated list of node names or quoted string if the nam
 
 ```task run
 !network load_file("./data/mississippi.net")
-node[tenessee,"lower-mississippi"] print_attrs("NAME")
+nodes[tenessee,"lower-mississippi"] do print_attrs("NAME")
 ```
 
 ### Path of Nodes
 
-Path of node has the same syntax as a path used in the network file. It has starting node and end node. Instead of it representing a single edge like in network file, it represents all the nodes that are between those two (inclusive).
+Path of node has the same syntax as a path used in the network file. It has starting node and end node. Instead of it representing a single edge like in network file, it represents all the nodes that are between those two (inclusive) if the network is a rooted tree graph. If any nodes in between the nodes have multiple outputs, then the path doesn't work. This limitation will be fixed in the future.
 
 ```task run
 !network load_file("./data/mississippi.net")
-node[tenessee -> "lower-mississippi"] print_attrs("NAME")
+nodes[tenessee -> "lower-mississippi"] do print_attrs("NAME")
 ```
 
 As we can see in the diagram, the path from tenessee to lower
@@ -90,7 +122,7 @@ mississippi includes the ohio node.
 Logical condition is used by putting an expression that evaluates to a boolean value inside the `()`. 
 ```task run
 !network load_file("./data/mississippi.net")
-node("mississippi" in NAME) print_attrs("NAME")
+nodes("mississippi" in NAME) do print_attrs("NAME")
 ```
 
 ## Combination
@@ -100,7 +132,7 @@ For example:
 
 ```task run
 !network load_file("./data/mississippi.net")
-node[tenessee -> "lower-mississippi"]("mississippi" in NAME) INDEX
-node<inv>[tenessee -> "lower-mississippi"] INDEX
-node<inv>[tenessee -> "lower-mississippi"](ORDER > 1) INDEX
+nodesmap[tenessee -> "lower-mississippi"]("mississippi" in NAME) INDEX
+nm<inv>[tenessee -> "lower-mississippi"] INDEX
+nm<inv>[tenessee -> "lower-mississippi"](ORDER > 1) INDEX
 ```

@@ -1,7 +1,17 @@
 # Network Functions
-## save {#network.save}
+## load_positions {#network.load_positions}
 ```sig
-network graphviz.save(
+network GVIZ.load_positions(gv_file: '& Path', factor: 'f64' = 0.1)
+```
+
+**Arguments:**
+- `gv_file: '& Path'` => 
+- `factor: 'f64' = 0.1` => 
+
+Load Node positions from the graphviz file
+## save_gv {#network.save_gv}
+```sig
+network GVIZ.save_gv(
     outfile: '& Path',
     name: '& str' = "network",
     global_attrs: '& str' = "",

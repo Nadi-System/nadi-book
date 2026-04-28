@@ -9,7 +9,7 @@ Some examples showing how you'd have to write python codes from equivalent examp
 ## Example 1: looping through the nodes
 ```task run
 network load_str("a -> b\nc -> b")
-node(output._?) echo(env.render("{i} -> {o}", i=node.INDEX, o=output.INDEX))
+nodes(output._?) do echo(env.render("{i} -> {o}", i=node.INDEX, o=output.INDEX))
 ```
 
 Equivalent Python:

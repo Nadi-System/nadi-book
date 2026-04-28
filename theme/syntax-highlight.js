@@ -49,7 +49,7 @@ hljs.registerLanguage("task", (hljs) => ({
 	hljs.C_NUMBER_MODE,
 	NODE_LIST_OR_PATH,
 	{
-	    begin: '\\b(node|network|env|exit|end|help|inputs|output|nodes|root|if|else|while|in|match|function|map|attrs|loop|for|inf|nan|func|return|error|try|catch|import)\\b',
+	    begin: '\\b("clear|import|exec|from|node|network|net|networks|networksmap|netm|env|exit|end|help|input|inputs|inputsmap|im|output|outputs|outputsmap|om|nodes|nodesmap|nm|root|roots|rootsmap|rm|leaves|leavesmap|lm|if|else|while|try|catch|in|match|hook|local|loc|struct|function|func|return|break|continue|error|for|map|attrs|loop|progress|prog|do|dopar|par")\\b',
 	    className: "deletion",
 	},
 	{
@@ -58,6 +58,7 @@ hljs.registerLanguage("task", (hljs) => ({
 	},
     ],
 }));
+
 
 hljs.registerLanguage("output", (hljs) => ({
     name: "Output",
@@ -72,6 +73,10 @@ hljs.registerLanguage("output", (hljs) => ({
 	    begin: '^[$] ',
 	    end: '$',
 	    className: "addition",
+	},
+	{
+	    begin: '<None>',
+	    className: "comment",
 	},
     ],
 }));

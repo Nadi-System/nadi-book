@@ -1,22 +1,27 @@
-# Env Functions
-## root_node {#env.root_node}
+# Node Functions
+## move_aside {#node.move_aside}
 ```sig
-env CONN.root_node()
+node CONN.move_aside()
 ```
 
 **Arguments:**
 
 
-default name used for ROOT node of the network
+Move the node to the side so that its inputs go to the output
 # Network Functions
 ## load_file {#network.load_file}
 ```sig
-network CONN.load_file(file: 'PathBuf', append: 'bool' = false)
+network CONN.load_file(
+    file: 'PathBuf',
+    append: 'bool' = false,
+    force: 'bool' = false
+)
 ```
 
 **Arguments:**
 - `file: 'PathBuf'` => File to load the network connections from
 - `append: 'bool' = false` => Append the connections in the current network
+- `force: 'bool' = false` => Force overriding outputs if previous one is present, only valid for override
 
 Load the given file into the network
 
@@ -24,12 +29,17 @@ This replaces the current network with the one loaded from the
 file.
 ## load_str {#network.load_str}
 ```sig
-network CONN.load_str(contents: '& str', append: 'bool' = false)
+network CONN.load_str(
+    contents: '& str',
+    append: 'bool' = false,
+    force: 'bool' = false
+)
 ```
 
 **Arguments:**
 - `contents: '& str'` => String containing Network connections
 - `append: 'bool' = false` => Append the connections in the current network
+- `force: 'bool' = false` => Force overriding outputs if previous one is present, only valid for override
 
 Load network from the given string
 
@@ -42,12 +52,17 @@ env assert_eq(nodes.NAME, ["b", "a"])
 ```
 ## load_edges {#network.load_edges}
 ```sig
-network CONN.load_edges(edges: '& [(String, String)]', append: 'bool' = false)
+network CONN.load_edges(
+    edges: '& [(String, String)]',
+    append: 'bool' = false,
+    force: 'bool' = false
+)
 ```
 
 **Arguments:**
 - `edges: '& [(String, String)]'` => String containing Network connections
 - `append: 'bool' = false` => Append the connections in the current network
+- `force: 'bool' = false` => Force overriding outputs if previous one is present
 
 Load the given edges as a network
 
@@ -70,7 +85,7 @@ network CONN.subset(filter: '& [bool]', keep: 'bool' = true)
 Take a subset of network by only including the selected nodes
 ```task
 network load_str("a -> b\n b->c");
-node[a->b].sth = true;
+nodes[a->b].sth = true;
 node[c].sth = false;
 network subset(nodes.sth);
 env assert_eq(nodes.NAME, ["b", "a"])
@@ -95,13 +110,13 @@ For more control on graphviz file writing, use
 `save_graphviz` from `graphviz` plugin instead.
 ## subset_from {#network.subset_from}
 ```sig
-network CONN.subset_from(new_outlet: '& str')
+network CONN.subset_from(new_root: '& str')
 ```
 
 **Arguments:**
-- `new_outlet: '& str'` => 
+- `new_root: '& str'` => 
 
-Take a subset of network by taking the given node as new outlet
+Take a subset of network by taking the given node as a new outlet
 
 ```task
 network load_str("a -> b\n b->c\n x -> y");
@@ -110,23 +125,22 @@ env assert_eq(nodes.NAME, ["b", "a"])
 ```
 ## subset_largest {#network.subset_largest}
 ```sig
-network CONN.subset_largest(parent: '& str' = "*ROOT*")
+network CONN.subset_largest(parent: 'Option < String >')
 ```
 
 **Arguments:**
-- `parent: '& str' = "*ROOT*"` => 
+- `parent: 'Option < String >'` => 
 
 Take a subset of network by only including the largest blob of connected nodes
 
-When you load a network that have disconnected nodes, nadi
-includes a ROOT note by default and collects all the outlets
-as inputs to that node. This function allows you to filter out
-all the nodes except the one belonging to the largest
-connected network (number of nodes). Alternatively, you can
-also use ORDER and other logic in the task system to do that.
+When you load a network that have disconnected nodes, this
+function allows you to filter out all the nodes except the one
+belonging to the largest connected network (number of
+nodes). Alternatively, you can also use ORDER and other logic
+in the task system to do that.
 
-If your network doesn't have a root node, then it'll just keep
-the network as it is.
+If your network has a root node, and no parent node is given,
+then it'll just keep the network as it is.
 
 ```task
 network load_str("a -> b\n b->c\n x -> y");

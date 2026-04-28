@@ -67,7 +67,7 @@ for year, flow in sf.groupby(sf.index.year).mean().items():
 Now we can call this script from inside the nadi tasks system like the following, assuming the python file is saved as `streamflow.py`.
 
 ```task
-node command("python streamflow.py {_NAME}")
+nodes do command("python streamflow.py {_NAME}")
 ```
 
 If you want to know what the template will be rendered as, use `render` function, and if you want to check whether it exists or not, you can use `exists` function.

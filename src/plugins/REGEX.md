@@ -113,3 +113,19 @@ env assert_eq(str_split("abc", "^[ab]"), ["", "bc"])
 env assert_eq(str_split("abc", "[ab]"), ["", "", "c"])
 env assert_eq(str_split("abc", "[ab]", limit=2), ["", "bc"])
 ```
+## str_join {#env.str_join}
+```sig
+env REGEX.str_join(strings: 'Vec < String >', with: '& str' = "")
+```
+
+**Arguments:**
+- `strings: 'Vec < String >'` => Strings to join
+- `with: '& str' = ""` => Substring to join with
+
+Join the list of strings with the given string
+
+```task
+env assert_eq(str_join(["abc", "de"]), "abcde")
+env assert_eq(str_join(["abc", "de"], " "), "abc de")
+env assert_eq(str_join(["abc", "de"], ", "), "abc, de")
+```

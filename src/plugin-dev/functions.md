@@ -30,7 +30,7 @@ Furthermore, there are required and optional arguments. And users can optionally
 For now, the function arguments except the `Node` or `Network` cannot be `mut`. But they can be reference of `T` if `T` satisfies the trait constraints, for example, instead of `Vec<String>`, it can be `&[String]`. But because the function context is evaluated for each node/network, there is no optimization by using the references.
 
 ## Return Types
-Function Return can be empty, an attribute value, or an error. When a function returns an error, the execution is halted. When it doesn't return a value and an assignment is performed, it will error as well.
+Function Return can be empty, an attribute value, image, multiple images, file, or an error. When a function returns an error, the execution is halted. When it doesn't return a value and an assignment is performed, it will error as well. Image and file return will be converted to string, if the return value is used as part of an expression, otherwise a signal is sent for the program to handle it. For example, NADI IDE will display the image in SVG Viewer.
 
 The return type of the function should implement `Into<FunctinRet>`, refer to the documentation for [`nadi_core::functions::FunctionRet`](https://docs.rs/nadi_core/latest/nadi_core/functions/enum.FunctionRet.html) to see what types implement it. You can also implement that for your own types.
 
