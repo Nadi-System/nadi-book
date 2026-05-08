@@ -35,3 +35,48 @@ network svg_ts_blocks("output/scioto-ts-gap-id.svg", "{NAME}", "streamflow", 620
 ```
 
 ![Plot Showing the Data Gaps in the CSV](../output/scioto-ts-gap-id.svg)
+
+We can use the series map function in NADI to fill the gaps in timeseries using other nodes. The example below shows just two nodes using one to fill the other.
+
+```task run continue
+# example to fill timeseries with a value from another node
+node[03229610]$sf_fix = ($$streamflow, node[03227500]$$streamflow) -> func(a=false, b=false) {
+	if (a == false & b == false) {return}
+	if (a == false) { float(b) } else { float(a) }
+}
+
+node[03229610]$$streamflow
+node[03229610]$sf_fix
+```
+
+We can see the data is filled here, in the beginning the data comes from the node `03227500`, while at the end we can see the data comes from the node itself.
+```task run continue
+node[03229610]$sf_fix[0:100]
+nm[03229610,03227500] {$$streamflow[0:100]}
+
+l = node[03229610].sr_len("sf_fix")-1
+s = l - 500
+node[03229610]$sf_fix[s:l]
+nm[03229610,03227500] {$$streamflow[s:l]}
+```
+
+Now while this was an example where we manually chose which node to use to fill the other. You probably noticed that we can't simply fill the value in many cases, or you might want to use multiple nodes, or automate it. In that case you can simply use the `inputs`/`outputs`/`edges` or any other keywords in similar manner to use the timeseries from connected nodes, as well as using other attribute values to weight or scale the values.
+
+```task run continue
+node[03229610]$sf_fix2 = ($$streamflow, im$$streamflow) -> func(a=false, b=false) {
+	if (a == false & b == false) {return}
+	if (a == false) {
+	  sum([float(i) for i in values(b)])
+	} else { float(a) }
+}
+
+node[03229610]$sf_fix[1000:1200]
+node[03229610]$sf_fix2[1000:1200]
+
+node[03229610]$sf_org = $$streamflow -> func(a="") {
+	if (a != "") {float(a)}
+}
+# need to add the ability to calculate mean of maskedseries
+
+node[03229610] {[sr_mean("sf_org"), sr_mean("sf_fix"), sr_mean("sf_fix2")]}
+```
