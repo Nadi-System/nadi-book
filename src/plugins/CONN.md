@@ -53,14 +53,14 @@ env assert_eq(nodes.NAME, ["b", "a"])
 ## load_edges {#network.load_edges}
 ```sig
 network CONN.load_edges(
-    edges: '& [(String, String)]',
+    edges: 'Vec < (RString, RString) >',
     append: 'bool' = false,
     force: 'bool' = false
 )
 ```
 
 **Arguments:**
-- `edges: '& [(String, String)]'` => String containing Network connections
+- `edges: 'Vec < (RString, RString) >'` => String containing Network connections
 - `append: 'bool' = false` => Append the connections in the current network
 - `force: 'bool' = false` => Force overriding outputs if previous one is present
 
@@ -75,11 +75,11 @@ env assert_eq(nodes.NAME, ["c", "b", "a"])
 ```
 ## subset {#network.subset}
 ```sig
-network CONN.subset(filter: '& [bool]', keep: 'bool' = true)
+network CONN.subset(filter: 'Vec < bool >', keep: 'bool' = true)
 ```
 
 **Arguments:**
-- `filter: '& [bool]'` => 
+- `filter: 'Vec < bool >'` => 
 - `keep: 'bool' = true` => Keep the selected nodes (false = removes the selected)
 
 Take a subset of network by only including the selected nodes

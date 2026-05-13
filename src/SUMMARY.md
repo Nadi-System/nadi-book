@@ -99,7 +99,7 @@
   - [Cairo](plugins/cairo.md)
   - [CSV](plugins/csv.md)
   - [GIS](plugins/gis.md)
-  - [HTML](plugins/html.md)
+  - [DSS](plugins/dss.md)
   - [Typst](plugins/typst.md)
 
 # Developer Notes and Future Direction

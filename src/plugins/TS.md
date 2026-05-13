@@ -1,3 +1,28 @@
+# Env Functions
+## ts_timeline {#env.ts_timeline}
+```sig
+env TS.ts_timeline(ts: 'TimeSeries')
+```
+
+**Arguments:**
+- `ts: 'TimeSeries'` => 
+
+Get timeline of the timeseries as Series of strings
+## timeseries {#env.timeseries}
+```sig
+env TS.timeseries(
+    timeline: '& [RString]',
+    series: 'Series',
+    fmt: '& str' = "%Y-%m-%d"
+)
+```
+
+**Arguments:**
+- `timeline: '& [RString]'` => 
+- `series: 'Series'` => 
+- `fmt: '& str' = "%Y-%m-%d"` => 
+
+build timeseries from timeline and series
 # Node Functions
 ## ts_count {#node.ts_count}
 ```sig
@@ -63,7 +88,7 @@ Convert the timeseries to complete if it doesn't have gaps
 ## ts_print {#node.ts_print}
 ```sig
 node TS.ts_print(
-    name: '& String',
+    name: '& str',
     header: 'bool' = true,
     head: 'Option < i64 >',
     missing: 'String' = ""
@@ -71,7 +96,7 @@ node TS.ts_print(
 ```
 
 **Arguments:**
-- `name: '& String'` => name of the timeseries
+- `name: '& str'` => name of the timeseries
 - `header: 'bool' = true` => show header
 - `head: 'Option < i64 >'` => number of head rows to show (all by default)
 - `missing: 'String' = ""` => Show missing values as this string
@@ -83,18 +108,18 @@ Print the given timeseries values in csv format
 ## ts_print_csv {#network.ts_print_csv}
 ```sig
 network TS.ts_print_csv(
-    name: 'String',
+    name: '& str',
     head: 'Option < usize >',
     nodes: 'Option < HashSet < String > >',
-    missing: 'String' = ""
+    missing: '& str' = ""
 )
 ```
 
 **Arguments:**
-- `name: 'String'` => Name of the timeseries to save
+- `name: '& str'` => Name of the timeseries to save
 - `head: 'Option < usize >'` => number of head rows to show (all by default)
 - `nodes: 'Option < HashSet < String > >'` => Include only these nodes (all by default)
-- `missing: 'String' = ""` => Show missing values as this string
+- `missing: '& str' = ""` => Show missing values as this string
 
 Save timeseries from all nodes into a single csv file
 
@@ -105,18 +130,18 @@ TODO: output to `file: PathBuf`
 ```sig
 network TS.series_csv(
     filter: 'Vec < bool >',
-    outfile: 'PathBuf',
+    outfile: '& Path',
     attrs: 'Vec < String >',
     series: 'Vec < String >',
-    missing: 'String' = ""
+    missing: '& str' = ""
 )
 ```
 
 **Arguments:**
 - `filter: 'Vec < bool >'` => 
-- `outfile: 'PathBuf'` => Path to the output csv
+- `outfile: '& Path'` => Path to the output csv
 - `attrs: 'Vec < String >'` => list of attributes to write
 - `series: 'Vec < String >'` => list of series to write
-- `missing: 'String' = ""` => Show missing values as this string
+- `missing: '& str' = ""` => Show missing values as this string
 
 Write the given nodes to csv with given attributes and series

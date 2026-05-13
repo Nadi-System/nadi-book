@@ -49,7 +49,7 @@
         rows: 0.5cm,
         columns: 1,
         [Gaurav Atreya],
-        [2025-12-01]
+        [2026-05-13]
     )
 }
 
@@ -270,6 +270,27 @@ NADI has two types of plugin systems, which means users can write their own anal
 #heading(level:1)[Who this book is for]
 #htmlblock("warning")[If you are a developer and want an API documentation for the data types used in the NADI Rust library refer to the docs.rs `nadi_core` page (https://docs.rs/nadi_core/latest/nadi_core/). But if you want to understand the core concepts, use cases, and examples then proceed.
 ]
+
+
+If you have to model, or analyze data that represents a system with directed network? then you might find NADI useful to you. Some examples include:
+
+
+- river networks, road networks,
+- file/directory structures,
+- flow networks,
+- control flow/signal flow graphs,
+- social networks, computer networks,
+- project management (Grantt chart),
+- compilers, git history,
+- any kind of dependencies map (modeling, project, files),
+- human resources in a company,
+- trade routes/ trade networks,
+- decision tree / policy tree,
+- reaction mechanics for compound sysnthesis,
+- neural signals,
+- gene-regulatory networks,
+- modeling work with dependencies to component models, etc
+
 
 
 This book has sections explaining the concepts of the NADI system, its developmental notes, user guide and developer guide.
@@ -1454,6 +1475,63 @@ UserError  at Line 1 Column 1: Negative Value not supported
 There is no way to catch specific errors for now. In future versions pattern matching for error handling might be added.
 
 
+==== Series/TimeSeries with Gaps
+
+
+
+The current version supports series and timeseries data with gaps in them. In the previous version you could only store complete series/timeseries resulting in the plugins having to fill the gap themselves.
+
+Furthermore the series can also be filled with user functions in current version.
+
+The code below shows how to define a series, how to introduce gaps or fill it using series map syntax.
+
+
+``````task
+env$x = 1:10
+
+env$x_gap = $x -> func(i) {if (i % 2 == 0) {return i * 10}}
+env$x_gap
+
+env$x_filled = $x_gap -> func(i=false) {if (i == false) { 0.0 } else { i }}
+env$x_filled
+``````
+
+
+
+Results:
+
+
+``````output
+MaskedSeries(len: 10, dtype: Integers, valid: 5) [-, 20, -, 40, -, 60, -, 80, -, 100]
+
+
+Series(len: 10, dtype: Floats) [0, 20, 0, 40, 0, 60, 0, 80, 0, 100]
+``````
+
+
+
+You can also use other series to fill the gaps like:
+
+
+``````task
+env$x_filled2 = ($x, $x_gap) -> func(i, j = false) { if (j == false) {i} else {j}}
+env$x_filled2
+``````
+
+
+
+Results:
+
+
+``````output
+Series(len: 10, dtype: Integers) [1, 20, 3, 40, 5, 60, 7, 80, 9, 100]
+``````
+
+
+
+Here we combined two series, but you can do multiple ones. And while you are in a network context, you can also use series from `inputs`, `outputs`, etc.
+
+
 
 #pagebreak()
 #set page(header:[#h(1fr) Network Detection (GIS)])
@@ -1938,10 +2016,10 @@ Results:
 
 
 ``````output
-node render (template: '& Template', safe: 'bool' = false)
+node render (template: 'Template', safe: 'bool' = false)
 Render the template based on the node attributes
 # Arguments
-- `template: & Template` String template to render
+- `template: Template` String template to render
 - `safe: bool` [def = false] if render fails keep it as it is instead of exiting
 
 
@@ -2448,7 +2526,7 @@ Results:
 ``````output
 false
 
--12
+-12.0
 ``````
 
 === Binary Operator
@@ -3228,7 +3306,7 @@ In addition to that, you can also assign the function arguments dynamic values b
 
 
 ``````task
-func last(vals, offset=1) { get(vals, length(vals) - offset) }
+func last(vals, offset=1) { get(vals, len(vals) - offset) }
 
 last(["a", "b", "c", "d", "e"])
 last(["a", "b", "c", "d", "e"], 2)
@@ -3288,7 +3366,7 @@ Since there is only immutable expression evaluation in the functions, anything r
 
 
 ``````task
-func sum_vals(vals, ind=length(vals) - 1) {
+func sum_vals(vals, ind=len(vals) - 1) {
 	if (ind < 0) { 0 } else {
 		get(vals, ind) + sum_vals(vals, ind - 1)
 	}
@@ -3363,9 +3441,9 @@ Results:
 
 
 ``````output
-{bottom = 10, deltay = 10, fontsize = 10, top = 10, deltax = 10, right = 10, left = 10}
+{fontsize = 10.0, deltay = 10.0, bottom = 10.0, left = 10.0, deltax = 10.0, top = 10.0, right = 10.0}
 
-{bottom = 10, top = 100, deltay = 10, left = 10, deltax = 10, right = 10, fontsize = 10}
+{deltay = 10.0, fontsize = 10.0, bottom = 10.0, top = 100.0, left = 10.0, right = 10.0, deltax = 10.0}
 ``````
 
 
@@ -4037,7 +4115,7 @@ network sum(array(env.count(), 1))
   a = 2
 }
 
-FunctionError  at Line 3 Column 1: function count: Argument 1 (vars [& [bool]]) is required
+FunctionError  at Line 3 Column 1: function count: Argument 1 (vars [Vec < bool >]) is required
 ``````
 
 === Node Variables/Functions
@@ -4132,6 +4210,237 @@ Results:
 ``````
 
 
+#heading(level:2)[Series and TimeSeries]
+
+=== Series and TimeSeries
+
+
+
+Series is a list of values of same types. The array in nadi can be different types, so this is a separate data type from that.
+
+In addition to arrays, Series values can be null, while arrays or attributes can not be null.
+
+TimeSeries is Series plus time information. Currently the time information is not as well designed due to complications with timezones and other aspects of datetime. So the recommendation is to keep the time information as string, work with Series, and save timeseries with string column of time.
+
+Series is accessed with `$` while timeseries is accessed with `$$` after variable type.
+
+
+==== Series vs Attributes
+
+
+
+While you can assign an array to a series variable, it will internally convert that to the series. And similarly assigning series to attribute will convert it into an attribute array.
+
+
+``````task
+# array
+env.x = [1,2,3]
+env.x
+env$x = [1,2,3]
+env$x
+
+env.x + env$x
+``````
+
+
+
+Results:
+
+
+``````output
+[1, 2, 3]
+
+
+Series(len: 3, dtype: Integers) [1, 2, 3]
+
+[2, 4, 6]
+``````
+
+
+
+The main thing to keep in mind is that they are stored separately, and the inter-operability is just there to make things easier.
+
+
+==== Series with Gaps
+
+
+
+Series loaded from CSV/DSS or other sources (each need their own plugins) can have missing data. But because attributes can not be null, only way to make a series with missing data is to generate it with series map.
+
+
+``````task
+env$x = 1:10
+env$x
+env$xg = $x -> func(i) {if (i%3 != 0) {return i}}
+env$xg
+``````
+
+
+
+Results:
+
+
+``````output
+Series(len: 10, dtype: Integers) [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+
+MaskedSeries(len: 10, dtype: Integers, valid: 7) [1, 2, -, 4, 5, -, 7, 8, -, 10]
+``````
+
+==== Data Imputation
+
+
+
+You can fill the gaps again using series map. Or of course you can load functions from plugins that do it for you.
+
+Because functions can’t take null values, you need to use a default value to check if the series sent any values or not. This might be fixed in the future versions.
+
+
+``````task
+env $xg -> func(i=false) {if (i==false) {0} else {i}}
+``````
+
+
+
+Results:
+
+
+``````output
+Series(len: 10, dtype: Integers) [1, 2, 0, 4, 5, 0, 7, 8, 0, 10]
+``````
+
+
+
+You can also use multiple series in series map to impute data based on other series
+
+
+``````task
+network.load_str("a -> b")
+node[a]$x = 1:8
+node[b]$x = node[a]$x -> func(i) {if (i%3 != 0) {i * 10}}
+nm $x
+
+# filling
+node[b]$xf = ($x, input$x) -> func(b=false, a=false) {if (b == false) {a} else {b}}
+node[b] $xf
+``````
+
+
+
+Results:
+
+
+``````output
+{
+  b = MaskedSeries(len: 8, dtype: Integers, valid: 6) [10, 20, -, 40, 50, -, 70, 80],
+  a = Series(len: 8, dtype: Integers) [1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+
+Series(len: 8, dtype: Integers) [10, 20, 3, 40, 50, 6, 70, 80]
+``````
+
+==== Conversion of TimeSeries and Series
+
+
+
+If you want to convert series into timeseries, you need another series with same length to be the time component.
+
+
+``````task
+env$times = ["1920-01-01", "1920-01-02", "1920-01-03", "1920-01-04"]
+env$values = [1, 2, 3, 4]
+
+env$$tsvals = timeseries($times, $values)
+env$$tsvals
+``````
+
+
+
+Results:
+
+
+``````output
+TimeSeries([1920-01-01, 1920-01-02, ..., 1920-01-04], values: Series(len: 4, dtype: Integers) [1, 2, 3, 4])
+``````
+
+
+
+While you can use timeseries directly where you need series, it will only use the series component
+
+
+``````task
+env$y = env$$tsvals
+env$y
+``````
+
+
+
+Results:
+
+
+``````output
+Series(len: 4, dtype: Integers) [1, 2, 3, 4]
+``````
+
+
+
+If you are doing series map, only one of them needs to be a timeseries, the time information will be carried over to the result.
+
+
+``````task
+env$$z = (env$$tsvals, env$y) -> func(a, b) {a + b}
+env$$z
+``````
+
+
+
+Results:
+
+
+``````output
+TimeSeries([1920-01-01, 1920-01-02, ..., 1920-01-04], values: Series(len: 4, dtype: Integers) [2, 4, 6, 8])
+``````
+
+
+
+If you are trying to assign a series values to a timeseries, it will only work if the timeseries already exists.
+
+
+``````task
+env$$z2 = (env$values, env$y) -> func(a, b) {a + b}
+env$$z2
+``````
+
+
+
+\*Error\*:
+
+
+``````error
+TimeSeriesNotFoundError  at Line 1 Column 1: z2
+``````
+
+
+
+If the timeseries already exists, then it will overwrite its values.
+
+
+``````task
+env$$z = (env$values, env$y) -> func(a, b) {a * b}
+env$$z
+``````
+
+
+
+Results:
+
+
+``````output
+TimeSeries([1920-01-01, 1920-01-02, ..., 1920-01-04], values: Series(len: 4, dtype: Integers) [1, 4, 9, 16])
+``````
+
+
 #heading(level:2)[Plugins]
 
 === Plugins
@@ -4192,10 +4501,10 @@ Results:
 
 
 ``````output
-node render (template: '& Template', safe: 'bool' = false)
+node render (template: 'Template', safe: 'bool' = false)
 Render the template based on the node attributes
 # Arguments
-- `template: & Template` String template to render
+- `template: Template` String template to render
 - `safe: bool` [def = false] if render fails keep it as it is instead of exiting
 
 
@@ -5205,10 +5514,10 @@ Results:
 ``````output
 {
   "03399800" = <None>,
-  IL50499 = 1980,
-  IL40055 = 1980,
-  IL00955 = 1977,
-  IL00070 = 1960
+  IL50499 = 1980.0,
+  IL40055 = 1980.0,
+  IL00955 = 1977.0,
+  IL00070 = 1960.0
 }
 
 {
@@ -5343,13 +5652,13 @@ Results:
 ``````output
 {
   "03399800" = <None>,
-  IL50499 = 144000,
+  IL50499 = 144000.0,
   IL40055 = 0.08,
   IL00955 = <None>,
   IL00070 = <None>,
   IL00039 = <None>,
   "03386500" = 9.853134072120001,
-  IL00102 = 2,
+  IL00102 = 2.0,
   "03386000" = <None>,
   "03385500" = <None>
 }
@@ -5425,8 +5734,8 @@ Results:
   IN04021 = [0.08, 0.2],
   IN03653 = [0.04, 0.37],
   IL50585 = [0.03, 0.16],
-  IL01085 = [240, 240.171142047264],
-  IL00606 = [0.6, 57],
+  IL01085 = [240.0, 240.171142047264],
+  IL00606 = [0.6, 57.0],
   IN00316 = [0.09, 0.15],
   IN00317 = [0.15, 0.7000000000000001],
   IN00319 = [0.7000000000000001, 43.053904369656],
@@ -5440,7 +5749,7 @@ Results:
   IN00618 = [0.41000000000000003, 1.2700000000000002],
   IN00098 = [0.33, 263.021357392616],
   IN00035 = [0.23, 168.12355234608],
-  "03343010" = [13732, 13755.171304576803],
+  "03343010" = [13732.0, 13755.171304576803],
   IN00528 = [0.21, 0.32],
   IN00151 = [1.18, 4.75],
   IN03337 = [1.1500000000000001, 42.9097178978],
@@ -5452,10 +5761,10 @@ Results:
   IL40011 = [2.36, 11.4],
   IN00726 = [0.01, 0.2],
   IN00731 = [0.2, 3.73],
-  IN00729 = [0.16, 1],
+  IN00729 = [0.16, 1.0],
   IL00742 = [0.2, 21.7],
   IN00722 = [0.29, 3.08],
-  IN00723 = [0.2, 1],
+  IN00723 = [0.2, 1.0],
   IN00437 = [0.2, 2.4],
   IN00721 = [0.17, 0.39],
   IN00431 = [0.39, 0.85],
@@ -5468,18 +5777,18 @@ Results:
   IN00735 = [1.9000000000000001, 2.15],
   IL50291 = [0.06, 69.89807631177601],
   IN00753 = [0.3, 1868.7614815512],
-  IN00459 = [0.31, 1790],
-  "03332605" = [1790, 1793],
+  IN00459 = [0.31, 1790.0],
+  "03332605" = [1790.0, 1793.0],
   IN00240 = [1.6, 35.2],
-  IN03801 = [0.2, 809],
-  IN03355 = [0, 695.78422034768],
+  IN03801 = [0.2, 809.0],
+  IN03355 = [0.0, 695.78422034768],
   IN00321 = [0.23, 0.49],
   IN03984 = [0.13, 8.620000000000001],
-  IN03462 = [0, 33.65716107796],
+  IN03462 = [0.0, 33.65716107796],
   IN00763 = [0.09, 0.45],
-  IN00767 = [0, 768.8080807372801],
+  IN00767 = [0.0, 768.8080807372801],
   IN00441 = [0.38, 556.23730459968],
-  IN03434 = [0, 263.58341177426405],
+  IN03434 = [0.0, 263.58341177426405],
   IN03758 = [0.64, 578.7119252311201],
   IN00445 = [0.37, 499.66125210536006],
   IN00207 = [0.26, 0.28],
@@ -5489,7 +5798,7 @@ Results:
   IN00188 = [0.79, 4.04],
   IN00057 = [1.2, 14.2],
   IN00120 = [0.44, 14.450000000000001],
-  IN03353 = [0, 0.25],
+  IN03353 = [0.0, 0.25],
   IN00166 = [0.22, 0.97],
   IN00325 = [0.21, 0.63],
   IN00460 = [0.15, 834.9862486900802],
@@ -5499,14 +5808,14 @@ Results:
   IN03788 = [0.11, 0.43],
   IN00709 = [0.23, 0.36],
   IN03956 = [0.13, 294.15926653704],
-  "03359000" = [294.15926653704, 295],
-  IN00663 = [0, 0.37],
-  IN00666 = [0, 0.85],
+  "03359000" = [294.15926653704, 295.0],
+  IN00663 = [0.0, 0.37],
+  IN00666 = [0.0, 0.85],
   IN00704 = [0.35000000000000003, 10.75],
-  IN00702 = [0, 134.30289503066402],
-  IN00711 = [0, 2986.82183069928],
+  IN00702 = [0.0, 134.30289503066402],
+  IN00711 = [0.0, 2986.82183069928],
   IN00695 = [0.15, 0.66],
-  IN03272 = [0, 1.75],
+  IN03272 = [0.0, 1.75],
   IN00691 = [0.22, 15.1],
   IN00665 = [0.45, 0.63],
   IN03503 = [0.02, 1.23],
@@ -5530,7 +5839,10 @@ Let’s try to fix them, or avoid points without data.
 
 
 ``````task
-nodes.all_inputs_ba = all(inputs {basin_area?});
+nodes.all_inputs_ba = node {
+	x = inputs {basin_area?}
+	all(*x)
+};
 nodes.incorrect = basin_area? & all_inputs_ba & (
 	basin_area < (0.975 * sum(inputs.basin_area))
 );
@@ -5855,12 +6167,12 @@ Results:
 4181
 
 {
-  IL50499 = [56, 738700],
-  IL40055 = [28, 47],
-  IL00955 = [36, 366],
-  IL00070 = [24, 153],
-  IL00039 = [59, 633],
-  IL00102 = [38, 1814]
+  IL50499 = [56.0, 738700.0],
+  IL40055 = [28.0, 47.0],
+  IL00955 = [36.0, 366.0],
+  IL00070 = [24.0, 153.0],
+  IL00039 = [59.0, 633.0],
+  IL00102 = [38.0, 1814.0]
 }
 ``````
 
@@ -5948,25 +6260,25 @@ Results:
 353
 
 {
-  IL50593 = [108, 10790, 0.27],
-  IL50678 = [110, 5250, 0.1],
-  IL50066 = [55, 1087, 0.7000000000000001],
-  IN00446 = [54, 7538, 4.75],
-  IL00688 = [52, 3474, 3.3000000000000003],
-  IN00439 = [56, 321, 0.52],
-  IN03920 = [55, 39, 0.02],
-  IN00505 = [56, 66, 0.03],
-  IN00036 = [63, 1595, 1.2],
-  IN00201 = [55, 2861, 4.69],
-  IN00181 = [55, 1380, 4.7],
-  IN00069 = [68, 6718, 5.8],
-  IN03731 = [57, 128, 0.8200000000000001],
-  IN03007 = [55, 29800, 0],
-  IN00197 = [62, 3555, 1.82],
-  IN00103 = [60, 1158, 0.36],
-  IN00133 = [82, 13000, 9.34],
-  IN00342 = [63, 198, 0.19],
-  IN00565 = [53, 109, 0.1]
+  IL50593 = [108.0, 10790.0, 0.27],
+  IL50678 = [110.0, 5250.0, 0.1],
+  IL50066 = [55.0, 1087.0, 0.7000000000000001],
+  IN00446 = [54.0, 7538.0, 4.75],
+  IL00688 = [52.0, 3474.0, 3.3000000000000003],
+  IN00439 = [56.0, 321.0, 0.52],
+  IN03920 = [55.0, 39.0, 0.02],
+  IN00505 = [56.0, 66.0, 0.03],
+  IN00036 = [63.0, 1595.0, 1.2],
+  IN00201 = [55.0, 2861.0, 4.69],
+  IN00181 = [55.0, 1380.0, 4.7],
+  IN00069 = [68.0, 6718.0, 5.8],
+  IN03731 = [57.0, 128.0, 0.8200000000000001],
+  IN03007 = [55.0, 29800.0, 0.0],
+  IN00197 = [62.0, 3555.0, 1.82],
+  IN00103 = [60.0, 1158.0, 0.36],
+  IN00133 = [82.0, 13000.0, 9.34],
+  IN00342 = [63.0, 198.0, 0.19],
+  IN00565 = [53.0, 109.0, 0.1]
 }
 ``````
 
@@ -6414,6 +6726,7 @@ nodes.visual = {};
 nodes.visual.nodeshape = "circle";
 nodes(good).visual.nodecolor = "darkgreen";
 nodes(good).visual.textcolor = "darkgreen";
+node[03221646].visual.nodecolor = "red"; # for later
 network svg_ts_blocks("output/scioto-ts-gap-id.svg", "{NAME}", "streamflow", 620.0, 820.0, arr_width=500.0, bgcolor="#ffffff33")
 ``````
 
@@ -6431,6 +6744,169 @@ Results:
 
 #figure(image("example/../output/scioto-ts-gap-id.svg"), caption: [Plot Showing the Data Gaps in the CSV])
 
+
+We can use the series map function in NADI to fill the gaps in timeseries using other nodes. The example below shows just two nodes using one to fill the other.
+
+
+``````task
+# example to fill timeseries with a value from another node
+node[03229610]$sf_fix = ($$streamflow, node[03227500]$$streamflow) -> func(a=false, b=false) {
+	if (a == false & b == false) {return}
+	if (a == false) { float(b) } else { float(a) }
+}
+
+node[03229610]$$streamflow
+node[03229610]$sf_fix
+``````
+
+
+
+Results:
+
+
+``````output
+TimeSeries([1920-10-01, 1920-10-02, ..., 2024-12-31], values: MaskedSeries(len: 38078, dtype: Strings, valid: 7032) [-, -, -, -, -, -, -, -, -, -, ...])
+
+MaskedSeries(len: 38078, dtype: Floats, valid: 38067) [110, 110, 110, 110, 110, 110, 110, 110, 110, 110, ...]
+``````
+
+
+
+We can see the data is filled here, in the beginning the data comes from the node `03227500`, while at the end we can see the data comes from the node itself.
+
+
+``````task
+node[03229610]$sf_fix[0:100]
+nm[03229610,03227500] {$$streamflow[0:100]}
+
+l = node[03229610].sr_len("sf_fix")-1
+s = l - 500
+node[03229610]$sf_fix[s:l]
+nm[03229610,03227500] {$$streamflow[s:l]}
+``````
+
+
+
+Results:
+
+
+``````output
+Series(len: 101, dtype: Floats) [110, 110, 110, 110, 110, 110, 110, 110, 110, 110, ...]
+
+{
+  "03229610" = MaskedSeries(len: 101, dtype: Attributes, valid: 0) [-, -, -, -, -, -, -, -, -, -, ...],
+  "03227500" = Series(len: 101, dtype: Floats) [110, 110, 110, 110, 110, 110, 110, 110, 110, 110, ...]
+}
+
+
+
+Series(len: 501, dtype: Floats) [574, 485, 465, 439, 421, 5170, 5360, 5300, 4260, 3620, ...]
+
+{
+  "03229610" = Series(len: 501, dtype: Strings) ["574.0", "485.0", "465.0", "439.0", "421.0", "5170.0", "5360.0", "5300.0", "4260.0", "3620.0", ...],
+  "03227500" = Series(len: 501, dtype: Floats) [191, 176, 165, 159, 134, 3500, 3690, 4520, 3530, 2970, ...]
+}
+``````
+
+
+
+Now while this was an example where we manually chose which node to use to fill the other. You probably noticed that we can’t simply fill the value in many cases, or you might want to use multiple nodes, or automate it. In that case you can simply use the `inputs`/`outputs`/`edges` or any other keywords in similar manner to use the timeseries from connected nodes, as well as using other attribute values to weight or scale the values.
+
+
+``````task
+node[03229610]$sf_fix2 = ($$streamflow, im$$streamflow) -> func(a=false, b=false) {
+	if (a == false & b == false) {return}
+	if (a == false) {
+      if (len(b) == 0) {return}
+	  sum([float(i) for i in values(b)])
+	} else { float(a) }
+}
+
+node[03229610]$sf_fix[1000:1200]
+node[03229610]$sf_fix2[1000:1200]
+
+node[03229610]$sf_org = $$streamflow -> func(a="") {
+	if (a != "") {float(a)}
+}
+# need to add the ability to calculate mean of maskedseries
+
+node[03229610] {[sr_mean("sf_org"), sr_mean("sf_fix"), sr_mean("sf_fix2")]}
+``````
+
+
+
+Results:
+
+
+``````output
+Series(len: 201, dtype: Floats) [271, 271, 231, 194, 177, 194, 194, 271, 231, 360, ...]
+
+Series(len: 201, dtype: Floats) [405, 389, 345, 276, 252, 3304, 904, 891, 422, 528, ...]
+
+
+[2781.179749715586, 1701.8723040954108, 2077.1651452282154]
+``````
+
+``````task
+nodes$$streamflow2 = $$streamflow
+node[03229610]$$streamflow2 = $sf_fix2
+network svg_ts_blocks("output/scioto-ts-gap-id-2.svg", "{NAME}", "streamflow2", 620.0, 820.0, arr_width=500.0, bgcolor="#ffffff33")
+``````
+
+
+
+Results:
+
+
+``````output
+
+``````
+
+
+
+
+#figure(image("example/../output/scioto-ts-gap-id-2.svg"), caption: [Plot Showing the Data Gaps in the CSV])
+
+
+Now if we do the same with all the nodes with more than one input nodes, we get the following result.
+
+
+``````task
+
+nodes(len(inputs._)>0)$sf_fix3 = ($$streamflow, im$$streamflow) -> func(a=false, b=false) {
+	if (a == false & b == false) {return}
+	if (a == false) {
+      if (len(b) == 0) {return}
+	  sum([float(i) for i in values(b)])
+	} else { float(a) }
+}
+
+nodes$$streamflow3 = $$streamflow
+
+nodes(len(inputs._)>0)$$streamflow3 = $sf_fix3
+network svg_ts_blocks("../output/scioto-ts-gap-id-3.svg", "{NAME}", "streamflow3", 620.0, 820.0, arr_width=500.0, bgcolor="#ffffff33")
+``````
+
+
+
+Results:
+
+
+``````output
+
+``````
+
+
+
+
+#figure(image("example/../output/scioto-ts-gap-id-3.svg"), caption: [Plot Showing the Data Gaps in the CSV])
+
+
+If you compare this with the previous image side by side, you can see that now we have timeseries data available for a lot more range. Look at the red node, and the root node, how the timeseries range is now the same as the longest input node.
+
+But it is still limited to when the data is available in the input nodes. We can run another step with output nodes to fill the gaps in the leaf nodes. We can also do that multiple times in a loop to propagate the values based on previous imputation, but of course that decreases the accuracy overall.
+
+Note: This is a simplified algorithm to fill the gaps, you can make it more complicated.
 
 
 
@@ -6499,12 +6975,12 @@ nodes(output._?) do echo(env.render("{i} -> {o}", i=node.INDEX, o=output.INDEX))
 
 
 
-Results:
+\*Error\*:
 
 
-``````output
-1 -> 0
-2 -> 0
+``````error
+
+NotANodeContextError [c] at Line 2 Column 1: currently not inside a node context
 ``````
 
 
@@ -7162,16 +7638,11 @@ network and(what?, and(true, true))
 
 
 
-Results:
+\*Error\*:
 
 
-``````output
-true
-
-
-true
-
-false
+``````error
+FunctionError  at Line 1 Column 1: function and: Invalid Type: Integer
 ``````
 
 
@@ -7211,7 +7682,7 @@ All the functions available on this instance of nadi, are listed here.
 #table(
   columns: 3,
   table.header([*Plugin*], [*Function*], [*Help*]),
-  [#link("ATTRS.md")[`ATTRS`]], [#link(<attrs:env.float_div>)[`float_div`]], [Float Division (same as / operator)], [#link("ATTRS.md")[`ATTRS`]], [#link(<attrs:env.float_mult>)[`float_mult`]], [Float Multiplication (same as \* operator)], [#link("ATTRS.md")[`ATTRS`]], [#link(<attrs:env.get>)[`get`]], [get the choosen attribute from Array or AttrMap], [#link("ATTRS.md")[`ATTRS`]], [#link(<attrs:env.keys>)[`keys`]], [keys of the attribute map], [#link("ATTRS.md")[`ATTRS`]], [#link(<attrs:env.parse_attr>)[`parse_attr`]], [Parse attribute from string], [#link("ATTRS.md")[`ATTRS`]], [#link(<attrs:env.parse_attrmap>)[`parse_attrmap`]], [Parse attribute map from string], [#link("ATTRS.md")[`ATTRS`]], [#link(<attrs:env.strmap>)[`strmap`]], [map values from the attribute based on the given table], [#link("ATTRS.md")[`ATTRS`]], [#link(<attrs:env.values>)[`values`]], [values of the attribute map], [#link("COMMAND.md")[`COMMAND`]], [#link(<command:env.command>)[`command`]], [Runs a command in terminal and returns attribute map], [#link("COMMAND.md")[`COMMAND`]], [#link(<command:env.set_shell_env>)[`set_shell_env`]], [Set environment variable in the shell], [#link("COMMAND.md")[`COMMAND`]], [#link(<command:env.shell_env>)[`shell_env`]], [Get environment variable from the shell], [#link("CORE.md")[`CORE`]], [#link(<core:env.append>)[`append`]], [append a value to an array], [#link("CORE.md")[`CORE`]], [#link(<core:env.array>)[`array`]], [make an array from the arguments], [#link("CORE.md")[`CORE`]], [#link(<core:env.assert_eq>)[`assert_eq`]], [Assert the two values are equal], [#link("CORE.md")[`CORE`]], [#link(<core:env.assert_neq>)[`assert_neq`]], [Assert the two values are not equal], [#link("CORE.md")[`CORE`]], [#link(<core:env.assert>)[`assert`]], [Assert the condition is true], [#link("CORE.md")[`CORE`]], [#link(<core:env.attrmap>)[`attrmap`]], [make an attrmap from the arguments], [#link("CORE.md")[`CORE`]], [#link(<core:env.concat>)[`concat`]], [Concat the strings], [#link("CORE.md")[`CORE`]], [#link(<core:env.count_str>)[`count_str`]], [Get a count of unique string values], [#link("CORE.md")[`CORE`]], [#link(<core:env.count>)[`count`]], [Count the number of true values in the array], [#link("CORE.md")[`CORE`]], [#link(<core:env.day>)[`day`]], [day from date/datetime], [#link("CORE.md")[`CORE`]], [#link(<core:env.drop_nan>)[`drop_nan`]], [append a value to an array], [#link("CORE.md")[`CORE`]], [#link(<core:env.flatten>)[`flatten`]], [flatten the given list of arrays into a single one], [#link("CORE.md")[`CORE`]], [#link(<core:env.float>)[`float`]], [make a float from value], [#link("CORE.md")[`CORE`]], [#link(<core:env.hour>)[`hour`]], [hour from time/datetime], [#link("CORE.md")[`CORE`]], [#link(<core:env.insert>)[`insert`]], [Insert a key and value to a attrmap], [#link("CORE.md")[`CORE`]], [#link(<core:env.int>)[`int`]], [make an int from the value], [#link("CORE.md")[`CORE`]], [#link(<core:env.isinf>)[`isinf`]], [check if a float is +/- infinity], [#link("CORE.md")[`CORE`]], [#link(<core:env.isna>)[`isna`]], [check if a float is nan], [#link("CORE.md")[`CORE`]], [#link(<core:env.json>)[`json`]], [format the attribute as a json string], [#link("CORE.md")[`CORE`]], [#link(<core:env.length>)[`length`]], [length of an array or hashmap], [#link("CORE.md")[`CORE`]], [#link(<core:env.max_num>)[`max_num`]], [Minimum of the variables], [#link("CORE.md")[`CORE`]], [#link(<core:env.max>)[`max`]], [Maximum of the variables], [#link("CORE.md")[`CORE`]], [#link(<core:env.min_num>)[`min_num`]], [Minimum of the variables], [#link("CORE.md")[`CORE`]], [#link(<core:env.min>)[`min`]], [Minimum of the variables], [#link("CORE.md")[`CORE`]], [#link(<core:env.minute>)[`minute`]], [minute from time/datetime], [#link("CORE.md")[`CORE`]], [#link(<core:env.month>)[`month`]], [month from date/datetime], [#link("CORE.md")[`CORE`]], [#link(<core:env.nanosecond>)[`nanosecond`]], [nanosecond from time/datetime], [#link("CORE.md")[`CORE`]], [#link(<core:env.now>)[`now`]], [get the current date time], [#link("CORE.md")[`CORE`]], [#link(<core:env.prod>)[`prod`]], [Product of the variables], [#link("CORE.md")[`CORE`]], [#link(<core:env.range>)[`range`]], [Generate integer array, end is not included], [#link("CORE.md")[`CORE`]], [#link(<core:env.second>)[`second`]], [second from time/datetime], [#link("CORE.md")[`CORE`]], [#link(<core:env.str_quote>)[`str_quote`]], [Convert string to double quoted form], [#link("CORE.md")[`CORE`]], [#link(<core:env.str>)[`str`]], [make a string from value], [#link("CORE.md")[`CORE`]], [#link(<core:env.sum>)[`sum`]], [Sum of the variables], [#link("CORE.md")[`CORE`]], [#link(<core:env.timediff>)[`timediff`]], [get the current date time], [#link("CORE.md")[`CORE`]], [#link(<core:env.to_attrmap>)[`to_attrmap`]], [make an attrmap from a list of (k, v)], [#link("CORE.md")[`CORE`]], [#link(<core:env.today>)[`today`]], [get the current date], [#link("CORE.md")[`CORE`]], [#link(<core:env.type_name>)[`type_name`]], [Type name of the arguments], [#link("CORE.md")[`CORE`]], [#link(<core:env.unique_str>)[`unique_str`]], [Get a list of unique string values], [#link("CORE.md")[`CORE`]], [#link(<core:env.year>)[`year`]], [year from date/datetime], [#link("CORE.md")[`CORE`]], [#link(<core:env.zip>)[`zip`]], [make an array combining the arrays from arguments], [#link("DEBUG.md")[`DEBUG`]], [#link(<debug:env.clip>)[`clip`]], [Echo the `----8<----` line for clipping syntax], [#link("DEBUG.md")[`DEBUG`]], [#link(<debug:env.debug>)[`debug`]], [Print the args and kwargs on this function], [#link("DEBUG.md")[`DEBUG`]], [#link(<debug:env.echo>)[`echo`]], [Echo the string to stdout or stderr], [#link("DEBUG.md")[`DEBUG`]], [#link(<debug:env.sleep>)[`sleep`]], [sleep for given number of milliseconds], [#link("FILES.md")[`FILES`]], [#link(<files:env.exists>)[`exists`]], [Checks if the given path exists], [#link("FILES.md")[`FILES`]], [#link(<files:env.from_file>)[`from_file`]], [Reads the file contents as string], [#link("FILES.md")[`FILES`]], [#link(<files:env.line>)[`line`]], [Checks if the given path exists], [#link("FILES.md")[`FILES`]], [#link(<files:env.to_file>)[`to_file`]], [Writes the string to the file], [#link("LOGIC.md")[`LOGIC`]], [#link(<logic:env.all>)[`all`]], [check if all of the bool are true], [#link("LOGIC.md")[`LOGIC`]], [#link(<logic:env.and>)[`and`]], [Boolean and], [#link("LOGIC.md")[`LOGIC`]], [#link(<logic:env.any>)[`any`]], [check if any of the bool are true], [#link("LOGIC.md")[`LOGIC`]], [#link(<logic:env.eq>)[`eq`]], [Equality than check], [#link("LOGIC.md")[`LOGIC`]], [#link(<logic:env.gt>)[`gt`]], [Greater than check], [#link("LOGIC.md")[`LOGIC`]], [#link(<logic:env.ifelse>)[`ifelse`]], [Simple if else condition], [#link("LOGIC.md")[`LOGIC`]], [#link(<logic:env.lt>)[`lt`]], [Less than check], [#link("LOGIC.md")[`LOGIC`]], [#link(<logic:env.not>)[`not`]], [boolean not], [#link("LOGIC.md")[`LOGIC`]], [#link(<logic:env.or>)[`or`]], [boolean or], [#link("MATH.md")[`MATH`]], [#link(<math:env.exp>)[`exp`]], [Exponential], [#link("MATH.md")[`MATH`]], [#link(<math:env.log>)[`log`]], [Logarithm of a value, natural if base not given], [#link("MATH.md")[`MATH`]], [#link(<math:env.powf>)[`powf`]], [Float power], [#link("MATH.md")[`MATH`]], [#link(<math:env.powi>)[`powi`]], [Integer power], [#link("MATH.md")[`MATH`]], [#link(<math:env.sqrt>)[`sqrt`]], [Square Root], [#link("OPTIMUM.md")[`OPTIMUM`]], [#link(<optimum:env.uniform_crossing_over>)[`uniform_crossing_over`]], [Crossing over of linear genes from two parent given uniform probability], [#link("RANDOM.md")[`RANDOM`]], [#link(<random:env.random_bool>)[`random_bool`]], [Random bool given uniform probability], [#link("REGEX.md")[`REGEX`]], [#link(<regex:env.str_count>)[`str_count`]], [Count the number of matches of given pattern in the string], [#link("REGEX.md")[`REGEX`]], [#link(<regex:env.str_filter>)[`str_filter`]], [Filter from the string list with only the values matching pattern], [#link("REGEX.md")[`REGEX`]], [#link(<regex:env.str_find_all>)[`str_find_all`]], [Find all the matches of the given pattern in the value], [#link("REGEX.md")[`REGEX`]], [#link(<regex:env.str_find>)[`str_find`]], [Find the given pattern in the value], [#link("REGEX.md")[`REGEX`]], [#link(<regex:env.str_join>)[`str_join`]], [Join the list of strings with the given string], [#link("REGEX.md")[`REGEX`]], [#link(<regex:env.str_match>)[`str_match`]], [Check if the given pattern matches the value or not], [#link("REGEX.md")[`REGEX`]], [#link(<regex:env.str_replace>)[`str_replace`]], [Replace the occurances of the given match], [#link("REGEX.md")[`REGEX`]], [#link(<regex:env.str_split>)[`str_split`]], [Split the string with the given pattern], [#link("RENDER.md")[`RENDER`]], [#link(<render:env.render>)[`render`]], [Render the template based on the node attributes], [#link("VISUALS.md")[`VISUALS`]], [#link(<visuals:env.image>)[`image`]], [], [#link("VISUALS.md")[`VISUALS`]], [#link(<visuals:env.svg_open_multi>)[`svg_open_multi`]], [], [#link("VISUALS.md")[`VISUALS`]], [#link(<visuals:env.svg_open>)[`svg_open`]], [], [#link("VISUALS.md")[`VISUALS`]], [#link(<visuals:env.svg_settings>)[`svg_settings`]], [Generate the margins for the SVGs], [#link("csv.md")[`csv`]], [#link(<csv:env.count_data>)[`count_data`]], [Count the number of data in a column from a CSV file], [#link("csv.md")[`csv`]], [#link(<csv:env.count_usgs_years>)[`count_usgs_years`]], [Count the number of data in a column from a CSV file], [#link("csv.md")[`csv`]], [#link(<csv:env.schema>)[`schema`]], [List the columns in a CSV file], [#link("gis.md")[`gis`]], [#link(<gis:env.features_count>)[`features_count`]], [Show the fields in the GIS file layer as a list], [#link("gis.md")[`gis`]], [#link(<gis:env.fields>)[`fields`]], [Show the fields in the GIS file layer as a list], [#link("gis.md")[`gis`]], [#link(<gis:env.layers>)[`layers`]], [Show the layers of the GIS file as a list], [#link("gis.md")[`gis`]], [#link(<gis:env.line>)[`line`]], [Show the layers of the GIS file as a list], [#link("gis.md")[`gis`]], [#link(<gis:env.values>)[`values`]], [Returns the values from a feature in a GIS file from its index], [#link("typst.md")[`typst`]], [#link(<typst:env.compile>)[`compile`]], [convert the typst content into pdf/svg/png], [#link("typst.md")[`typst`]], [#link(<typst:env.svg2pdf>)[`svg2pdf`]], [convert the svg content into pdf or png (or svg)]
+  [#link("ATTRS.md")[`ATTRS`]], [#link(<attrs:env.float_div>)[`float_div`]], [Float Division (same as / operator)], [#link("ATTRS.md")[`ATTRS`]], [#link(<attrs:env.float_mult>)[`float_mult`]], [Float Multiplication (same as \* operator)], [#link("ATTRS.md")[`ATTRS`]], [#link(<attrs:env.get>)[`get`]], [get the choosen attribute from Array or AttrMap], [#link("ATTRS.md")[`ATTRS`]], [#link(<attrs:env.is_none>)[`is_none`]], [check for none value], [#link("ATTRS.md")[`ATTRS`]], [#link(<attrs:env.keys>)[`keys`]], [keys of the attribute map], [#link("ATTRS.md")[`ATTRS`]], [#link(<attrs:env.none>)[`none`]], [None function that returns None], [#link("ATTRS.md")[`ATTRS`]], [#link(<attrs:env.parse_attr>)[`parse_attr`]], [Parse attribute from string], [#link("ATTRS.md")[`ATTRS`]], [#link(<attrs:env.parse_attrmap>)[`parse_attrmap`]], [Parse attribute map from string], [#link("ATTRS.md")[`ATTRS`]], [#link(<attrs:env.strmap>)[`strmap`]], [map values from the attribute based on the given table], [#link("ATTRS.md")[`ATTRS`]], [#link(<attrs:env.values>)[`values`]], [values of the attribute map], [#link("COMMAND.md")[`COMMAND`]], [#link(<command:env.command>)[`command`]], [Runs a command in terminal and returns attribute map], [#link("COMMAND.md")[`COMMAND`]], [#link(<command:env.set_shell_env>)[`set_shell_env`]], [Set environment variable in the shell], [#link("COMMAND.md")[`COMMAND`]], [#link(<command:env.shell_env>)[`shell_env`]], [Get environment variable from the shell], [#link("CORE.md")[`CORE`]], [#link(<core:env.append>)[`append`]], [append a value to an array], [#link("CORE.md")[`CORE`]], [#link(<core:env.array>)[`array`]], [make an array from the arguments], [#link("CORE.md")[`CORE`]], [#link(<core:env.assert_eq>)[`assert_eq`]], [Assert the two values are equal], [#link("CORE.md")[`CORE`]], [#link(<core:env.assert_neq>)[`assert_neq`]], [Assert the two values are not equal], [#link("CORE.md")[`CORE`]], [#link(<core:env.assert>)[`assert`]], [Assert the condition is true], [#link("CORE.md")[`CORE`]], [#link(<core:env.attrmap>)[`attrmap`]], [make an attrmap from the arguments], [#link("CORE.md")[`CORE`]], [#link(<core:env.concat>)[`concat`]], [Concat the strings], [#link("CORE.md")[`CORE`]], [#link(<core:env.count_str>)[`count_str`]], [Get a count of unique string values], [#link("CORE.md")[`CORE`]], [#link(<core:env.count>)[`count`]], [Count the number of true values in the array], [#link("CORE.md")[`CORE`]], [#link(<core:env.day>)[`day`]], [day from date/datetime], [#link("CORE.md")[`CORE`]], [#link(<core:env.drop_nan>)[`drop_nan`]], [append a value to an array], [#link("CORE.md")[`CORE`]], [#link(<core:env.flatten>)[`flatten`]], [flatten the given list of arrays into a single one], [#link("CORE.md")[`CORE`]], [#link(<core:env.float>)[`float`]], [make a float from value], [#link("CORE.md")[`CORE`]], [#link(<core:env.hour>)[`hour`]], [hour from time/datetime], [#link("CORE.md")[`CORE`]], [#link(<core:env.insert>)[`insert`]], [Insert a key and value to a attrmap], [#link("CORE.md")[`CORE`]], [#link(<core:env.int>)[`int`]], [make an int from the value], [#link("CORE.md")[`CORE`]], [#link(<core:env.isinf>)[`isinf`]], [check if a float is +/- infinity], [#link("CORE.md")[`CORE`]], [#link(<core:env.isna>)[`isna`]], [check if a float is nan], [#link("CORE.md")[`CORE`]], [#link(<core:env.json>)[`json`]], [format the attribute as a json string], [#link("CORE.md")[`CORE`]], [#link(<core:env.len>)[`len`]], [length of an array or hashmap], [#link("CORE.md")[`CORE`]], [#link(<core:env.max_num>)[`max_num`]], [Minimum of the variables], [#link("CORE.md")[`CORE`]], [#link(<core:env.max>)[`max`]], [Maximum of the variables], [#link("CORE.md")[`CORE`]], [#link(<core:env.min_num>)[`min_num`]], [Minimum of the variables], [#link("CORE.md")[`CORE`]], [#link(<core:env.min>)[`min`]], [Minimum of the variables], [#link("CORE.md")[`CORE`]], [#link(<core:env.minute>)[`minute`]], [minute from time/datetime], [#link("CORE.md")[`CORE`]], [#link(<core:env.month>)[`month`]], [month from date/datetime], [#link("CORE.md")[`CORE`]], [#link(<core:env.nanosecond>)[`nanosecond`]], [nanosecond from time/datetime], [#link("CORE.md")[`CORE`]], [#link(<core:env.now>)[`now`]], [get the current date time], [#link("CORE.md")[`CORE`]], [#link(<core:env.prod>)[`prod`]], [Product of the variables], [#link("CORE.md")[`CORE`]], [#link(<core:env.range>)[`range`]], [Generate integer array, end is not included], [#link("CORE.md")[`CORE`]], [#link(<core:env.second>)[`second`]], [second from time/datetime], [#link("CORE.md")[`CORE`]], [#link(<core:env.str_quote>)[`str_quote`]], [Convert string to double quoted form], [#link("CORE.md")[`CORE`]], [#link(<core:env.str>)[`str`]], [make a string from value], [#link("CORE.md")[`CORE`]], [#link(<core:env.sum>)[`sum`]], [Sum of the variables], [#link("CORE.md")[`CORE`]], [#link(<core:env.timediff>)[`timediff`]], [get the current date time], [#link("CORE.md")[`CORE`]], [#link(<core:env.to_attrmap>)[`to_attrmap`]], [make an attrmap from a list of (k, v)], [#link("CORE.md")[`CORE`]], [#link(<core:env.today>)[`today`]], [get the current date], [#link("CORE.md")[`CORE`]], [#link(<core:env.type_name>)[`type_name`]], [Type name of the arguments], [#link("CORE.md")[`CORE`]], [#link(<core:env.unique_str>)[`unique_str`]], [Get a list of unique string values], [#link("CORE.md")[`CORE`]], [#link(<core:env.unique>)[`unique`]], [Get a list of unique attribute values (only primitives)], [#link("CORE.md")[`CORE`]], [#link(<core:env.year>)[`year`]], [year from date/datetime], [#link("CORE.md")[`CORE`]], [#link(<core:env.zip>)[`zip`]], [make an array combining the arrays from arguments], [#link("DEBUG.md")[`DEBUG`]], [#link(<debug:env.clip>)[`clip`]], [Echo the `----8<----` line for clipping syntax], [#link("DEBUG.md")[`DEBUG`]], [#link(<debug:env.debug>)[`debug`]], [Print the args and kwargs on this function], [#link("DEBUG.md")[`DEBUG`]], [#link(<debug:env.echo>)[`echo`]], [Echo the string to stdout or stderr], [#link("DEBUG.md")[`DEBUG`]], [#link(<debug:env.sleep>)[`sleep`]], [sleep for given number of milliseconds], [#link("FILES.md")[`FILES`]], [#link(<files:env.exists>)[`exists`]], [Checks if the given path exists], [#link("FILES.md")[`FILES`]], [#link(<files:env.from_file>)[`from_file`]], [Reads the file contents as string], [#link("FILES.md")[`FILES`]], [#link(<files:env.line>)[`line`]], [Checks if the given path exists], [#link("FILES.md")[`FILES`]], [#link(<files:env.to_file>)[`to_file`]], [Writes the string to the file], [#link("LOGIC.md")[`LOGIC`]], [#link(<logic:env.all>)[`all`]], [check if all of the bool are true], [#link("LOGIC.md")[`LOGIC`]], [#link(<logic:env.and>)[`and`]], [Boolean and], [#link("LOGIC.md")[`LOGIC`]], [#link(<logic:env.any>)[`any`]], [check if any of the bool are true], [#link("LOGIC.md")[`LOGIC`]], [#link(<logic:env.eq>)[`eq`]], [Equality than check], [#link("LOGIC.md")[`LOGIC`]], [#link(<logic:env.gt>)[`gt`]], [Greater than check], [#link("LOGIC.md")[`LOGIC`]], [#link(<logic:env.ifelse>)[`ifelse`]], [Simple if else condition], [#link("LOGIC.md")[`LOGIC`]], [#link(<logic:env.lt>)[`lt`]], [Less than check], [#link("LOGIC.md")[`LOGIC`]], [#link(<logic:env.not>)[`not`]], [boolean not], [#link("LOGIC.md")[`LOGIC`]], [#link(<logic:env.or>)[`or`]], [boolean or], [#link("MATH.md")[`MATH`]], [#link(<math:env.exp>)[`exp`]], [Exponential], [#link("MATH.md")[`MATH`]], [#link(<math:env.log>)[`log`]], [Logarithm of a value, natural if base not given], [#link("MATH.md")[`MATH`]], [#link(<math:env.powf>)[`powf`]], [Float power], [#link("MATH.md")[`MATH`]], [#link(<math:env.powi>)[`powi`]], [Integer power], [#link("MATH.md")[`MATH`]], [#link(<math:env.sqrt>)[`sqrt`]], [Square Root], [#link("OPTIMUM.md")[`OPTIMUM`]], [#link(<optimum:env.uniform_crossing_over>)[`uniform_crossing_over`]], [Crossing over of linear genes from two parent given uniform probability], [#link("RANDOM.md")[`RANDOM`]], [#link(<random:env.random_bool>)[`random_bool`]], [Random bool given uniform probability], [#link("REGEX.md")[`REGEX`]], [#link(<regex:env.str_count>)[`str_count`]], [Count the number of matches of given pattern in the string], [#link("REGEX.md")[`REGEX`]], [#link(<regex:env.str_filter>)[`str_filter`]], [Filter from the string list with only the values matching pattern], [#link("REGEX.md")[`REGEX`]], [#link(<regex:env.str_find_all>)[`str_find_all`]], [Find all the matches of the given pattern in the value], [#link("REGEX.md")[`REGEX`]], [#link(<regex:env.str_find>)[`str_find`]], [Find the given pattern in the value], [#link("REGEX.md")[`REGEX`]], [#link(<regex:env.str_join>)[`str_join`]], [Join the list of strings with the given string], [#link("REGEX.md")[`REGEX`]], [#link(<regex:env.str_match>)[`str_match`]], [Check if the given pattern matches the value or not], [#link("REGEX.md")[`REGEX`]], [#link(<regex:env.str_replace>)[`str_replace`]], [Replace the occurances of the given match], [#link("REGEX.md")[`REGEX`]], [#link(<regex:env.str_split>)[`str_split`]], [Split the string with the given pattern], [#link("RENDER.md")[`RENDER`]], [#link(<render:env.render>)[`render`]], [Render the template based on the node attributes], [#link("TS.md")[`TS`]], [#link(<ts:env.timeseries>)[`timeseries`]], [build timeseries from timeline and series], [#link("TS.md")[`TS`]], [#link(<ts:env.ts_timeline>)[`ts_timeline`]], [Get timeline of the timeseries as Series of strings], [#link("VISUALS.md")[`VISUALS`]], [#link(<visuals:env.image>)[`image`]], [], [#link("VISUALS.md")[`VISUALS`]], [#link(<visuals:env.svg_open_multi>)[`svg_open_multi`]], [], [#link("VISUALS.md")[`VISUALS`]], [#link(<visuals:env.svg_open>)[`svg_open`]], [], [#link("VISUALS.md")[`VISUALS`]], [#link(<visuals:env.svg_settings>)[`svg_settings`]], [Generate the margins for the SVGs], [#link("csv.md")[`csv`]], [#link(<csv:env.count_data>)[`count_data`]], [Count the number of data in a column from a CSV file], [#link("csv.md")[`csv`]], [#link(<csv:env.count_usgs_years>)[`count_usgs_years`]], [Count the number of data in a column from a CSV file], [#link("csv.md")[`csv`]], [#link(<csv:env.schema>)[`schema`]], [List the columns in a CSV file], [#link("dss.md")[`dss`]], [#link(<dss:env.list_catalog>)[`list_catalog`]], [List the catalog of the dss file], [#link("dss.md")[`dss`]], [#link(<dss:env.load_series>)[`load_series`]], [], [#link("dss.md")[`dss`]], [#link(<dss:env.save_series>)[`save_series`]], [], [#link("gis.md")[`gis`]], [#link(<gis:env.features_count>)[`features_count`]], [Show the fields in the GIS file layer as a list], [#link("gis.md")[`gis`]], [#link(<gis:env.fields>)[`fields`]], [Show the fields in the GIS file layer as a list], [#link("gis.md")[`gis`]], [#link(<gis:env.layers>)[`layers`]], [Show the layers of the GIS file as a list], [#link("gis.md")[`gis`]], [#link(<gis:env.line>)[`line`]], [Show the layers of the GIS file as a list], [#link("gis.md")[`gis`]], [#link(<gis:env.values>)[`values`]], [Returns the values from a feature in a GIS file from its index], [#link("typst.md")[`typst`]], [#link(<typst:env.compile>)[`compile`]], [convert the typst content into pdf/svg/png], [#link("typst.md")[`typst`]], [#link(<typst:env.svg2pdf>)[`svg2pdf`]], [convert the svg content into pdf or png (or svg)]
 )
 
 
@@ -7229,52 +7700,8 @@ All the functions available on this instance of nadi, are listed here.
 #table(
   columns: 3,
   table.header([*Plugin*], [*Function*], [*Help*]),
-  
+  [#link("ATTRS.md")[`ATTRS`]], [#link(<attrs:network.nodemap>)[`nodemap`]], [Generate attribute map for the given attribute for the nodes], [#link("ATTRS.md")[`ATTRS`]], [#link(<attrs:network.set_attrs_render>)[`set_attrs_render`]], [Set network attributes based on string templates], [#link("ATTRS.md")[`ATTRS`]], [#link(<attrs:network.set_attrs>)[`set_attrs`]], [Set network attributes], [#link("ATTRS.md")[`ATTRS`]], [#link(<attrs:network.set_node_attrs>)[`set_node_attrs`]], [Set node attributes in a network using a attrmap or array], [#link("COMMAND.md")[`COMMAND`]], [#link(<command:network.command>)[`command`]], [Run the given template as a shell command.], [#link("COMMAND.md")[`COMMAND`]], [#link(<command:network.parallel>)[`parallel`]], [Run the given template as a shell command for each nodes in the network in parallel.], [#link("CONN.md")[`CONN`]], [#link(<conn:network.load_edges>)[`load_edges`]], [Load the given edges as a network], [#link("CONN.md")[`CONN`]], [#link(<conn:network.load_file>)[`load_file`]], [Load the given file into the network], [#link("CONN.md")[`CONN`]], [#link(<conn:network.load_str>)[`load_str`]], [Load network from the given string], [#link("CONN.md")[`CONN`]], [#link(<conn:network.save_file>)[`save_file`]], [Save the network into the given file], [#link("CONN.md")[`CONN`]], [#link(<conn:network.subset_from>)[`subset_from`]], [Take a subset of network by taking the given node as a new outlet], [#link("CONN.md")[`CONN`]], [#link(<conn:network.subset_largest>)[`subset_largest`]], [Take a subset of network by only including the largest blob of connected nodes], [#link("CONN.md")[`CONN`]], [#link(<conn:network.subset>)[`subset`]], [Take a subset of network by only including the selected nodes], [#link("CORE.md")[`CORE`]], [#link(<core:network.count>)[`count`]], [Count the number of nodes in the network], [#link("CORE.md")[`CORE`]], [#link(<core:network.net_leaves>)[`net_leaves`]], [Get the name of the leaf nodes], [#link("CORE.md")[`CORE`]], [#link(<core:network.net_roots>)[`net_roots`]], [Get the name of the outlet nodes], [#link("CORE.md")[`CORE`]], [#link(<core:network.node_attr>)[`node_attr`]], [Get the attr of the provided node], [#link("CORE.md")[`CORE`]], [#link(<core:network.node_map>)[`node_map`]], [Get a attrmap with node name and attributes], [#link("GVIZ.md")[`GVIZ`]], [#link(<gviz:network.load_positions>)[`load_positions`]], [Load Node positions from the graphviz file], [#link("GVIZ.md")[`GVIZ`]], [#link(<gviz:network.save_gv>)[`save_gv`]], [Save the network as a graphviz file], [#link("RENDER.md")[`RENDER`]], [#link(<render:network.render_nodes>)[`render_nodes`]], [Render each node of the network and combine to same variable], [#link("RENDER.md")[`RENDER`]], [#link(<render:network.render_template>)[`render_template`]], [Render a File template for the nodes in the whole network], [#link("RENDER.md")[`RENDER`]], [#link(<render:network.render>)[`render`]], [Render from network attributes], [#link("TABLE.md")[`TABLE`]], [#link(<table:network.save_csv>)[`save_csv`]], [Save CSV], [#link("TABLE.md")[`TABLE`]], [#link(<table:network.table_to_markdown>)[`table_to_markdown`]], [Render the Table as a rendered markdown], [#link("TS.md")[`TS`]], [#link(<ts:network.series_csv>)[`series_csv`]], [Write the given nodes to csv with given attributes and series], [#link("TS.md")[`TS`]], [#link(<ts:network.ts_print_csv>)[`ts_print_csv`]], [Save timeseries from all nodes into a single csv file], [#link("VISUALS.md")[`VISUALS`]], [#link(<visuals:network.flatten>)[`flatten`]], [], [#link("VISUALS.md")[`VISUALS`]], [#link(<visuals:network.set_nodesize_attrs>)[`set_nodesize_attrs`]], [Set the node size of the nodes based on the attribute value], [#link("VISUALS.md")[`VISUALS`]], [#link(<visuals:network.svg_save>)[`svg_save`]], [Exports the network as a svg], [#link("VISUALS.md")[`VISUALS`]], [#link(<visuals:network.svg_ts_blocks>)[`svg_ts_blocks`]], [], [#link("cairo.md")[`cairo`]], [#link(<cairo:network.network>)[`network`]], [Create a SVG file with the given network structure], [#link("cairo.md")[`cairo`]], [#link(<cairo:network.table>)[`table`]], [Create a SVG file with the given network structure], [#link("csv.md")[`csv`]], [#link(<csv:network.load_series>)[`load_series`]], [Load series values to nodes], [#link("csv.md")[`csv`]], [#link(<csv:network.load_timeseries>)[`load_timeseries`]], [Load timeseries values to nodes], [#link("gis.md")[`gis`]], [#link(<gis:network.load_attrs>)[`load_attrs`]], [Load node attributes from a GIS file], [#link("gis.md")[`gis`]], [#link(<gis:network.load_network>)[`load_network`]], [Load network from a GIS file], [#link("gis.md")[`gis`]], [#link(<gis:network.save_connections>)[`save_connections`]], [Save GIS file of the connections], [#link("gis.md")[`gis`]], [#link(<gis:network.save_nodes>)[`save_nodes`]], [Save GIS file of the nodes], [#link("typst.md")[`typst`]], [#link(<typst:network.table>)[`table`]], [Generate Typst code for given Table]
 )
-
-
-
-
-| #link("ATTRS.md")[`ATTRS`]     | #link(<attrs:network.nodemap>)[`nodemap`]                         | Generate attribute map for the given attribute for the nodes                         |
-| #link("ATTRS.md")[`ATTRS`]     | #link(<attrs:network.set_attrs_render>)[`set_attrs_render`]       | Set network attributes based on string templates                                     |
-| #link("ATTRS.md")[`ATTRS`]     | #link(<attrs:network.set_attrs>)[`set_attrs`]                     | Set network attributes                                                               |
-| #link("ATTRS.md")[`ATTRS`]     | #link(<attrs:network.set_node_attrs>)[`set_node_attrs`]           | Set node attributes in a network using a attrmap or array                            |
-| #link("COMMAND.md")[`COMMAND`] | #link(<command:network.command>)[`command`]                       | Run the given template as a shell command.                                           |
-| #link("COMMAND.md")[`COMMAND`] | #link(<command:network.parallel>)[`parallel`]                     | Run the given template as a shell command for each nodes in the network in parallel. |
-| #link("CONN.md")[`CONN`]       | #link(<conn:network.load_edges>)[`load_edges`]                    | Load the given edges as a network                                                    |
-| #link("CONN.md")[`CONN`]       | #link(<conn:network.load_file>)[`load_file`]                      | Load the given file into the network                                                 |
-| #link("CONN.md")[`CONN`]       | #link(<conn:network.load_str>)[`load_str`]                        | Load network from the given string                                                   |
-| #link("CONN.md")[`CONN`]       | #link(<conn:network.save_file>)[`save_file`]                      | Save the network into the given file                                                 |
-| #link("CONN.md")[`CONN`]       | #link(<conn:network.subset_from>)[`subset_from`]                  | Take a subset of network by taking the given node as a new outlet                    |
-| #link("CONN.md")[`CONN`]       | #link(<conn:network.subset_largest>)[`subset_largest`]            | Take a subset of network by only including the largest blob of connected nodes       |
-| #link("CONN.md")[`CONN`]       | #link(<conn:network.subset>)[`subset`]                            | Take a subset of network by only including the selected nodes                        |
-| #link("CORE.md")[`CORE`]       | #link(<core:network.count>)[`count`]                              | Count the number of nodes in the network                                             |
-| #link("CORE.md")[`CORE`]       | #link(<core:network.net_leaves>)[`net_leaves`]                    | Get the name of the leaf nodes                                                       |
-| #link("CORE.md")[`CORE`]       | #link(<core:network.net_roots>)[`net_roots`]                      | Get the name of the outlet nodes                                                     |
-| #link("CORE.md")[`CORE`]       | #link(<core:network.node_attr>)[`node_attr`]                      | Get the attr of the provided node                                                    |
-| #link("CORE.md")[`CORE`]       | #link(<core:network.node_map>)[`node_map`]                        | Get a attrmap with node name and attributes                                          |
-| #link("GVIZ.md")[`GVIZ`]       | #link(<gviz:network.load_positions>)[`load_positions`]            | Load Node positions from the graphviz file                                           |
-| #link("GVIZ.md")[`GVIZ`]       | #link(<gviz:network.save_gv>)[`save_gv`]                          | Save the network as a graphviz file                                                  |
-| #link("RENDER.md")[`RENDER`]   | #link(<render:network.render_nodes>)[`render_nodes`]              | Render each node of the network and combine to same variable                         |
-| #link("RENDER.md")[`RENDER`]   | #link(<render:network.render_template>)[`render_template`]        | Render a File template for the nodes in the whole network                            |
-| #link("RENDER.md")[`RENDER`]   | #link(<render:network.render>)[`render`]                          | Render from network attributes                                                       |
-| #link("TABLE.md")[`TABLE`]     | #link(<table:network.save_csv>)[`save_csv`]                       | Save CSV                                                                             |
-| #link("TABLE.md")[`TABLE`]     | #link(<table:network.table_to_markdown>)[`table_to_markdown`]     | Render the Table as a rendered markdown                                              |
-| #link("TS.md")[`TS`]           | #link(<ts:network.series_csv>)[`series_csv`]                      | Write the given nodes to csv with given attributes and series                        |
-| #link("TS.md")[`TS`]           | #link(<ts:network.ts_print_csv>)[`ts_print_csv`]                  | Save timeseries from all nodes into a single csv file                                |
-| #link("VISUALS.md")[`VISUALS`] | #link(<visuals:network.flatten>)[`flatten`]                       |                                                                                      |
-| #link("VISUALS.md")[`VISUALS`] | #link(<visuals:network.set_nodesize_attrs>)[`set_nodesize_attrs`] | Set the node size of the nodes based on the attribute value                          |
-| #link("VISUALS.md")[`VISUALS`] | #link(<visuals:network.svg_save>)[`svg_save`]                     | Exports the network as a svg                                                         |
-| #link("VISUALS.md")[`VISUALS`] | #link(<visuals:network.svg_ts_blocks>)[`svg_ts_blocks`]           |                                                                                      |
-| #link("cairo.md")[`cairo`]     | #link(<cairo:network.network>)[`network`]                         | Create a SVG file with the given network structure                                   |
-| #link("cairo.md")[`cairo`]     | #link(<cairo:network.table>)[`table`]                             | Create a SVG file with the given network structure                                   |
-| #link("csv.md")[`csv`]         | #link(<csv:network.load_series>)[`load_series`]                   | Load series values to nodes                                                          |
-| #link("csv.md")[`csv`]         | #link(<csv:network.load_timeseries>)[`load_timeseries`]           | Load timeseries values to nodes                                                      |
-| #link("gis.md")[`gis`]         | #link(<gis:network.load_attrs>)[`load_attrs`]                     | Load node attributes from a GIS file                                                 |
-| #link("gis.md")[`gis`]         | #link(<gis:network.load_network>)[`load_network`]                 | Load network from a GIS file                                                         |
-| #link("gis.md")[`gis`]         | #link(<gis:network.save_connections>)[`save_connections`]         | Save GIS file of the connections                                                     |
-| #link("gis.md")[`gis`]         | #link(<gis:network.save_nodes>)[`save_nodes`]                     | Save GIS file of the nodes                                                           |
-| #link("typst.md")[`typst`]     | #link(<typst:network.table>)[`table`]                             | Generate Typst code for given Table                                                  |
 
 
 
@@ -7338,11 +7765,46 @@ nodesmap[WV04112 -> WV04113] render("{NAME}")
 
 === Env Functions
 
+==== none <attrs:env.none>
+
+``````sig
+env ATTRS.none()
+``````
+
+
+
+*Arguments:*
+
+None function that returns None
+
+
+==== is_none <attrs:env.is_none>
+
+``````sig
+env ATTRS.is_none(inp: 'Option < FunctionInput >')
+``````
+
+
+
+*Arguments:*
+
+
+- `inp: 'Option < FunctionInput >'` =>
+
+
+
+check for none value
+
+
+``````task
+assert_eq(is_none(none()), true)
+``````
+
 ==== strmap <attrs:env.strmap>
 
 ``````sig
 env ATTRS.strmap(
-    attr: '& str',
+    attr: 'String',
     attrmap: '& AttrMap',
     default: 'Option < Attribute >'
 )
@@ -7353,7 +7815,7 @@ env ATTRS.strmap(
 *Arguments:*
 
 
-- `attr: '& str'` => Value to transform the attribute
+- `attr: 'String'` => Value to transform the attribute
 - `attrmap: '& AttrMap'` => Dictionary of key=value to map the data to
 - `default: 'Option < Attribute >'` => Default value if key not found in `attrmap`
 
@@ -7790,7 +8252,7 @@ nodes assert(!has_attr("y"))
 ==== first_attr <attrs:node.first_attr>
 
 ``````sig
-node ATTRS.first_attr(attrs: '& [String]', default: 'Option < Attribute >')
+node ATTRS.first_attr(attrs: 'Vec < RString >', default: 'Option < Attribute >')
 ``````
 
 
@@ -7798,7 +8260,7 @@ node ATTRS.first_attr(attrs: '& [String]', default: 'Option < Attribute >')
 *Arguments:*
 
 
-- `attrs: '& [String]'` => attribute names
+- `attrs: 'Vec < RString >'` => attribute names
 - `default: 'Option < Attribute >'` => Default value if not found
 
 
@@ -7868,7 +8330,7 @@ function is useful when you have to do something in a batch.
 ==== set_attrs_render <attrs:node.set_attrs_render>
 
 ``````sig
-node ATTRS.set_attrs_render(**kwargs)
+node ATTRS.set_attrs_render(**values)
 ``````
 
 
@@ -7876,7 +8338,7 @@ node ATTRS.set_attrs_render(**kwargs)
 *Arguments:*
 
 
-- `**kwargs` => key value pair of attribute to set and the Template to render
+- `**values` => key value pair of attribute to set and the Template to render
 
 
 
@@ -7895,7 +8357,7 @@ node[a] assert_eq(val1, "Node: a")
 ==== load_toml_render <attrs:node.load_toml_render>
 
 ``````sig
-node ATTRS.load_toml_render(toml: '& Template', echo: 'bool' = false)
+node ATTRS.load_toml_render(toml: 'Template', echo: 'bool' = false)
 ``````
 
 
@@ -7903,7 +8365,7 @@ node ATTRS.load_toml_render(toml: '& Template', echo: 'bool' = false)
 *Arguments:*
 
 
-- `toml: '& Template'` => String template to render and load as toml string
+- `toml: 'Template'` => String template to render and load as toml string
 - `echo: 'bool' = false` => Print the rendered toml or not
 
 
@@ -7931,7 +8393,7 @@ nodes assert_eq(label, render("Node: {NAME}"))
 ==== set_attrs <attrs:network.set_attrs>
 
 ``````sig
-network ATTRS.set_attrs(**attrs)
+network ATTRS.set_attrs(**values)
 ``````
 
 
@@ -7939,7 +8401,7 @@ network ATTRS.set_attrs(**attrs)
 *Arguments:*
 
 
-- `**attrs` => key value pair of attributes to set
+- `**values` => key value pair of attributes to set
 
 
 
@@ -8043,7 +8505,7 @@ Generate attribute map for the given attribute for the nodes
 ==== shell_env <command:env.shell_env>
 
 ``````sig
-env COMMAND.shell_env(var: 'String')
+env COMMAND.shell_env(var: '& str')
 ``````
 
 
@@ -8051,7 +8513,7 @@ env COMMAND.shell_env(var: 'String')
 *Arguments:*
 
 
-- `var: 'String'` =>
+- `var: '& str'` =>
 
 
 
@@ -8066,7 +8528,7 @@ env.home = shell_env("HOME")
 ==== set_shell_env <command:env.set_shell_env>
 
 ``````sig
-env COMMAND.set_shell_env(var: 'String', val: 'String')
+env COMMAND.set_shell_env(var: '& str', val: '& str')
 ``````
 
 
@@ -8074,8 +8536,8 @@ env COMMAND.set_shell_env(var: 'String', val: 'String')
 *Arguments:*
 
 
-- `var: 'String'` =>
-- `val: 'String'` =>
+- `var: '& str'` =>
+- `val: '& str'` =>
 
 
 
@@ -8125,7 +8587,7 @@ env assert_eq(outputs2.test, 12)
 
 ``````sig
 node COMMAND.command(
-    cmd: '& Template',
+    cmd: 'Template',
     verbose: 'bool' = true,
     echo: 'bool' = false
 )
@@ -8136,7 +8598,7 @@ node COMMAND.command(
 *Arguments:*
 
 
-- `cmd: '& Template'` => String Command template to run
+- `cmd: 'Template'` => String Command template to run
 - `verbose: 'bool' = true` => Show the rendered version of command, and other messages
 - `echo: 'bool' = false` => Echo the stdout from the command
 
@@ -8214,7 +8676,7 @@ tasks with input files and output files.
 
 ``````sig
 network COMMAND.parallel(
-    cmd: '& Template',
+    cmd: 'Template',
     workers: 'i64' = 16,
     verbose: 'bool' = true,
     echo: 'bool' = false
@@ -8226,7 +8688,7 @@ network COMMAND.parallel(
 *Arguments:*
 
 
-- `cmd: '& Template'` => String Command template to run
+- `cmd: 'Template'` => String Command template to run
 - `workers: 'i64' = 16` => Number of workers to run in parallel
 - `verbose: 'bool' = true` => Print the command being run
 - `echo: 'bool' = false` => Show the output of the command
@@ -8372,7 +8834,7 @@ env assert_eq(nodes.NAME, ["b", "a"])
 
 ``````sig
 network CONN.load_edges(
-    edges: '& [(String, String)]',
+    edges: 'Vec < (RString, RString) >',
     append: 'bool' = false,
     force: 'bool' = false
 )
@@ -8383,7 +8845,7 @@ network CONN.load_edges(
 *Arguments:*
 
 
-- `edges: '& [(String, String)]'` => String containing Network connections
+- `edges: 'Vec < (RString, RString) >'` => String containing Network connections
 - `append: 'bool' = false` => Append the connections in the current network
 - `force: 'bool' = false` => Force overriding outputs if previous one is present
 
@@ -8403,7 +8865,7 @@ env assert_eq(nodes.NAME, ["c", "b", "a"])
 ==== subset <conn:network.subset>
 
 ``````sig
-network CONN.subset(filter: '& [bool]', keep: 'bool' = true)
+network CONN.subset(filter: 'Vec < bool >', keep: 'bool' = true)
 ``````
 
 
@@ -8411,7 +8873,7 @@ network CONN.subset(filter: '& [bool]', keep: 'bool' = true)
 *Arguments:*
 
 
-- `filter: '& [bool]'` =>
+- `filter: 'Vec < bool >'` =>
 - `keep: 'bool' = true` => Keep the selected nodes (false = removes the selected)
 
 
@@ -8544,7 +9006,7 @@ env assert_eq(str_quote(12), "\"12\"")
 ==== count <core:env.count>
 
 ``````sig
-env CORE.count(vars: '& [bool]')
+env CORE.count(vars: 'Vec < bool >')
 ``````
 
 
@@ -8552,7 +9014,7 @@ env CORE.count(vars: '& [bool]')
 *Arguments:*
 
 
-- `vars: '& [bool]'` =>
+- `vars: 'Vec < bool >'` =>
 
 
 
@@ -8929,10 +9391,10 @@ append a value to an array
 env assert_eq(append([4], 5), [4, 5])
 ``````
 
-==== length <core:env.length>
+==== len <core:env.len>
 
 ``````sig
-env CORE.length(value: '& Attribute')
+env CORE.len(value: '& FunctionInput')
 ``````
 
 
@@ -8940,7 +9402,7 @@ env CORE.length(value: '& Attribute')
 *Arguments:*
 
 
-- `value: '& Attribute'` => Array or a HashMap
+- `value: '& FunctionInput'` => Array or a HashMap
 
 
 
@@ -8948,8 +9410,8 @@ length of an array or hashmap
 
 
 ``````task
-env assert_eq(length([4, 5]), 2)
-env assert_eq(length({x=4, y=5}), 2)
+env assert_eq(len([4, 5]), 2)
+env assert_eq(len({x=4, y=5}), 2)
 ``````
 
 ==== timediff <core:env.timediff>
@@ -9314,6 +9776,35 @@ env assert_eq(prod([1, 2, 3]), 6)
 env assert_eq(prod([1.0, 2, 3]), 6.0)
 ``````
 
+==== unique <core:env.unique>
+
+``````sig
+env CORE.unique(vars: 'Vec < HashableAttr >')
+``````
+
+
+
+*Arguments:*
+
+
+- `vars: 'Vec < HashableAttr >'` =>
+
+
+
+Get a list of unique attribute values (only primitives)
+
+The order of the attributes returned is not guaranteed. This
+does not support array and attrmap values due to uniqueness
+ambiguity.
+
+
+``````task
+env.uniq = unique(["hi", "me", "hi", "you"]);
+env assert_eq(len(uniq), 3)
+env.uniq = unique(["hi", true, true, nan, 1.0, 1, nan]);
+env assert_eq(len(uniq), 5)
+``````
+
 ==== unique_str <core:env.unique_str>
 
 ``````sig
@@ -9336,7 +9827,7 @@ The order of the strings returned is not guaranteed
 
 ``````task
 env.uniq = unique_str(["hi", "me", "hi", "you"]);
-env assert_eq(length(uniq), 3)
+env assert_eq(len(uniq), 3)
 ``````
 
 ==== count_str <core:env.count_str>
@@ -9390,7 +9881,7 @@ env assert_eq(concat("Hello", "World", join=" "), "Hello World")
 ==== range <core:env.range>
 
 ``````sig
-env CORE.range(start: 'i64', end: 'i64')
+env CORE.range(start: 'i64', end: 'Option < i64 >')
 ``````
 
 
@@ -9399,7 +9890,7 @@ env CORE.range(start: 'i64', end: 'i64')
 
 
 - `start: 'i64'` =>
-- `end: 'i64'` =>
+- `end: 'Option < i64 >'` =>
 
 
 
@@ -9407,7 +9898,8 @@ Generate integer array, end is not included
 
 
 ``````task
-env assert_eq(range(1, 5), [1, 2, 3, 4])
+env assert_eq(range(1, 5), [1, 2, 3, 4, 5])
+env assert_eq(range(2), [1, 2])
 ``````
 
 ==== assert <core:env.assert>
@@ -9509,7 +10001,7 @@ Count the number of input nodes in the node
 
 ``````task
 network load_str("a -> b\n b -> d\n c -> d")
-nodes assert_eq(inputs_count(), length(inputs._))
+nodes assert_eq(inputs_count(), len(inputs._))
 ``````
 
 ==== inputs_attr <core:node.inputs_attr>
@@ -9986,8 +10478,8 @@ network GVIZ.save_gv(
     outfile: '& Path',
     name: '& str' = "network",
     global_attrs: '& str' = "",
-    node_attr: 'Option < & Template >',
-    edge_attr: 'Option < & Template >'
+    node_attr: 'Option < Template >',
+    edge_attr: 'Option < Template >'
 )
 ``````
 
@@ -9999,8 +10491,8 @@ network GVIZ.save_gv(
 - `outfile: '& Path'` =>
 - `name: '& str' = "network"` =>
 - `global_attrs: '& str' = ""` =>
-- `node_attr: 'Option < & Template >'` =>
-- `edge_attr: 'Option < & Template >'` =>
+- `node_attr: 'Option < Template >'` =>
+- `edge_attr: 'Option < Template >'` =>
 
 
 
@@ -10153,7 +10645,7 @@ env LOGIC.and(*conds)
 *Arguments:*
 
 
-- `*conds` => List of attributes that can be cast to bool
+- `*conds` => List of bools
 
 
 
@@ -10179,7 +10671,7 @@ env LOGIC.or(*conds)
 *Arguments:*
 
 
-- `*conds` => List of attributes that can be cast to bool
+- `*conds` => List of bools
 
 
 
@@ -10224,7 +10716,7 @@ env assert_eq(not(false), !false)
 === all <logic:env.all>
 
 ``````sig
-env LOGIC.all(vars: '& [bool]')
+env LOGIC.all(*vars)
 ``````
 
 
@@ -10232,7 +10724,7 @@ env LOGIC.all(vars: '& [bool]')
 *Arguments:*
 
 
-- `vars: '& [bool]'` =>
+- `*vars` =>
 
 
 
@@ -10240,16 +10732,16 @@ check if all of the bool are true
 
 
 ``````task
-env assert_eq(all([true]), true)
-env assert_eq(all([false, true]), false)
-env assert_eq(all([true, true]), true)
-env assert_eq(all([false]), false)
+env assert_eq(all(true), true)
+env assert_eq(all(false, true), false)
+env assert_eq(all(true, true), true)
+env assert_eq(all(false), false)
 ``````
 
 === any <logic:env.any>
 
 ``````sig
-env LOGIC.any(vars: '& [bool]')
+env LOGIC.any(*vars)
 ``````
 
 
@@ -10257,7 +10749,7 @@ env LOGIC.any(vars: '& [bool]')
 *Arguments:*
 
 
-- `vars: '& [bool]'` =>
+- `*vars` =>
 
 
 
@@ -10265,10 +10757,10 @@ check if any of the bool are true
 
 
 ``````task
-env assert_eq(any([true]), true)
-env assert_eq(any([false, true]), true)
-env assert_eq(any([false, false]), false)
-env assert_eq(any([false]), false)
+env assert_eq(any(true), true)
+env assert_eq(any(false, true), true)
+env assert_eq(any(false, false), false)
+env assert_eq(any(false), false)
 ``````
 
 
@@ -10479,7 +10971,7 @@ env REGEX.str_match(attr: '& str', pattern: 'Regex')
 *Arguments:*
 
 
-- `attr: '& str'` => attribute to check for pattern
+- `attr: '& str'` => string to check for pattern
 - `pattern: 'Regex'` => Regex pattern to match
 
 
@@ -10519,8 +11011,8 @@ Replace the occurances of the given match
 
 
 ``````task
-env assert_eq(str_replace("abc", "^a", 2), "2bc")
-env assert_eq(str_replace("abc", "[abc]", 2), "222")
+env assert_eq(str_replace("abc", "^a", "2"), "2bc")
+env assert_eq(str_replace("abc", "[abc]", "2"), "222")
 ``````
 
 === str_find <regex:env.str_find>
@@ -10534,7 +11026,7 @@ env REGEX.str_find(attr: '& str', pattern: 'Regex')
 *Arguments:*
 
 
-- `attr: '& str'` => attribute to check for pattern
+- `attr: '& str'` => string to check for pattern
 - `pattern: 'Regex'` => Regex pattern to match
 
 
@@ -10557,7 +11049,7 @@ env REGEX.str_find_all(attr: '& str', pattern: 'Regex')
 *Arguments:*
 
 
-- `attr: '& str'` => attribute to check for pattern
+- `attr: '& str'` => string to check for pattern
 - `pattern: 'Regex'` => Regex pattern to match
 
 
@@ -10580,7 +11072,7 @@ env REGEX.str_count(attr: '& str', pattern: 'Regex')
 *Arguments:*
 
 
-- `attr: '& str'` => attribute to check for pattern
+- `attr: '& str'` => string to check for pattern
 - `pattern: 'Regex'` => Regex pattern to match
 
 
@@ -10656,7 +11148,7 @@ env assert_eq(str_join(["abc", "de"], ", "), "abc, de")
 
 ``````sig
 env RENDER.render(
-    template: '& Template',
+    template: 'Template',
     safe: 'bool' = false,
     **keyval
 )
@@ -10667,7 +11159,7 @@ env RENDER.render(
 *Arguments:*
 
 
-- `template: '& Template'` => String template to render
+- `template: 'Template'` => String template to render
 - `safe: 'bool' = false` => if render fails keep it as it is instead of exiting
 - `**keyval` =>
 
@@ -10704,7 +11196,7 @@ env assert_eq(render("abc {x}", safe=true), "abc {x}")
 ==== render <render:node.render>
 
 ``````sig
-node RENDER.render(template: '& Template', safe: 'bool' = false)
+node RENDER.render(template: 'Template', safe: 'bool' = false)
 ``````
 
 
@@ -10712,7 +11204,7 @@ node RENDER.render(template: '& Template', safe: 'bool' = false)
 *Arguments:*
 
 
-- `template: '& Template'` => String template to render
+- `template: 'Template'` => String template to render
 - `safe: 'bool' = false` => if render fails keep it as it is instead of exiting
 
 
@@ -10735,7 +11227,7 @@ nodes assert_eq(render("abc {x} {a}", safe=true), "abc {x} {a}")
 ==== render <render:network.render>
 
 ``````sig
-network RENDER.render(template: '& Template', safe: 'bool' = false)
+network RENDER.render(template: 'Template', safe: 'bool' = false)
 ``````
 
 
@@ -10743,7 +11235,7 @@ network RENDER.render(template: '& Template', safe: 'bool' = false)
 *Arguments:*
 
 
-- `template: '& Template'` => Path to the template file
+- `template: 'Template'` => Path to the template file
 - `safe: 'bool' = false` => if render fails keep it as it is instead of exiting
 
 
@@ -10761,7 +11253,7 @@ network assert_eq(render("abc {x} {a}", safe=true), "abc {x} {a}")
 
 ``````sig
 network RENDER.render_nodes(
-    template: '& Template',
+    template: 'Template',
     safe: 'bool' = false,
     join: '& str' = "\n"
 )
@@ -10772,7 +11264,7 @@ network RENDER.render_nodes(
 *Arguments:*
 
 
-- `template: '& Template'` => Path to the template file
+- `template: 'Template'` => Path to the template file
 - `safe: 'bool' = false` => if render fails keep it as it is instead of exiting
 - `join: '& str' = "\n"` => String to join the render results
 
@@ -11105,7 +11597,7 @@ Get minimum value of the series
 ``````sig
 network TABLE.save_csv(
     path: '& Path',
-    fields: '& [String]',
+    fields: 'Vec < String >',
     filter: 'Option < Vec < bool > >'
 )
 ``````
@@ -11116,7 +11608,7 @@ network TABLE.save_csv(
 
 
 - `path: '& Path'` =>
-- `fields: '& [String]'` =>
+- `fields: 'Vec < String >'` =>
 - `filter: 'Option < Vec < bool > >'` =>
 
 
@@ -11166,6 +11658,50 @@ The function will error out if,
 
 
 #heading(level:2)[Timeseries]
+
+=== Env Functions
+
+==== ts_timeline <ts:env.ts_timeline>
+
+``````sig
+env TS.ts_timeline(ts: 'TimeSeries')
+``````
+
+
+
+*Arguments:*
+
+
+- `ts: 'TimeSeries'` =>
+
+
+
+Get timeline of the timeseries as Series of strings
+
+
+==== timeseries <ts:env.timeseries>
+
+``````sig
+env TS.timeseries(
+    timeline: '& [RString]',
+    series: 'Series',
+    fmt: '& str' = "%Y-%m-%d"
+)
+``````
+
+
+
+*Arguments:*
+
+
+- `timeline: '& [RString]'` =>
+- `series: 'Series'` =>
+- `fmt: '& str' = "%Y-%m-%d"` =>
+
+
+
+build timeseries from timeline and series
+
 
 === Node Functions
 
@@ -11278,7 +11814,7 @@ Convert the timeseries to complete if it doesn’t have gaps
 
 ``````sig
 node TS.ts_print(
-    name: '& String',
+    name: '& str',
     header: 'bool' = true,
     head: 'Option < i64 >',
     missing: 'String' = ""
@@ -11290,7 +11826,7 @@ node TS.ts_print(
 *Arguments:*
 
 
-- `name: '& String'` => name of the timeseries
+- `name: '& str'` => name of the timeseries
 - `header: 'bool' = true` => show header
 - `head: 'Option < i64 >'` => number of head rows to show (all by default)
 - `missing: 'String' = ""` => Show missing values as this string
@@ -11310,10 +11846,10 @@ Print the given timeseries values in csv format
 
 ``````sig
 network TS.ts_print_csv(
-    name: 'String',
+    name: '& str',
     head: 'Option < usize >',
     nodes: 'Option < HashSet < String > >',
-    missing: 'String' = ""
+    missing: '& str' = ""
 )
 ``````
 
@@ -11322,10 +11858,10 @@ network TS.ts_print_csv(
 *Arguments:*
 
 
-- `name: 'String'` => Name of the timeseries to save
+- `name: '& str'` => Name of the timeseries to save
 - `head: 'Option < usize >'` => number of head rows to show (all by default)
 - `nodes: 'Option < HashSet < String > >'` => Include only these nodes (all by default)
-- `missing: 'String' = ""` => Show missing values as this string
+- `missing: '& str' = ""` => Show missing values as this string
 
 
 
@@ -11341,10 +11877,10 @@ TODO: output to `file: PathBuf`
 ``````sig
 network TS.series_csv(
     filter: 'Vec < bool >',
-    outfile: 'PathBuf',
+    outfile: '& Path',
     attrs: 'Vec < String >',
     series: 'Vec < String >',
-    missing: 'String' = ""
+    missing: '& str' = ""
 )
 ``````
 
@@ -11354,10 +11890,10 @@ network TS.series_csv(
 
 
 - `filter: 'Vec < bool >'` =>
-- `outfile: 'PathBuf'` => Path to the output csv
+- `outfile: '& Path'` => Path to the output csv
 - `attrs: 'Vec < String >'` => list of attributes to write
 - `series: 'Vec < String >'` => list of series to write
-- `missing: 'String' = ""` => Show missing values as this string
+- `missing: '& str' = ""` => Show missing values as this string
 
 
 
@@ -11484,7 +12020,7 @@ network VISUALS.flatten()
 
 ``````sig
 network VISUALS.set_nodesize_attrs(
-    attrs: '& [f64]',
+    attrs: 'Vec < f64 >',
     minsize: 'f64' = 4.0,
     maxsize: 'f64' = 12.0
 )
@@ -11495,7 +12031,7 @@ network VISUALS.set_nodesize_attrs(
 *Arguments:*
 
 
-- `attrs: '& [f64]'` => Attribute values to use for size scaling
+- `attrs: 'Vec < f64 >'` => Attribute values to use for size scaling
 - `minsize: 'f64' = 4.0` => minimum size of the node
 - `maxsize: 'f64' = 12.0` => maximum size of the node
 
@@ -11929,6 +12465,10 @@ network gis.load_network(
     source: 'String',
     destination: 'String',
     layer: 'Option < String >',
+    loadattrs: 'Option < String >',
+    outattrs: 'bool' = false,
+    ignore: 'String' = "",
+    sanitize: 'bool' = true,
     ignore_null: 'bool' = false,
     force: 'bool' = false
 )
@@ -11943,6 +12483,10 @@ network gis.load_network(
 - `source: 'String'` => Field in the GIS file corresponding to the input node name
 - `destination: 'String'` => layer of the GIS file corresponding to the output node name
 - `layer: 'Option < String >'` => layer of the GIS file, first one picked by default
+- `loadattrs: 'Option < String >'` => Load attributes from GIS file into this attribute
+- `outattrs: 'bool' = false` => attributes are for output instead of input node
+- `ignore: 'String' = ""` => Field names separated by comma, to ignore
+- `sanitize: 'bool' = true` => sanitize the name of the fields
 - `ignore_null: 'bool' = false` => Ignore feature if it has fields with null value
 - `force: 'bool' = false` => Force overwrite the output if already present
 
@@ -12047,7 +12591,67 @@ Save GIS file of the nodes
 
 
 
-#heading(level:2)[HTML]
+#heading(level:2)[DSS]
+
+=== list_catalog <dss:env.list_catalog>
+
+``````sig
+env dss.list_catalog(dssfile: 'String', paths: 'String' = "/*/*/*/*/*/*/")
+``````
+
+
+
+*Arguments:*
+
+
+- `dssfile: 'String'` =>
+- `paths: 'String' = "/*/*/*/*/*/*/"` =>
+
+
+
+List the catalog of the dss file
+
+env list_catalog(“dsslib/routed-main-stem.dss”)
+
+
+=== load_series <dss:env.load_series>
+
+``````sig
+env dss.load_series(dssfile: 'String', path: 'String')
+``````
+
+
+
+*Arguments:*
+
+
+- `dssfile: 'String'` =>
+- `path: 'String'` =>
+
+=== save_series <dss:env.save_series>
+
+``````sig
+env dss.save_series(
+    series: '& Series',
+    dssfile: 'String',
+    path: 'String',
+    start_date: 'String' = "1990-01-01",
+    start_time: 'String' = "12:00",
+    delta_minute: 'i64' = 1440
+)
+``````
+
+
+
+*Arguments:*
+
+
+- `series: '& Series'` =>
+- `dssfile: 'String'` =>
+- `path: 'String'` =>
+- `start_date: 'String' = "1990-01-01"` => start date of the series
+- `start_time: 'String' = "12:00"` => start time of the series
+- `delta_minute: 'i64' = 1440` => delta time in minutes
 
 
 #heading(level:2)[Typst]
@@ -12442,8 +13046,8 @@ Example:
 ``````
 ```table run markdown
 network load_file("./data/mississippi.net")
-<Name => {_NAME:repl(-, ):case(title)}
-^Ind => =(+ (st+num 'INDEX) 1)
+<Name => {NAME}
+^Ind => {INDEX}
 >Order => {ORDER}
 ```
 ``````
@@ -12455,19 +13059,22 @@ Becomes:
 
 ``````table
 network load_file("./data/mississippi.net")
-<Name => {_NAME:repl(-, ):case(title)}
-^Ind => =(+ (st+num 'INDEX) 1)
+<Name => {NAME}
+^Ind => {INDEX}
 >Order => {ORDER}
 ``````
 
 
 
-\*Error\*:
+Results:
 
 
-``````error
-FunctionError  at Line 3 Column 1: function table_to_markdown: TemplateError at pos 8: Invalid Character 'r'
-``````
+#table(
+  columns: 3,
+  table.header([*Name*], [*Ind*], [*Order*]),
+  [lower-mississippi], [0], [3], [red], [1], [1], [arkansas], [2], [1], [missouri], [3], [1], [upper-mississippi], [4], [1], [ohio], [5], [2], [tenessee], [6], [1]
+)
+
 
 
 
@@ -12482,20 +13089,27 @@ For example `task run` of this:
 ``````task
 network load_file("./data/mississippi.net")
 network table_to_markdown(template="
-<Name => {_NAME:repl(-, ):case(title)}
-^Ind => =(+ (st+num 'INDEX) 1)
+<Name => {NAME}
+^Ind => {INDEX}
 >Order => {ORDER}
 ")
 ``````
 
 
 
-\*Error\*:
+Results:
 
 
-``````error
-
-FunctionError  at Line 2 Column 1: function table_to_markdown: TemplateError at pos 8: Invalid Character 'r'
+``````output
+| Name              | Ind | Order |
+|:------------------|:---:|------:|
+| lower-mississippi |  0  |     3 |
+| red               |  1  |     1 |
+| arkansas          |  2  |     1 |
+| missouri          |  3  |     1 |
+| upper-mississippi |  4  |     1 |
+| ohio              |  5  |     2 |
+| tenessee          |  6  |     1 |
 ``````
 
 
@@ -12506,21 +13120,23 @@ If you do `task run markdown` then:
 ``````task
 network load_file("./data/mississippi.net")
 network table_to_markdown(template="
-<Name => {_NAME:repl(-, ):case(title)}
-^Ind => =(+ (st+num 'INDEX) 1)
+<Name => {NAME}
+^Ind => {INDEX}
 >Order => {ORDER}
 ")
 ``````
 
 
 
-\*Error\*:
+Results:
 
 
-``````error
+#table(
+  columns: 3,
+  table.header([*Name*], [*Ind*], [*Order*]),
+  [lower-mississippi], [0], [3], [red], [1], [1], [arkansas], [2], [1], [missouri], [3], [1], [upper-mississippi], [4], [1], [ohio], [5], [2], [tenessee], [6], [1]
+)
 
-FunctionError  at Line 2 Column 1: function table_to_markdown: TemplateError at pos 8: Invalid Character 'r'
-``````
 
 
 
@@ -12531,22 +13147,38 @@ Which means it can be used for other things:
 network load_file("./data/mississippi.net");
 network echo("**Details about the Nodes:**")
 network echo(render_nodes("
-=(+ (st+num 'INDEX) 1). {_NAME:repl(-, ):case(title)} River
+{INDEX}. {NAME}
 "))
 ``````
 
 
 
-\*Error\*:
+Results:
+
+*Details about the Nodes:*
 
 
-``````error
-
-**Details about the Nodes:**
+0. lower-mississippi
 
 
-FunctionError  at Line 3 Column 1: function render_nodes: Argument 1 (template [Template]): TemplateError at pos 33: Invalid Character 'r'
-``````
+1. red
+
+
+2. arkansas
+
+
+3. missouri
+
+
+4. upper-mississippi
+
+
+5. ohio
+
+
+6. tenessee
+
+
 
 
 

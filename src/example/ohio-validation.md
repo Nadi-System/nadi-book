@@ -113,7 +113,10 @@ This could be due to the error in snapping to the streamlines. It is also possib
  
 Let's try to fix them, or avoid points without data.
 ```task run continue
-nodes.all_inputs_ba = all(inputs {basin_area?});
+nodes.all_inputs_ba = node {
+	x = inputs {basin_area?}
+	all(*x)
+};
 nodes.incorrect = basin_area? & all_inputs_ba & (
 	basin_area < (0.975 * sum(inputs.basin_area))
 );

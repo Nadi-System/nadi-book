@@ -3,14 +3,14 @@
 ```sig
 network TABLE.save_csv(
     path: '& Path',
-    fields: '& [String]',
+    fields: 'Vec < String >',
     filter: 'Option < Vec < bool > >'
 )
 ```
 
 **Arguments:**
 - `path: '& Path'` => 
-- `fields: '& [String]'` => 
+- `fields: 'Vec < String >'` => 
 - `filter: 'Option < Vec < bool > >'` => 
 
 Save CSV

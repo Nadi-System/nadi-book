@@ -143,8 +143,8 @@ Example:
 
     ```table run markdown
     !network load_file("./data/mississippi.net")
-    <Name => {_NAME:repl(-, ):case(title)}
-    ^Ind => =(+ (st+num 'INDEX) 1)
+    <Name => {NAME}
+    ^Ind => {INDEX}
     >Order => {ORDER}
     ```
 
@@ -153,8 +153,8 @@ Becomes:
 ---
 ```table run markdown
 !network load_file("./data/mississippi.net")
-<Name => {_NAME:repl(-, ):case(title)}
-^Ind => =(+ (st+num 'INDEX) 1)
+<Name => {NAME}
+^Ind => {INDEX}
 >Order => {ORDER}
 ```
 ---
@@ -170,8 +170,8 @@ For example `task run` of this:
 ```task run
 network load_file("./data/mississippi.net")
 network table_to_markdown(template="
-<Name => {_NAME:repl(-, ):case(title)}
-^Ind => =(+ (st+num 'INDEX) 1)
+<Name => {NAME}
+^Ind => {INDEX}
 >Order => {ORDER}
 ")
 ```
@@ -180,8 +180,8 @@ If you do `task run markdown` then:
 ```task run markdown
 network load_file("./data/mississippi.net")
 network table_to_markdown(template="
-<Name => {_NAME:repl(-, ):case(title)}
-^Ind => =(+ (st+num 'INDEX) 1)
+<Name => {NAME}
+^Ind => {INDEX}
 >Order => {ORDER}
 ")
 ```
@@ -191,7 +191,7 @@ Which means it can be used for other things:
 network load_file("./data/mississippi.net");
 network echo("**Details about the Nodes:**")
 network echo(render_nodes("
-=(+ (st+num 'INDEX) 1). {_NAME:repl(-, ):case(title)} River
+{INDEX}. {NAME}
 "))
 ```
 

@@ -93,7 +93,7 @@ env LOGIC.and(*conds)
 ```
 
 **Arguments:**
-- `*conds` => List of attributes that can be cast to bool
+- `*conds` => List of bools
 
 Boolean and
 
@@ -110,7 +110,7 @@ env LOGIC.or(*conds)
 ```
 
 **Arguments:**
-- `*conds` => List of attributes that can be cast to bool
+- `*conds` => List of bools
 
 boolean or
 
@@ -140,33 +140,33 @@ env assert_eq(not(false), !false)
 ```
 ## all {#env.all}
 ```sig
-env LOGIC.all(vars: '& [bool]')
+env LOGIC.all(*vars)
 ```
 
 **Arguments:**
-- `vars: '& [bool]'` => 
+- `*vars` => 
 
 check if all of the bool are true
 
 ```task
-env assert_eq(all([true]), true)
-env assert_eq(all([false, true]), false)
-env assert_eq(all([true, true]), true)
-env assert_eq(all([false]), false)
+env assert_eq(all(true), true)
+env assert_eq(all(false, true), false)
+env assert_eq(all(true, true), true)
+env assert_eq(all(false), false)
 ```
 ## any {#env.any}
 ```sig
-env LOGIC.any(vars: '& [bool]')
+env LOGIC.any(*vars)
 ```
 
 **Arguments:**
-- `vars: '& [bool]'` => 
+- `*vars` => 
 
 check if any of the bool are true
 
 ```task
-env assert_eq(any([true]), true)
-env assert_eq(any([false, true]), true)
-env assert_eq(any([false, false]), false)
-env assert_eq(any([false]), false)
+env assert_eq(any(true), true)
+env assert_eq(any(false, true), true)
+env assert_eq(any(false, false), false)
+env assert_eq(any(false), false)
 ```

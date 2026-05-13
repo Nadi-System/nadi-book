@@ -62,6 +62,10 @@ network gis.load_network(
     source: 'String',
     destination: 'String',
     layer: 'Option < String >',
+    loadattrs: 'Option < String >',
+    outattrs: 'bool' = false,
+    ignore: 'String' = "",
+    sanitize: 'bool' = true,
     ignore_null: 'bool' = false,
     force: 'bool' = false
 )
@@ -72,6 +76,10 @@ network gis.load_network(
 - `source: 'String'` => Field in the GIS file corresponding to the input node name
 - `destination: 'String'` => layer of the GIS file corresponding to the output node name
 - `layer: 'Option < String >'` => layer of the GIS file, first one picked by default
+- `loadattrs: 'Option < String >'` => Load attributes from GIS file into this attribute
+- `outattrs: 'bool' = false` => attributes are for output instead of input node
+- `ignore: 'String' = ""` => Field names separated by comma, to ignore
+- `sanitize: 'bool' = true` => sanitize the name of the fields
 - `ignore_null: 'bool' = false` => Ignore feature if it has fields with null value
 - `force: 'bool' = false` => Force overwrite the output if already present
 

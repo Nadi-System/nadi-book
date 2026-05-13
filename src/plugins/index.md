@@ -7,7 +7,9 @@ All the functions available on this instance of nadi, are listed here.
 | [`ATTRS`](ATTRS.md)     | [`float_div`](ATTRS.md#env.float_div)                           | Float Division (same as / operator)                                     |
 | [`ATTRS`](ATTRS.md)     | [`float_mult`](ATTRS.md#env.float_mult)                         | Float Multiplication (same as * operator)                               |
 | [`ATTRS`](ATTRS.md)     | [`get`](ATTRS.md#env.get)                                       | get the choosen attribute from Array or AttrMap                         |
+| [`ATTRS`](ATTRS.md)     | [`is_none`](ATTRS.md#env.is_none)                               | check for none value                                                    |
 | [`ATTRS`](ATTRS.md)     | [`keys`](ATTRS.md#env.keys)                                     | keys of the attribute map                                               |
+| [`ATTRS`](ATTRS.md)     | [`none`](ATTRS.md#env.none)                                     | None function that returns None                                         |
 | [`ATTRS`](ATTRS.md)     | [`parse_attr`](ATTRS.md#env.parse_attr)                         | Parse attribute from string                                             |
 | [`ATTRS`](ATTRS.md)     | [`parse_attrmap`](ATTRS.md#env.parse_attrmap)                   | Parse attribute map from string                                         |
 | [`ATTRS`](ATTRS.md)     | [`strmap`](ATTRS.md#env.strmap)                                 | map values from the attribute based on the given table                  |
@@ -34,7 +36,7 @@ All the functions available on this instance of nadi, are listed here.
 | [`CORE`](CORE.md)       | [`isinf`](CORE.md#env.isinf)                                    | check if a float is +/- infinity                                        |
 | [`CORE`](CORE.md)       | [`isna`](CORE.md#env.isna)                                      | check if a float is nan                                                 |
 | [`CORE`](CORE.md)       | [`json`](CORE.md#env.json)                                      | format the attribute as a json string                                   |
-| [`CORE`](CORE.md)       | [`length`](CORE.md#env.length)                                  | length of an array or hashmap                                           |
+| [`CORE`](CORE.md)       | [`len`](CORE.md#env.len)                                        | length of an array or hashmap                                           |
 | [`CORE`](CORE.md)       | [`max_num`](CORE.md#env.max_num)                                | Minimum of the variables                                                |
 | [`CORE`](CORE.md)       | [`max`](CORE.md#env.max)                                        | Maximum of the variables                                                |
 | [`CORE`](CORE.md)       | [`min_num`](CORE.md#env.min_num)                                | Minimum of the variables                                                |
@@ -54,6 +56,7 @@ All the functions available on this instance of nadi, are listed here.
 | [`CORE`](CORE.md)       | [`today`](CORE.md#env.today)                                    | get the current date                                                    |
 | [`CORE`](CORE.md)       | [`type_name`](CORE.md#env.type_name)                            | Type name of the arguments                                              |
 | [`CORE`](CORE.md)       | [`unique_str`](CORE.md#env.unique_str)                          | Get a list of unique string values                                      |
+| [`CORE`](CORE.md)       | [`unique`](CORE.md#env.unique)                                  | Get a list of unique attribute values (only primitives)                 |
 | [`CORE`](CORE.md)       | [`year`](CORE.md#env.year)                                      | year from date/datetime                                                 |
 | [`CORE`](CORE.md)       | [`zip`](CORE.md#env.zip)                                        | make an array combining the arrays from arguments                       |
 | [`DEBUG`](DEBUG.md)     | [`clip`](DEBUG.md#env.clip)                                     | Echo the `----8<----` line for clipping syntax                          |
@@ -89,6 +92,8 @@ All the functions available on this instance of nadi, are listed here.
 | [`REGEX`](REGEX.md)     | [`str_replace`](REGEX.md#env.str_replace)                       | Replace the occurances of the given match                               |
 | [`REGEX`](REGEX.md)     | [`str_split`](REGEX.md#env.str_split)                           | Split the string with the given pattern                                 |
 | [`RENDER`](RENDER.md)   | [`render`](RENDER.md#env.render)                                | Render the template based on the node attributes                        |
+| [`TS`](TS.md)           | [`timeseries`](TS.md#env.timeseries)                            | build timeseries from timeline and series                               |
+| [`TS`](TS.md)           | [`ts_timeline`](TS.md#env.ts_timeline)                          | Get timeline of the timeseries as Series of strings                     |
 | [`VISUALS`](VISUALS.md) | [`image`](VISUALS.md#env.image)                                 |                                                                         |
 | [`VISUALS`](VISUALS.md) | [`svg_open_multi`](VISUALS.md#env.svg_open_multi)               |                                                                         |
 | [`VISUALS`](VISUALS.md) | [`svg_open`](VISUALS.md#env.svg_open)                           |                                                                         |
@@ -96,6 +101,9 @@ All the functions available on this instance of nadi, are listed here.
 | [`csv`](csv.md)         | [`count_data`](csv.md#env.count_data)                           | Count the number of data in a column from a CSV file                    |
 | [`csv`](csv.md)         | [`count_usgs_years`](csv.md#env.count_usgs_years)               | Count the number of data in a column from a CSV file                    |
 | [`csv`](csv.md)         | [`schema`](csv.md#env.schema)                                   | List the columns in a CSV file                                          |
+| [`dss`](dss.md)         | [`list_catalog`](dss.md#env.list_catalog)                       | List the catalog of the dss file                                        |
+| [`dss`](dss.md)         | [`load_series`](dss.md#env.load_series)                         |                                                                         |
+| [`dss`](dss.md)         | [`save_series`](dss.md#env.save_series)                         |                                                                         |
 | [`gis`](gis.md)         | [`features_count`](gis.md#env.features_count)                   | Show the fields in the GIS file layer as a list                         |
 | [`gis`](gis.md)         | [`fields`](gis.md#env.fields)                                   | Show the fields in the GIS file layer as a list                         |
 | [`gis`](gis.md)         | [`layers`](gis.md#env.layers)                                   | Show the layers of the GIS file as a list                               |
@@ -160,7 +168,6 @@ All the functions available on this instance of nadi, are listed here.
 ## Network Functions
 | Plugin                  | Function                                                      | Help                                                                                 |
 |:------------------------|:--------------------------------------------------------------|:-------------------------------------------------------------------------------------|
-
 | [`ATTRS`](ATTRS.md)     | [`nodemap`](ATTRS.md#network.nodemap)                         | Generate attribute map for the given attribute for the nodes                         |
 | [`ATTRS`](ATTRS.md)     | [`set_attrs_render`](ATTRS.md#network.set_attrs_render)       | Set network attributes based on string templates                                     |
 | [`ATTRS`](ATTRS.md)     | [`set_attrs`](ATTRS.md#network.set_attrs)                     | Set network attributes                                                               |

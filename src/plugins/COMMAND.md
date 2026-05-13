@@ -1,11 +1,11 @@
 # Env Functions
 ## shell_env {#env.shell_env}
 ```sig
-env COMMAND.shell_env(var: 'String')
+env COMMAND.shell_env(var: '& str')
 ```
 
 **Arguments:**
-- `var: 'String'` => 
+- `var: '& str'` => 
 
 Get environment variable from the shell
 
@@ -15,12 +15,12 @@ env.home = shell_env("HOME")
 ```
 ## set_shell_env {#env.set_shell_env}
 ```sig
-env COMMAND.set_shell_env(var: 'String', val: 'String')
+env COMMAND.set_shell_env(var: '& str', val: '& str')
 ```
 
 **Arguments:**
-- `var: 'String'` => 
-- `val: 'String'` => 
+- `var: '& str'` => 
+- `val: '& str'` => 
 
 Set environment variable in the shell
 
@@ -55,14 +55,14 @@ env assert_eq(outputs2.test, 12)
 ## command {#node.command}
 ```sig
 node COMMAND.command(
-    cmd: '& Template',
+    cmd: 'Template',
     verbose: 'bool' = true,
     echo: 'bool' = false
 )
 ```
 
 **Arguments:**
-- `cmd: '& Template'` => String Command template to run
+- `cmd: 'Template'` => String Command template to run
 - `verbose: 'bool' = true` => Show the rendered version of command, and other messages
 - `echo: 'bool' = false` => Echo the stdout from the command
 
@@ -121,7 +121,7 @@ tasks with input files and output files.
 ## parallel {#network.parallel}
 ```sig
 network COMMAND.parallel(
-    cmd: '& Template',
+    cmd: 'Template',
     workers: 'i64' = 16,
     verbose: 'bool' = true,
     echo: 'bool' = false
@@ -129,7 +129,7 @@ network COMMAND.parallel(
 ```
 
 **Arguments:**
-- `cmd: '& Template'` => String Command template to run
+- `cmd: 'Template'` => String Command template to run
 - `workers: 'i64' = 16` => Number of workers to run in parallel
 - `verbose: 'bool' = true` => Print the command being run
 - `echo: 'bool' = false` => Show the output of the command

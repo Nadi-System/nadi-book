@@ -17,11 +17,11 @@ env assert_eq(str_quote(12), "\"12\"")
 ```
 ## count {#env.count}
 ```sig
-env CORE.count(vars: '& [bool]')
+env CORE.count(vars: 'Vec < bool >')
 ```
 
 **Arguments:**
-- `vars: '& [bool]'` => 
+- `vars: 'Vec < bool >'` => 
 
 Count the number of true values in the array
 
@@ -259,19 +259,19 @@ append a value to an array
 ```task
 env assert_eq(append([4], 5), [4, 5])
 ```
-## length {#env.length}
+## len {#env.len}
 ```sig
-env CORE.length(value: '& Attribute')
+env CORE.len(value: '& FunctionInput')
 ```
 
 **Arguments:**
-- `value: '& Attribute'` => Array or a HashMap
+- `value: '& FunctionInput'` => Array or a HashMap
 
 length of an array or hashmap
 
 ```task
-env assert_eq(length([4, 5]), 2)
-env assert_eq(length({x=4, y=5}), 2)
+env assert_eq(len([4, 5]), 2)
+env assert_eq(len({x=4, y=5}), 2)
 ```
 ## timediff {#env.timediff}
 ```sig
@@ -501,6 +501,26 @@ This function is for numerical values/attributes
 env assert_eq(prod([1, 2, 3]), 6)
 env assert_eq(prod([1.0, 2, 3]), 6.0)
 ```
+## unique {#env.unique}
+```sig
+env CORE.unique(vars: 'Vec < HashableAttr >')
+```
+
+**Arguments:**
+- `vars: 'Vec < HashableAttr >'` => 
+
+Get a list of unique attribute values (only primitives)
+
+The order of the attributes returned is not guaranteed. This
+does not support array and attrmap values due to uniqueness
+ambiguity.
+
+```task
+env.uniq = unique(["hi", "me", "hi", "you"]);
+env assert_eq(len(uniq), 3)
+env.uniq = unique(["hi", true, true, nan, 1.0, 1, nan]);
+env assert_eq(len(uniq), 5)
+```
 ## unique_str {#env.unique_str}
 ```sig
 env CORE.unique_str(vars: 'Vec < String >')
@@ -515,7 +535,7 @@ The order of the strings returned is not guaranteed
 
 ```task
 env.uniq = unique_str(["hi", "me", "hi", "you"]);
-env assert_eq(length(uniq), 3)
+env assert_eq(len(uniq), 3)
 ```
 ## count_str {#env.count_str}
 ```sig
@@ -549,17 +569,18 @@ env assert_eq(concat("Hello", "World", join=" "), "Hello World")
 ```
 ## range {#env.range}
 ```sig
-env CORE.range(start: 'i64', end: 'i64')
+env CORE.range(start: 'i64', end: 'Option < i64 >')
 ```
 
 **Arguments:**
 - `start: 'i64'` => 
-- `end: 'i64'` => 
+- `end: 'Option < i64 >'` => 
 
 Generate integer array, end is not included
 
 ```task
-env assert_eq(range(1, 5), [1, 2, 3, 4])
+env assert_eq(range(1, 5), [1, 2, 3, 4, 5])
+env assert_eq(range(2), [1, 2])
 ```
 ## assert {#env.assert}
 ```sig
@@ -629,7 +650,7 @@ Count the number of input nodes in the node
 
 ```task
 network load_str("a -> b\n b -> d\n c -> d")
-nodes assert_eq(inputs_count(), length(inputs._))
+nodes assert_eq(inputs_count(), len(inputs._))
 ```
 ## inputs_attr {#node.inputs_attr}
 ```sig

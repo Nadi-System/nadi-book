@@ -1,15 +1,37 @@
 # Env Functions
+## none {#env.none}
+```sig
+env ATTRS.none()
+```
+
+**Arguments:**
+
+
+None function that returns None
+## is_none {#env.is_none}
+```sig
+env ATTRS.is_none(inp: 'Option < FunctionInput >')
+```
+
+**Arguments:**
+- `inp: 'Option < FunctionInput >'` => 
+
+check for none value
+
+```task
+assert_eq(is_none(none()), true)
+```
 ## strmap {#env.strmap}
 ```sig
 env ATTRS.strmap(
-    attr: '& str',
+    attr: 'String',
     attrmap: '& AttrMap',
     default: 'Option < Attribute >'
 )
 ```
 
 **Arguments:**
-- `attr: '& str'` => Value to transform the attribute
+- `attr: 'String'` => Value to transform the attribute
 - `attrmap: '& AttrMap'` => Dictionary of key=value to map the data to
 - `default: 'Option < Attribute >'` => Default value if key not found in `attrmap`
 
@@ -280,11 +302,11 @@ nodes assert(!has_attr("y"))
 ```
 ## first_attr {#node.first_attr}
 ```sig
-node ATTRS.first_attr(attrs: '& [String]', default: 'Option < Attribute >')
+node ATTRS.first_attr(attrs: 'Vec < RString >', default: 'Option < Attribute >')
 ```
 
 **Arguments:**
-- `attrs: '& [String]'` => attribute names
+- `attrs: 'Vec < RString >'` => attribute names
 - `default: 'Option < Attribute >'` => Default value if not found
 
 Return the first Attribute that exists
@@ -333,11 +355,11 @@ flexibility than this function in normal use cases. But this
 function is useful when you have to do something in a batch.
 ## set_attrs_render {#node.set_attrs_render}
 ```sig
-node ATTRS.set_attrs_render(**kwargs)
+node ATTRS.set_attrs_render(**values)
 ```
 
 **Arguments:**
-- `**kwargs` => key value pair of attribute to set and the Template to render
+- `**values` => key value pair of attribute to set and the Template to render
 
 Set node attributes based on string templates
 
@@ -351,11 +373,11 @@ node[a] assert_eq(val1, "Node: a")
 ```
 ## load_toml_render {#node.load_toml_render}
 ```sig
-node ATTRS.load_toml_render(toml: '& Template', echo: 'bool' = false)
+node ATTRS.load_toml_render(toml: 'Template', echo: 'bool' = false)
 ```
 
 **Arguments:**
-- `toml: '& Template'` => String template to render and load as toml string
+- `toml: 'Template'` => String template to render and load as toml string
 - `echo: 'bool' = false` => Print the rendered toml or not
 
 Set node attributes by loading a toml from rendered template
@@ -377,11 +399,11 @@ nodes assert_eq(label, render("Node: {NAME}"))
 # Network Functions
 ## set_attrs {#network.set_attrs}
 ```sig
-network ATTRS.set_attrs(**attrs)
+network ATTRS.set_attrs(**values)
 ```
 
 **Arguments:**
-- `**attrs` => key value pair of attributes to set
+- `**values` => key value pair of attributes to set
 
 Set network attributes
 

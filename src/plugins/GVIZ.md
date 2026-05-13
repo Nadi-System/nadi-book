@@ -15,8 +15,8 @@ network GVIZ.save_gv(
     outfile: '& Path',
     name: '& str' = "network",
     global_attrs: '& str' = "",
-    node_attr: 'Option < & Template >',
-    edge_attr: 'Option < & Template >'
+    node_attr: 'Option < Template >',
+    edge_attr: 'Option < Template >'
 )
 ```
 
@@ -24,8 +24,8 @@ network GVIZ.save_gv(
 - `outfile: '& Path'` => 
 - `name: '& str' = "network"` => 
 - `global_attrs: '& str' = ""` => 
-- `node_attr: 'Option < & Template >'` => 
-- `edge_attr: 'Option < & Template >'` => 
+- `node_attr: 'Option < Template >'` => 
+- `edge_attr: 'Option < Template >'` => 
 
 Save the network as a graphviz file
 ### Arguments:

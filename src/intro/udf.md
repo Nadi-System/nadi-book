@@ -33,7 +33,7 @@ for x in range(1, 20) {cakc(x)}
 In addition to that, you can also assign the function arguments dynamic values based on previous arguments, or environement/network context. These are similar to the local variables inside the function body, but they can be overridden with other values by the users.
 
 ```task run
-func last(vals, offset=1) { get(vals, length(vals) - offset) }
+func last(vals, offset=1) { get(vals, len(vals) - offset) }
 
 last(["a", "b", "c", "d", "e"])
 last(["a", "b", "c", "d", "e"], 2)
@@ -62,7 +62,7 @@ This can allow you to reduce the number of arguments required for the function c
 Since there is only immutable expression evaluation in the functions, anything requiring something like a loop has to be done through recursion.
 
 ```task run
-func sum_vals(vals, ind=length(vals) - 1) {
+func sum_vals(vals, ind=len(vals) - 1) {
 	if (ind < 0) { 0 } else {
 		get(vals, ind) + sum_vals(vals, ind - 1)
 	}

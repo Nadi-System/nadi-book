@@ -82,14 +82,14 @@ network VISUALS.flatten()
 ## set_nodesize_attrs {#network.set_nodesize_attrs}
 ```sig
 network VISUALS.set_nodesize_attrs(
-    attrs: '& [f64]',
+    attrs: 'Vec < f64 >',
     minsize: 'f64' = 4.0,
     maxsize: 'f64' = 12.0
 )
 ```
 
 **Arguments:**
-- `attrs: '& [f64]'` => Attribute values to use for size scaling
+- `attrs: 'Vec < f64 >'` => Attribute values to use for size scaling
 - `minsize: 'f64' = 4.0` => minimum size of the node
 - `maxsize: 'f64' = 12.0` => maximum size of the node
 

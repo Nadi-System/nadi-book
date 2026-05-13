@@ -2,14 +2,14 @@
 ## render {#env.render}
 ```sig
 env RENDER.render(
-    template: '& Template',
+    template: 'Template',
     safe: 'bool' = false,
     **keyval
 )
 ```
 
 **Arguments:**
-- `template: '& Template'` => String template to render
+- `template: 'Template'` => String template to render
 - `safe: 'bool' = false` => if render fails keep it as it is instead of exiting
 - `**keyval` => 
 
@@ -37,11 +37,11 @@ env assert_eq(render("abc {x}", safe=true), "abc {x}")
 # Node Functions
 ## render {#node.render}
 ```sig
-node RENDER.render(template: '& Template', safe: 'bool' = false)
+node RENDER.render(template: 'Template', safe: 'bool' = false)
 ```
 
 **Arguments:**
-- `template: '& Template'` => String template to render
+- `template: 'Template'` => String template to render
 - `safe: 'bool' = false` => if render fails keep it as it is instead of exiting
 
 Render the template based on the node attributes
@@ -58,11 +58,11 @@ nodes assert_eq(render("abc {x} {a}", safe=true), "abc {x} {a}")
 # Network Functions
 ## render {#network.render}
 ```sig
-network RENDER.render(template: '& Template', safe: 'bool' = false)
+network RENDER.render(template: 'Template', safe: 'bool' = false)
 ```
 
 **Arguments:**
-- `template: '& Template'` => Path to the template file
+- `template: 'Template'` => Path to the template file
 - `safe: 'bool' = false` => if render fails keep it as it is instead of exiting
 
 Render from network attributes
@@ -75,14 +75,14 @@ network assert_eq(render("abc {x} {a}", safe=true), "abc {x} {a}")
 ## render_nodes {#network.render_nodes}
 ```sig
 network RENDER.render_nodes(
-    template: '& Template',
+    template: 'Template',
     safe: 'bool' = false,
     join: '& str' = "\n"
 )
 ```
 
 **Arguments:**
-- `template: '& Template'` => Path to the template file
+- `template: 'Template'` => Path to the template file
 - `safe: 'bool' = false` => if render fails keep it as it is instead of exiting
 - `join: '& str' = "\n"` => String to join the render results
 

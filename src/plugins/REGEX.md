@@ -19,7 +19,7 @@ env REGEX.str_match(attr: '& str', pattern: 'Regex')
 ```
 
 **Arguments:**
-- `attr: '& str'` => attribute to check for pattern
+- `attr: '& str'` => string to check for pattern
 - `pattern: 'Regex'` => Regex pattern to match
 
 Check if the given pattern matches the value or not
@@ -47,8 +47,8 @@ env REGEX.str_replace(
 Replace the occurances of the given match
 
 ```task
-env assert_eq(str_replace("abc", "^a", 2), "2bc")
-env assert_eq(str_replace("abc", "[abc]", 2), "222")
+env assert_eq(str_replace("abc", "^a", "2"), "2bc")
+env assert_eq(str_replace("abc", "[abc]", "2"), "222")
 ```
 ## str_find {#env.str_find}
 ```sig
@@ -56,7 +56,7 @@ env REGEX.str_find(attr: '& str', pattern: 'Regex')
 ```
 
 **Arguments:**
-- `attr: '& str'` => attribute to check for pattern
+- `attr: '& str'` => string to check for pattern
 - `pattern: 'Regex'` => Regex pattern to match
 
 Find the given pattern in the value
@@ -70,7 +70,7 @@ env REGEX.str_find_all(attr: '& str', pattern: 'Regex')
 ```
 
 **Arguments:**
-- `attr: '& str'` => attribute to check for pattern
+- `attr: '& str'` => string to check for pattern
 - `pattern: 'Regex'` => Regex pattern to match
 
 Find all the matches of the given pattern in the value
@@ -84,7 +84,7 @@ env REGEX.str_count(attr: '& str', pattern: 'Regex')
 ```
 
 **Arguments:**
-- `attr: '& str'` => attribute to check for pattern
+- `attr: '& str'` => string to check for pattern
 - `pattern: 'Regex'` => Regex pattern to match
 
 Count the number of matches of given pattern in the string
