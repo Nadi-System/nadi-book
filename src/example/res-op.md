@@ -51,9 +51,10 @@ nodes<inp>(noleaves)$c_flows = if (reservoir) {
 	$local_flows + (inputs$c_flows -> @sum)
 }
 
-!net.cairo.plot("c_flows", "reservoir-table-2.svg", normalize=true)
+!net.cairo.plot("c_flows", "./output/ro-reservoir-table-2.svg", normalize=true)
 ```
 
+![Output Image](../output/ro-reservoir-table-2.svg)
 
 
 If we look at the minimum flows, we can see how it has maintained the provided minimum flows from the reservoirs onwards.
