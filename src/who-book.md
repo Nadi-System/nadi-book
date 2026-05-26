@@ -4,6 +4,24 @@
 If you are a developer and want an API documentation for the data types used in the NADI Rust library refer to the docs.rs `nadi_core` page (https://docs.rs/nadi_core/latest/nadi_core/). But if you want to understand the core concepts, use cases, and examples then proceed.
 </div>
 
+If you have to model, or analyze data that represents a system with directed network? then you might find NADI useful to you. Some examples include:
+- river networks, road networks,
+- file/directory structures,
+- flow networks,
+- control flow/signal flow graphs,
+- social networks, computer networks,
+- project management (Grantt chart),
+- compilers, git history,
+- any kind of dependencies map (modeling, project, files),
+- human resources in a company,
+- trade routes/ trade networks,
+- decision tree / policy tree,
+- reaction mechanics for compound sysnthesis,
+- neural signals,
+- gene-regulatory networks,
+- modeling work with dependencies to component models, etc
+
+
 This book has sections explaining the concepts of the NADI system, its developmental notes, user guide and developer guide.
 
 Hence it can be useful for people who:

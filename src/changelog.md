@@ -170,3 +170,30 @@ fact(-8)
 ```
 
 There is no way to catch specific errors for now. In future versions pattern matching for error handling might be added.
+
+
+### Series/TimeSeries with Gaps
+
+The current version supports series and timeseries data with gaps in them. In the previous version you could only store complete series/timeseries resulting in the plugins having to fill the gap themselves.
+
+Furthermore the series can also be filled with user functions in current version.
+
+The code below shows how to define a series, how to introduce gaps or fill it using series map syntax.
+```task run
+env$x = 1:10
+
+env$x_gap = $x -> func(i) {if (i % 2 == 0) {return i * 10}}
+env$x_gap
+
+env$x_filled = $x_gap -> func(i=false) {if (i == false) { 0.0 } else { i }}
+env$x_filled
+```
+
+You can also use other series to fill the gaps like:
+
+```task run continue
+env$x_filled2 = ($x, $x_gap) -> func(i, j = false) { if (j == false) {i} else {j}}
+env$x_filled2
+```
+
+Here we combined two series, but you can do multiple ones. And while you are in a network context, you can also use series from `inputs`, `outputs`, etc.
