@@ -44,13 +44,19 @@
   - [String Templates](./learn-examples/str-templates.md)
 - [NADI Extension Capabilities](./system/extensions.md)
 
-# Example Research Problems
+# Example River Problems
 - [Effects of Dams](./example/ohio-dams-intro.md)
   - [Validating Network](./example/ohio-validation.md)
   - [Counting Ohio Dams](./example/ohio-dams.md)
   - [Earliest Dam Year](./example/ohio-dam-years.md)
 - [LaTeX Table](./example/latex-table.md)
 - [Timeseries Gap Identification](./example/timeseries-gap.md)
+- [Flow routing in River Network](./example/routing.md)
+- [Reservoir Operating Rules](./example/res-op.md)
+
+# General Example Problems
+- [Graph Theory](./example/graph-theory.md)
+- [Gene Regulatory Network](./example/gene-regulation.md)
 <!-- - [Ohio River Routing](./example-usage.md) -->
 <!--   - [Making Tables](./example/tables.md) -->
 <!--   - [Generating Reports](./example/gen-report.md) -->

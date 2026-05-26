@@ -8,5 +8,5 @@ functions need to be loaded from plugins.
 
 
 ```task
-{{#include ../data/example.tasks}}
+{{#include ./data/example.tasks}}
 ```
